@@ -1,5 +1,5 @@
 name: withu_app
-description: "withu application"
+description: "withu mobile application"
 
 version: 1.0.0+1
 
@@ -12,12 +12,46 @@ dependencies:
 
   cupertino_icons: ^1.0.8
 
+  # Dependency Injection
+  get_it: 8.0.0
+
+  # Being able to compare objects in Dart
+  equatable: 2.0.5
+
+  # Fetch Data From Api
+  dio: 5.7.0
+
+  # Logging Interceptor
+  logging: 1.2.0
+
+  # BloC State Management
+  flutter_bloc: 8.1.6
+
+  # Json Annotation
+  json_annotation: 4.9.0
+
+  # Code generation
+  freezed_annotation: 2.4.4
+
+  # Router
+  auto_route: 9.2.2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
+  # build related
+  build_runner: 2.4.12
+  json_serializable: 6.8.0
+  freezed: 2.5.7
+
   flutter_lints: ^4.0.0
+  auto_route_generator: ^9.0.0
 
 flutter:
 
   uses-material-design: true
+
+# Derry script manager
+scripts:
+  build: dart run build_runner build --delete-conflicting-outputs
