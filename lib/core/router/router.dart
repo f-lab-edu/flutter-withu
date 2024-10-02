@@ -12,5 +12,8 @@ class AppRouter extends RootStackRouter {
           page: SplashRoute.page,
           initial: true,
         ),
+        AutoRoute(
+          page: JobPostingsRoute.page,
+        ),
       ];
 }
