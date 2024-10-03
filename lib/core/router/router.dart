@@ -10,10 +10,12 @@ class AppRouter extends RootStackRouter {
   List<AutoRoute> get routes => [
         AutoRoute(
           page: SplashRoute.page,
+          path: '/',
           initial: true,
         ),
         AutoRoute(
           page: JobPostingsRoute.page,
+          path: '/job-postings',
         ),
       ];
 }

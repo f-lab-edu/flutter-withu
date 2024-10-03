@@ -36,6 +36,9 @@ dependencies:
   # Router
   auto_route: 9.2.2
 
+  # Logging
+  logger: ^2.4.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

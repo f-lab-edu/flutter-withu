@@ -1,0 +1,18 @@
+{
+  "data": [
+    {
+      "id": "1",
+      "title": "공고명1",
+      "jobCategory": "catering",
+      "startDate": "2024-09-01",
+      "endDate": null
+    },
+    {
+      "id": "2",
+      "title": "공고명2",
+      "jobCategory": "foodStyling",
+      "startDate": "2024-09-03",
+      "endDate": "2024-09-05"
+    }
+  ],
+}
