@@ -3,14 +3,14 @@ import 'package:flutter/cupertino.dart';
 class BaseBadge extends StatelessWidget {
   final String text;
 
-  final TextStyle textStyle;
+  final TextStyle? textStyle;
 
   final Color backgroundColor;
 
   const BaseBadge({
     super.key,
     required this.text,
-    required this.textStyle,
+    this.textStyle,
     required this.backgroundColor,
   });
 

@@ -65,24 +65,13 @@ class _Information extends StatelessWidget {
           children: [
             BaseBadge(
               text: entity.category.displayName,
-              textStyle: const TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.w400,
-                color: ColorName.primary,
-                height: 19.2 / 12,
-              ),
+              textStyle: context.textTheme.bodySmall,
               backgroundColor: ColorName.teritary,
             ),
             const SizedBox(width: 8),
             Text(
               entity.title,
-              style: const TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w700,
-                color: ColorName.primary,
-                height: 28.8 / 18,
-                letterSpacing: -0.5,
-              ),
+              style: context.textTheme.bodySmall,
             ),
           ],
         ),
@@ -90,13 +79,7 @@ class _Information extends StatelessWidget {
         Text(
           _date,
           textAlign: TextAlign.start,
-          style: const TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.w400,
-            color: ColorName.primary,
-            height: 22.4 / 14,
-            letterSpacing: -0.5,
-          ),
+          style: context.textTheme.bodyMedium,
         ),
       ],
     );
@@ -143,7 +126,7 @@ class _TemporaryView extends StatelessWidget {
   }
 }
 
-/// 진행 - 모집인원
+/// 진행 - 모집 인원
 class _InProgressView extends StatelessWidget {
   /// 최대 인원
   final int max;

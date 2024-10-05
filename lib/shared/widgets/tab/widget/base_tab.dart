@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:withu_app/core/utils/extensions/theme_extension.dart';
 import 'package:withu_app/gen/colors.gen.dart';
 import 'package:withu_app/shared/shared.dart';
 
@@ -38,11 +39,7 @@ class BaseTab extends StatelessWidget {
         child: Text(
           data.text,
           textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w700,
-            height: 25.6 / 16,
-            letterSpacing: -0.5,
+          style: context.textTheme.bodyLargeBold?.copyWith(
             color: textColor,
           ),
         ),
