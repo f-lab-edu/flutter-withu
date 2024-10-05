@@ -7,11 +7,11 @@ part 'splash_state.dart';
 
 class SplashBloc extends Bloc<SplashEvent, SplashState> {
   SplashBloc() : super(LoadingState()) {
-    on<InitializeApp>(_onInitializeApp);
+    on<OnInitializeApp>(_onOnInitializeApp);
   }
 
-  FutureOr<void> _onInitializeApp(
-    InitializeApp event,
+  FutureOr<void> _onOnInitializeApp(
+    OnInitializeApp event,
     Emitter<SplashState> emit,
   ) async {
     // 1초 대기 후 홈 화면으로 이동.
