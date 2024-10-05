@@ -29,13 +29,10 @@ class _SplashPage extends StatelessWidget {
             context.router.push(const JobPostingsRoute());
           }
         },
-        child: const Center(
+        child: Center(
           child: Text(
-            '위드유',
-            style: TextStyle(
-              fontSize: 30,
-              fontWeight: FontWeight.bold,
-            ),
+            StringRes.appName.tr,
+            style: context.textTheme.headlineLarge,
           ),
         ),
       ),

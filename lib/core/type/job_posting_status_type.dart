@@ -1,4 +1,6 @@
 // 공고 상태 타입
+import 'package:withu_app/core/core.dart';
+
 enum JobPostingStatusType {
   /// 임시저장
   temporary,
@@ -14,11 +16,11 @@ extension JobPostingStatusTypeEx on JobPostingStatusType {
   String get displayName {
     switch (this) {
       case JobPostingStatusType.temporary:
-        return '임시저장';
+        return StringRes.temporarySave.tr;
       case JobPostingStatusType.inProgress:
-        return '진행';
+        return StringRes.inProgress.tr;
       case JobPostingStatusType.closed:
-        return '마감';
+        return StringRes.closed.tr;
     }
   }
 }

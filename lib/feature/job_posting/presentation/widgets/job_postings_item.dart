@@ -71,7 +71,7 @@ class _Information extends StatelessWidget {
             const SizedBox(width: 8),
             Text(
               entity.title,
-              style: context.textTheme.bodySmall,
+              style: context.textTheme.headlineSmall,
             ),
           ],
         ),
@@ -113,15 +113,9 @@ class _TemporaryView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Text(
-      '임시저장',
-      style: TextStyle(
-        fontSize: 12,
-        fontWeight: FontWeight.w400,
-        color: ColorName.primary,
-        height: 19.2 / 12,
-        letterSpacing: -0.5,
-      ),
+    return Text(
+      StringRes.temporarySave.tr,
+      style: context.textTheme.bodySmall,
     );
   }
 }
@@ -147,25 +141,13 @@ class _InProgressView extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        const Text(
-          '모집인원',
-          style: TextStyle(
-            fontSize: 12,
-            fontWeight: FontWeight.w400,
-            color: ColorName.primary,
-            height: 19.2 / 12,
-            letterSpacing: -0.5,
-          ),
+        Text(
+          StringRes.numberOfRecruits.tr,
+          style: context.textTheme.bodySmall,
         ),
         Text(
           counter,
-          style: const TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.w700,
-            color: ColorName.primary,
-            height: 28.8 / 18,
-            letterSpacing: -0.5,
-          ),
+          style: context.textTheme.headlineSmall,
         ),
       ],
     );
@@ -178,15 +160,9 @@ class _ClosedView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Text(
-      '모집마감',
-      style: TextStyle(
-        fontSize: 12,
-        fontWeight: FontWeight.w400,
-        color: ColorName.primary,
-        height: 19.2 / 12,
-        letterSpacing: -0.5,
-      ),
+    return Text(
+      StringRes.closed.tr,
+      style: context.textTheme.bodySmall,
     );
   }
 }

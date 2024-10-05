@@ -44,6 +44,7 @@ dependencies:
 
   #
   infinite_scroll_pagination: ^4.0.0
+  easy_localization: ^3.0.7
 
 dev_dependencies:
   flutter_test:
@@ -66,6 +67,9 @@ dev_dependencies:
 flutter:
 
   uses-material-design: true
+
+  assets:
+    - assets/translations/
 
 # Derry script manager
 scripts:
