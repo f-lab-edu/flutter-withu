@@ -166,7 +166,19 @@ class JobPostingsListState<B extends JobPostingsBloc>
           itemBuilder: (context, item, index) => JobPostingsItem(
             entity: item,
           ),
+          firstPageProgressIndicatorBuilder: (context) => _emptyView(),
+          noItemsFoundIndicatorBuilder: (context) => _emptyView(),
         ),
+      ),
+    );
+  }
+
+  /// 페이지 비어있을 때.
+  Widget _emptyView() {
+    return Center(
+      child: Text(
+        '저장된 공고가 없습니다!',
+        style: context.textTheme.bodyMedium,
       ),
     );
   }
