@@ -1,10 +1,10 @@
-part of 'job_posting_bloc.dart';
+part of 'job_postings_bloc.dart';
 
-enum JobPostingStatus { initial, loading, success, failure }
+enum JobPostingsStatus { initial, loading, success, failure }
 
 class JobPostingState extends Equatable {
   /// 상태값
-  final JobPostingStatus status;
+  final JobPostingsStatus status;
 
   /// 공고 목록
   final List<JobPostingEntity> list;
@@ -13,13 +13,13 @@ class JobPostingState extends Equatable {
   final bool isLast;
 
   const JobPostingState({
-    this.status = JobPostingStatus.initial,
+    this.status = JobPostingsStatus.initial,
     this.list = const [],
     this.isLast = true,
   });
 
   JobPostingState copyWith({
-    JobPostingStatus? status,
+    JobPostingsStatus? status,
     List<JobPostingEntity>? list,
     bool? isLast,
   }) {

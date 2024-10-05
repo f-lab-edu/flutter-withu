@@ -1,2 +1,2 @@
-export 'dto/job_posting.dart';
-export 'remote/job_posting_api.dart';
+export 'dto/dto.dart';
+export 'remote/remote.dart';

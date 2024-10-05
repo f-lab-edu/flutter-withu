@@ -12,7 +12,7 @@ class BaseTabBloc extends Bloc<BaseTabEvent, BaseTabState> {
   }) : super(BaseTabState(tabs: tabs, selectedTab: null)) {
     on<OnSelectTap>(
       (event, emit) => emit(
-        BaseTabState(
+        state.copyWith(
           tabs: tabs,
           selectedTab: event.selectedTab,
         ),

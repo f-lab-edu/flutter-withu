@@ -13,7 +13,16 @@ initJobPostingInjections() {
   getIt.registerSingleton<JobPostingUseCase>(
     JobPostingUseCaseImpl(repository: getIt()),
   );
-  getIt.registerFactory<JobPostingBloc>(
-    () => JobPostingBloc(useCase: getIt()),
+  getIt.registerFactory<JobPostingsTemporaryBloc>(
+    () => JobPostingsTemporaryBloc(useCase: getIt()),
+  );
+  getIt.registerFactory<JobPostingsInProgressBloc>(
+    () => JobPostingsInProgressBloc(useCase: getIt()),
+  );
+  getIt.registerFactory<JobPostingsClosedBloc>(
+    () => JobPostingsClosedBloc(useCase: getIt()),
+  );
+  getIt.registerFactory<JobPostingsTabBloc>(
+    () => JobPostingsTabBloc(),
   );
 }

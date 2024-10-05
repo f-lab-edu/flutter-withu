@@ -7,28 +7,19 @@ import 'package:withu_app/feature/feature.dart';
 import 'package:withu_app/feature/job_posting/domain/domain.dart';
 import 'package:withu_app/shared/shared.dart';
 
+/// 공고 목록 화면
 @RoutePage()
 class JobPostingsPage extends StatelessWidget {
-  final List<BaseTabData> tabs = const [
-    BaseTabData(text: '임시저장'),
-    BaseTabData(text: '진행'),
-    BaseTabData(text: '마감'),
-  ];
-
   const JobPostingsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<JobPostingBloc>(
-          create: (context) => JobPostingBloc(
-            useCase: getIt<JobPostingUseCase>(),
-          ),
-        ),
-        BlocProvider<BaseTabBloc>(
-          create: (context) => BaseTabBloc(tabs: tabs),
-        ),
+        BlocProvider<JobPostingsTemporaryBloc>(create: (context) => getIt()),
+        BlocProvider<JobPostingsInProgressBloc>(create: (context) => getIt()),
+        BlocProvider<JobPostingsClosedBloc>(create: (context) => getIt()),
+        BlocProvider<JobPostingsTabBloc>(create: (context) => getIt()),
       ],
       child: _JobPostingsPage(),
     );
@@ -43,14 +34,12 @@ class _JobPostingsPage extends StatelessWidget {
         child: Container(
           width: double.infinity,
           height: double.infinity,
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 24),
           child: const Column(
             children: [
               SizedBox(height: 20),
               _JobPostingsTabs(),
-              Expanded(
-                child: _JobPostingList(),
-              ),
+              Expanded(child: JobPostingsListPage()),
             ],
           ),
         ),
@@ -65,17 +54,13 @@ class _JobPostingsTabs extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<BaseTabBloc, BaseTabState>(
+    return BlocBuilder<JobPostingsTabBloc, BaseTabState>(
       builder: (context, state) {
         return BaseTabs(
           tabs: state.tabs,
-          selectedTab: state.selectedTab,
+          selectedTab: state.selectedTab ?? state.tabs.first,
           onTap: (BaseTabData tab) {
-            // 탭 선택 이벤트
-            context.read<BaseTabBloc>().add(OnSelectTap(tab));
-
-            // 목록 로딩 이벤트
-            context.read<JobPostingBloc>().add(OnGettingListEvent());
+            context.read<JobPostingsTabBloc>().add(OnSelectTap(tab));
           },
         );
       },
@@ -83,52 +68,106 @@ class _JobPostingsTabs extends StatelessWidget {
   }
 }
 
-/// 공고 목록 - 리스트
-class _JobPostingList extends StatefulWidget {
-  const _JobPostingList();
+/// 공고 목록 페이지
+class JobPostingsListPage extends StatelessWidget {
+  const JobPostingsListPage({super.key});
 
   @override
-  State<StatefulWidget> createState() => _JobPostingsListState();
+  Widget build(BuildContext context) {
+    return BlocBuilder<JobPostingsTabBloc, BaseTabState>(
+      builder: (context, state) {
+        final selectedType =
+            state.selectedTab?.value ?? JobPostingStatusType.temporary;
+
+        return IndexedStack(
+          index: JobPostingStatusType.values.indexOf(selectedType),
+          children: const [
+            JobPostingsList<JobPostingsTemporaryBloc>(
+              type: JobPostingStatusType.temporary,
+            ),
+            JobPostingsList<JobPostingsInProgressBloc>(
+              type: JobPostingStatusType.inProgress,
+            ),
+            JobPostingsList<JobPostingsClosedBloc>(
+              type: JobPostingStatusType.closed,
+            ),
+          ],
+        );
+      },
+    );
+  }
 }
 
-class _JobPostingsListState extends State<_JobPostingList> {
-  /// 페이지 컨트롤러
+/// 공고 목록 - 리스트
+class JobPostingsList<B extends JobPostingsBloc> extends StatefulWidget {
+  final JobPostingStatusType type;
+
+  const JobPostingsList({
+    super.key,
+    required this.type,
+  });
+
+  @override
+  State<StatefulWidget> createState() => JobPostingsListState<B>();
+}
+
+class JobPostingsListState<B extends JobPostingsBloc>
+    extends State<JobPostingsList> with AutomaticKeepAliveClientMixin {
   final PagingController<int, JobPostingEntity> _pagingController =
       PagingController(firstPageKey: 0);
 
   @override
+  bool get wantKeepAlive => true;
+
+  @override
   void initState() {
-    _pagingController.addPageRequestListener((pageKey) {
-      context.read<JobPostingBloc>().add(OnGettingListEvent());
-    });
+    _pagingController.addPageRequestListener(
+      (pageKey) {
+        context.read<B>().add(
+              OnGettingListEvent(
+                type: widget.type,
+                page: pageKey,
+              ),
+            );
+      },
+    );
     super.initState();
   }
 
   @override
+  void dispose() {
+    _pagingController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return BlocConsumer<JobPostingBloc, JobPostingState>(
-      listener: (context, state) {
-        if (state.status == JobPostingStatus.success) {
-          final isLast = state.isLast;
-          if (isLast) {
-            _pagingController.appendLastPage(state.list);
-          } else {
-            final nextPageKey = (_pagingController.nextPageKey ?? 0) + 1;
-            _pagingController.appendPage(state.list, nextPageKey);
-          }
-        }
-      },
-      builder: (BuildContext context, state) {
-        return PagedListView(
-          pagingController: _pagingController,
-          padding: const EdgeInsets.symmetric(vertical: 20),
-          builderDelegate: PagedChildBuilderDelegate<JobPostingEntity>(
-            itemBuilder: (context, item, index) => JobPostingsItem(
-              entity: item,
-            ),
+    super.build(context);
+    return MultiBlocListener(
+      listeners: [
+        BlocListener<B, JobPostingState>(
+          listener: (context, state) {
+            if (state.status == JobPostingsStatus.success) {
+              final isLast = state.isLast;
+              if (isLast) {
+                _pagingController.appendLastPage(state.list);
+              } else {
+                final nextPageKey = (_pagingController.nextPageKey ?? 0) + 1;
+                _pagingController.appendPage(state.list, nextPageKey);
+              }
+            }
+          },
+        ),
+      ],
+      child: PagedListView<int, JobPostingEntity>(
+        pagingController: _pagingController,
+        padding: const EdgeInsets.symmetric(vertical: 20),
+        builderDelegate: PagedChildBuilderDelegate<JobPostingEntity>(
+          itemBuilder: (context, item, index) => JobPostingsItem(
+            entity: item,
           ),
-        );
-      },
+        ),
+      ),
     );
   }
 }

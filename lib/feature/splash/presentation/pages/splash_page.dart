@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:withu_app/core/core.dart';
 import 'package:withu_app/core/router/router.gr.dart';
 import 'package:withu_app/feature/splash/presentation/bloc/splash_bloc.dart';
 
@@ -13,9 +14,7 @@ class SplashPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<SplashBloc>(
-      create: (context) {
-        return GetIt.I<SplashBloc>()..add(InitializeApp());
-      },
+      create: (context) => getIt(),
       child: _SplashPage(),
     );
   }

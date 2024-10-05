@@ -1,8 +1,12 @@
 import 'package:withu_app/core/core.dart';
+import 'package:withu_app/feature/job_posting/data/data.dart';
 import 'package:withu_app/feature/job_posting/domain/domain.dart';
 
 abstract class JobPostingUseCase {
-  Future<void> getJobPostings();
+  Future<List<JobPostingEntity>?> getJobPostings({
+    required JobPostingStatusType status,
+    required int page,
+  });
 }
 
 class JobPostingUseCaseImpl implements JobPostingUseCase {
@@ -13,12 +17,34 @@ class JobPostingUseCaseImpl implements JobPostingUseCase {
   });
 
   @override
-  Future<void> getJobPostings() async {
+  Future<List<JobPostingEntity>?> getJobPostings({
+    required JobPostingStatusType status,
+    required int page,
+  }) async {
     try {
-      final result = await repository.getJobPostings();
-      return result;
+      final List<JobPostingModel>? result = await repository.getJobPostings(
+        status: status,
+        page: page,
+      );
+
+      final entities = result
+          ?.map(
+            (dto) => JobPostingEntity(
+              id: dto.id,
+              title: dto.title,
+              category: dto.category,
+              startDate: dto.startDate,
+              endDate: dto.endDate,
+              current: dto.current,
+              max: dto.max,
+            ),
+          )
+          .toList();
+
+      return entities;
     } catch (e) {
       logger.e(e);
+      return null;
     }
   }
 }
