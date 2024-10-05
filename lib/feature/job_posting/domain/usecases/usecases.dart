@@ -35,6 +35,7 @@ class JobPostingUseCaseImpl implements JobPostingUseCase {
               category: dto.category,
               startDate: dto.startDate,
               endDate: dto.endDate,
+              status: dto.status,
               current: dto.current,
               max: dto.max,
             ),

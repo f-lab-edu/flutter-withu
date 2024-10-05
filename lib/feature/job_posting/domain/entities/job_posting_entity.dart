@@ -16,6 +16,9 @@ class JobPostingEntity {
   /// 종료날짜
   final DateTime? endDate;
 
+  /// 상태
+  final JobPostingStatusType status;
+
   /// 현재 지원한 인원 수
   final int current;
 
@@ -28,6 +31,7 @@ class JobPostingEntity {
     required this.category,
     required this.startDate,
     required this.endDate,
+    required this.status,
     required this.current,
     required this.max,
   });

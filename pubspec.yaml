@@ -38,10 +38,12 @@ dependencies:
 
   # Logging
   logger: ^2.4.0
-  infinite_scroll_pagination: ^4.0.0
 
   # Localization
   intl: ^0.19.0
+
+  #
+  infinite_scroll_pagination: ^4.0.0
 
 dev_dependencies:
   flutter_test:
@@ -58,6 +60,9 @@ dev_dependencies:
   # router
   auto_route_generator: ^9.0.0
 
+  # Resource manager
+  flutter_gen_runner:
+
 flutter:
 
   uses-material-design: true
@@ -65,3 +70,12 @@ flutter:
 # Derry script manager
 scripts:
   build: dart run build_runner build --delete-conflicting-outputs
+
+# Resource manager
+flutter_gen:
+  output: lib/gen/
+  line_length: 80
+
+  colors:
+    inputs:
+      - assets/color/colors.xml

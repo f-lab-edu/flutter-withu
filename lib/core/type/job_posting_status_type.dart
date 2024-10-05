@@ -16,7 +16,7 @@ extension JobPostingStatusTypeEx on JobPostingStatusType {
       case JobPostingStatusType.temporary:
         return '임시저장';
       case JobPostingStatusType.inProgress:
-        return '진행 중';
+        return '진행';
       case JobPostingStatusType.closed:
         return '마감';
     }

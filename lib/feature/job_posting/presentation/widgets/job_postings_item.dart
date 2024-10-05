@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:withu_app/core/type/job_category.dart';
-import 'package:withu_app/core/utils/extensions/date_ex.dart';
+import 'package:withu_app/core/core.dart';
 import 'package:withu_app/feature/job_posting/domain/domain.dart';
+import 'package:withu_app/gen/colors.gen.dart';
 import 'package:withu_app/shared/shared.dart';
 
 /// 공고 목록 아이템
@@ -16,7 +16,10 @@ class JobPostingsItem extends StatelessWidget {
       padding: const EdgeInsets.all(12),
       decoration: const BoxDecoration(
         border: Border(
-          bottom: BorderSide(color: Colors.grey),
+          bottom: BorderSide(
+            color: ColorName.teritary,
+            width: 0.5,
+          ),
         ),
       ),
       child: Row(
@@ -24,17 +27,9 @@ class JobPostingsItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Expanded(
-            child: _Information(
-              title: entity.title,
-              category: entity.category,
-              startDate: entity.startDate,
-              endDate: entity.endDate,
-            ),
+            child: _Information(entity: entity),
           ),
-          _RecruitmentCounter(
-            max: entity.max,
-            current: entity.current,
-          ),
+          _RightView(entity: entity),
         ],
       ),
     );
@@ -42,30 +37,19 @@ class JobPostingsItem extends StatelessWidget {
 }
 
 class _Information extends StatelessWidget {
-  final JobCategory category;
+  final JobPostingEntity entity;
 
-  final String title;
-
-  final DateTime startDate;
-
-  final DateTime? endDate;
+  const _Information({required this.entity});
 
   String get _date => _getDisplayDate();
-
-  const _Information({
-    required this.category,
-    required this.title,
-    required this.startDate,
-    this.endDate,
-  });
 
   /// 표시 날짜 얻기.
   String _getDisplayDate() {
     const String format = 'yy.MM.dd(E)';
-    String result = startDate.format(format);
+    String result = entity.startDate.format(format);
 
-    if (endDate != null) {
-      result += ' - ${endDate?.format(format)}';
+    if (entity.endDate != null) {
+      result += ' - ${entity.endDate?.format(format)}';
     }
     return result;
   }
@@ -80,22 +64,22 @@ class _Information extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             BaseBadge(
-              text: category.displayName,
+              text: entity.category.displayName,
               textStyle: const TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w400,
-                color: Colors.black,
+                color: ColorName.primary,
                 height: 19.2 / 12,
               ),
-              backgroundColor: Colors.green,
+              backgroundColor: ColorName.teritary,
             ),
             const SizedBox(width: 8),
             Text(
-              title,
+              entity.title,
               style: const TextStyle(
                 fontSize: 18,
-                fontWeight: FontWeight.w800,
-                color: Colors.black,
+                fontWeight: FontWeight.w700,
+                color: ColorName.primary,
                 height: 28.8 / 18,
                 letterSpacing: -0.5,
               ),
@@ -109,7 +93,7 @@ class _Information extends StatelessWidget {
           style: const TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w400,
-            color: Colors.black,
+            color: ColorName.primary,
             height: 22.4 / 14,
             letterSpacing: -0.5,
           ),
@@ -119,8 +103,48 @@ class _Information extends StatelessWidget {
   }
 }
 
-/// 모집인원
-class _RecruitmentCounter extends StatelessWidget {
+class _RightView extends StatelessWidget {
+  final JobPostingEntity entity;
+
+  const _RightView({required this.entity});
+
+  @override
+  Widget build(BuildContext context) {
+    switch (entity.status) {
+      case JobPostingStatusType.temporary:
+        return const _TemporaryView();
+      case JobPostingStatusType.inProgress:
+        return _InProgressView(
+          max: entity.max,
+          current: entity.current,
+        );
+      case JobPostingStatusType.closed:
+        return const _ClosedView();
+    }
+  }
+}
+
+/// 임시저장
+class _TemporaryView extends StatelessWidget {
+  const _TemporaryView();
+
+  @override
+  Widget build(BuildContext context) {
+    return const Text(
+      '임시저장',
+      style: TextStyle(
+        fontSize: 12,
+        fontWeight: FontWeight.w400,
+        color: ColorName.primary,
+        height: 19.2 / 12,
+        letterSpacing: -0.5,
+      ),
+    );
+  }
+}
+
+/// 진행 - 모집인원
+class _InProgressView extends StatelessWidget {
   /// 최대 인원
   final int max;
 
@@ -130,7 +154,7 @@ class _RecruitmentCounter extends StatelessWidget {
   /// 현재 / 최대
   String get counter => '$current/$max';
 
-  const _RecruitmentCounter({
+  const _InProgressView({
     required this.max,
     required this.current,
   });
@@ -145,6 +169,7 @@ class _RecruitmentCounter extends StatelessWidget {
           style: TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.w400,
+            color: ColorName.primary,
             height: 19.2 / 12,
             letterSpacing: -0.5,
           ),
@@ -154,11 +179,31 @@ class _RecruitmentCounter extends StatelessWidget {
           style: const TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.w700,
+            color: ColorName.primary,
             height: 28.8 / 18,
             letterSpacing: -0.5,
           ),
         ),
       ],
+    );
+  }
+}
+
+/// 마감
+class _ClosedView extends StatelessWidget {
+  const _ClosedView();
+
+  @override
+  Widget build(BuildContext context) {
+    return const Text(
+      '모집마감',
+      style: TextStyle(
+        fontSize: 12,
+        fontWeight: FontWeight.w400,
+        color: ColorName.primary,
+        height: 19.2 / 12,
+        letterSpacing: -0.5,
+      ),
     );
   }
 }

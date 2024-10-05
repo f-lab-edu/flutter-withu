@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:withu_app/gen/colors.gen.dart';
 import 'package:withu_app/shared/shared.dart';
 
 /// Dynamic Tab
@@ -21,7 +22,9 @@ class BaseTabs extends StatelessWidget {
     return Container(
       decoration: const BoxDecoration(
         border: Border(
-          bottom: BorderSide(color: Colors.grey),
+          bottom: BorderSide(
+            color: ColorName.teritary,
+          ),
         ),
       ),
       child: Row(

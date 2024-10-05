@@ -1,0 +1,8 @@
+<resources>
+    <color name='primary'>#142d00</color>
+    <color name='primary80'>#496433</color>
+    <color name='secondary'>#8a9680</color>
+    <color name='teritary'>#e6ede1</color>
+    <color name='annotations'>#F6BE2C</color>
+    <color name='white'>#ffffff</color>
+</resources>
