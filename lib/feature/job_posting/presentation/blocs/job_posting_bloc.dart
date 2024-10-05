@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:withu_app/core/core.dart';
 import 'package:withu_app/feature/job_posting/domain/domain.dart';
@@ -11,22 +12,35 @@ class JobPostingBloc extends Bloc<JobPostingEvent, JobPostingState> {
 
   JobPostingBloc({
     required this.useCase,
-  }) : super(InitState()) {
+  }) : super(const JobPostingState()) {
     on<OnGettingListEvent>(_onGettingListEvent);
   }
 
   _onGettingListEvent(
     OnGettingListEvent event,
-    Emitter<JobPostingState> emitter,
+    Emitter<JobPostingState> emit,
   ) async {
-    try {
-      logger.i('_onGettingListEvent');
-      emitter(LoadingState());
+    logger.i('_onGettingListEvent');
 
-      final result = await useCase.getJobPostings();
-      return result;
-    } catch (e) {
-      logger.e(e);
-    }
+    emit(state.copyWith(status: JobPostingStatus.loading));
+
+    final List<JobPostingEntity> list = List.generate(
+      30,
+      (int index) => JobPostingEntity(
+        id: '$index',
+        title: '공고명 #$index',
+        category: JobCategory.catering,
+        startDate: DateTime.now(),
+        endDate: DateTime.now(),
+        current: index % 3,
+        max: 3,
+      ),
+    );
+    emit(
+      state.copyWith(
+        status: JobPostingStatus.success,
+        list: list,
+      ),
+    );
   }
 }

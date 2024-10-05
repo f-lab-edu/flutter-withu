@@ -6,7 +6,7 @@ part 'base_tab_event.dart';
 part 'base_tab_state.dart';
 
 // TabBloc 정의
-class BaseTabBloc extends Bloc<TabEvent, BaseTabState> {
+class BaseTabBloc extends Bloc<BaseTabEvent, BaseTabState> {
   BaseTabBloc({
     required List<BaseTabData> tabs,
   }) : super(BaseTabState(tabs: tabs, selectedTab: null)) {

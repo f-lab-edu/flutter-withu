@@ -20,7 +20,10 @@ class BaseTabs extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
-          border: Border(bottom: BorderSide(color: Colors.grey))),
+        border: Border(
+          bottom: BorderSide(color: Colors.grey),
+        ),
+      ),
       child: Row(
         children: tabs
             .map(

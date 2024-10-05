@@ -1,9 +1,35 @@
 part of 'job_posting_bloc.dart';
 
-sealed class JobPostingState {}
+enum JobPostingStatus { initial, loading, success, failure }
 
-/// 초기화 상태.
-class InitState extends JobPostingState {}
+class JobPostingState extends Equatable {
+  /// 상태값
+  final JobPostingStatus status;
 
-/// 로딩 상태.
-class LoadingState extends JobPostingState {}
+  /// 공고 목록
+  final List<JobPostingEntity> list;
+
+  /// 마지막 페이지 여부
+  final bool isLast;
+
+  const JobPostingState({
+    this.status = JobPostingStatus.initial,
+    this.list = const [],
+    this.isLast = true,
+  });
+
+  JobPostingState copyWith({
+    JobPostingStatus? status,
+    List<JobPostingEntity>? list,
+    bool? isLast,
+  }) {
+    return JobPostingState(
+      status: status ?? this.status,
+      list: list ?? this.list,
+      isLast: isLast ?? this.isLast,
+    );
+  }
+
+  @override
+  List<Object?> get props => [status, list, isLast];
+}
