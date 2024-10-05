@@ -7,14 +7,15 @@
 
 ### 프로젝트 사용 기술
 
-* flutter
-* dart
-* flutter_bloc: 상태관리
-* autoRouter: navigation
-* get_it: di
-* dio: api
-* freezed: data generation
-* derry - script manager
+* Flutter, Dart
+* State Manegement : flutter_bloc
+* Navigation: auto_route
+* DI : get_it
+* REST API: dio
+* Data class: freezed
+* Script manager: derry
+* Resource manager: flutter_gen
+* Lint: flutter_lint
 
 ### Architecture
 
