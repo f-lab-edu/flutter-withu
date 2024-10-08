@@ -2,7 +2,11 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:withu_app/core/core.dart';
 
-void main() async {
+void run({
+  required EnvironmentType environment,
+}) async {
+  Environment.env = environment;
+
   WidgetsFlutterBinding.ensureInitialized();
 
   await EasyLocalization.ensureInitialized();

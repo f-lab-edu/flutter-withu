@@ -5,7 +5,7 @@ import 'package:withu_app/feature/job_posting/job_posting.dart';
 
 initJobPostingInjections() {
   getIt.registerSingleton<JobPostingApi>(
-    JobPostingApiImpl(),
+    Environment.isProd ? JobPostingApiImpl() : JobPostingMockApi(),
   );
   getIt.registerSingleton<JobPostingRepository>(
     JobPostingRepositoryImpl(api: getIt()),

@@ -1,4 +1,5 @@
 import 'package:withu_app/core/core.dart';
+import 'package:withu_app/feature/job_posting/data/data.dart';
 
 class JobPostingEntity {
   /// id
@@ -20,10 +21,10 @@ class JobPostingEntity {
   final JobPostingStatusType status;
 
   /// 현재 지원한 인원 수
-  final int current;
+  final int currentMemberCount;
 
   /// 최대 인원 수
-  final int max;
+  final int maxMemberCount;
 
   JobPostingEntity({
     required this.id,
@@ -32,7 +33,31 @@ class JobPostingEntity {
     required this.startDate,
     required this.endDate,
     required this.status,
-    required this.current,
-    required this.max,
+    required this.currentMemberCount,
+    required this.maxMemberCount,
   });
+
+  factory JobPostingEntity.fromModel(JobPostingModel model) {
+    final JobPostingModel(
+      :id,
+      :title,
+      :category,
+      :startDate,
+      :endDate,
+      :status,
+      :currentMemberCount,
+      :maxMemberCount,
+    ) = model;
+
+    return JobPostingEntity(
+      id: id,
+      title: title,
+      category: category,
+      startDate: startDate,
+      endDate: endDate,
+      status: status,
+      currentMemberCount: currentMemberCount,
+      maxMemberCount: maxMemberCount,
+    );
+  }
 }

@@ -25,9 +25,9 @@ mixin _$JobPostingModel {
   JobCategory get category => throw _privateConstructorUsedError; // 직업 카테고리
   JobPostingStatusType get status => throw _privateConstructorUsedError; // 상태값
   DateTime get startDate => throw _privateConstructorUsedError; // 근무 시작 날짜
-  DateTime get endDate => throw _privateConstructorUsedError; // 근무 종료 날짜
-  int get current => throw _privateConstructorUsedError;
-  int get max => throw _privateConstructorUsedError;
+  DateTime? get endDate => throw _privateConstructorUsedError; // 근무 종료 날짜
+  int get currentMemberCount => throw _privateConstructorUsedError; // 현재 모집 인원
+  int get maxMemberCount => throw _privateConstructorUsedError;
 
   /// Serializes this JobPostingModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -51,9 +51,9 @@ abstract class $JobPostingModelCopyWith<$Res> {
       JobCategory category,
       JobPostingStatusType status,
       DateTime startDate,
-      DateTime endDate,
-      int current,
-      int max});
+      DateTime? endDate,
+      int currentMemberCount,
+      int maxMemberCount});
 }
 
 /// @nodoc
@@ -76,9 +76,9 @@ class _$JobPostingModelCopyWithImpl<$Res, $Val extends JobPostingModel>
     Object? category = null,
     Object? status = null,
     Object? startDate = null,
-    Object? endDate = null,
-    Object? current = null,
-    Object? max = null,
+    Object? endDate = freezed,
+    Object? currentMemberCount = null,
+    Object? maxMemberCount = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -101,17 +101,17 @@ class _$JobPostingModelCopyWithImpl<$Res, $Val extends JobPostingModel>
           ? _value.startDate
           : startDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      endDate: null == endDate
+      endDate: freezed == endDate
           ? _value.endDate
           : endDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      current: null == current
-          ? _value.current
-          : current // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      currentMemberCount: null == currentMemberCount
+          ? _value.currentMemberCount
+          : currentMemberCount // ignore: cast_nullable_to_non_nullable
               as int,
-      max: null == max
-          ? _value.max
-          : max // ignore: cast_nullable_to_non_nullable
+      maxMemberCount: null == maxMemberCount
+          ? _value.maxMemberCount
+          : maxMemberCount // ignore: cast_nullable_to_non_nullable
               as int,
     ) as $Val);
   }
@@ -131,9 +131,9 @@ abstract class _$$JobPostingModelImplCopyWith<$Res>
       JobCategory category,
       JobPostingStatusType status,
       DateTime startDate,
-      DateTime endDate,
-      int current,
-      int max});
+      DateTime? endDate,
+      int currentMemberCount,
+      int maxMemberCount});
 }
 
 /// @nodoc
@@ -154,9 +154,9 @@ class __$$JobPostingModelImplCopyWithImpl<$Res>
     Object? category = null,
     Object? status = null,
     Object? startDate = null,
-    Object? endDate = null,
-    Object? current = null,
-    Object? max = null,
+    Object? endDate = freezed,
+    Object? currentMemberCount = null,
+    Object? maxMemberCount = null,
   }) {
     return _then(_$JobPostingModelImpl(
       id: null == id
@@ -179,17 +179,17 @@ class __$$JobPostingModelImplCopyWithImpl<$Res>
           ? _value.startDate
           : startDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      endDate: null == endDate
+      endDate: freezed == endDate
           ? _value.endDate
           : endDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      current: null == current
-          ? _value.current
-          : current // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      currentMemberCount: null == currentMemberCount
+          ? _value.currentMemberCount
+          : currentMemberCount // ignore: cast_nullable_to_non_nullable
               as int,
-      max: null == max
-          ? _value.max
-          : max // ignore: cast_nullable_to_non_nullable
+      maxMemberCount: null == maxMemberCount
+          ? _value.maxMemberCount
+          : maxMemberCount // ignore: cast_nullable_to_non_nullable
               as int,
     ));
   }
@@ -205,8 +205,8 @@ class _$JobPostingModelImpl implements _JobPostingModel {
       required this.status,
       required this.startDate,
       required this.endDate,
-      required this.current,
-      required this.max});
+      required this.currentMemberCount,
+      required this.maxMemberCount});
 
   factory _$JobPostingModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$JobPostingModelImplFromJson(json);
@@ -227,16 +227,17 @@ class _$JobPostingModelImpl implements _JobPostingModel {
   final DateTime startDate;
 // 근무 시작 날짜
   @override
-  final DateTime endDate;
+  final DateTime? endDate;
 // 근무 종료 날짜
   @override
-  final int current;
+  final int currentMemberCount;
+// 현재 모집 인원
   @override
-  final int max;
+  final int maxMemberCount;
 
   @override
   String toString() {
-    return 'JobPostingModel(id: $id, title: $title, category: $category, status: $status, startDate: $startDate, endDate: $endDate, current: $current, max: $max)';
+    return 'JobPostingModel(id: $id, title: $title, category: $category, status: $status, startDate: $startDate, endDate: $endDate, currentMemberCount: $currentMemberCount, maxMemberCount: $maxMemberCount)';
   }
 
   @override
@@ -252,14 +253,16 @@ class _$JobPostingModelImpl implements _JobPostingModel {
             (identical(other.startDate, startDate) ||
                 other.startDate == startDate) &&
             (identical(other.endDate, endDate) || other.endDate == endDate) &&
-            (identical(other.current, current) || other.current == current) &&
-            (identical(other.max, max) || other.max == max));
+            (identical(other.currentMemberCount, currentMemberCount) ||
+                other.currentMemberCount == currentMemberCount) &&
+            (identical(other.maxMemberCount, maxMemberCount) ||
+                other.maxMemberCount == maxMemberCount));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, title, category, status,
-      startDate, endDate, current, max);
+      startDate, endDate, currentMemberCount, maxMemberCount);
 
   /// Create a copy of JobPostingModel
   /// with the given fields replaced by the non-null parameter values.
@@ -285,9 +288,9 @@ abstract class _JobPostingModel implements JobPostingModel {
       required final JobCategory category,
       required final JobPostingStatusType status,
       required final DateTime startDate,
-      required final DateTime endDate,
-      required final int current,
-      required final int max}) = _$JobPostingModelImpl;
+      required final DateTime? endDate,
+      required final int currentMemberCount,
+      required final int maxMemberCount}) = _$JobPostingModelImpl;
 
   factory _JobPostingModel.fromJson(Map<String, dynamic> json) =
       _$JobPostingModelImpl.fromJson;
@@ -303,11 +306,11 @@ abstract class _JobPostingModel implements JobPostingModel {
   @override
   DateTime get startDate; // 근무 시작 날짜
   @override
-  DateTime get endDate; // 근무 종료 날짜
+  DateTime? get endDate; // 근무 종료 날짜
   @override
-  int get current;
+  int get currentMemberCount; // 현재 모집 인원
   @override
-  int get max;
+  int get maxMemberCount;
 
   /// Create a copy of JobPostingModel
   /// with the given fields replaced by the non-null parameter values.

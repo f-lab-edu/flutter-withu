@@ -98,8 +98,8 @@ class _RightView extends StatelessWidget {
         return const _TemporaryView();
       case JobPostingStatusType.inProgress:
         return _InProgressView(
-          max: entity.max,
-          current: entity.current,
+          max: entity.maxMemberCount,
+          current: entity.currentMemberCount,
         );
       case JobPostingStatusType.closed:
         return const _ClosedView();

@@ -3,7 +3,7 @@ import 'package:withu_app/feature/job_posting/data/data.dart';
 import 'package:withu_app/feature/job_posting/domain/domain.dart';
 
 abstract class JobPostingUseCase {
-  Future<List<JobPostingEntity>?> getJobPostings({
+  Future<List<JobPostingEntity>?> searchJobPostings({
     required JobPostingStatusType status,
     required int page,
   });
@@ -17,35 +17,20 @@ class JobPostingUseCaseImpl implements JobPostingUseCase {
   });
 
   @override
-  Future<List<JobPostingEntity>?> getJobPostings({
+  Future<List<JobPostingEntity>> searchJobPostings({
     required JobPostingStatusType status,
     required int page,
   }) async {
     try {
-      final List<JobPostingModel>? result = await repository.getJobPostings(
+      final List<JobPostingModel>? result = await repository.searchJobPostings(
         status: status,
         page: page,
       );
 
-      final entities = result
-          ?.map(
-            (dto) => JobPostingEntity(
-              id: dto.id,
-              title: dto.title,
-              category: dto.category,
-              startDate: dto.startDate,
-              endDate: dto.endDate,
-              status: dto.status,
-              current: dto.current,
-              max: dto.max,
-            ),
-          )
-          .toList();
-
-      return entities;
+      return result?.map(JobPostingEntity.fromModel).toList() ?? [];
     } catch (e) {
       logger.e(e);
-      return null;
+      return [];
     }
   }
 }

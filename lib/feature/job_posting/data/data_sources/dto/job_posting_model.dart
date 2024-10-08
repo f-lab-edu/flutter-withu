@@ -13,9 +13,9 @@ class JobPostingModel with _$JobPostingModel {
     required JobCategory category, // 직업 카테고리
     required JobPostingStatusType status, // 상태값
     required DateTime startDate, // 근무 시작 날짜
-    required DateTime endDate, // 근무 종료 날짜
-    required int current,
-    required int max,
+    required DateTime? endDate, // 근무 종료 날짜
+    required int currentMemberCount, // 현재 모집 인원
+    required int maxMemberCount, // 최대 모집 인원
   }) = _JobPostingModel;
 
   factory JobPostingModel.fromJson(Map<String, Object?> json) =>

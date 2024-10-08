@@ -10,14 +10,12 @@ class JobPostingRepositoryImpl implements JobPostingRepository {
   });
 
   @override
-  Future<List<JobPostingModel>?> getJobPostings({
+  Future<List<JobPostingModel>?> searchJobPostings({
     required JobPostingStatusType status,
     required int page,
   }) async {
     try {
-      final result = await api.fetchList(status: status, page: page);
-      await Future.delayed(const Duration(seconds: 1));
-      return result;
+      return await api.fetchList(status: status, page: page);
     } catch (e) {
       logger.e(e);
       return null;

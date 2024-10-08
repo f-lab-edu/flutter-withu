@@ -20,6 +20,7 @@ dependencies:
 
   # Fetch Data From Api
   dio: 5.7.0
+  pretty_dio_logger: ^1.4.0
 
   # Logging Interceptor
   logging: 1.2.0
@@ -41,10 +42,10 @@ dependencies:
 
   # Localization
   intl: ^0.19.0
+  easy_localization: ^3.0.7
 
   #
   infinite_scroll_pagination: ^4.0.0
-  easy_localization: ^3.0.7
 
 dev_dependencies:
   flutter_test:
@@ -63,6 +64,9 @@ dev_dependencies:
 
   # Resource manager
   flutter_gen_runner:
+
+  # api mocking
+  http_mock_adapter: ^0.6.1
 
 flutter:
 
