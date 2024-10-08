@@ -1,0 +1,1 @@
+enum EnvironmentType { prod, dev }

@@ -16,10 +16,11 @@ dependencies:
   get_it: 8.0.0
 
   # Being able to compare objects in Dart
-  equatable: 2.0.5
+  equatable: ^2.0.5
 
   # Fetch Data From Api
   dio: 5.7.0
+  pretty_dio_logger: ^1.4.0
 
   # Logging Interceptor
   logging: 1.2.0
@@ -36,6 +37,16 @@ dependencies:
   # Router
   auto_route: 9.2.2
 
+  # Logging
+  logger: ^2.4.0
+
+  # Localization
+  intl: ^0.19.0
+  easy_localization: ^3.0.7
+
+  #
+  infinite_scroll_pagination: ^4.0.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -45,13 +56,38 @@ dev_dependencies:
   json_serializable: 6.8.0
   freezed: 2.5.7
 
+  # lint
   flutter_lints: ^4.0.0
+
+  # router
   auto_route_generator: ^9.0.0
+
+  # Resource manager
+  flutter_gen_runner:
+
+  # api mocking
+  http_mock_adapter: ^0.6.1
 
 flutter:
 
   uses-material-design: true
 
+  assets:
+    - assets/translations/
+
 # Derry script manager
 scripts:
+  # build runner 실행
   build: dart run build_runner build --delete-conflicting-outputs
+
+  # 전체 파일 대상으로 pre-commit hooks 스크립트 실행
+  pre-commit: pre-commit run --all-files
+
+# Resource manager
+flutter_gen:
+  output: lib/gen/
+  line_length: 80
+
+  colors:
+    inputs:
+      - assets/color/colors.xml
