@@ -5,4 +5,3 @@ linter:
   rules:
     - eol_at_end_of_file
     - require_trailing_commas
-

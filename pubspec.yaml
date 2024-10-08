@@ -73,7 +73,11 @@ flutter:
 
 # Derry script manager
 scripts:
+  # build runner 실행
   build: dart run build_runner build --delete-conflicting-outputs
+
+  # 전체 파일 대상으로 pre-commit hooks 스크립트 실행
+  pre-commit: pre-commit run --all-files
 
 # Resource manager
 flutter_gen:
