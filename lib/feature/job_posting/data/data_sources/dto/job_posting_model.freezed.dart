@@ -22,7 +22,7 @@ JobPostingModel _$JobPostingModelFromJson(Map<String, dynamic> json) {
 mixin _$JobPostingModel {
   String get id => throw _privateConstructorUsedError; // Id
   String get title => throw _privateConstructorUsedError; // 공고명
-  JobCategory get category => throw _privateConstructorUsedError; // 직업 카테고리
+  JobCategoryType get category => throw _privateConstructorUsedError; // 직업 카테고리
   JobPostingStatusType get status => throw _privateConstructorUsedError; // 상태값
   DateTime get startDate => throw _privateConstructorUsedError; // 근무 시작 날짜
   DateTime? get endDate => throw _privateConstructorUsedError; // 근무 종료 날짜
@@ -48,7 +48,7 @@ abstract class $JobPostingModelCopyWith<$Res> {
   $Res call(
       {String id,
       String title,
-      JobCategory category,
+      JobCategoryType category,
       JobPostingStatusType status,
       DateTime startDate,
       DateTime? endDate,
@@ -92,7 +92,7 @@ class _$JobPostingModelCopyWithImpl<$Res, $Val extends JobPostingModel>
       category: null == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
-              as JobCategory,
+              as JobCategoryType,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -128,7 +128,7 @@ abstract class _$$JobPostingModelImplCopyWith<$Res>
   $Res call(
       {String id,
       String title,
-      JobCategory category,
+      JobCategoryType category,
       JobPostingStatusType status,
       DateTime startDate,
       DateTime? endDate,
@@ -170,7 +170,7 @@ class __$$JobPostingModelImplCopyWithImpl<$Res>
       category: null == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
-              as JobCategory,
+              as JobCategoryType,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -218,7 +218,7 @@ class _$JobPostingModelImpl implements _JobPostingModel {
   final String title;
 // 공고명
   @override
-  final JobCategory category;
+  final JobCategoryType category;
 // 직업 카테고리
   @override
   final JobPostingStatusType status;
@@ -285,7 +285,7 @@ abstract class _JobPostingModel implements JobPostingModel {
   const factory _JobPostingModel(
       {required final String id,
       required final String title,
-      required final JobCategory category,
+      required final JobCategoryType category,
       required final JobPostingStatusType status,
       required final DateTime startDate,
       required final DateTime? endDate,
@@ -300,7 +300,7 @@ abstract class _JobPostingModel implements JobPostingModel {
   @override
   String get title; // 공고명
   @override
-  JobCategory get category; // 직업 카테고리
+  JobCategoryType get category; // 직업 카테고리
   @override
   JobPostingStatusType get status; // 상태값
   @override

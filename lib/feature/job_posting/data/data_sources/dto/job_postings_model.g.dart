@@ -7,8 +7,7 @@ part of 'job_postings_model.dart';
 // **************************************************************************
 
 _$JobPostingsModelImpl _$$JobPostingsModelImplFromJson(
-  Map<String, dynamic> json,
-) =>
+        Map<String, dynamic> json) =>
     _$JobPostingsModelImpl(
       contents: (json['contents'] as List<dynamic>?)
           ?.map((e) => JobPostingModel.fromJson(e as Map<String, dynamic>))
@@ -16,8 +15,7 @@ _$JobPostingsModelImpl _$$JobPostingsModelImplFromJson(
     );
 
 Map<String, dynamic> _$$JobPostingsModelImplToJson(
-  _$JobPostingsModelImpl instance,
-) =>
+        _$JobPostingsModelImpl instance) =>
     <String, dynamic>{
       'contents': instance.contents,
     };

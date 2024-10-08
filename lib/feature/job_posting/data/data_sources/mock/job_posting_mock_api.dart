@@ -15,7 +15,7 @@ class JobPostingMockApi extends JobPostingApi with MockAPI {
           id: '$index',
           title: '공고명 #${index + (page * 30)}',
           status: status,
-          category: JobCategory.values[index % 4],
+          category: JobCategoryType.values[index % 4],
           startDate: DateTime.now(),
           endDate: DateTime.now(),
           currentMemberCount: index % 3,

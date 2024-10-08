@@ -10,7 +10,7 @@ class JobPostingModel with _$JobPostingModel {
   const factory JobPostingModel({
     required String id, // Id
     required String title, // 공고명
-    required JobCategory category, // 직업 카테고리
+    required JobCategoryType category, // 직업 카테고리
     required JobPostingStatusType status, // 상태값
     required DateTime startDate, // 근무 시작 날짜
     required DateTime? endDate, // 근무 종료 날짜

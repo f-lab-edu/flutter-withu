@@ -64,7 +64,7 @@ class _Information extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             BaseBadge(
-              text: entity.category.displayName,
+              text: entity.category.tr,
               textStyle: context.textTheme.bodySmall,
               backgroundColor: ColorName.teritary,
             ),

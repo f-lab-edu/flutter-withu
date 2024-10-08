@@ -10,7 +10,7 @@ class JobPostingsTabBloc extends BaseTabBloc {
     return JobPostingStatusType.values
         .map<BaseTabData<JobPostingStatusType>>(
           (type) => BaseTabData(
-            text: type.displayName,
+            text: type.tr,
             value: type,
           ),
         )
