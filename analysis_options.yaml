@@ -3,5 +3,5 @@ include: package:flutter_lints/flutter.yaml
 linter:
 
   rules:
-    - eol_at_end_of_file
-    - require_trailing_commas
+    - eol_at_end_of_file: true
+    - require_trailing_commas: true

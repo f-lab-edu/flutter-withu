@@ -1,5 +1,4 @@
 // 공고 상태 타입
-import 'package:easy_localization/easy_localization.dart' as easy;
 import 'package:withu_app/core/core.dart';
 
 enum JobPostingStatusType with I10nKeyProvider {
