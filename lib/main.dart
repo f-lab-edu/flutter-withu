@@ -16,7 +16,7 @@ void run({
 
   runApp(
     EasyLocalization(
-      supportedLocales: const [Locale('en'), Locale('ko')],
+      supportedLocales: const [Locale('ko')],
       fallbackLocale: const Locale('ko'),
       startLocale: const Locale('ko'),
       path: 'assets/translations',
