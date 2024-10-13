@@ -1,7 +1,7 @@
 
 import 'package:intl/intl.dart';
 
-extension DateTimeEx on DateTime {
+extension DateTimeExt on DateTime {
 
   /// 포맷팅한 날짜 얻기
   String format(String format) {

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:withu_app/core/core.dart';
+import 'package:withu_app/core/router/router.gr.dart';
 import 'package:withu_app/feature/feature.dart';
 import 'package:withu_app/feature/job_posting/domain/domain.dart';
 import 'package:withu_app/shared/shared.dart';
@@ -30,6 +31,9 @@ class _JobPostingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(onPressed: () {
+        context.pushRoute(const JobPostingFormRoute());
+      }),
       body: SafeArea(
         child: Container(
           width: double.infinity,
