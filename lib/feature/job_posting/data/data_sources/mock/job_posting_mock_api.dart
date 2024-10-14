@@ -43,4 +43,36 @@ class JobPostingMockApi extends JobPostingApi with MockAPI {
       return [];
     }
   }
+
+  @override
+  FutureOr<ApiResponse<JobPostingDetailModel>> createJobPosting({
+    required JobPostingRequestModel requestData,
+  }) async {
+    final JobPostingDetailModel responseData = JobPostingDetailModel.fromJson({
+      'id': '1',
+      ...requestData.toJson(),
+    });
+    try {
+      dioAdapter.onGet(
+        url,
+        (server) => server.reply(
+          200,
+          responseData,
+          delay: const Duration(seconds: 1),
+        ),
+      );
+
+      final response = await dio.get(url);
+
+      if (response.statusCode == 200) {
+        final detail = JobPostingDetailModel.fromJson(response.data);
+        return ApiResponse.success(detail);
+      }
+
+      final fail = FailResponse.fromJson(response.data);
+      return ApiResponse.fail(fail);
+    } catch (e) {
+      return const ApiResponse.error();
+    }
+  }
 }
