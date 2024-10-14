@@ -10,7 +10,7 @@ class JobPostingRepositoryImpl implements JobPostingRepository {
   });
 
   @override
-  Future<List<JobPostingModel>?> searchJobPostings({
+  Future<List<JobPostingsItemModel>?> searchJobPostings({
     required JobPostingStatusType status,
     required int page,
   }) async {

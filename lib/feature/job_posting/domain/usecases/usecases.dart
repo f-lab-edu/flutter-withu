@@ -22,7 +22,7 @@ class JobPostingUseCaseImpl implements JobPostingUseCase {
     required int page,
   }) async {
     try {
-      final List<JobPostingModel>? result = await repository.searchJobPostings(
+      final List<JobPostingsItemModel>? result = await repository.searchJobPostings(
         status: status,
         page: page,
       );

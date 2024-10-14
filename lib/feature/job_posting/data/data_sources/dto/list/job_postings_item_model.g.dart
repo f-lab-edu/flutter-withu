@@ -1,14 +1,14 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'job_posting_model.dart';
+part of 'job_postings_item_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$JobPostingModelImpl _$$JobPostingModelImplFromJson(
+_$JobPostingsItemModelImpl _$$JobPostingsItemModelImplFromJson(
         Map<String, dynamic> json) =>
-    _$JobPostingModelImpl(
+    _$JobPostingsItemModelImpl(
       id: json['id'] as String,
       title: json['title'] as String,
       category: $enumDecode(_$JobCategoryTypeEnumMap, json['category']),
@@ -21,8 +21,8 @@ _$JobPostingModelImpl _$$JobPostingModelImplFromJson(
       maxMemberCount: (json['maxMemberCount'] as num).toInt(),
     );
 
-Map<String, dynamic> _$$JobPostingModelImplToJson(
-        _$JobPostingModelImpl instance) =>
+Map<String, dynamic> _$$JobPostingsItemModelImplToJson(
+        _$JobPostingsItemModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'title': instance.title,

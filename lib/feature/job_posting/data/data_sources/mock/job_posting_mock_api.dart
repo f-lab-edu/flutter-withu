@@ -4,14 +4,14 @@ import 'package:withu_app/feature/job_posting/data/data.dart';
 
 class JobPostingMockApi extends JobPostingApi with MockAPI {
   @override
-  FutureOr<List<JobPostingModel>> fetchList({
+  FutureOr<List<JobPostingsItemModel>> fetchList({
     required JobPostingStatusType status,
     required int page,
   }) async {
     try {
-      final list = List<JobPostingModel>.generate(
+      final list = List<JobPostingsItemModel>.generate(
         30,
-        (int index) => JobPostingModel(
+        (int index) => JobPostingsItemModel(
           id: '$index',
           title: '공고명 #${index + (page * 30)}',
           status: status,
