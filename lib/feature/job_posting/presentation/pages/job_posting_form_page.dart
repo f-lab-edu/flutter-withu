@@ -125,7 +125,7 @@ class _PeriodType extends StatelessWidget {
       children: [
         _FieldName(text: StringRes.periodFormat.tr),
         const Spacer(),
-        ...WorkPeriodType.values.map(
+        ...ContractType.values.map(
           (type) => RadioChip(
             text: type.tr,
             isSelected: true,

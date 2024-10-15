@@ -1,7 +1,7 @@
 import 'package:withu_app/core/core.dart';
 
 /// 근로 기간 타입
-enum WorkPeriodType with L10nKeyProvider {
+enum ContractType with L10nKeyProvider {
   /// 단기
   short(l10nKey: 'shortTerm'),
 
@@ -11,5 +11,5 @@ enum WorkPeriodType with L10nKeyProvider {
   @override
   final String l10nKey;
 
-  const WorkPeriodType({required this.l10nKey});
+  const ContractType({required this.l10nKey});
 }

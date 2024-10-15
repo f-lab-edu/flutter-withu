@@ -37,6 +37,7 @@ class JobPostingEntity {
     required this.maxMemberCount,
   });
 
+  /// DTO -> Entity
   factory JobPostingEntity.fromModel(JobPostingsItemModel model) {
     final JobPostingsItemModel(
       :id,

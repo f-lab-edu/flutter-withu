@@ -1,14 +1,14 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'job_posting_request_model.dart';
+part of 'job_posting_request_dto.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$JobPostingRequestModelImpl _$$JobPostingRequestModelImplFromJson(
+_$JobPostingRequestDtoImpl _$$JobPostingRequestDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$JobPostingRequestModelImpl(
+    _$JobPostingRequestDtoImpl(
       companyId: json['companyId'] as String,
       title: json['title'] as String,
       content: json['content'] as String,
@@ -17,11 +17,9 @@ _$JobPostingRequestModelImpl _$$JobPostingRequestModelImplFromJson(
       contractStartDate: DateTime.parse(json['contractStartDate'] as String),
       contractEndDate: DateTime.parse(json['contractEndDate'] as String),
       isTimeUndecided: json['isTimeUndecided'] as bool,
-      payType: $enumDecode(_$PayTypeEnumMap, json['payType']),
+      payType: json['payType'] as String,
       payAmount: (json['payAmount'] as num).toInt(),
       workAddress: json['workAddress'] as String,
-      latitude: (json['latitude'] as num).toDouble(),
-      longitude: (json['longitude'] as num).toDouble(),
       participants: (json['participants'] as num).toInt(),
       hasTravelTime: json['hasTravelTime'] as bool,
       isTravelTimePaid: json['isTravelTimePaid'] as bool,
@@ -38,8 +36,8 @@ _$JobPostingRequestModelImpl _$$JobPostingRequestModelImplFromJson(
           : DateTime.parse(json['workEndTime'] as String),
     );
 
-Map<String, dynamic> _$$JobPostingRequestModelImplToJson(
-        _$JobPostingRequestModelImpl instance) =>
+Map<String, dynamic> _$$JobPostingRequestDtoImplToJson(
+        _$JobPostingRequestDtoImpl instance) =>
     <String, dynamic>{
       'companyId': instance.companyId,
       'title': instance.title,
@@ -49,11 +47,9 @@ Map<String, dynamic> _$$JobPostingRequestModelImplToJson(
       'contractStartDate': instance.contractStartDate.toIso8601String(),
       'contractEndDate': instance.contractEndDate.toIso8601String(),
       'isTimeUndecided': instance.isTimeUndecided,
-      'payType': _$PayTypeEnumMap[instance.payType]!,
+      'payType': instance.payType,
       'payAmount': instance.payAmount,
       'workAddress': instance.workAddress,
-      'latitude': instance.latitude,
-      'longitude': instance.longitude,
       'participants': instance.participants,
       'hasTravelTime': instance.hasTravelTime,
       'isTravelTimePaid': instance.isTravelTimePaid,
@@ -65,8 +61,3 @@ Map<String, dynamic> _$$JobPostingRequestModelImplToJson(
       'workStartTime': instance.workStartTime?.toIso8601String(),
       'workEndTime': instance.workEndTime?.toIso8601String(),
     };
-
-const _$PayTypeEnumMap = {
-  PayType.hour: 'hour',
-  PayType.day: 'day',
-};

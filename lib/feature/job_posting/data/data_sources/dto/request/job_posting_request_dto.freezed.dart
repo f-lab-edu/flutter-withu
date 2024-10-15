@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'job_posting_request_model.dart';
+part of 'job_posting_request_dto.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,13 +14,12 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-JobPostingRequestModel _$JobPostingRequestModelFromJson(
-    Map<String, dynamic> json) {
-  return _JobPostingRequestModel.fromJson(json);
+JobPostingRequestDto _$JobPostingRequestDtoFromJson(Map<String, dynamic> json) {
+  return _JobPostingRequestDto.fromJson(json);
 }
 
 /// @nodoc
-mixin _$JobPostingRequestModel {
+mixin _$JobPostingRequestDto {
   String get companyId => throw _privateConstructorUsedError; // 회사 ID
   String get title => throw _privateConstructorUsedError; // 공고명
   String get content => throw _privateConstructorUsedError; // 근로 내용
@@ -32,11 +31,9 @@ mixin _$JobPostingRequestModel {
   DateTime get contractEndDate =>
       throw _privateConstructorUsedError; // 근로 종료 날짜
   bool get isTimeUndecided => throw _privateConstructorUsedError; // 시간 미정 여부
-  PayType get payType => throw _privateConstructorUsedError; // 급여 타입: 시급, 일급
+  String get payType => throw _privateConstructorUsedError; // 급여 타입: 시급, 일급
   int get payAmount => throw _privateConstructorUsedError; // 금액
   String get workAddress => throw _privateConstructorUsedError; // 근무지 주소
-  double get latitude => throw _privateConstructorUsedError; // 근무지 위도
-  double get longitude => throw _privateConstructorUsedError; // 근무지 경도
   int get participants => throw _privateConstructorUsedError; // 모집인원
   bool get hasTravelTime => throw _privateConstructorUsedError; // 이동시간 유무
   bool get isTravelTimePaid =>
@@ -50,21 +47,21 @@ mixin _$JobPostingRequestModel {
   DateTime? get workStartTime => throw _privateConstructorUsedError; // 근무 시작 시간
   DateTime? get workEndTime => throw _privateConstructorUsedError;
 
-  /// Serializes this JobPostingRequestModel to a JSON map.
+  /// Serializes this JobPostingRequestDto to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
-  /// Create a copy of JobPostingRequestModel
+  /// Create a copy of JobPostingRequestDto
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $JobPostingRequestModelCopyWith<JobPostingRequestModel> get copyWith =>
+  $JobPostingRequestDtoCopyWith<JobPostingRequestDto> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $JobPostingRequestModelCopyWith<$Res> {
-  factory $JobPostingRequestModelCopyWith(JobPostingRequestModel value,
-          $Res Function(JobPostingRequestModel) then) =
-      _$JobPostingRequestModelCopyWithImpl<$Res, JobPostingRequestModel>;
+abstract class $JobPostingRequestDtoCopyWith<$Res> {
+  factory $JobPostingRequestDtoCopyWith(JobPostingRequestDto value,
+          $Res Function(JobPostingRequestDto) then) =
+      _$JobPostingRequestDtoCopyWithImpl<$Res, JobPostingRequestDto>;
   @useResult
   $Res call(
       {String companyId,
@@ -75,11 +72,9 @@ abstract class $JobPostingRequestModelCopyWith<$Res> {
       DateTime contractStartDate,
       DateTime contractEndDate,
       bool isTimeUndecided,
-      PayType payType,
+      String payType,
       int payAmount,
       String workAddress,
-      double latitude,
-      double longitude,
       int participants,
       bool hasTravelTime,
       bool isTravelTimePaid,
@@ -93,17 +88,17 @@ abstract class $JobPostingRequestModelCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$JobPostingRequestModelCopyWithImpl<$Res,
-        $Val extends JobPostingRequestModel>
-    implements $JobPostingRequestModelCopyWith<$Res> {
-  _$JobPostingRequestModelCopyWithImpl(this._value, this._then);
+class _$JobPostingRequestDtoCopyWithImpl<$Res,
+        $Val extends JobPostingRequestDto>
+    implements $JobPostingRequestDtoCopyWith<$Res> {
+  _$JobPostingRequestDtoCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of JobPostingRequestModel
+  /// Create a copy of JobPostingRequestDto
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -119,8 +114,6 @@ class _$JobPostingRequestModelCopyWithImpl<$Res,
     Object? payType = null,
     Object? payAmount = null,
     Object? workAddress = null,
-    Object? latitude = null,
-    Object? longitude = null,
     Object? participants = null,
     Object? hasTravelTime = null,
     Object? isTravelTimePaid = null,
@@ -168,7 +161,7 @@ class _$JobPostingRequestModelCopyWithImpl<$Res,
       payType: null == payType
           ? _value.payType
           : payType // ignore: cast_nullable_to_non_nullable
-              as PayType,
+              as String,
       payAmount: null == payAmount
           ? _value.payAmount
           : payAmount // ignore: cast_nullable_to_non_nullable
@@ -177,14 +170,6 @@ class _$JobPostingRequestModelCopyWithImpl<$Res,
           ? _value.workAddress
           : workAddress // ignore: cast_nullable_to_non_nullable
               as String,
-      latitude: null == latitude
-          ? _value.latitude
-          : latitude // ignore: cast_nullable_to_non_nullable
-              as double,
-      longitude: null == longitude
-          ? _value.longitude
-          : longitude // ignore: cast_nullable_to_non_nullable
-              as double,
       participants: null == participants
           ? _value.participants
           : participants // ignore: cast_nullable_to_non_nullable
@@ -230,12 +215,11 @@ class _$JobPostingRequestModelCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$JobPostingRequestModelImplCopyWith<$Res>
-    implements $JobPostingRequestModelCopyWith<$Res> {
-  factory _$$JobPostingRequestModelImplCopyWith(
-          _$JobPostingRequestModelImpl value,
-          $Res Function(_$JobPostingRequestModelImpl) then) =
-      __$$JobPostingRequestModelImplCopyWithImpl<$Res>;
+abstract class _$$JobPostingRequestDtoImplCopyWith<$Res>
+    implements $JobPostingRequestDtoCopyWith<$Res> {
+  factory _$$JobPostingRequestDtoImplCopyWith(_$JobPostingRequestDtoImpl value,
+          $Res Function(_$JobPostingRequestDtoImpl) then) =
+      __$$JobPostingRequestDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -247,11 +231,9 @@ abstract class _$$JobPostingRequestModelImplCopyWith<$Res>
       DateTime contractStartDate,
       DateTime contractEndDate,
       bool isTimeUndecided,
-      PayType payType,
+      String payType,
       int payAmount,
       String workAddress,
-      double latitude,
-      double longitude,
       int participants,
       bool hasTravelTime,
       bool isTravelTimePaid,
@@ -265,16 +247,14 @@ abstract class _$$JobPostingRequestModelImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$JobPostingRequestModelImplCopyWithImpl<$Res>
-    extends _$JobPostingRequestModelCopyWithImpl<$Res,
-        _$JobPostingRequestModelImpl>
-    implements _$$JobPostingRequestModelImplCopyWith<$Res> {
-  __$$JobPostingRequestModelImplCopyWithImpl(
-      _$JobPostingRequestModelImpl _value,
-      $Res Function(_$JobPostingRequestModelImpl) _then)
+class __$$JobPostingRequestDtoImplCopyWithImpl<$Res>
+    extends _$JobPostingRequestDtoCopyWithImpl<$Res, _$JobPostingRequestDtoImpl>
+    implements _$$JobPostingRequestDtoImplCopyWith<$Res> {
+  __$$JobPostingRequestDtoImplCopyWithImpl(_$JobPostingRequestDtoImpl _value,
+      $Res Function(_$JobPostingRequestDtoImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of JobPostingRequestModel
+  /// Create a copy of JobPostingRequestDto
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -290,8 +270,6 @@ class __$$JobPostingRequestModelImplCopyWithImpl<$Res>
     Object? payType = null,
     Object? payAmount = null,
     Object? workAddress = null,
-    Object? latitude = null,
-    Object? longitude = null,
     Object? participants = null,
     Object? hasTravelTime = null,
     Object? isTravelTimePaid = null,
@@ -303,7 +281,7 @@ class __$$JobPostingRequestModelImplCopyWithImpl<$Res>
     Object? workStartTime = freezed,
     Object? workEndTime = freezed,
   }) {
-    return _then(_$JobPostingRequestModelImpl(
+    return _then(_$JobPostingRequestDtoImpl(
       companyId: null == companyId
           ? _value.companyId
           : companyId // ignore: cast_nullable_to_non_nullable
@@ -339,7 +317,7 @@ class __$$JobPostingRequestModelImplCopyWithImpl<$Res>
       payType: null == payType
           ? _value.payType
           : payType // ignore: cast_nullable_to_non_nullable
-              as PayType,
+              as String,
       payAmount: null == payAmount
           ? _value.payAmount
           : payAmount // ignore: cast_nullable_to_non_nullable
@@ -348,14 +326,6 @@ class __$$JobPostingRequestModelImplCopyWithImpl<$Res>
           ? _value.workAddress
           : workAddress // ignore: cast_nullable_to_non_nullable
               as String,
-      latitude: null == latitude
-          ? _value.latitude
-          : latitude // ignore: cast_nullable_to_non_nullable
-              as double,
-      longitude: null == longitude
-          ? _value.longitude
-          : longitude // ignore: cast_nullable_to_non_nullable
-              as double,
       participants: null == participants
           ? _value.participants
           : participants // ignore: cast_nullable_to_non_nullable
@@ -402,8 +372,8 @@ class __$$JobPostingRequestModelImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$JobPostingRequestModelImpl implements _JobPostingRequestModel {
-  const _$JobPostingRequestModelImpl(
+class _$JobPostingRequestDtoImpl implements _JobPostingRequestDto {
+  const _$JobPostingRequestDtoImpl(
       {required this.companyId,
       required this.title,
       required this.content,
@@ -415,8 +385,6 @@ class _$JobPostingRequestModelImpl implements _JobPostingRequestModel {
       required this.payType,
       required this.payAmount,
       required this.workAddress,
-      required this.latitude,
-      required this.longitude,
       required this.participants,
       required this.hasTravelTime,
       required this.isTravelTimePaid,
@@ -428,8 +396,8 @@ class _$JobPostingRequestModelImpl implements _JobPostingRequestModel {
       this.workStartTime,
       this.workEndTime});
 
-  factory _$JobPostingRequestModelImpl.fromJson(Map<String, dynamic> json) =>
-      _$$JobPostingRequestModelImplFromJson(json);
+  factory _$JobPostingRequestDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$JobPostingRequestDtoImplFromJson(json);
 
   @override
   final String companyId;
@@ -456,7 +424,7 @@ class _$JobPostingRequestModelImpl implements _JobPostingRequestModel {
   final bool isTimeUndecided;
 // 시간 미정 여부
   @override
-  final PayType payType;
+  final String payType;
 // 급여 타입: 시급, 일급
   @override
   final int payAmount;
@@ -464,12 +432,6 @@ class _$JobPostingRequestModelImpl implements _JobPostingRequestModel {
   @override
   final String workAddress;
 // 근무지 주소
-  @override
-  final double latitude;
-// 근무지 위도
-  @override
-  final double longitude;
-// 근무지 경도
   @override
   final int participants;
 // 모집인원
@@ -502,14 +464,14 @@ class _$JobPostingRequestModelImpl implements _JobPostingRequestModel {
 
   @override
   String toString() {
-    return 'JobPostingRequestModel(companyId: $companyId, title: $title, content: $content, specialtyField: $specialtyField, contractType: $contractType, contractStartDate: $contractStartDate, contractEndDate: $contractEndDate, isTimeUndecided: $isTimeUndecided, payType: $payType, payAmount: $payAmount, workAddress: $workAddress, latitude: $latitude, longitude: $longitude, participants: $participants, hasTravelTime: $hasTravelTime, isTravelTimePaid: $isTravelTimePaid, hasBreakTime: $hasBreakTime, isBreakTimePaid: $isBreakTimePaid, isMealProvided: $isMealProvided, isUrgent: $isUrgent, preferredQualifications: $preferredQualifications, workStartTime: $workStartTime, workEndTime: $workEndTime)';
+    return 'JobPostingRequestDto(companyId: $companyId, title: $title, content: $content, specialtyField: $specialtyField, contractType: $contractType, contractStartDate: $contractStartDate, contractEndDate: $contractEndDate, isTimeUndecided: $isTimeUndecided, payType: $payType, payAmount: $payAmount, workAddress: $workAddress, participants: $participants, hasTravelTime: $hasTravelTime, isTravelTimePaid: $isTravelTimePaid, hasBreakTime: $hasBreakTime, isBreakTimePaid: $isBreakTimePaid, isMealProvided: $isMealProvided, isUrgent: $isUrgent, preferredQualifications: $preferredQualifications, workStartTime: $workStartTime, workEndTime: $workEndTime)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$JobPostingRequestModelImpl &&
+            other is _$JobPostingRequestDtoImpl &&
             (identical(other.companyId, companyId) ||
                 other.companyId == companyId) &&
             (identical(other.title, title) || other.title == title) &&
@@ -529,10 +491,6 @@ class _$JobPostingRequestModelImpl implements _JobPostingRequestModel {
                 other.payAmount == payAmount) &&
             (identical(other.workAddress, workAddress) ||
                 other.workAddress == workAddress) &&
-            (identical(other.latitude, latitude) ||
-                other.latitude == latitude) &&
-            (identical(other.longitude, longitude) ||
-                other.longitude == longitude) &&
             (identical(other.participants, participants) ||
                 other.participants == participants) &&
             (identical(other.hasTravelTime, hasTravelTime) ||
@@ -571,8 +529,6 @@ class _$JobPostingRequestModelImpl implements _JobPostingRequestModel {
         payType,
         payAmount,
         workAddress,
-        latitude,
-        longitude,
         participants,
         hasTravelTime,
         isTravelTimePaid,
@@ -585,25 +541,26 @@ class _$JobPostingRequestModelImpl implements _JobPostingRequestModel {
         workEndTime
       ]);
 
-  /// Create a copy of JobPostingRequestModel
+  /// Create a copy of JobPostingRequestDto
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$JobPostingRequestModelImplCopyWith<_$JobPostingRequestModelImpl>
-      get copyWith => __$$JobPostingRequestModelImplCopyWithImpl<
-          _$JobPostingRequestModelImpl>(this, _$identity);
+  _$$JobPostingRequestDtoImplCopyWith<_$JobPostingRequestDtoImpl>
+      get copyWith =>
+          __$$JobPostingRequestDtoImplCopyWithImpl<_$JobPostingRequestDtoImpl>(
+              this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$JobPostingRequestModelImplToJson(
+    return _$$JobPostingRequestDtoImplToJson(
       this,
     );
   }
 }
 
-abstract class _JobPostingRequestModel implements JobPostingRequestModel {
-  const factory _JobPostingRequestModel(
+abstract class _JobPostingRequestDto implements JobPostingRequestDto {
+  const factory _JobPostingRequestDto(
       {required final String companyId,
       required final String title,
       required final String content,
@@ -612,11 +569,9 @@ abstract class _JobPostingRequestModel implements JobPostingRequestModel {
       required final DateTime contractStartDate,
       required final DateTime contractEndDate,
       required final bool isTimeUndecided,
-      required final PayType payType,
+      required final String payType,
       required final int payAmount,
       required final String workAddress,
-      required final double latitude,
-      required final double longitude,
       required final int participants,
       required final bool hasTravelTime,
       required final bool isTravelTimePaid,
@@ -626,10 +581,10 @@ abstract class _JobPostingRequestModel implements JobPostingRequestModel {
       required final bool isUrgent,
       final String? preferredQualifications,
       final DateTime? workStartTime,
-      final DateTime? workEndTime}) = _$JobPostingRequestModelImpl;
+      final DateTime? workEndTime}) = _$JobPostingRequestDtoImpl;
 
-  factory _JobPostingRequestModel.fromJson(Map<String, dynamic> json) =
-      _$JobPostingRequestModelImpl.fromJson;
+  factory _JobPostingRequestDto.fromJson(Map<String, dynamic> json) =
+      _$JobPostingRequestDtoImpl.fromJson;
 
   @override
   String get companyId; // 회사 ID
@@ -648,15 +603,11 @@ abstract class _JobPostingRequestModel implements JobPostingRequestModel {
   @override
   bool get isTimeUndecided; // 시간 미정 여부
   @override
-  PayType get payType; // 급여 타입: 시급, 일급
+  String get payType; // 급여 타입: 시급, 일급
   @override
   int get payAmount; // 금액
   @override
   String get workAddress; // 근무지 주소
-  @override
-  double get latitude; // 근무지 위도
-  @override
-  double get longitude; // 근무지 경도
   @override
   int get participants; // 모집인원
   @override
@@ -678,10 +629,10 @@ abstract class _JobPostingRequestModel implements JobPostingRequestModel {
   @override
   DateTime? get workEndTime;
 
-  /// Create a copy of JobPostingRequestModel
+  /// Create a copy of JobPostingRequestDto
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$JobPostingRequestModelImplCopyWith<_$JobPostingRequestModelImpl>
+  _$$JobPostingRequestDtoImplCopyWith<_$JobPostingRequestDtoImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

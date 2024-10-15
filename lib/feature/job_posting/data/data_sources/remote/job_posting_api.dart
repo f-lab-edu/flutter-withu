@@ -11,6 +11,6 @@ abstract class JobPostingApi extends API {
 
   /// 공고 생성
   FutureOr<ApiResponse<JobPostingDetailModel>> createJobPosting({
-    required JobPostingRequestModel requestData,
+    required JobPostingRequestDto requestData,
   });
 }

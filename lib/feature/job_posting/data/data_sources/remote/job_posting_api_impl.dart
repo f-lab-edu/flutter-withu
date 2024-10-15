@@ -13,7 +13,7 @@ class JobPostingApiImpl extends JobPostingApi {
 
   @override
   FutureOr<ApiResponse<JobPostingDetailModel>> createJobPosting({
-    required JobPostingRequestModel requestData,
+    required JobPostingRequestDto requestData,
   }) {
     // TODO: implement postJobPosting
     return const ApiResponse.error();

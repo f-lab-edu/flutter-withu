@@ -46,7 +46,7 @@ class JobPostingMockApi extends JobPostingApi with MockAPI {
 
   @override
   FutureOr<ApiResponse<JobPostingDetailModel>> createJobPosting({
-    required JobPostingRequestModel requestData,
+    required JobPostingRequestDto requestData,
   }) async {
     final JobPostingDetailModel responseData = JobPostingDetailModel.fromJson({
       'id': '1',
