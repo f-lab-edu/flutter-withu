@@ -55,7 +55,7 @@ class JobPostingUseCaseImpl implements JobPostingUseCase {
 
     final result = await repository.createJobPosting(dto: dto);
 
-    return result is JobPostingDetailModel;
+    return result.maybeWhen<bool>(success: (_) => true, orElse: () => false);
   }
 }
 

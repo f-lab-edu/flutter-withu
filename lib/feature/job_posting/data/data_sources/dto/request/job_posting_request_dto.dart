@@ -21,14 +21,14 @@ class JobPostingRequestDto with _$JobPostingRequestDto {
     required String workAddress, // 근무지 주소
     required int participants, // 모집인원
     required bool hasTravelTime, // 이동시간 유무
-    required bool isTravelTimePaid, // 이동시간 급여/비급여
     required bool hasBreakTime, // 휴게시간 여부
-    required bool isBreakTimePaid, // 휴게시간 급여/비급여
     required bool isMealProvided, // 식사유무
     required bool isUrgent, // 급구 여부
     String? preferredQualifications, // 우대사항
     DateTime? workStartTime, // 근무 시작 시간
     DateTime? workEndTime, // 근무 종료 시간
+    bool? isTravelTimePaid, // 이동시간 급여/비급여
+    bool? isBreakTimePaid, // 휴게시간 급여/비급여
   }) = _JobPostingRequestDto;
 
   factory JobPostingRequestDto.fromJson(Map<String, Object?> json) =>

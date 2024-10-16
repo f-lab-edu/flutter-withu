@@ -15,9 +15,19 @@ class JobPostingFormPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<JobPostingFormBloc>(
-      create: (context) => getIt(),
-      child: _JobPostingFormPage(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<LoadingBloc>(create: (context) => getIt()),
+        BlocProvider<JobPostingFormBloc>(create: (context) => getIt()),
+      ],
+      child: BlocListener<JobPostingFormBloc, JobPostingFormState>(
+        listener: (context, state) {
+          if (state.status.isSuccess) {
+            context.back();
+          }
+        },
+        child: _JobPostingFormPage(),
+      ),
     );
   }
 }
@@ -25,72 +35,66 @@ class JobPostingFormPage extends StatelessWidget {
 class _JobPostingFormPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return PageRoot(
-      appBar: CustomAppBar.back(
-        context: context,
-        trailing: [
-          TextButton(
-            onPressed: () {
-              context.read<JobPostingFormBloc>().add(OnCliCkTemporarySave());
-            },
-            child: Text(
-              StringRes.temporarySave.tr,
-              style: context.textTheme.bodyMedium,
+    return BlocBuilder<LoadingBloc, LoadingState>(
+      builder: (context, loadingState) {
+        return PageRoot(
+          isLoading: loadingState.loading,
+          appBar: CustomAppBar.back(
+            context: context,
+          ),
+          child: SingleChildScrollView(
+            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.manual,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _JobPostingTitle(),
+                const SizedBox(height: 30),
+                _FieldName(text: StringRes.workDetail.tr),
+                const SizedBox(height: 8),
+                _JobPostingContent(),
+                const SizedBox(height: 30),
+                _FieldName(text: StringRes.selectCategory.tr),
+                const SizedBox(height: 15),
+                _CategorySelect(),
+                const SizedBox(height: 30),
+                _ContractType(),
+                const SizedBox(height: 30),
+                _ContractStartDate(),
+                _ContractStartCalendar(),
+                const SizedBox(height: 30),
+                _ContractEndDate(),
+                _ContractEndCalendar(),
+                const SizedBox(height: 30),
+                _WorkHoursField(),
+                _WorkHoursTimePicker(),
+                const SizedBox(height: 30),
+                _Participants(),
+                const SizedBox(height: 30),
+                _FieldName(text: StringRes.payMethod.tr),
+                const SizedBox(height: 15),
+                _PayType(),
+                const SizedBox(height: 30),
+                _FieldName(text: StringRes.address.tr),
+                _Address(),
+                const SizedBox(height: 30),
+                _FieldName(text: StringRes.preferences.tr),
+                _PreferredQualification(),
+                const SizedBox(height: 30),
+                _TravelTimeField(),
+                _TravelTimePaid(),
+                const SizedBox(height: 30),
+                _BreakTimeField(),
+                _BreakTimePaid(),
+                const SizedBox(height: 30),
+                _MealPaidField(),
+                const SizedBox(height: 40),
+                _SubmitButton(),
+                const SizedBox(height: 15),
+              ],
             ),
-          )
-        ],
-      ),
-      child: SingleChildScrollView(
-        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.manual,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _JobPostingTitle(),
-            const SizedBox(height: 30),
-            _FieldName(text: StringRes.workDetail.tr),
-            const SizedBox(height: 8),
-            _JobPostingContent(),
-            const SizedBox(height: 30),
-            _FieldName(text: StringRes.selectCategory.tr),
-            const SizedBox(height: 15),
-            _CategorySelect(),
-            const SizedBox(height: 30),
-            _ContractType(),
-            const SizedBox(height: 30),
-            _ContractStartDate(),
-            _ContractStartCalendar(),
-            const SizedBox(height: 30),
-            _ContractEndDate(),
-            _ContractEndCalendar(),
-            const SizedBox(height: 30),
-            _WorkHoursField(),
-            _WorkHoursTimePicker(),
-            const SizedBox(height: 30),
-            _Participants(),
-            const SizedBox(height: 30),
-            _FieldName(text: StringRes.payMethod.tr),
-            const SizedBox(height: 15),
-            _PayType(),
-            const SizedBox(height: 30),
-            _FieldName(text: StringRes.address.tr),
-            _Address(),
-            const SizedBox(height: 30),
-            _FieldName(text: StringRes.preferences.tr),
-            _PreferredQualification(),
-            const SizedBox(height: 30),
-            _TravelTimeField(),
-            _TravelTimePaid(),
-            const SizedBox(height: 30),
-            _BreakTimeField(),
-            _BreakTimePaid(),
-            const SizedBox(height: 30),
-            _MealPaidField(),
-            const SizedBox(height: 40),
-            _SubmitButton(),
-            const SizedBox(height: 15),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }

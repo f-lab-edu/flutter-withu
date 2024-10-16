@@ -1,14 +1,14 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'job_posting_detail_model.dart';
+part of 'job_posting_detail_dto.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$JobPostingDetailModelImpl _$$JobPostingDetailModelImplFromJson(
+_$JobPostingDetailDtoImpl _$$JobPostingDetailDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$JobPostingDetailModelImpl(
+    _$JobPostingDetailDtoImpl(
       id: json['id'] as String,
       companyId: json['companyId'] as String,
       title: json['title'] as String,
@@ -25,9 +25,7 @@ _$JobPostingDetailModelImpl _$$JobPostingDetailModelImplFromJson(
       longitude: (json['longitude'] as num).toDouble(),
       participants: (json['participants'] as num).toInt(),
       hasTravelTime: json['hasTravelTime'] as bool,
-      isTravelTimePaid: json['isTravelTimePaid'] as bool,
       hasBreakTime: json['hasBreakTime'] as bool,
-      isBreakTimePaid: json['isBreakTimePaid'] as bool,
       isMealProvided: json['isMealProvided'] as bool,
       isUrgent: json['isUrgent'] as bool,
       preferredQualifications: json['preferredQualifications'] as String?,
@@ -37,10 +35,12 @@ _$JobPostingDetailModelImpl _$$JobPostingDetailModelImplFromJson(
       workEndTime: json['workEndTime'] == null
           ? null
           : DateTime.parse(json['workEndTime'] as String),
+      isTravelTimePaid: json['isTravelTimePaid'] as bool?,
+      isBreakTimePaid: json['isBreakTimePaid'] as bool?,
     );
 
-Map<String, dynamic> _$$JobPostingDetailModelImplToJson(
-        _$JobPostingDetailModelImpl instance) =>
+Map<String, dynamic> _$$JobPostingDetailDtoImplToJson(
+        _$JobPostingDetailDtoImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'companyId': instance.companyId,
@@ -58,12 +58,12 @@ Map<String, dynamic> _$$JobPostingDetailModelImplToJson(
       'longitude': instance.longitude,
       'participants': instance.participants,
       'hasTravelTime': instance.hasTravelTime,
-      'isTravelTimePaid': instance.isTravelTimePaid,
       'hasBreakTime': instance.hasBreakTime,
-      'isBreakTimePaid': instance.isBreakTimePaid,
       'isMealProvided': instance.isMealProvided,
       'isUrgent': instance.isUrgent,
       'preferredQualifications': instance.preferredQualifications,
       'workStartTime': instance.workStartTime?.toIso8601String(),
       'workEndTime': instance.workEndTime?.toIso8601String(),
+      'isTravelTimePaid': instance.isTravelTimePaid,
+      'isBreakTimePaid': instance.isBreakTimePaid,
     };

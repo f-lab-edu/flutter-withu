@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'job_posting_detail_model.dart';
+part of 'job_posting_detail_dto.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,13 +14,12 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-JobPostingDetailModel _$JobPostingDetailModelFromJson(
-    Map<String, dynamic> json) {
-  return _JobPostingDetailModel.fromJson(json);
+JobPostingDetailDto _$JobPostingDetailDtoFromJson(Map<String, dynamic> json) {
+  return _JobPostingDetailDto.fromJson(json);
 }
 
 /// @nodoc
-mixin _$JobPostingDetailModel {
+mixin _$JobPostingDetailDto {
   String get id => throw _privateConstructorUsedError; // 공고 ID
   String get companyId => throw _privateConstructorUsedError; // 회사 ID
   String get title => throw _privateConstructorUsedError; // 공고명
@@ -40,32 +39,32 @@ mixin _$JobPostingDetailModel {
   double get longitude => throw _privateConstructorUsedError; // 근무지 경도
   int get participants => throw _privateConstructorUsedError; // 모집인원
   bool get hasTravelTime => throw _privateConstructorUsedError; // 이동시간 유무
-  bool get isTravelTimePaid =>
-      throw _privateConstructorUsedError; // 이동시간 급여/비급여
   bool get hasBreakTime => throw _privateConstructorUsedError; // 휴게시간 여부
-  bool get isBreakTimePaid => throw _privateConstructorUsedError; // 휴게시간 급여/비급여
   bool get isMealProvided => throw _privateConstructorUsedError; // 식사유무
   bool get isUrgent => throw _privateConstructorUsedError; // 급구 여부
   String? get preferredQualifications =>
       throw _privateConstructorUsedError; // 우대사항
   DateTime? get workStartTime => throw _privateConstructorUsedError; // 근무 시작 시간
-  DateTime? get workEndTime => throw _privateConstructorUsedError;
+  DateTime? get workEndTime => throw _privateConstructorUsedError; // 근무 종료 시간
+  bool? get isTravelTimePaid =>
+      throw _privateConstructorUsedError; // 이동시간 급여/비급여
+  bool? get isBreakTimePaid => throw _privateConstructorUsedError;
 
-  /// Serializes this JobPostingDetailModel to a JSON map.
+  /// Serializes this JobPostingDetailDto to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
-  /// Create a copy of JobPostingDetailModel
+  /// Create a copy of JobPostingDetailDto
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $JobPostingDetailModelCopyWith<JobPostingDetailModel> get copyWith =>
+  $JobPostingDetailDtoCopyWith<JobPostingDetailDto> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $JobPostingDetailModelCopyWith<$Res> {
-  factory $JobPostingDetailModelCopyWith(JobPostingDetailModel value,
-          $Res Function(JobPostingDetailModel) then) =
-      _$JobPostingDetailModelCopyWithImpl<$Res, JobPostingDetailModel>;
+abstract class $JobPostingDetailDtoCopyWith<$Res> {
+  factory $JobPostingDetailDtoCopyWith(
+          JobPostingDetailDto value, $Res Function(JobPostingDetailDto) then) =
+      _$JobPostingDetailDtoCopyWithImpl<$Res, JobPostingDetailDto>;
   @useResult
   $Res call(
       {String id,
@@ -84,28 +83,27 @@ abstract class $JobPostingDetailModelCopyWith<$Res> {
       double longitude,
       int participants,
       bool hasTravelTime,
-      bool isTravelTimePaid,
       bool hasBreakTime,
-      bool isBreakTimePaid,
       bool isMealProvided,
       bool isUrgent,
       String? preferredQualifications,
       DateTime? workStartTime,
-      DateTime? workEndTime});
+      DateTime? workEndTime,
+      bool? isTravelTimePaid,
+      bool? isBreakTimePaid});
 }
 
 /// @nodoc
-class _$JobPostingDetailModelCopyWithImpl<$Res,
-        $Val extends JobPostingDetailModel>
-    implements $JobPostingDetailModelCopyWith<$Res> {
-  _$JobPostingDetailModelCopyWithImpl(this._value, this._then);
+class _$JobPostingDetailDtoCopyWithImpl<$Res, $Val extends JobPostingDetailDto>
+    implements $JobPostingDetailDtoCopyWith<$Res> {
+  _$JobPostingDetailDtoCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of JobPostingDetailModel
+  /// Create a copy of JobPostingDetailDto
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -126,14 +124,14 @@ class _$JobPostingDetailModelCopyWithImpl<$Res,
     Object? longitude = null,
     Object? participants = null,
     Object? hasTravelTime = null,
-    Object? isTravelTimePaid = null,
     Object? hasBreakTime = null,
-    Object? isBreakTimePaid = null,
     Object? isMealProvided = null,
     Object? isUrgent = null,
     Object? preferredQualifications = freezed,
     Object? workStartTime = freezed,
     Object? workEndTime = freezed,
+    Object? isTravelTimePaid = freezed,
+    Object? isBreakTimePaid = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -200,17 +198,9 @@ class _$JobPostingDetailModelCopyWithImpl<$Res,
           ? _value.hasTravelTime
           : hasTravelTime // ignore: cast_nullable_to_non_nullable
               as bool,
-      isTravelTimePaid: null == isTravelTimePaid
-          ? _value.isTravelTimePaid
-          : isTravelTimePaid // ignore: cast_nullable_to_non_nullable
-              as bool,
       hasBreakTime: null == hasBreakTime
           ? _value.hasBreakTime
           : hasBreakTime // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isBreakTimePaid: null == isBreakTimePaid
-          ? _value.isBreakTimePaid
-          : isBreakTimePaid // ignore: cast_nullable_to_non_nullable
               as bool,
       isMealProvided: null == isMealProvided
           ? _value.isMealProvided
@@ -232,17 +222,24 @@ class _$JobPostingDetailModelCopyWithImpl<$Res,
           ? _value.workEndTime
           : workEndTime // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      isTravelTimePaid: freezed == isTravelTimePaid
+          ? _value.isTravelTimePaid
+          : isTravelTimePaid // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      isBreakTimePaid: freezed == isBreakTimePaid
+          ? _value.isBreakTimePaid
+          : isBreakTimePaid // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$JobPostingDetailModelImplCopyWith<$Res>
-    implements $JobPostingDetailModelCopyWith<$Res> {
-  factory _$$JobPostingDetailModelImplCopyWith(
-          _$JobPostingDetailModelImpl value,
-          $Res Function(_$JobPostingDetailModelImpl) then) =
-      __$$JobPostingDetailModelImplCopyWithImpl<$Res>;
+abstract class _$$JobPostingDetailDtoImplCopyWith<$Res>
+    implements $JobPostingDetailDtoCopyWith<$Res> {
+  factory _$$JobPostingDetailDtoImplCopyWith(_$JobPostingDetailDtoImpl value,
+          $Res Function(_$JobPostingDetailDtoImpl) then) =
+      __$$JobPostingDetailDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -262,26 +259,25 @@ abstract class _$$JobPostingDetailModelImplCopyWith<$Res>
       double longitude,
       int participants,
       bool hasTravelTime,
-      bool isTravelTimePaid,
       bool hasBreakTime,
-      bool isBreakTimePaid,
       bool isMealProvided,
       bool isUrgent,
       String? preferredQualifications,
       DateTime? workStartTime,
-      DateTime? workEndTime});
+      DateTime? workEndTime,
+      bool? isTravelTimePaid,
+      bool? isBreakTimePaid});
 }
 
 /// @nodoc
-class __$$JobPostingDetailModelImplCopyWithImpl<$Res>
-    extends _$JobPostingDetailModelCopyWithImpl<$Res,
-        _$JobPostingDetailModelImpl>
-    implements _$$JobPostingDetailModelImplCopyWith<$Res> {
-  __$$JobPostingDetailModelImplCopyWithImpl(_$JobPostingDetailModelImpl _value,
-      $Res Function(_$JobPostingDetailModelImpl) _then)
+class __$$JobPostingDetailDtoImplCopyWithImpl<$Res>
+    extends _$JobPostingDetailDtoCopyWithImpl<$Res, _$JobPostingDetailDtoImpl>
+    implements _$$JobPostingDetailDtoImplCopyWith<$Res> {
+  __$$JobPostingDetailDtoImplCopyWithImpl(_$JobPostingDetailDtoImpl _value,
+      $Res Function(_$JobPostingDetailDtoImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of JobPostingDetailModel
+  /// Create a copy of JobPostingDetailDto
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -302,16 +298,16 @@ class __$$JobPostingDetailModelImplCopyWithImpl<$Res>
     Object? longitude = null,
     Object? participants = null,
     Object? hasTravelTime = null,
-    Object? isTravelTimePaid = null,
     Object? hasBreakTime = null,
-    Object? isBreakTimePaid = null,
     Object? isMealProvided = null,
     Object? isUrgent = null,
     Object? preferredQualifications = freezed,
     Object? workStartTime = freezed,
     Object? workEndTime = freezed,
+    Object? isTravelTimePaid = freezed,
+    Object? isBreakTimePaid = freezed,
   }) {
-    return _then(_$JobPostingDetailModelImpl(
+    return _then(_$JobPostingDetailDtoImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -376,17 +372,9 @@ class __$$JobPostingDetailModelImplCopyWithImpl<$Res>
           ? _value.hasTravelTime
           : hasTravelTime // ignore: cast_nullable_to_non_nullable
               as bool,
-      isTravelTimePaid: null == isTravelTimePaid
-          ? _value.isTravelTimePaid
-          : isTravelTimePaid // ignore: cast_nullable_to_non_nullable
-              as bool,
       hasBreakTime: null == hasBreakTime
           ? _value.hasBreakTime
           : hasBreakTime // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isBreakTimePaid: null == isBreakTimePaid
-          ? _value.isBreakTimePaid
-          : isBreakTimePaid // ignore: cast_nullable_to_non_nullable
               as bool,
       isMealProvided: null == isMealProvided
           ? _value.isMealProvided
@@ -408,14 +396,22 @@ class __$$JobPostingDetailModelImplCopyWithImpl<$Res>
           ? _value.workEndTime
           : workEndTime // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      isTravelTimePaid: freezed == isTravelTimePaid
+          ? _value.isTravelTimePaid
+          : isTravelTimePaid // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      isBreakTimePaid: freezed == isBreakTimePaid
+          ? _value.isBreakTimePaid
+          : isBreakTimePaid // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$JobPostingDetailModelImpl implements _JobPostingDetailModel {
-  const _$JobPostingDetailModelImpl(
+class _$JobPostingDetailDtoImpl implements _JobPostingDetailDto {
+  const _$JobPostingDetailDtoImpl(
       {required this.id,
       required this.companyId,
       required this.title,
@@ -432,17 +428,17 @@ class _$JobPostingDetailModelImpl implements _JobPostingDetailModel {
       required this.longitude,
       required this.participants,
       required this.hasTravelTime,
-      required this.isTravelTimePaid,
       required this.hasBreakTime,
-      required this.isBreakTimePaid,
       required this.isMealProvided,
       required this.isUrgent,
       this.preferredQualifications,
       this.workStartTime,
-      this.workEndTime});
+      this.workEndTime,
+      this.isTravelTimePaid,
+      this.isBreakTimePaid});
 
-  factory _$JobPostingDetailModelImpl.fromJson(Map<String, dynamic> json) =>
-      _$$JobPostingDetailModelImplFromJson(json);
+  factory _$JobPostingDetailDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$JobPostingDetailDtoImplFromJson(json);
 
   @override
   final String id;
@@ -493,14 +489,8 @@ class _$JobPostingDetailModelImpl implements _JobPostingDetailModel {
   final bool hasTravelTime;
 // 이동시간 유무
   @override
-  final bool isTravelTimePaid;
-// 이동시간 급여/비급여
-  @override
   final bool hasBreakTime;
 // 휴게시간 여부
-  @override
-  final bool isBreakTimePaid;
-// 휴게시간 급여/비급여
   @override
   final bool isMealProvided;
 // 식사유무
@@ -515,17 +505,23 @@ class _$JobPostingDetailModelImpl implements _JobPostingDetailModel {
 // 근무 시작 시간
   @override
   final DateTime? workEndTime;
+// 근무 종료 시간
+  @override
+  final bool? isTravelTimePaid;
+// 이동시간 급여/비급여
+  @override
+  final bool? isBreakTimePaid;
 
   @override
   String toString() {
-    return 'JobPostingDetailModel(id: $id, companyId: $companyId, title: $title, content: $content, specialtyField: $specialtyField, contractType: $contractType, contractStartDate: $contractStartDate, contractEndDate: $contractEndDate, isTimeUndecided: $isTimeUndecided, payType: $payType, payAmount: $payAmount, workAddress: $workAddress, latitude: $latitude, longitude: $longitude, participants: $participants, hasTravelTime: $hasTravelTime, isTravelTimePaid: $isTravelTimePaid, hasBreakTime: $hasBreakTime, isBreakTimePaid: $isBreakTimePaid, isMealProvided: $isMealProvided, isUrgent: $isUrgent, preferredQualifications: $preferredQualifications, workStartTime: $workStartTime, workEndTime: $workEndTime)';
+    return 'JobPostingDetailDto(id: $id, companyId: $companyId, title: $title, content: $content, specialtyField: $specialtyField, contractType: $contractType, contractStartDate: $contractStartDate, contractEndDate: $contractEndDate, isTimeUndecided: $isTimeUndecided, payType: $payType, payAmount: $payAmount, workAddress: $workAddress, latitude: $latitude, longitude: $longitude, participants: $participants, hasTravelTime: $hasTravelTime, hasBreakTime: $hasBreakTime, isMealProvided: $isMealProvided, isUrgent: $isUrgent, preferredQualifications: $preferredQualifications, workStartTime: $workStartTime, workEndTime: $workEndTime, isTravelTimePaid: $isTravelTimePaid, isBreakTimePaid: $isBreakTimePaid)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$JobPostingDetailModelImpl &&
+            other is _$JobPostingDetailDtoImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.companyId, companyId) ||
                 other.companyId == companyId) &&
@@ -554,12 +550,8 @@ class _$JobPostingDetailModelImpl implements _JobPostingDetailModel {
                 other.participants == participants) &&
             (identical(other.hasTravelTime, hasTravelTime) ||
                 other.hasTravelTime == hasTravelTime) &&
-            (identical(other.isTravelTimePaid, isTravelTimePaid) ||
-                other.isTravelTimePaid == isTravelTimePaid) &&
             (identical(other.hasBreakTime, hasBreakTime) ||
                 other.hasBreakTime == hasBreakTime) &&
-            (identical(other.isBreakTimePaid, isBreakTimePaid) ||
-                other.isBreakTimePaid == isBreakTimePaid) &&
             (identical(other.isMealProvided, isMealProvided) ||
                 other.isMealProvided == isMealProvided) &&
             (identical(other.isUrgent, isUrgent) ||
@@ -570,7 +562,11 @@ class _$JobPostingDetailModelImpl implements _JobPostingDetailModel {
             (identical(other.workStartTime, workStartTime) ||
                 other.workStartTime == workStartTime) &&
             (identical(other.workEndTime, workEndTime) ||
-                other.workEndTime == workEndTime));
+                other.workEndTime == workEndTime) &&
+            (identical(other.isTravelTimePaid, isTravelTimePaid) ||
+                other.isTravelTimePaid == isTravelTimePaid) &&
+            (identical(other.isBreakTimePaid, isBreakTimePaid) ||
+                other.isBreakTimePaid == isBreakTimePaid));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -593,35 +589,35 @@ class _$JobPostingDetailModelImpl implements _JobPostingDetailModel {
         longitude,
         participants,
         hasTravelTime,
-        isTravelTimePaid,
         hasBreakTime,
-        isBreakTimePaid,
         isMealProvided,
         isUrgent,
         preferredQualifications,
         workStartTime,
-        workEndTime
+        workEndTime,
+        isTravelTimePaid,
+        isBreakTimePaid
       ]);
 
-  /// Create a copy of JobPostingDetailModel
+  /// Create a copy of JobPostingDetailDto
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$JobPostingDetailModelImplCopyWith<_$JobPostingDetailModelImpl>
-      get copyWith => __$$JobPostingDetailModelImplCopyWithImpl<
-          _$JobPostingDetailModelImpl>(this, _$identity);
+  _$$JobPostingDetailDtoImplCopyWith<_$JobPostingDetailDtoImpl> get copyWith =>
+      __$$JobPostingDetailDtoImplCopyWithImpl<_$JobPostingDetailDtoImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$JobPostingDetailModelImplToJson(
+    return _$$JobPostingDetailDtoImplToJson(
       this,
     );
   }
 }
 
-abstract class _JobPostingDetailModel implements JobPostingDetailModel {
-  const factory _JobPostingDetailModel(
+abstract class _JobPostingDetailDto implements JobPostingDetailDto {
+  const factory _JobPostingDetailDto(
       {required final String id,
       required final String companyId,
       required final String title,
@@ -638,17 +634,17 @@ abstract class _JobPostingDetailModel implements JobPostingDetailModel {
       required final double longitude,
       required final int participants,
       required final bool hasTravelTime,
-      required final bool isTravelTimePaid,
       required final bool hasBreakTime,
-      required final bool isBreakTimePaid,
       required final bool isMealProvided,
       required final bool isUrgent,
       final String? preferredQualifications,
       final DateTime? workStartTime,
-      final DateTime? workEndTime}) = _$JobPostingDetailModelImpl;
+      final DateTime? workEndTime,
+      final bool? isTravelTimePaid,
+      final bool? isBreakTimePaid}) = _$JobPostingDetailDtoImpl;
 
-  factory _JobPostingDetailModel.fromJson(Map<String, dynamic> json) =
-      _$JobPostingDetailModelImpl.fromJson;
+  factory _JobPostingDetailDto.fromJson(Map<String, dynamic> json) =
+      _$JobPostingDetailDtoImpl.fromJson;
 
   @override
   String get id; // 공고 ID
@@ -683,11 +679,7 @@ abstract class _JobPostingDetailModel implements JobPostingDetailModel {
   @override
   bool get hasTravelTime; // 이동시간 유무
   @override
-  bool get isTravelTimePaid; // 이동시간 급여/비급여
-  @override
   bool get hasBreakTime; // 휴게시간 여부
-  @override
-  bool get isBreakTimePaid; // 휴게시간 급여/비급여
   @override
   bool get isMealProvided; // 식사유무
   @override
@@ -697,12 +689,16 @@ abstract class _JobPostingDetailModel implements JobPostingDetailModel {
   @override
   DateTime? get workStartTime; // 근무 시작 시간
   @override
-  DateTime? get workEndTime;
+  DateTime? get workEndTime; // 근무 종료 시간
+  @override
+  bool? get isTravelTimePaid; // 이동시간 급여/비급여
+  @override
+  bool? get isBreakTimePaid;
 
-  /// Create a copy of JobPostingDetailModel
+  /// Create a copy of JobPostingDetailDto
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$JobPostingDetailModelImplCopyWith<_$JobPostingDetailModelImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  _$$JobPostingDetailDtoImplCopyWith<_$JobPostingDetailDtoImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

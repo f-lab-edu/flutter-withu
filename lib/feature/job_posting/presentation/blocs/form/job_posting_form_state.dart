@@ -1,6 +1,10 @@
 part of 'job_posting_form_bloc.dart';
 
-enum JobPostingFormStatus { initial, loading, success, failure }
+enum JobPostingFormStatus { initial, success }
+
+extension JobPostingFormStatusExt on JobPostingFormStatus {
+  bool get isSuccess => this == JobPostingFormStatus.success;
+}
 
 class JobPostingFormState extends Equatable {
   /// 상태값

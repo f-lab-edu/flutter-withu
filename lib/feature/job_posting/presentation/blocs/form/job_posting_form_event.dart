@@ -2,12 +2,6 @@ part of 'job_posting_form_bloc.dart';
 
 sealed class JobPostingFormEvent extends Equatable {}
 
-/// 임시 저장 클릭 이벤트
-class OnCliCkTemporarySave extends JobPostingFormEvent {
-  @override
-  List<Object?> get props => [];
-}
-
 /// 공고 제목 입력 이벤트
 class OnChangedTitle extends JobPostingFormEvent {
   final String title;

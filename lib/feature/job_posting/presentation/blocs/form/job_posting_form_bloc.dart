@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:withu_app/core/core.dart';
 import 'package:withu_app/feature/job_posting/domain/domain.dart';
+import 'package:withu_app/shared/shared.dart';
 
 part 'job_posting_form_state.dart';
 
@@ -14,7 +15,6 @@ class JobPostingFormBloc
   JobPostingFormBloc({
     required this.useCase,
   }) : super(const JobPostingFormState(status: JobPostingFormStatus.initial)) {
-    on<OnCliCkTemporarySave>(_onCliCkTemporarySave);
     on<OnChangedTitle>(_onChangedTitle);
     on<OnChangedContent>(_onChangedContent);
     on<OnPressedJobCategory>(_onPressedJobCategory);
@@ -37,14 +37,6 @@ class JobPostingFormBloc
     on<OnSelectBreakTimePaid>(_onSelectBreakTimePaid);
     on<OnToggleHasMealPaid>(_onToggleHasMealPaid);
     on<OnPressedSubmit>(_onPressedSubmit);
-  }
-
-  /// 임시 저장 클릭 이벤트.
-  void _onCliCkTemporarySave(
-    OnCliCkTemporarySave event,
-    Emitter<JobPostingFormState> emit,
-  ) {
-    logger.i(state.props);
   }
 
   /// 공고 제목 변경 이벤트.
@@ -221,6 +213,19 @@ class JobPostingFormBloc
     OnPressedSubmit event,
     Emitter<JobPostingFormState> emit,
   ) async {
-    await useCase.createJobPosting(state.toEntity());
+    final loadingBloc = getIt<LoadingBloc>();
+    try {
+      loadingBloc.add(OnVisibleLoading());
+      final result = await useCase.createJobPosting(state.toEntity());
+      if (result) {
+        emit(state.copyWith(status: JobPostingFormStatus.success));
+      } else {
+        logger.i('등록 실패');
+      }
+    } catch (e) {
+      logger.e(e);
+    } finally {
+      loadingBloc.add(OnInVisibleLoading());
+    }
   }
 }

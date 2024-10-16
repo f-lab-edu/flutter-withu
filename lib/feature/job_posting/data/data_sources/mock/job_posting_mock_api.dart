@@ -45,11 +45,13 @@ class JobPostingMockApi extends JobPostingApi with MockAPI {
   }
 
   @override
-  FutureOr<ApiResponse<JobPostingDetailModel>> createJobPosting({
+  FutureOr<ApiResponse<JobPostingDetailDto>> createJobPosting({
     required JobPostingRequestDto requestData,
   }) async {
-    final JobPostingDetailModel responseData = JobPostingDetailModel.fromJson({
+    final JobPostingDetailDto responseData = JobPostingDetailDto.fromJson({
       'id': '1',
+      'latitude': 37.5664056,
+      'longitude': 126.9778222,
       ...requestData.toJson(),
     });
     try {
@@ -65,12 +67,14 @@ class JobPostingMockApi extends JobPostingApi with MockAPI {
       final response = await dio.get(url);
 
       if (response.statusCode == 200) {
-        final detail = JobPostingDetailModel.fromJson(response.data);
-        return ApiResponse.success(detail);
+        return ApiResponse.success(
+          JobPostingDetailDto.fromJson(response.data),
+        );
       }
 
-      final fail = FailResponse.fromJson(response.data);
-      return ApiResponse.fail(fail);
+      return ApiResponse.fail(
+        FailResponse.fromJson(response.data),
+      );
     } catch (e) {
       return const ApiResponse.error();
     }

@@ -22,9 +22,7 @@ _$JobPostingRequestDtoImpl _$$JobPostingRequestDtoImplFromJson(
       workAddress: json['workAddress'] as String,
       participants: (json['participants'] as num).toInt(),
       hasTravelTime: json['hasTravelTime'] as bool,
-      isTravelTimePaid: json['isTravelTimePaid'] as bool,
       hasBreakTime: json['hasBreakTime'] as bool,
-      isBreakTimePaid: json['isBreakTimePaid'] as bool,
       isMealProvided: json['isMealProvided'] as bool,
       isUrgent: json['isUrgent'] as bool,
       preferredQualifications: json['preferredQualifications'] as String?,
@@ -34,6 +32,8 @@ _$JobPostingRequestDtoImpl _$$JobPostingRequestDtoImplFromJson(
       workEndTime: json['workEndTime'] == null
           ? null
           : DateTime.parse(json['workEndTime'] as String),
+      isTravelTimePaid: json['isTravelTimePaid'] as bool?,
+      isBreakTimePaid: json['isBreakTimePaid'] as bool?,
     );
 
 Map<String, dynamic> _$$JobPostingRequestDtoImplToJson(
@@ -52,12 +52,12 @@ Map<String, dynamic> _$$JobPostingRequestDtoImplToJson(
       'workAddress': instance.workAddress,
       'participants': instance.participants,
       'hasTravelTime': instance.hasTravelTime,
-      'isTravelTimePaid': instance.isTravelTimePaid,
       'hasBreakTime': instance.hasBreakTime,
-      'isBreakTimePaid': instance.isBreakTimePaid,
       'isMealProvided': instance.isMealProvided,
       'isUrgent': instance.isUrgent,
       'preferredQualifications': instance.preferredQualifications,
       'workStartTime': instance.workStartTime?.toIso8601String(),
       'workEndTime': instance.workEndTime?.toIso8601String(),
+      'isTravelTimePaid': instance.isTravelTimePaid,
+      'isBreakTimePaid': instance.isBreakTimePaid,
     };

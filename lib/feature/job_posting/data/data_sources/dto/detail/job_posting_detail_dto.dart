@@ -1,14 +1,14 @@
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'job_posting_detail_model.freezed.dart';
+part 'job_posting_detail_dto.freezed.dart';
 
-part 'job_posting_detail_model.g.dart';
+part 'job_posting_detail_dto.g.dart';
 
 /// 공고 상세 모델
 @freezed
-class JobPostingDetailModel with _$JobPostingDetailModel {
-  const factory JobPostingDetailModel({
+class JobPostingDetailDto with _$JobPostingDetailDto {
+  const factory JobPostingDetailDto({
     required String id, // 공고 ID
     required String companyId, // 회사 ID
     required String title, // 공고명
@@ -25,16 +25,16 @@ class JobPostingDetailModel with _$JobPostingDetailModel {
     required double longitude, // 근무지 경도
     required int participants, // 모집인원
     required bool hasTravelTime, // 이동시간 유무
-    required bool isTravelTimePaid, // 이동시간 급여/비급여
     required bool hasBreakTime, // 휴게시간 여부
-    required bool isBreakTimePaid, // 휴게시간 급여/비급여
     required bool isMealProvided, // 식사유무
     required bool isUrgent, // 급구 여부
     String? preferredQualifications, // 우대사항
     DateTime? workStartTime, // 근무 시작 시간
     DateTime? workEndTime, // 근무 종료 시간
-  }) = _JobPostingDetailModel;
+    bool? isTravelTimePaid, // 이동시간 급여/비급여
+    bool? isBreakTimePaid, // 휴게시간 급여/비급여
+  }) = _JobPostingDetailDto;
 
-  factory JobPostingDetailModel.fromJson(Map<String, Object?> json) =>
-      _$JobPostingDetailModelFromJson(json);
+  factory JobPostingDetailDto.fromJson(Map<String, Object?> json) =>
+      _$JobPostingDetailDtoFromJson(json);
 }

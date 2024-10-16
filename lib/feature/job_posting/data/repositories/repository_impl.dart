@@ -23,7 +23,7 @@ class JobPostingRepositoryImpl implements JobPostingRepository {
   }
 
   @override
-  Future<ApiResponse<JobPostingDetailModel>> createJobPosting({
+  Future<ApiResponse<JobPostingDetailDto>> createJobPosting({
     required JobPostingRequestDto dto,
   }) async {
     return await api.createJobPosting(requestData: dto);

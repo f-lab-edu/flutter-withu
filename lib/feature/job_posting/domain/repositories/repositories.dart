@@ -9,7 +9,7 @@ abstract class JobPostingRepository {
   });
 
   /// 공고 등록
-  Future<ApiResponse<JobPostingDetailModel>> createJobPosting({
+  Future<ApiResponse<JobPostingDetailDto>> createJobPosting({
     required JobPostingRequestDto dto,
   });
 }

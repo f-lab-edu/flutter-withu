@@ -93,12 +93,11 @@ extension JobPostingRequestEntityExt on JobPostingRequestEntity {
     final categoryType = this.categoryType;
     final contractType = this.contractType;
     final startDate = contractStartDate;
-    final endDate = contractEndDate;
+    final endDate =
+        contractType == ContractType.short ? startDate : contractEndDate;
     final payType = this.payType;
     final payAmount = int.tryParse(this.payAmount);
     final participants = int.tryParse(this.participants);
-    final isTravelTimePaid = this.isTravelTimePaid;
-    final isBreakTimePaid = this.isBreakTimePaid;
 
     if (categoryType == null ||
         contractType == null ||
@@ -106,11 +105,10 @@ extension JobPostingRequestEntityExt on JobPostingRequestEntity {
         endDate == null ||
         payType == null ||
         payAmount == null ||
-        participants == null ||
-        isTravelTimePaid == null ||
-        isBreakTimePaid == null) {
+        participants == null) {
       return null;
     }
+
     // TODO: companyId, isUrgent 추가 예정.
     return JobPostingRequestDto(
       companyId: '1',

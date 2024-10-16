@@ -36,16 +36,16 @@ mixin _$JobPostingRequestDto {
   String get workAddress => throw _privateConstructorUsedError; // 근무지 주소
   int get participants => throw _privateConstructorUsedError; // 모집인원
   bool get hasTravelTime => throw _privateConstructorUsedError; // 이동시간 유무
-  bool get isTravelTimePaid =>
-      throw _privateConstructorUsedError; // 이동시간 급여/비급여
   bool get hasBreakTime => throw _privateConstructorUsedError; // 휴게시간 여부
-  bool get isBreakTimePaid => throw _privateConstructorUsedError; // 휴게시간 급여/비급여
   bool get isMealProvided => throw _privateConstructorUsedError; // 식사유무
   bool get isUrgent => throw _privateConstructorUsedError; // 급구 여부
   String? get preferredQualifications =>
       throw _privateConstructorUsedError; // 우대사항
   DateTime? get workStartTime => throw _privateConstructorUsedError; // 근무 시작 시간
-  DateTime? get workEndTime => throw _privateConstructorUsedError;
+  DateTime? get workEndTime => throw _privateConstructorUsedError; // 근무 종료 시간
+  bool? get isTravelTimePaid =>
+      throw _privateConstructorUsedError; // 이동시간 급여/비급여
+  bool? get isBreakTimePaid => throw _privateConstructorUsedError;
 
   /// Serializes this JobPostingRequestDto to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -77,14 +77,14 @@ abstract class $JobPostingRequestDtoCopyWith<$Res> {
       String workAddress,
       int participants,
       bool hasTravelTime,
-      bool isTravelTimePaid,
       bool hasBreakTime,
-      bool isBreakTimePaid,
       bool isMealProvided,
       bool isUrgent,
       String? preferredQualifications,
       DateTime? workStartTime,
-      DateTime? workEndTime});
+      DateTime? workEndTime,
+      bool? isTravelTimePaid,
+      bool? isBreakTimePaid});
 }
 
 /// @nodoc
@@ -116,14 +116,14 @@ class _$JobPostingRequestDtoCopyWithImpl<$Res,
     Object? workAddress = null,
     Object? participants = null,
     Object? hasTravelTime = null,
-    Object? isTravelTimePaid = null,
     Object? hasBreakTime = null,
-    Object? isBreakTimePaid = null,
     Object? isMealProvided = null,
     Object? isUrgent = null,
     Object? preferredQualifications = freezed,
     Object? workStartTime = freezed,
     Object? workEndTime = freezed,
+    Object? isTravelTimePaid = freezed,
+    Object? isBreakTimePaid = freezed,
   }) {
     return _then(_value.copyWith(
       companyId: null == companyId
@@ -178,17 +178,9 @@ class _$JobPostingRequestDtoCopyWithImpl<$Res,
           ? _value.hasTravelTime
           : hasTravelTime // ignore: cast_nullable_to_non_nullable
               as bool,
-      isTravelTimePaid: null == isTravelTimePaid
-          ? _value.isTravelTimePaid
-          : isTravelTimePaid // ignore: cast_nullable_to_non_nullable
-              as bool,
       hasBreakTime: null == hasBreakTime
           ? _value.hasBreakTime
           : hasBreakTime // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isBreakTimePaid: null == isBreakTimePaid
-          ? _value.isBreakTimePaid
-          : isBreakTimePaid // ignore: cast_nullable_to_non_nullable
               as bool,
       isMealProvided: null == isMealProvided
           ? _value.isMealProvided
@@ -210,6 +202,14 @@ class _$JobPostingRequestDtoCopyWithImpl<$Res,
           ? _value.workEndTime
           : workEndTime // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      isTravelTimePaid: freezed == isTravelTimePaid
+          ? _value.isTravelTimePaid
+          : isTravelTimePaid // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      isBreakTimePaid: freezed == isBreakTimePaid
+          ? _value.isBreakTimePaid
+          : isBreakTimePaid // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ) as $Val);
   }
 }
@@ -236,14 +236,14 @@ abstract class _$$JobPostingRequestDtoImplCopyWith<$Res>
       String workAddress,
       int participants,
       bool hasTravelTime,
-      bool isTravelTimePaid,
       bool hasBreakTime,
-      bool isBreakTimePaid,
       bool isMealProvided,
       bool isUrgent,
       String? preferredQualifications,
       DateTime? workStartTime,
-      DateTime? workEndTime});
+      DateTime? workEndTime,
+      bool? isTravelTimePaid,
+      bool? isBreakTimePaid});
 }
 
 /// @nodoc
@@ -272,14 +272,14 @@ class __$$JobPostingRequestDtoImplCopyWithImpl<$Res>
     Object? workAddress = null,
     Object? participants = null,
     Object? hasTravelTime = null,
-    Object? isTravelTimePaid = null,
     Object? hasBreakTime = null,
-    Object? isBreakTimePaid = null,
     Object? isMealProvided = null,
     Object? isUrgent = null,
     Object? preferredQualifications = freezed,
     Object? workStartTime = freezed,
     Object? workEndTime = freezed,
+    Object? isTravelTimePaid = freezed,
+    Object? isBreakTimePaid = freezed,
   }) {
     return _then(_$JobPostingRequestDtoImpl(
       companyId: null == companyId
@@ -334,17 +334,9 @@ class __$$JobPostingRequestDtoImplCopyWithImpl<$Res>
           ? _value.hasTravelTime
           : hasTravelTime // ignore: cast_nullable_to_non_nullable
               as bool,
-      isTravelTimePaid: null == isTravelTimePaid
-          ? _value.isTravelTimePaid
-          : isTravelTimePaid // ignore: cast_nullable_to_non_nullable
-              as bool,
       hasBreakTime: null == hasBreakTime
           ? _value.hasBreakTime
           : hasBreakTime // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isBreakTimePaid: null == isBreakTimePaid
-          ? _value.isBreakTimePaid
-          : isBreakTimePaid // ignore: cast_nullable_to_non_nullable
               as bool,
       isMealProvided: null == isMealProvided
           ? _value.isMealProvided
@@ -366,6 +358,14 @@ class __$$JobPostingRequestDtoImplCopyWithImpl<$Res>
           ? _value.workEndTime
           : workEndTime // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      isTravelTimePaid: freezed == isTravelTimePaid
+          ? _value.isTravelTimePaid
+          : isTravelTimePaid // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      isBreakTimePaid: freezed == isBreakTimePaid
+          ? _value.isBreakTimePaid
+          : isBreakTimePaid // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
@@ -387,14 +387,14 @@ class _$JobPostingRequestDtoImpl implements _JobPostingRequestDto {
       required this.workAddress,
       required this.participants,
       required this.hasTravelTime,
-      required this.isTravelTimePaid,
       required this.hasBreakTime,
-      required this.isBreakTimePaid,
       required this.isMealProvided,
       required this.isUrgent,
       this.preferredQualifications,
       this.workStartTime,
-      this.workEndTime});
+      this.workEndTime,
+      this.isTravelTimePaid,
+      this.isBreakTimePaid});
 
   factory _$JobPostingRequestDtoImpl.fromJson(Map<String, dynamic> json) =>
       _$$JobPostingRequestDtoImplFromJson(json);
@@ -439,14 +439,8 @@ class _$JobPostingRequestDtoImpl implements _JobPostingRequestDto {
   final bool hasTravelTime;
 // 이동시간 유무
   @override
-  final bool isTravelTimePaid;
-// 이동시간 급여/비급여
-  @override
   final bool hasBreakTime;
 // 휴게시간 여부
-  @override
-  final bool isBreakTimePaid;
-// 휴게시간 급여/비급여
   @override
   final bool isMealProvided;
 // 식사유무
@@ -461,10 +455,16 @@ class _$JobPostingRequestDtoImpl implements _JobPostingRequestDto {
 // 근무 시작 시간
   @override
   final DateTime? workEndTime;
+// 근무 종료 시간
+  @override
+  final bool? isTravelTimePaid;
+// 이동시간 급여/비급여
+  @override
+  final bool? isBreakTimePaid;
 
   @override
   String toString() {
-    return 'JobPostingRequestDto(companyId: $companyId, title: $title, content: $content, specialtyField: $specialtyField, contractType: $contractType, contractStartDate: $contractStartDate, contractEndDate: $contractEndDate, isTimeUndecided: $isTimeUndecided, payType: $payType, payAmount: $payAmount, workAddress: $workAddress, participants: $participants, hasTravelTime: $hasTravelTime, isTravelTimePaid: $isTravelTimePaid, hasBreakTime: $hasBreakTime, isBreakTimePaid: $isBreakTimePaid, isMealProvided: $isMealProvided, isUrgent: $isUrgent, preferredQualifications: $preferredQualifications, workStartTime: $workStartTime, workEndTime: $workEndTime)';
+    return 'JobPostingRequestDto(companyId: $companyId, title: $title, content: $content, specialtyField: $specialtyField, contractType: $contractType, contractStartDate: $contractStartDate, contractEndDate: $contractEndDate, isTimeUndecided: $isTimeUndecided, payType: $payType, payAmount: $payAmount, workAddress: $workAddress, participants: $participants, hasTravelTime: $hasTravelTime, hasBreakTime: $hasBreakTime, isMealProvided: $isMealProvided, isUrgent: $isUrgent, preferredQualifications: $preferredQualifications, workStartTime: $workStartTime, workEndTime: $workEndTime, isTravelTimePaid: $isTravelTimePaid, isBreakTimePaid: $isBreakTimePaid)';
   }
 
   @override
@@ -495,12 +495,8 @@ class _$JobPostingRequestDtoImpl implements _JobPostingRequestDto {
                 other.participants == participants) &&
             (identical(other.hasTravelTime, hasTravelTime) ||
                 other.hasTravelTime == hasTravelTime) &&
-            (identical(other.isTravelTimePaid, isTravelTimePaid) ||
-                other.isTravelTimePaid == isTravelTimePaid) &&
             (identical(other.hasBreakTime, hasBreakTime) ||
                 other.hasBreakTime == hasBreakTime) &&
-            (identical(other.isBreakTimePaid, isBreakTimePaid) ||
-                other.isBreakTimePaid == isBreakTimePaid) &&
             (identical(other.isMealProvided, isMealProvided) ||
                 other.isMealProvided == isMealProvided) &&
             (identical(other.isUrgent, isUrgent) ||
@@ -511,7 +507,11 @@ class _$JobPostingRequestDtoImpl implements _JobPostingRequestDto {
             (identical(other.workStartTime, workStartTime) ||
                 other.workStartTime == workStartTime) &&
             (identical(other.workEndTime, workEndTime) ||
-                other.workEndTime == workEndTime));
+                other.workEndTime == workEndTime) &&
+            (identical(other.isTravelTimePaid, isTravelTimePaid) ||
+                other.isTravelTimePaid == isTravelTimePaid) &&
+            (identical(other.isBreakTimePaid, isBreakTimePaid) ||
+                other.isBreakTimePaid == isBreakTimePaid));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -531,14 +531,14 @@ class _$JobPostingRequestDtoImpl implements _JobPostingRequestDto {
         workAddress,
         participants,
         hasTravelTime,
-        isTravelTimePaid,
         hasBreakTime,
-        isBreakTimePaid,
         isMealProvided,
         isUrgent,
         preferredQualifications,
         workStartTime,
-        workEndTime
+        workEndTime,
+        isTravelTimePaid,
+        isBreakTimePaid
       ]);
 
   /// Create a copy of JobPostingRequestDto
@@ -574,14 +574,14 @@ abstract class _JobPostingRequestDto implements JobPostingRequestDto {
       required final String workAddress,
       required final int participants,
       required final bool hasTravelTime,
-      required final bool isTravelTimePaid,
       required final bool hasBreakTime,
-      required final bool isBreakTimePaid,
       required final bool isMealProvided,
       required final bool isUrgent,
       final String? preferredQualifications,
       final DateTime? workStartTime,
-      final DateTime? workEndTime}) = _$JobPostingRequestDtoImpl;
+      final DateTime? workEndTime,
+      final bool? isTravelTimePaid,
+      final bool? isBreakTimePaid}) = _$JobPostingRequestDtoImpl;
 
   factory _JobPostingRequestDto.fromJson(Map<String, dynamic> json) =
       _$JobPostingRequestDtoImpl.fromJson;
@@ -613,11 +613,7 @@ abstract class _JobPostingRequestDto implements JobPostingRequestDto {
   @override
   bool get hasTravelTime; // 이동시간 유무
   @override
-  bool get isTravelTimePaid; // 이동시간 급여/비급여
-  @override
   bool get hasBreakTime; // 휴게시간 여부
-  @override
-  bool get isBreakTimePaid; // 휴게시간 급여/비급여
   @override
   bool get isMealProvided; // 식사유무
   @override
@@ -627,7 +623,11 @@ abstract class _JobPostingRequestDto implements JobPostingRequestDto {
   @override
   DateTime? get workStartTime; // 근무 시작 시간
   @override
-  DateTime? get workEndTime;
+  DateTime? get workEndTime; // 근무 종료 시간
+  @override
+  bool? get isTravelTimePaid; // 이동시간 급여/비급여
+  @override
+  bool? get isBreakTimePaid;
 
   /// Create a copy of JobPostingRequestDto
   /// with the given fields replaced by the non-null parameter values.
