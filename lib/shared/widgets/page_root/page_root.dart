@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:withu_app/gen/colors.gen.dart';
 
 class PageRoot extends StatelessWidget {
@@ -22,30 +23,32 @@ class PageRoot extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Scaffold(
-          appBar: appBar,
-          floatingActionButton: fab,
-          backgroundColor: Colors.white,
-          body: SafeArea(
-            child: Container(
-              width: double.infinity,
-              height: double.infinity,
-              padding: padding,
-              child: child,
+    return KeyboardDismissOnTap(
+      child: Stack(
+        children: [
+          Scaffold(
+            appBar: appBar,
+            floatingActionButton: fab,
+            backgroundColor: Colors.white,
+            body: SafeArea(
+              child: Container(
+                width: double.infinity,
+                height: double.infinity,
+                padding: padding,
+                child: child,
+              ),
             ),
           ),
-        ),
-        Visibility(
-          visible: isLoading,
-          child: const Center(
-            child: CircularProgressIndicator(
-              color: ColorName.primary,
+          Visibility(
+            visible: isLoading,
+            child: const Center(
+              child: CircularProgressIndicator(
+                color: ColorName.primary,
+              ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

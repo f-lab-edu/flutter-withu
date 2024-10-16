@@ -2,7 +2,6 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:withu_app/core/core.dart';
 import 'package:withu_app/feature/job_posting/domain/domain.dart';
-import 'package:withu_app/shared/shared.dart';
 
 part 'job_posting_form_state.dart';
 
@@ -213,9 +212,8 @@ class JobPostingFormBloc
     OnPressedSubmit event,
     Emitter<JobPostingFormState> emit,
   ) async {
-    final loadingBloc = getIt<LoadingBloc>();
     try {
-      loadingBloc.add(OnVisibleLoading());
+      emit(state.copyWith(status: JobPostingFormStatus.loading));
       final result = await useCase.createJobPosting(state.toEntity());
       if (result) {
         emit(state.copyWith(status: JobPostingFormStatus.success));
@@ -225,7 +223,7 @@ class JobPostingFormBloc
     } catch (e) {
       logger.e(e);
     } finally {
-      loadingBloc.add(OnInVisibleLoading());
+      emit(state.copyWith(status: JobPostingFormStatus.initial));
     }
   }
 }

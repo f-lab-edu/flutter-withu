@@ -17,7 +17,6 @@ class JobPostingFormPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<LoadingBloc>(create: (context) => getIt()),
         BlocProvider<JobPostingFormBloc>(create: (context) => getIt()),
       ],
       child: BlocListener<JobPostingFormBloc, JobPostingFormState>(
@@ -35,10 +34,10 @@ class JobPostingFormPage extends StatelessWidget {
 class _JobPostingFormPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<LoadingBloc, LoadingState>(
-      builder: (context, loadingState) {
+    return BlocBuilder<JobPostingFormBloc, JobPostingFormState>(
+      builder: (context, state) {
         return PageRoot(
-          isLoading: loadingState.loading,
+          isLoading: state.status.isLoading,
           padding: const EdgeInsets.symmetric(horizontal: 24),
           appBar: CustomAppBar.back(
             context: context,
