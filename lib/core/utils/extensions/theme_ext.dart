@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-extension BulidContextTextThemeEx on BuildContext {
+extension BulidContextTextThemeExt on BuildContext {
   TextTheme get textTheme => Theme.of(this).textTheme;
 }
 

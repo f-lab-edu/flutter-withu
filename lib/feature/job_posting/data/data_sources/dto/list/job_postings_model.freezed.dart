@@ -20,7 +20,8 @@ JobPostingsModel _$JobPostingsModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$JobPostingsModel {
-  List<JobPostingModel>? get contents => throw _privateConstructorUsedError;
+  List<JobPostingsItemModel>? get contents =>
+      throw _privateConstructorUsedError;
 
   /// Serializes this JobPostingsModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -38,7 +39,7 @@ abstract class $JobPostingsModelCopyWith<$Res> {
           JobPostingsModel value, $Res Function(JobPostingsModel) then) =
       _$JobPostingsModelCopyWithImpl<$Res, JobPostingsModel>;
   @useResult
-  $Res call({List<JobPostingModel>? contents});
+  $Res call({List<JobPostingsItemModel>? contents});
 }
 
 /// @nodoc
@@ -62,7 +63,7 @@ class _$JobPostingsModelCopyWithImpl<$Res, $Val extends JobPostingsModel>
       contents: freezed == contents
           ? _value.contents
           : contents // ignore: cast_nullable_to_non_nullable
-              as List<JobPostingModel>?,
+              as List<JobPostingsItemModel>?,
     ) as $Val);
   }
 }
@@ -75,7 +76,7 @@ abstract class _$$JobPostingsModelImplCopyWith<$Res>
       __$$JobPostingsModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<JobPostingModel>? contents});
+  $Res call({List<JobPostingsItemModel>? contents});
 }
 
 /// @nodoc
@@ -97,7 +98,7 @@ class __$$JobPostingsModelImplCopyWithImpl<$Res>
       contents: freezed == contents
           ? _value._contents
           : contents // ignore: cast_nullable_to_non_nullable
-              as List<JobPostingModel>?,
+              as List<JobPostingsItemModel>?,
     ));
   }
 }
@@ -105,15 +106,16 @@ class __$$JobPostingsModelImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$JobPostingsModelImpl implements _JobPostingsModel {
-  const _$JobPostingsModelImpl({required final List<JobPostingModel>? contents})
+  const _$JobPostingsModelImpl(
+      {required final List<JobPostingsItemModel>? contents})
       : _contents = contents;
 
   factory _$JobPostingsModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$JobPostingsModelImplFromJson(json);
 
-  final List<JobPostingModel>? _contents;
+  final List<JobPostingsItemModel>? _contents;
   @override
-  List<JobPostingModel>? get contents {
+  List<JobPostingsItemModel>? get contents {
     final value = _contents;
     if (value == null) return null;
     if (_contents is EqualUnmodifiableListView) return _contents;
@@ -158,14 +160,14 @@ class _$JobPostingsModelImpl implements _JobPostingsModel {
 
 abstract class _JobPostingsModel implements JobPostingsModel {
   const factory _JobPostingsModel(
-          {required final List<JobPostingModel>? contents}) =
+          {required final List<JobPostingsItemModel>? contents}) =
       _$JobPostingsModelImpl;
 
   factory _JobPostingsModel.fromJson(Map<String, dynamic> json) =
       _$JobPostingsModelImpl.fromJson;
 
   @override
-  List<JobPostingModel>? get contents;
+  List<JobPostingsItemModel>? get contents;
 
   /// Create a copy of JobPostingsModel
   /// with the given fields replaced by the non-null parameter values.

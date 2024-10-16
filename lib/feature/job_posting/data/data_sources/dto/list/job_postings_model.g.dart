@@ -10,7 +10,7 @@ _$JobPostingsModelImpl _$$JobPostingsModelImplFromJson(
         Map<String, dynamic> json) =>
     _$JobPostingsModelImpl(
       contents: (json['contents'] as List<dynamic>?)
-          ?.map((e) => JobPostingModel.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => JobPostingsItemModel.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 

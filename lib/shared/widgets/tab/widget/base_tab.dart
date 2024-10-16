@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:withu_app/core/utils/extensions/theme_extension.dart';
+import 'package:withu_app/core/utils/extensions/theme_ext.dart';
 import 'package:withu_app/gen/colors.gen.dart';
 import 'package:withu_app/shared/shared.dart';
 

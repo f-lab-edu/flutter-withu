@@ -1,13 +1,13 @@
 import 'package:withu_app/core/core.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'job_posting_model.freezed.dart';
+part 'job_postings_item_model.freezed.dart';
 
-part 'job_posting_model.g.dart';
+part 'job_postings_item_model.g.dart';
 
 @freezed
-class JobPostingModel with _$JobPostingModel {
-  const factory JobPostingModel({
+class JobPostingsItemModel with _$JobPostingsItemModel {
+  const factory JobPostingsItemModel({
     required String id, // Id
     required String title, // 공고명
     required JobCategoryType category, // 직업 카테고리
@@ -16,8 +16,8 @@ class JobPostingModel with _$JobPostingModel {
     required DateTime? endDate, // 근무 종료 날짜
     required int currentMemberCount, // 현재 모집 인원
     required int maxMemberCount, // 최대 모집 인원
-  }) = _JobPostingModel;
+  }) = _JobPostingsItemModel;
 
-  factory JobPostingModel.fromJson(Map<String, Object?> json) =>
-      _$JobPostingModelFromJson(json);
+  factory JobPostingsItemModel.fromJson(Map<String, Object?> json) =>
+      _$JobPostingsItemModelFromJson(json);
 }

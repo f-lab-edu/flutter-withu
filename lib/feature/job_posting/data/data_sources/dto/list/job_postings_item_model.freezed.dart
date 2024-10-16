@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'job_posting_model.dart';
+part of 'job_postings_item_model.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,12 +14,12 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-JobPostingModel _$JobPostingModelFromJson(Map<String, dynamic> json) {
-  return _JobPostingModel.fromJson(json);
+JobPostingsItemModel _$JobPostingsItemModelFromJson(Map<String, dynamic> json) {
+  return _JobPostingsItemModel.fromJson(json);
 }
 
 /// @nodoc
-mixin _$JobPostingModel {
+mixin _$JobPostingsItemModel {
   String get id => throw _privateConstructorUsedError; // Id
   String get title => throw _privateConstructorUsedError; // 공고명
   JobCategoryType get category => throw _privateConstructorUsedError; // 직업 카테고리
@@ -29,21 +29,21 @@ mixin _$JobPostingModel {
   int get currentMemberCount => throw _privateConstructorUsedError; // 현재 모집 인원
   int get maxMemberCount => throw _privateConstructorUsedError;
 
-  /// Serializes this JobPostingModel to a JSON map.
+  /// Serializes this JobPostingsItemModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
-  /// Create a copy of JobPostingModel
+  /// Create a copy of JobPostingsItemModel
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $JobPostingModelCopyWith<JobPostingModel> get copyWith =>
+  $JobPostingsItemModelCopyWith<JobPostingsItemModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $JobPostingModelCopyWith<$Res> {
-  factory $JobPostingModelCopyWith(
-          JobPostingModel value, $Res Function(JobPostingModel) then) =
-      _$JobPostingModelCopyWithImpl<$Res, JobPostingModel>;
+abstract class $JobPostingsItemModelCopyWith<$Res> {
+  factory $JobPostingsItemModelCopyWith(JobPostingsItemModel value,
+          $Res Function(JobPostingsItemModel) then) =
+      _$JobPostingsItemModelCopyWithImpl<$Res, JobPostingsItemModel>;
   @useResult
   $Res call(
       {String id,
@@ -57,16 +57,17 @@ abstract class $JobPostingModelCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$JobPostingModelCopyWithImpl<$Res, $Val extends JobPostingModel>
-    implements $JobPostingModelCopyWith<$Res> {
-  _$JobPostingModelCopyWithImpl(this._value, this._then);
+class _$JobPostingsItemModelCopyWithImpl<$Res,
+        $Val extends JobPostingsItemModel>
+    implements $JobPostingsItemModelCopyWith<$Res> {
+  _$JobPostingsItemModelCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of JobPostingModel
+  /// Create a copy of JobPostingsItemModel
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -118,11 +119,11 @@ class _$JobPostingModelCopyWithImpl<$Res, $Val extends JobPostingModel>
 }
 
 /// @nodoc
-abstract class _$$JobPostingModelImplCopyWith<$Res>
-    implements $JobPostingModelCopyWith<$Res> {
-  factory _$$JobPostingModelImplCopyWith(_$JobPostingModelImpl value,
-          $Res Function(_$JobPostingModelImpl) then) =
-      __$$JobPostingModelImplCopyWithImpl<$Res>;
+abstract class _$$JobPostingsItemModelImplCopyWith<$Res>
+    implements $JobPostingsItemModelCopyWith<$Res> {
+  factory _$$JobPostingsItemModelImplCopyWith(_$JobPostingsItemModelImpl value,
+          $Res Function(_$JobPostingsItemModelImpl) then) =
+      __$$JobPostingsItemModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -137,14 +138,14 @@ abstract class _$$JobPostingModelImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$JobPostingModelImplCopyWithImpl<$Res>
-    extends _$JobPostingModelCopyWithImpl<$Res, _$JobPostingModelImpl>
-    implements _$$JobPostingModelImplCopyWith<$Res> {
-  __$$JobPostingModelImplCopyWithImpl(
-      _$JobPostingModelImpl _value, $Res Function(_$JobPostingModelImpl) _then)
+class __$$JobPostingsItemModelImplCopyWithImpl<$Res>
+    extends _$JobPostingsItemModelCopyWithImpl<$Res, _$JobPostingsItemModelImpl>
+    implements _$$JobPostingsItemModelImplCopyWith<$Res> {
+  __$$JobPostingsItemModelImplCopyWithImpl(_$JobPostingsItemModelImpl _value,
+      $Res Function(_$JobPostingsItemModelImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of JobPostingModel
+  /// Create a copy of JobPostingsItemModel
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -158,7 +159,7 @@ class __$$JobPostingModelImplCopyWithImpl<$Res>
     Object? currentMemberCount = null,
     Object? maxMemberCount = null,
   }) {
-    return _then(_$JobPostingModelImpl(
+    return _then(_$JobPostingsItemModelImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -197,8 +198,8 @@ class __$$JobPostingModelImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$JobPostingModelImpl implements _JobPostingModel {
-  const _$JobPostingModelImpl(
+class _$JobPostingsItemModelImpl implements _JobPostingsItemModel {
+  const _$JobPostingsItemModelImpl(
       {required this.id,
       required this.title,
       required this.category,
@@ -208,8 +209,8 @@ class _$JobPostingModelImpl implements _JobPostingModel {
       required this.currentMemberCount,
       required this.maxMemberCount});
 
-  factory _$JobPostingModelImpl.fromJson(Map<String, dynamic> json) =>
-      _$$JobPostingModelImplFromJson(json);
+  factory _$JobPostingsItemModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$JobPostingsItemModelImplFromJson(json);
 
   @override
   final String id;
@@ -237,14 +238,14 @@ class _$JobPostingModelImpl implements _JobPostingModel {
 
   @override
   String toString() {
-    return 'JobPostingModel(id: $id, title: $title, category: $category, status: $status, startDate: $startDate, endDate: $endDate, currentMemberCount: $currentMemberCount, maxMemberCount: $maxMemberCount)';
+    return 'JobPostingsItemModel(id: $id, title: $title, category: $category, status: $status, startDate: $startDate, endDate: $endDate, currentMemberCount: $currentMemberCount, maxMemberCount: $maxMemberCount)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$JobPostingModelImpl &&
+            other is _$JobPostingsItemModelImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.category, category) ||
@@ -264,25 +265,26 @@ class _$JobPostingModelImpl implements _JobPostingModel {
   int get hashCode => Object.hash(runtimeType, id, title, category, status,
       startDate, endDate, currentMemberCount, maxMemberCount);
 
-  /// Create a copy of JobPostingModel
+  /// Create a copy of JobPostingsItemModel
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$JobPostingModelImplCopyWith<_$JobPostingModelImpl> get copyWith =>
-      __$$JobPostingModelImplCopyWithImpl<_$JobPostingModelImpl>(
-          this, _$identity);
+  _$$JobPostingsItemModelImplCopyWith<_$JobPostingsItemModelImpl>
+      get copyWith =>
+          __$$JobPostingsItemModelImplCopyWithImpl<_$JobPostingsItemModelImpl>(
+              this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$JobPostingModelImplToJson(
+    return _$$JobPostingsItemModelImplToJson(
       this,
     );
   }
 }
 
-abstract class _JobPostingModel implements JobPostingModel {
-  const factory _JobPostingModel(
+abstract class _JobPostingsItemModel implements JobPostingsItemModel {
+  const factory _JobPostingsItemModel(
       {required final String id,
       required final String title,
       required final JobCategoryType category,
@@ -290,10 +292,10 @@ abstract class _JobPostingModel implements JobPostingModel {
       required final DateTime startDate,
       required final DateTime? endDate,
       required final int currentMemberCount,
-      required final int maxMemberCount}) = _$JobPostingModelImpl;
+      required final int maxMemberCount}) = _$JobPostingsItemModelImpl;
 
-  factory _JobPostingModel.fromJson(Map<String, dynamic> json) =
-      _$JobPostingModelImpl.fromJson;
+  factory _JobPostingsItemModel.fromJson(Map<String, dynamic> json) =
+      _$JobPostingsItemModelImpl.fromJson;
 
   @override
   String get id; // Id
@@ -312,10 +314,10 @@ abstract class _JobPostingModel implements JobPostingModel {
   @override
   int get maxMemberCount;
 
-  /// Create a copy of JobPostingModel
+  /// Create a copy of JobPostingsItemModel
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$JobPostingModelImplCopyWith<_$JobPostingModelImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$JobPostingsItemModelImplCopyWith<_$JobPostingsItemModelImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

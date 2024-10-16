@@ -7,6 +7,9 @@ class CustomTheme {
   static ThemeData get theme {
     return ThemeData(
       primaryColor: ColorName.primary,
+      textSelectionTheme: const TextSelectionThemeData(
+        cursorColor: ColorName.primary,
+      ),
       textTheme: textTheme,
     );
   }
