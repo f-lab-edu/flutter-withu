@@ -13,23 +13,12 @@ class JobPostingFormBloc
 
   JobPostingFormBloc({
     required this.useCase,
-  }) : super(JobPostingFormState(
-          status: JobPostingFormStatus.initial,
-          title: '',
-          content: '',
-          contractStartDate: DateTime.now(),
-          isVisibleStartCalendar: false,
-          isVisibleEndCalendar: false,
-          isTBC: false,
-          participants: '',
-          pay: '',
-          address: '',
-        )) {
+  }) : super(const JobPostingFormState(status: JobPostingFormStatus.initial)) {
     on<OnCliCkTemporarySave>(_onCliCkTemporarySave);
     on<OnChangedTitle>(_onChangedTitle);
     on<OnChangedContent>(_onChangedContent);
     on<OnPressedJobCategory>(_onPressedJobCategory);
-    on<OnPressedPeriod>(_onPressedPeriod);
+    on<OnPressedContractType>(_onPressedContractType);
     on<OnChangedContractStartDate>(_onChangedContractStartDate);
     on<OnChangedContractEndDate>(_onChangedContractEndDate);
     on<OnToggleStartCalendarVisible>(_onToggleStartCalendarVisible);
@@ -47,6 +36,7 @@ class JobPostingFormBloc
     on<OnToggleHasBreakTime>(_onToggleHasBreakTime);
     on<OnSelectBreakTimePaid>(_onSelectBreakTimePaid);
     on<OnToggleHasMealPaid>(_onToggleHasMealPaid);
+    on<OnPressedSubmit>(_onPressedSubmit);
   }
 
   /// 임시 저장 클릭 이벤트.
@@ -82,11 +72,11 @@ class JobPostingFormBloc
   }
 
   /// 기간형식 선택 이벤트.
-  void _onPressedPeriod(
-    OnPressedPeriod event,
+  void _onPressedContractType(
+    OnPressedContractType event,
     Emitter<JobPostingFormState> emit,
   ) async {
-    emit(state.copyWith(period: event.period));
+    emit(state.copyWith(contractType: event.contractType));
   }
 
   /// 계약 시작 날짜.
@@ -220,9 +210,17 @@ class JobPostingFormBloc
 
   /// 식비 유무 토글 이벤트.
   void _onToggleHasMealPaid(
-      OnToggleHasMealPaid event,
-      Emitter<JobPostingFormState> emit,
-      ) {
-    emit(state.copyWith(hasMealPaid: !state.hasMealPaid));
+    OnToggleHasMealPaid event,
+    Emitter<JobPostingFormState> emit,
+  ) {
+    emit(state.copyWith(isMealProvided: !state.isMealProvided));
+  }
+
+  /// 등록하기 클릭.
+  void _onPressedSubmit(
+    OnPressedSubmit event,
+    Emitter<JobPostingFormState> emit,
+  ) async {
+    await useCase.createJobPosting(state.toEntity());
   }
 }

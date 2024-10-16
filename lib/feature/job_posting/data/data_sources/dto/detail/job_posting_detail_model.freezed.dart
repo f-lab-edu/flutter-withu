@@ -33,7 +33,7 @@ mixin _$JobPostingDetailModel {
   DateTime get contractEndDate =>
       throw _privateConstructorUsedError; // 근로 종료 날짜
   bool get isTimeUndecided => throw _privateConstructorUsedError; // 시간 미정 여부
-  PayType get payType => throw _privateConstructorUsedError; // 급여 타입: 시급, 일급
+  String get payType => throw _privateConstructorUsedError; // 급여 타입: 시급, 일급
   int get payAmount => throw _privateConstructorUsedError; // 금액
   String get workAddress => throw _privateConstructorUsedError; // 근무지 주소
   double get latitude => throw _privateConstructorUsedError; // 근무지 위도
@@ -77,7 +77,7 @@ abstract class $JobPostingDetailModelCopyWith<$Res> {
       DateTime contractStartDate,
       DateTime contractEndDate,
       bool isTimeUndecided,
-      PayType payType,
+      String payType,
       int payAmount,
       String workAddress,
       double latitude,
@@ -175,7 +175,7 @@ class _$JobPostingDetailModelCopyWithImpl<$Res,
       payType: null == payType
           ? _value.payType
           : payType // ignore: cast_nullable_to_non_nullable
-              as PayType,
+              as String,
       payAmount: null == payAmount
           ? _value.payAmount
           : payAmount // ignore: cast_nullable_to_non_nullable
@@ -255,7 +255,7 @@ abstract class _$$JobPostingDetailModelImplCopyWith<$Res>
       DateTime contractStartDate,
       DateTime contractEndDate,
       bool isTimeUndecided,
-      PayType payType,
+      String payType,
       int payAmount,
       String workAddress,
       double latitude,
@@ -351,7 +351,7 @@ class __$$JobPostingDetailModelImplCopyWithImpl<$Res>
       payType: null == payType
           ? _value.payType
           : payType // ignore: cast_nullable_to_non_nullable
-              as PayType,
+              as String,
       payAmount: null == payAmount
           ? _value.payAmount
           : payAmount // ignore: cast_nullable_to_non_nullable
@@ -472,7 +472,7 @@ class _$JobPostingDetailModelImpl implements _JobPostingDetailModel {
   final bool isTimeUndecided;
 // 시간 미정 여부
   @override
-  final PayType payType;
+  final String payType;
 // 급여 타입: 시급, 일급
   @override
   final int payAmount;
@@ -631,7 +631,7 @@ abstract class _JobPostingDetailModel implements JobPostingDetailModel {
       required final DateTime contractStartDate,
       required final DateTime contractEndDate,
       required final bool isTimeUndecided,
-      required final PayType payType,
+      required final String payType,
       required final int payAmount,
       required final String workAddress,
       required final double latitude,
@@ -669,7 +669,7 @@ abstract class _JobPostingDetailModel implements JobPostingDetailModel {
   @override
   bool get isTimeUndecided; // 시간 미정 여부
   @override
-  PayType get payType; // 급여 타입: 시급, 일급
+  String get payType; // 급여 타입: 시급, 일급
   @override
   int get payAmount; // 금액
   @override

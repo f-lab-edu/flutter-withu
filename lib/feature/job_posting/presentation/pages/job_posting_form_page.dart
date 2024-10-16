@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -56,12 +55,12 @@ class _JobPostingFormPage extends StatelessWidget {
             const SizedBox(height: 15),
             _CategorySelect(),
             const SizedBox(height: 30),
-            _PeriodType(),
+            _ContractType(),
             const SizedBox(height: 30),
-            _ContractStartPeriod(),
+            _ContractStartDate(),
             _ContractStartCalendar(),
             const SizedBox(height: 30),
-            _ContractEndPeriod(),
+            _ContractEndDate(),
             _ContractEndCalendar(),
             const SizedBox(height: 30),
             _WorkHoursField(),
@@ -87,6 +86,7 @@ class _JobPostingFormPage extends StatelessWidget {
             const SizedBox(height: 30),
             _MealPaidField(),
             const SizedBox(height: 40),
+            _SubmitButton(),
             const SizedBox(height: 15),
           ],
         ),
@@ -225,7 +225,7 @@ class _CategorySelect extends StatelessWidget {
 }
 
 /// 기간 형식
-class _PeriodType extends StatelessWidget {
+class _ContractType extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<JobPostingFormBloc, JobPostingFormState>(
@@ -235,14 +235,14 @@ class _PeriodType extends StatelessWidget {
         children: [
           _FieldName(text: StringRes.periodFormat.tr),
           const Spacer(),
-          ...PeriodType.values.map(
+          ...ContractType.values.map(
             (type) => RadioChip(
               text: type.tr,
-              isSelected: state.period == type,
+              isSelected: state.contractType == type,
               onSelected: () {
                 context
                     .read<JobPostingFormBloc>()
-                    .add(OnPressedPeriod(period: type));
+                    .add(OnPressedContractType(contractType: type));
               },
               margin: const EdgeInsets.only(left: 16),
             ),
@@ -254,12 +254,12 @@ class _PeriodType extends StatelessWidget {
 }
 
 /// 근로 계약 기간
-class _ContractStartPeriod extends StatelessWidget {
+class _ContractStartDate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<JobPostingFormBloc, JobPostingFormState>(
       builder: (context, state) {
-        final fieldName = state.period?.isLong == true
+        final fieldName = state.contractType?.isLong == true
             ? StringRes.workContractStartPeriod.tr
             : StringRes.workContractPeriod.tr;
         return Row(
@@ -337,13 +337,13 @@ class _ContractStartCalendar extends StatelessWidget {
 }
 
 /// 계약 종료 날짜
-class _ContractEndPeriod extends StatelessWidget {
+class _ContractEndDate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<JobPostingFormBloc, JobPostingFormState>(
       builder: (context, state) {
         return Visibility(
-          visible: state.period?.isLong == true,
+          visible: state.contractType?.isLong == true,
           child: Row(
             children: [
               _FieldName(text: StringRes.workContractEndPeriod.tr),
@@ -381,7 +381,8 @@ class _ContractEndCalendar extends StatelessWidget {
     return BlocBuilder<JobPostingFormBloc, JobPostingFormState>(
         builder: (context, state) {
       return Visibility(
-        visible: state.period?.isLong == true && state.isVisibleEndCalendar,
+        visible:
+            state.contractType?.isLong == true && state.isVisibleEndCalendar,
         child: Container(
           margin: const EdgeInsets.only(top: 14),
           padding: const EdgeInsets.only(top: 8),
@@ -852,7 +853,7 @@ class _MealPaidField extends StatelessWidget {
             _FieldName(text: StringRes.mealPaidOrNot.tr),
             const Spacer(),
             BaseSwitch(
-              isOn: state.hasMealPaid,
+              isOn: state.isMealProvided,
               onTap: () {
                 context.read<JobPostingFormBloc>().add(OnToggleHasMealPaid());
               },
@@ -868,11 +869,25 @@ class _MealPaidField extends StatelessWidget {
 class _SubmitButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: () {},
-      child: Text(
-        StringRes.register.tr,
-        style: context.textTheme.bodyMediumBold,
+    return InkWell(
+      borderRadius: BorderRadius.circular(10),
+      onTap: () {
+        context.read<JobPostingFormBloc>().add(OnPressedSubmit());
+      },
+      child: Container(
+        width: double.infinity,
+        height: 48,
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          color: ColorName.primary80,
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Text(
+          StringRes.register.tr,
+          style: context.textTheme.bodyMediumBold?.copyWith(
+            color: ColorName.white,
+          ),
+        ),
       ),
     );
   }

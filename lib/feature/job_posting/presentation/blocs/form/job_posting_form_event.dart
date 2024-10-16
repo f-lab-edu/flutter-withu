@@ -38,14 +38,14 @@ class OnPressedJobCategory extends JobPostingFormEvent {
   List<Object?> get props => [category];
 }
 
-/// 카테고리 선택 이벤트
-class OnPressedPeriod extends JobPostingFormEvent {
-  final PeriodType? period;
+/// 기간형식 선택 이벤트
+class OnPressedContractType extends JobPostingFormEvent {
+  final ContractType? contractType;
 
-  OnPressedPeriod({required this.period});
+  OnPressedContractType({required this.contractType});
 
   @override
-  List<Object?> get props => [period];
+  List<Object?> get props => [contractType];
 }
 
 /// 계약 시작 날짜 변경 이벤트
@@ -199,6 +199,14 @@ class OnSelectBreakTimePaid extends JobPostingFormEvent {
 /// 휴게시 유무 토글 이벤트.
 class OnToggleHasMealPaid extends JobPostingFormEvent {
   OnToggleHasMealPaid();
+
+  @override
+  List<Object?> get props => [];
+}
+
+/// 등록하기 버튼 클릭
+class OnPressedSubmit extends JobPostingFormEvent {
+  OnPressedSubmit();
 
   @override
   List<Object?> get props => [];

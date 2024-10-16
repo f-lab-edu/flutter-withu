@@ -16,7 +16,7 @@ class JobPostingFormState extends Equatable {
   final JobCategoryType? category;
 
   /// 기간 형식
-  final PeriodType? period;
+  final ContractType? contractType;
 
   /// 계약 시작 날짜
   final DateTime? contractStartDate;
@@ -72,31 +72,31 @@ class JobPostingFormState extends Equatable {
   final bool? isBreakTimePaid;
 
   /// 식비 유무
-  final bool hasMealPaid;
+  final bool isMealProvided;
 
   const JobPostingFormState({
     required this.status,
-    required this.title,
-    required this.content,
-    required this.isVisibleStartCalendar,
-    required this.isVisibleEndCalendar,
-    required this.isTBC,
-    required this.participants,
-    required this.pay,
-    required this.address,
+    this.title = '',
+    this.content = '',
     this.category,
-    this.period,
+    this.contractType,
     this.contractStartDate,
+    this.isVisibleStartCalendar = false,
     this.contractEndDate,
+    this.isVisibleEndCalendar = false,
+    this.isTBC = true,
     this.workStartTime,
     this.workEndTime,
+    this.participants = '',
     this.payType,
+    this.pay = '',
+    this.address = '',
     this.preferredQualifications = '',
     this.hasTravelTime = false,
     this.isTravelTimePaid,
     this.hasBreakTime = false,
     this.isBreakTimePaid,
-    this.hasMealPaid = false,
+    this.isMealProvided = false,
   });
 
   JobPostingFormState copyWith({
@@ -104,7 +104,7 @@ class JobPostingFormState extends Equatable {
     String? title,
     String? content,
     JobCategoryType? category,
-    PeriodType? period,
+    ContractType? contractType,
     DateTime? contractStartDate,
     DateTime? contractEndDate,
     bool? isVisibleStartCalendar,
@@ -121,14 +121,14 @@ class JobPostingFormState extends Equatable {
     bool? isTravelTimePaid,
     bool? hasBreakTime,
     bool? isBreakTimePaid,
-    bool? hasMealPaid,
+    bool? isMealProvided,
   }) {
     return JobPostingFormState(
       status: status ?? this.status,
       title: title ?? this.title,
       content: content ?? this.content,
       category: category ?? this.category,
-      period: period ?? this.period,
+      contractType: contractType ?? this.contractType,
       contractStartDate: contractStartDate ?? this.contractStartDate,
       contractEndDate: contractEndDate ?? this.contractEndDate,
       isVisibleStartCalendar:
@@ -147,7 +147,7 @@ class JobPostingFormState extends Equatable {
       isTravelTimePaid: isTravelTimePaid ?? this.isTravelTimePaid,
       hasBreakTime: hasBreakTime ?? this.hasBreakTime,
       isBreakTimePaid: isBreakTimePaid ?? this.isBreakTimePaid,
-      hasMealPaid: hasMealPaid ?? this.hasMealPaid,
+      isMealProvided: isMealProvided ?? this.isMealProvided,
     );
   }
 
@@ -157,7 +157,7 @@ class JobPostingFormState extends Equatable {
         title,
         content,
         category,
-        period,
+        contractType,
         contractStartDate,
         contractEndDate,
         isVisibleStartCalendar,
@@ -174,6 +174,35 @@ class JobPostingFormState extends Equatable {
         isTravelTimePaid,
         hasBreakTime,
         isBreakTimePaid,
-        hasMealPaid,
+        isMealProvided,
       ];
+}
+
+extension JobPostingFormStateExt on JobPostingFormState {
+  /// 등록/수정 요청 Entity로 변경
+  JobPostingRequestEntity toEntity() {
+    // TODO: companyId 추후 추가 예정
+    return JobPostingRequestEntity(
+      companyId: '1',
+      title: title,
+      content: content,
+      categoryType: category,
+      contractType: contractType,
+      contractStartDate: contractStartDate,
+      contractEndDate: contractEndDate,
+      isTBC: isTBC,
+      payType: payType,
+      payAmount: pay,
+      workAddress: address,
+      participants: participants,
+      hasTravelTime: hasTravelTime,
+      isTravelTimePaid: isTravelTimePaid,
+      hasBreakTime: hasBreakTime,
+      isBreakTimePaid: isBreakTimePaid,
+      isMealProvided: isMealProvided,
+      preferredQualifications: preferredQualifications,
+      workStartTime: workStartTime,
+      workEndTime: workEndTime,
+    );
+  }
 }

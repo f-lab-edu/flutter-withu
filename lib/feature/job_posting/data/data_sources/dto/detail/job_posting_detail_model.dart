@@ -1,6 +1,5 @@
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:withu_app/core/core.dart';
 
 part 'job_posting_detail_model.freezed.dart';
 
@@ -19,7 +18,7 @@ class JobPostingDetailModel with _$JobPostingDetailModel {
     required DateTime contractStartDate, // 근로 시작 날
     required DateTime contractEndDate, // 근로 종료 날짜
     required bool isTimeUndecided, // 시간 미정 여부
-    required PayType payType, // 급여 타입: 시급, 일급
+    required String payType, // 급여 타입: 시급, 일급
     required int payAmount, // 금액
     required String workAddress, // 근무지 주소
     required double latitude, // 근무지 위도

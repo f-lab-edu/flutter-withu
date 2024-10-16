@@ -18,7 +18,7 @@ _$JobPostingDetailModelImpl _$$JobPostingDetailModelImplFromJson(
       contractStartDate: DateTime.parse(json['contractStartDate'] as String),
       contractEndDate: DateTime.parse(json['contractEndDate'] as String),
       isTimeUndecided: json['isTimeUndecided'] as bool,
-      payType: $enumDecode(_$PayTypeEnumMap, json['payType']),
+      payType: json['payType'] as String,
       payAmount: (json['payAmount'] as num).toInt(),
       workAddress: json['workAddress'] as String,
       latitude: (json['latitude'] as num).toDouble(),
@@ -51,7 +51,7 @@ Map<String, dynamic> _$$JobPostingDetailModelImplToJson(
       'contractStartDate': instance.contractStartDate.toIso8601String(),
       'contractEndDate': instance.contractEndDate.toIso8601String(),
       'isTimeUndecided': instance.isTimeUndecided,
-      'payType': _$PayTypeEnumMap[instance.payType]!,
+      'payType': instance.payType,
       'payAmount': instance.payAmount,
       'workAddress': instance.workAddress,
       'latitude': instance.latitude,
@@ -67,8 +67,3 @@ Map<String, dynamic> _$$JobPostingDetailModelImplToJson(
       'workStartTime': instance.workStartTime?.toIso8601String(),
       'workEndTime': instance.workEndTime?.toIso8601String(),
     };
-
-const _$PayTypeEnumMap = {
-  PayType.hour: 'hour',
-  PayType.day: 'day',
-};
