@@ -13,6 +13,8 @@ class CustomAppBar extends AppBar {
   }) : super(
           leading: backButton,
           actions: trailing,
+          backgroundColor: Colors.white,
+          scrolledUnderElevation: 0,
         );
 
   /// 뒤로가기.

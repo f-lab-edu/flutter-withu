@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:withu_app/core/core.dart';
 
 part 'job_posting_request_dto.freezed.dart';
 

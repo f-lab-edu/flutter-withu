@@ -14,6 +14,7 @@ class PageRoot extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBar,
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Container(
           width: double.infinity,

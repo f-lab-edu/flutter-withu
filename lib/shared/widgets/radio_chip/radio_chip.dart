@@ -28,22 +28,23 @@ class RadioChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onSelected,
-      child: Container(
-        margin: margin,
-        padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 5),
-        decoration: BoxDecoration(
-          color: backgroundColor,
-          border: border,
-          borderRadius: BorderRadius.circular(
-            50,
+    return Container(
+      margin: margin,
+      child: InkWell(
+        onTap: onSelected,
+        borderRadius: BorderRadius.circular(50),
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 5),
+          decoration: BoxDecoration(
+            color: backgroundColor,
+            border: border,
+            borderRadius: BorderRadius.circular(50),
           ),
-        ),
-        child: Text(
-          text,
-          style: context.textTheme.bodySmallBold?.copyWith(
-            color: textColor,
+          child: Text(
+            text,
+            style: context.textTheme.bodySmallBold?.copyWith(
+              color: textColor,
+            ),
           ),
         ),
       ),

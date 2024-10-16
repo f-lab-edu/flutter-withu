@@ -12,7 +12,7 @@ enum JobCategoryType with L10nKeyProvider {
   foodStyling(l10nKey: 'foodStyling'),
 
   /// 플라워리스트
-  florist(l10nKey: 'florist');
+  florist(l10nKey: 'flower');
 
   @override
   final String l10nKey;

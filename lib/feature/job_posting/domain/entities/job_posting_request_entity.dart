@@ -15,7 +15,7 @@ class JobPostingRequestEntity {
   final JobCategoryType categoryType;
 
   /// 계약 타입: 단기, 장기
-  final ContractType contractType;
+  final PeriodType contractType;
 
   /// 근로 시작 날
   final DateTime contractStartDate;
