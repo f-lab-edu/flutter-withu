@@ -8,12 +8,17 @@ class PageRoot extends StatelessWidget {
 
   final PreferredSizeWidget? appBar;
 
-  const PageRoot({
-    super.key,
-    required this.child,
-    required this.isLoading,
-    this.appBar,
-  });
+  final FloatingActionButton? fab;
+
+  final EdgeInsets? padding;
+
+  const PageRoot(
+      {super.key,
+      required this.child,
+      required this.isLoading,
+      this.appBar,
+      this.fab,
+      this.padding});
 
   @override
   Widget build(BuildContext context) {
@@ -21,12 +26,13 @@ class PageRoot extends StatelessWidget {
       children: [
         Scaffold(
           appBar: appBar,
+          floatingActionButton: fab,
           backgroundColor: Colors.white,
           body: SafeArea(
             child: Container(
               width: double.infinity,
               height: double.infinity,
-              padding: const EdgeInsets.symmetric(horizontal: 24),
+              padding: padding,
               child: child,
             ),
           ),

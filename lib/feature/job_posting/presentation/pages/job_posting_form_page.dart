@@ -39,6 +39,7 @@ class _JobPostingFormPage extends StatelessWidget {
       builder: (context, loadingState) {
         return PageRoot(
           isLoading: loadingState.loading,
+          padding: const EdgeInsets.symmetric(horizontal: 24),
           appBar: CustomAppBar.back(
             context: context,
           ),
