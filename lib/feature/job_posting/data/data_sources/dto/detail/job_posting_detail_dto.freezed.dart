@@ -24,15 +24,16 @@ mixin _$JobPostingDetailDto {
   String get companyId => throw _privateConstructorUsedError; // 회사 ID
   String get title => throw _privateConstructorUsedError; // 공고명
   String get content => throw _privateConstructorUsedError; // 근로 내용
-  String get specialtyField => throw _privateConstructorUsedError; // 카테고리
-  String get contractType =>
+  JobCategoryType get specialtyField =>
+      throw _privateConstructorUsedError; // 카테고리
+  ContractType get contractType =>
       throw _privateConstructorUsedError; // 계약 타입: 단기, 장기
   DateTime get contractStartDate =>
       throw _privateConstructorUsedError; // 근로 시작 날
   DateTime get contractEndDate =>
       throw _privateConstructorUsedError; // 근로 종료 날짜
   bool get isTimeUndecided => throw _privateConstructorUsedError; // 시간 미정 여부
-  String get payType => throw _privateConstructorUsedError; // 급여 타입: 시급, 일급
+  PayType get payType => throw _privateConstructorUsedError; // 급여 타입: 시급, 일급
   int get payAmount => throw _privateConstructorUsedError; // 금액
   String get workAddress => throw _privateConstructorUsedError; // 근무지 주소
   double get latitude => throw _privateConstructorUsedError; // 근무지 위도
@@ -71,12 +72,12 @@ abstract class $JobPostingDetailDtoCopyWith<$Res> {
       String companyId,
       String title,
       String content,
-      String specialtyField,
-      String contractType,
+      JobCategoryType specialtyField,
+      ContractType contractType,
       DateTime contractStartDate,
       DateTime contractEndDate,
       bool isTimeUndecided,
-      String payType,
+      PayType payType,
       int payAmount,
       String workAddress,
       double latitude,
@@ -153,11 +154,11 @@ class _$JobPostingDetailDtoCopyWithImpl<$Res, $Val extends JobPostingDetailDto>
       specialtyField: null == specialtyField
           ? _value.specialtyField
           : specialtyField // ignore: cast_nullable_to_non_nullable
-              as String,
+              as JobCategoryType,
       contractType: null == contractType
           ? _value.contractType
           : contractType // ignore: cast_nullable_to_non_nullable
-              as String,
+              as ContractType,
       contractStartDate: null == contractStartDate
           ? _value.contractStartDate
           : contractStartDate // ignore: cast_nullable_to_non_nullable
@@ -173,7 +174,7 @@ class _$JobPostingDetailDtoCopyWithImpl<$Res, $Val extends JobPostingDetailDto>
       payType: null == payType
           ? _value.payType
           : payType // ignore: cast_nullable_to_non_nullable
-              as String,
+              as PayType,
       payAmount: null == payAmount
           ? _value.payAmount
           : payAmount // ignore: cast_nullable_to_non_nullable
@@ -247,12 +248,12 @@ abstract class _$$JobPostingDetailDtoImplCopyWith<$Res>
       String companyId,
       String title,
       String content,
-      String specialtyField,
-      String contractType,
+      JobCategoryType specialtyField,
+      ContractType contractType,
       DateTime contractStartDate,
       DateTime contractEndDate,
       bool isTimeUndecided,
-      String payType,
+      PayType payType,
       int payAmount,
       String workAddress,
       double latitude,
@@ -327,11 +328,11 @@ class __$$JobPostingDetailDtoImplCopyWithImpl<$Res>
       specialtyField: null == specialtyField
           ? _value.specialtyField
           : specialtyField // ignore: cast_nullable_to_non_nullable
-              as String,
+              as JobCategoryType,
       contractType: null == contractType
           ? _value.contractType
           : contractType // ignore: cast_nullable_to_non_nullable
-              as String,
+              as ContractType,
       contractStartDate: null == contractStartDate
           ? _value.contractStartDate
           : contractStartDate // ignore: cast_nullable_to_non_nullable
@@ -347,7 +348,7 @@ class __$$JobPostingDetailDtoImplCopyWithImpl<$Res>
       payType: null == payType
           ? _value.payType
           : payType // ignore: cast_nullable_to_non_nullable
-              as String,
+              as PayType,
       payAmount: null == payAmount
           ? _value.payAmount
           : payAmount // ignore: cast_nullable_to_non_nullable
@@ -453,10 +454,10 @@ class _$JobPostingDetailDtoImpl implements _JobPostingDetailDto {
   final String content;
 // 근로 내용
   @override
-  final String specialtyField;
+  final JobCategoryType specialtyField;
 // 카테고리
   @override
-  final String contractType;
+  final ContractType contractType;
 // 계약 타입: 단기, 장기
   @override
   final DateTime contractStartDate;
@@ -468,7 +469,7 @@ class _$JobPostingDetailDtoImpl implements _JobPostingDetailDto {
   final bool isTimeUndecided;
 // 시간 미정 여부
   @override
-  final String payType;
+  final PayType payType;
 // 급여 타입: 시급, 일급
   @override
   final int payAmount;
@@ -622,12 +623,12 @@ abstract class _JobPostingDetailDto implements JobPostingDetailDto {
       required final String companyId,
       required final String title,
       required final String content,
-      required final String specialtyField,
-      required final String contractType,
+      required final JobCategoryType specialtyField,
+      required final ContractType contractType,
       required final DateTime contractStartDate,
       required final DateTime contractEndDate,
       required final bool isTimeUndecided,
-      required final String payType,
+      required final PayType payType,
       required final int payAmount,
       required final String workAddress,
       required final double latitude,
@@ -655,9 +656,9 @@ abstract class _JobPostingDetailDto implements JobPostingDetailDto {
   @override
   String get content; // 근로 내용
   @override
-  String get specialtyField; // 카테고리
+  JobCategoryType get specialtyField; // 카테고리
   @override
-  String get contractType; // 계약 타입: 단기, 장기
+  ContractType get contractType; // 계약 타입: 단기, 장기
   @override
   DateTime get contractStartDate; // 근로 시작 날
   @override
@@ -665,7 +666,7 @@ abstract class _JobPostingDetailDto implements JobPostingDetailDto {
   @override
   bool get isTimeUndecided; // 시간 미정 여부
   @override
-  String get payType; // 급여 타입: 시급, 일급
+  PayType get payType; // 급여 타입: 시급, 일급
   @override
   int get payAmount; // 금액
   @override

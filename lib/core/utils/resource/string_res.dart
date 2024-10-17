@@ -43,6 +43,7 @@ enum StringRes {
   numberOfPeopleUnit,
   wonUnit,
   register,
+  serverError,
 }
 
 extension StringResEx on StringRes {

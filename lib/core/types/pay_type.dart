@@ -1,6 +1,8 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:withu_app/core/core.dart';
 
 /// 급여 타입
+@JsonEnum(valueField: 'serverKey')
 enum PayType with L10nKeyProvider {
   /// 시급
   hour(l10nKey: 'hourlyWage', serverKey: 'HOURLY'),

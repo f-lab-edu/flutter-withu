@@ -1,6 +1,8 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:withu_app/core/core.dart';
 
 /// 직업 종류
+@JsonEnum(valueField: 'serverKey')
 enum JobCategoryType with L10nKeyProvider {
   /// 촬영
   photography(l10nKey: 'photography', serverKey: 'PHOTOGRAPHY'),

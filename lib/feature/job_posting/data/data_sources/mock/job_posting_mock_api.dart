@@ -56,17 +56,18 @@ class JobPostingMockApi extends JobPostingApi with MockAPI {
       'longitude': 126.9778222,
       ...requestData.toJson(),
     });
+
     try {
-      dioAdapter.onGet(
+      dioAdapter.onPost(
         url,
         (server) => server.reply(
           200,
-          responseData,
+          responseData.toJson(),
           delay: const Duration(seconds: 1),
         ),
       );
 
-      final response = await dio.get(url);
+      final response = await dio.post(url);
 
       if (response.statusCode == 200) {
         return ApiResponse.success(
@@ -93,12 +94,12 @@ class JobPostingMockApi extends JobPostingApi with MockAPI {
         companyId: '1',
         title: '공고제목입니다:)',
         content: '열심히 일하시면 됩니다.',
-        specialtyField: 'CATERING',
-        contractType: 'SHORT_TERM',
+        specialtyField: JobCategoryType.catering,
+        contractType: ContractType.short,
         contractStartDate: DateTime.now(),
         contractEndDate: DateTime.now(),
         isTimeUndecided: true,
-        payType: 'HOURLY',
+        payType: PayType.hour,
         payAmount: 12000,
         workAddress: '서울 동작구 여의대방로22바길 2 2층',
         latitude: 37.5664056,

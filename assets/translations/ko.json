@@ -41,5 +41,6 @@
   "workHours": "근무시간",
   "numberOfPeopleUnit": "명",
   "wonUnit": "원",
-  "register": "등록하기"
+  "register": "등록하기",
+  "serverError": "서버 에러"
 }

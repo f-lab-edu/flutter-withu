@@ -13,12 +13,13 @@ _$JobPostingDetailDtoImpl _$$JobPostingDetailDtoImplFromJson(
       companyId: json['companyId'] as String,
       title: json['title'] as String,
       content: json['content'] as String,
-      specialtyField: json['specialtyField'] as String,
-      contractType: json['contractType'] as String,
+      specialtyField:
+          $enumDecode(_$JobCategoryTypeEnumMap, json['specialtyField']),
+      contractType: $enumDecode(_$ContractTypeEnumMap, json['contractType']),
       contractStartDate: DateTime.parse(json['contractStartDate'] as String),
       contractEndDate: DateTime.parse(json['contractEndDate'] as String),
       isTimeUndecided: json['isTimeUndecided'] as bool,
-      payType: json['payType'] as String,
+      payType: $enumDecode(_$PayTypeEnumMap, json['payType']),
       payAmount: (json['payAmount'] as num).toInt(),
       workAddress: json['workAddress'] as String,
       latitude: (json['latitude'] as num).toDouble(),
@@ -46,12 +47,12 @@ Map<String, dynamic> _$$JobPostingDetailDtoImplToJson(
       'companyId': instance.companyId,
       'title': instance.title,
       'content': instance.content,
-      'specialtyField': instance.specialtyField,
-      'contractType': instance.contractType,
+      'specialtyField': _$JobCategoryTypeEnumMap[instance.specialtyField]!,
+      'contractType': _$ContractTypeEnumMap[instance.contractType]!,
       'contractStartDate': instance.contractStartDate.toIso8601String(),
       'contractEndDate': instance.contractEndDate.toIso8601String(),
       'isTimeUndecided': instance.isTimeUndecided,
-      'payType': instance.payType,
+      'payType': _$PayTypeEnumMap[instance.payType]!,
       'payAmount': instance.payAmount,
       'workAddress': instance.workAddress,
       'latitude': instance.latitude,
@@ -67,3 +68,20 @@ Map<String, dynamic> _$$JobPostingDetailDtoImplToJson(
       'isTravelTimePaid': instance.isTravelTimePaid,
       'isBreakTimePaid': instance.isBreakTimePaid,
     };
+
+const _$JobCategoryTypeEnumMap = {
+  JobCategoryType.photography: 'PHOTOGRAPHY',
+  JobCategoryType.catering: 'CATERING',
+  JobCategoryType.foodStyling: 'FOOD_STYLING',
+  JobCategoryType.florist: 'FLORIST',
+};
+
+const _$ContractTypeEnumMap = {
+  ContractType.short: 'SHORT_TERM',
+  ContractType.long: 'LONG_TERM',
+};
+
+const _$PayTypeEnumMap = {
+  PayType.hour: 'HOURLY',
+  PayType.day: 'DAILY',
+};
