@@ -9,6 +9,7 @@ class JobPostingRepositoryImpl implements JobPostingRepository {
     required this.api,
   });
 
+  /// 공고 목록 조회
   @override
   Future<List<JobPostingsItemModel>?> searchJobPostings({
     required JobPostingStatusType status,
@@ -22,10 +23,19 @@ class JobPostingRepositoryImpl implements JobPostingRepository {
     }
   }
 
+  /// 공고 등록
   @override
   Future<ApiResponse<JobPostingDetailDto>> createJobPosting({
     required JobPostingRequestDto dto,
   }) async {
     return await api.createJobPosting(requestData: dto);
+  }
+
+  /// 공고 상세 조회
+  @override
+  Future<ApiResponse<JobPostingDetailDto>> getJobPosting({
+    required String jobPostingId,
+  }) async {
+    return await api.getJobPosting(jobPostingId: jobPostingId);
   }
 }

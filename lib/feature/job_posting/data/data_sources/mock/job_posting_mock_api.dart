@@ -3,6 +3,7 @@ import 'package:withu_app/core/core.dart';
 import 'package:withu_app/feature/job_posting/data/data.dart';
 
 class JobPostingMockApi extends JobPostingApi with MockAPI {
+  /// 공고 목록
   @override
   FutureOr<List<JobPostingsItemModel>> fetchList({
     required JobPostingStatusType status,
@@ -44,6 +45,7 @@ class JobPostingMockApi extends JobPostingApi with MockAPI {
     }
   }
 
+  /// 공고 등록
   @override
   FutureOr<ApiResponse<JobPostingDetailDto>> createJobPosting({
     required JobPostingRequestDto requestData,
@@ -55,6 +57,61 @@ class JobPostingMockApi extends JobPostingApi with MockAPI {
       ...requestData.toJson(),
     });
     try {
+      dioAdapter.onGet(
+        url,
+        (server) => server.reply(
+          200,
+          responseData,
+          delay: const Duration(seconds: 1),
+        ),
+      );
+
+      final response = await dio.get(url);
+
+      if (response.statusCode == 200) {
+        return ApiResponse.success(
+          JobPostingDetailDto.fromJson(response.data),
+        );
+      }
+
+      return ApiResponse.fail(
+        FailResponse.fromJson(response.data),
+      );
+    } catch (e) {
+      return const ApiResponse.error();
+    }
+  }
+
+  /// 공고 상세 조회
+  @override
+  FutureOr<ApiResponse<JobPostingDetailDto>> getJobPosting({
+    required String jobPostingId,
+  }) async {
+    try {
+      final responseData = JobPostingDetailDto(
+        id: '1',
+        companyId: '1',
+        title: '공고제목입니다:)',
+        content: '열심히 일하시면 됩니다.',
+        specialtyField: 'CATERING',
+        contractType: 'SHORT_TERM',
+        contractStartDate: DateTime.now(),
+        contractEndDate: DateTime.now(),
+        isTimeUndecided: true,
+        payType: 'HOURLY',
+        payAmount: 12000,
+        workAddress: '서울 동작구 여의대방로22바길 2 2층',
+        latitude: 37.5664056,
+        longitude: 126.9778222,
+        participants: 3,
+        hasTravelTime: true,
+        isTravelTimePaid: false,
+        hasBreakTime: true,
+        isBreakTimePaid: true,
+        isMealProvided: true,
+        isUrgent: false,
+      );
+
       dioAdapter.onGet(
         url,
         (server) => server.reply(
