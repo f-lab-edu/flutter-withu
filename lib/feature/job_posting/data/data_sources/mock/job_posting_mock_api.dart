@@ -90,7 +90,7 @@ class JobPostingMockApi extends JobPostingApi with MockAPI {
   }) async {
     try {
       final responseData = JobPostingDetailDto(
-        id: '1',
+        id: jobPostingId,
         companyId: '1',
         title: '공고제목입니다:)',
         content: '열심히 일하시면 됩니다.',
@@ -107,10 +107,11 @@ class JobPostingMockApi extends JobPostingApi with MockAPI {
         participants: 3,
         hasTravelTime: true,
         isTravelTimePaid: false,
-        hasBreakTime: true,
-        isBreakTimePaid: true,
+        hasBreakTime: false,
+        isBreakTimePaid: false,
         isMealProvided: true,
         isUrgent: false,
+        preferredQualifications: '채우기 부르며, 용어로도 보여줄 사용하는 분야에서 같은,',
       );
 
       dioAdapter.onGet(

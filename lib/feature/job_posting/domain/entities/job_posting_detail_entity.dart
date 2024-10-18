@@ -141,3 +141,37 @@ class JobPostingDetailEntity {
     );
   }
 }
+
+extension JobPostingDetailEntityExt on JobPostingDetailEntity {
+  /// 계약 기간
+  String get contractPeriod => _getContractPeriod();
+
+  String _getContractPeriod() {
+    const format = 'yy / MM / dd';
+    switch (contractType) {
+      case ContractType.short:
+        return contractStartDate?.format(format) ?? '';
+      case ContractType.long:
+        final startDate = contractStartDate?.format(format) ?? '';
+        final endDate = contractStartDate?.format(format) ?? '';
+        return '$startDate - $endDate';
+      default:
+        return '';
+    }
+  }
+
+  /// 근무 시간
+  String get workHours => _getWorkHours();
+
+  String _getWorkHours() {
+    if (isTBC) {
+      return StringRes.tbc.tr;
+    }
+
+    const format = 'hh:mm';
+    final startTime = workStartTime?.format(format) ?? '';
+    final endTime = workEndTime?.format(format) ?? '';
+
+    return '$startTime - $endTime';
+  }
+}

@@ -10,7 +10,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i5;
 import 'package:flutter/cupertino.dart' as _i6;
-import 'package:withu_app/feature/job_posting/presentation/pages/job_posting_detial_page.dart'
+import 'package:withu_app/feature/job_posting/presentation/pages/job_posting_detail_page.dart'
     as _i1;
 import 'package:withu_app/feature/job_posting/presentation/pages/job_posting_form_page.dart'
     as _i2;

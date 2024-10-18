@@ -7,7 +7,9 @@ class RadioChip extends StatelessWidget {
 
   final bool isSelected;
 
-  final VoidCallback onSelected;
+  final bool enabled;
+
+  final VoidCallback? onSelected;
 
   final EdgeInsets? margin;
 
@@ -15,7 +17,8 @@ class RadioChip extends StatelessWidget {
     super.key,
     required this.text,
     required this.isSelected,
-    required this.onSelected,
+    this.enabled = true,
+    this.onSelected,
     this.margin,
   });
 
@@ -31,7 +34,7 @@ class RadioChip extends StatelessWidget {
     return Container(
       margin: margin,
       child: InkWell(
-        onTap: onSelected,
+        onTap: enabled ? onSelected : () {},
         borderRadius: BorderRadius.circular(50),
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 5),

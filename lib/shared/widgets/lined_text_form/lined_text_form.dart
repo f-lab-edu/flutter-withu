@@ -8,7 +8,6 @@ class LinedTextFormField extends StatelessWidget {
 
   final bool readOnly;
 
-
   final Widget? suffix;
 
   final Function(String text)? onChanged;
