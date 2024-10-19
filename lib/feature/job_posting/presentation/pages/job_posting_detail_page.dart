@@ -86,7 +86,9 @@ class _JobPostingDetailPage extends StatelessWidget {
                       _FieldAndSwitch(
                         fieldName: StringRes.travelTimeOrNot.tr,
                         isOn: state.entity?.hasTravelTime ?? false,
-                        onPressedGuide: () {},
+                        onPressedGuide: () {
+                          GuideDialog.showTravelTime(context);
+                        },
                       ),
                       _PayInfo(
                         visible: state.entity?.hasTravelTime == true,
@@ -96,7 +98,9 @@ class _JobPostingDetailPage extends StatelessWidget {
                       _FieldAndSwitch(
                         fieldName: StringRes.breakTimeOrNot.tr,
                         isOn: state.entity?.hasBreakTime ?? false,
-                        onPressedGuide: () {},
+                        onPressedGuide: () {
+                          GuideDialog.showBreakTime(context);
+                        },
                       ),
                       _PayInfo(
                         visible: state.entity?.hasBreakTime == true,
@@ -106,7 +110,9 @@ class _JobPostingDetailPage extends StatelessWidget {
                       _FieldAndSwitch(
                         fieldName: StringRes.mealPaidOrNot.tr,
                         isOn: state.entity?.isMealProvided ?? false,
-                        onPressedGuide: () {},
+                        onPressedGuide: () {
+                          GuideDialog.showMeal(context);
+                        },
                       ),
                       const SizedBox(height: 60),
                     ],

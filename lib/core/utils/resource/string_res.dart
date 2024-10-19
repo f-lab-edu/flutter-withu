@@ -44,6 +44,9 @@ enum StringRes {
   wonUnit,
   register,
   serverError,
+  travelTimeGuideDescription,
+  breakTimeGuideDescription,
+  mealGuideDescription,
 }
 
 extension StringResEx on StringRes {

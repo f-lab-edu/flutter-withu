@@ -6,11 +6,11 @@ class BaseSwitch extends StatelessWidget {
 
   final VoidCallback onTap;
 
-  double width;
+  final double width;
 
-  double height;
+  final double height;
 
-  BaseSwitch({
+  const BaseSwitch({
     super.key,
     required this.isOn,
     required this.onTap,
