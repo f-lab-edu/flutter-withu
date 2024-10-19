@@ -41,79 +41,79 @@ class _JobPostingDetailPage extends StatelessWidget {
         return PageRoot(
           isLoading: state.status.isLoading,
           safeAreaTop: false,
-          child: NestedScrollView(
-            headerSliverBuilder: (
-              BuildContext context,
-              bool innerBoxIsScrolled,
-            ) {
-              return [
-                _AppBar(),
-                _Header(),
-              ];
-            },
-            body: SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(height: 20),
-                  _ContractPeriod(
-                    period: state.entity?.contractPeriod ?? '',
+          child: CustomScrollView(
+            slivers: [
+              _AppBar(),
+              _Header(),
+              SliverFillRemaining(
+                child: SingleChildScrollView(
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(height: 20),
+                      _ContractPeriod(
+                        period: state.entity?.contractPeriod ?? '',
+                      ),
+                      const SizedBox(height: 30),
+                      _WorkHours(
+                        time: state.entity?.workHours ?? '',
+                      ),
+                      const SizedBox(height: 30),
+                      _Participants(
+                        number: state.entity?.participants ?? '',
+                      ),
+                      const SizedBox(height: 30),
+                      _PayAmount(
+                        payType: state.entity?.payType?.tr ?? '',
+                        amount: state.entity?.payAmount ?? '',
+                      ),
+                      const SizedBox(height: 30),
+                      _Address(
+                        address: state.entity?.workAddress ?? '',
+                      ),
+                      const SizedBox(height: 10),
+                      _Map(),
+                      const SizedBox(height: 30),
+                      _FieldName(
+                        text: StringRes.preferences.tr,
+                      ),
+                      const SizedBox(height: 10),
+                      _PreferredQualifications(
+                        text: state.entity?.preferredQualifications ?? '',
+                      ),
+                      const SizedBox(height: 30),
+                      _FieldAndSwitch(
+                        fieldName: StringRes.travelTimeOrNot.tr,
+                        isOn: state.entity?.hasTravelTime ?? false,
+                        onPressedGuide: () {},
+                      ),
+                      _PayInfo(
+                        visible: state.entity?.hasTravelTime == true,
+                        isPaid: state.entity?.isTravelTimePaid,
+                      ),
+                      const SizedBox(height: 30),
+                      _FieldAndSwitch(
+                        fieldName: StringRes.breakTimeOrNot.tr,
+                        isOn: state.entity?.hasBreakTime ?? false,
+                        onPressedGuide: () {},
+                      ),
+                      _PayInfo(
+                        visible: state.entity?.hasBreakTime == true,
+                        isPaid: state.entity?.isBreakTimePaid,
+                      ),
+                      const SizedBox(height: 30),
+                      _FieldAndSwitch(
+                        fieldName: StringRes.mealPaidOrNot.tr,
+                        isOn: state.entity?.isMealProvided ?? false,
+                        onPressedGuide: () {},
+                      ),
+                      const SizedBox(height: 60),
+                    ],
                   ),
-                  const SizedBox(height: 30),
-                  _WorkHours(
-                    time: state.entity?.workHours ?? '',
-                  ),
-                  const SizedBox(height: 30),
-                  _Participants(
-                    number: state.entity?.participants ?? '',
-                  ),
-                  const SizedBox(height: 30),
-                  _PayAmount(
-                    payType: state.entity?.payType?.tr ?? '',
-                    amount: state.entity?.payAmount ?? '',
-                  ),
-                  const SizedBox(height: 30),
-                  _Address(
-                    address: state.entity?.workAddress ?? '',
-                  ),
-                  const SizedBox(height: 30),
-                  _FieldName(
-                    text: StringRes.preferences.tr,
-                  ),
-                  const SizedBox(height: 10),
-                  _PreferredQualifications(
-                    text: state.entity?.preferredQualifications ?? '',
-                  ),
-                  const SizedBox(height: 30),
-                  _FieldAndSwitch(
-                    fieldName: StringRes.travelTimeOrNot.tr,
-                    isOn: state.entity?.hasTravelTime ?? false,
-                    onPressedGuide: () {},
-                  ),
-                  _PayInfo(
-                    visible: state.entity?.hasTravelTime == true,
-                    isPaid: state.entity?.isTravelTimePaid,
-                  ),
-                  const SizedBox(height: 30),
-                  _FieldAndSwitch(
-                    fieldName: StringRes.breakTimeOrNot.tr,
-                    isOn: state.entity?.hasBreakTime ?? false,
-                    onPressedGuide: () {},
-                  ),
-                  _PayInfo(
-                    visible: state.entity?.hasBreakTime == true,
-                    isPaid: state.entity?.isBreakTimePaid,
-                  ),
-                  const SizedBox(height: 30),
-                  _FieldAndSwitch(
-                    fieldName: StringRes.mealPaidOrNot.tr,
-                    isOn: state.entity?.isMealProvided ?? false,
-                    onPressedGuide: () {},
-                  ),
-                ],
-              ),
-            ),
+                ),
+              )
+            ],
           ),
         );
       },
@@ -384,6 +384,30 @@ class _Address extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+/// 지도
+// TODO: 추후 지도 추가 예정.
+class _Map extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.fromLTRB(12, 16, 12, 0),
+      decoration: BoxDecoration(
+        color: ColorName.teritary,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: AspectRatio(
+        aspectRatio: 288 / 188,
+        child: Center(
+          child: Text(
+            '지도 영역',
+            style: context.textTheme.bodyLarge,
+          ),
+        ),
+      ),
     );
   }
 }
