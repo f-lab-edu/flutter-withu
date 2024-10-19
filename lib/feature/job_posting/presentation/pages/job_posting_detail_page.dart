@@ -36,7 +36,13 @@ class JobPostingDetailPage extends StatelessWidget {
 class _JobPostingDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<JobPostingDetailBloc, JobPostingDetailState>(
+    return BlocConsumer<JobPostingDetailBloc, JobPostingDetailState>(
+      listener: (context, state) {
+        if (state.message.isNotEmpty) {
+          CustomAlertDialog.showContentAlert(
+              context: context, content: state.message, closeCallback: () {});
+        }
+      },
       builder: (context, state) {
         return PageRoot(
           isLoading: state.status.isLoading,

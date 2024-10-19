@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$JobPostingDetailState {
   JobPostingDetailStatus get status => throw _privateConstructorUsedError;
+  String get message => throw _privateConstructorUsedError;
   JobPostingDetailEntity? get entity => throw _privateConstructorUsedError;
 
   /// Create a copy of JobPostingDetailState
@@ -32,7 +33,10 @@ abstract class $JobPostingDetailStateCopyWith<$Res> {
           $Res Function(JobPostingDetailState) then) =
       _$JobPostingDetailStateCopyWithImpl<$Res, JobPostingDetailState>;
   @useResult
-  $Res call({JobPostingDetailStatus status, JobPostingDetailEntity? entity});
+  $Res call(
+      {JobPostingDetailStatus status,
+      String message,
+      JobPostingDetailEntity? entity});
 }
 
 /// @nodoc
@@ -52,6 +56,7 @@ class _$JobPostingDetailStateCopyWithImpl<$Res,
   @override
   $Res call({
     Object? status = null,
+    Object? message = null,
     Object? entity = freezed,
   }) {
     return _then(_value.copyWith(
@@ -59,6 +64,10 @@ class _$JobPostingDetailStateCopyWithImpl<$Res,
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as JobPostingDetailStatus,
+      message: null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
       entity: freezed == entity
           ? _value.entity
           : entity // ignore: cast_nullable_to_non_nullable
@@ -76,7 +85,10 @@ abstract class _$$JobPostingDetailStateImplCopyWith<$Res>
       __$$JobPostingDetailStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({JobPostingDetailStatus status, JobPostingDetailEntity? entity});
+  $Res call(
+      {JobPostingDetailStatus status,
+      String message,
+      JobPostingDetailEntity? entity});
 }
 
 /// @nodoc
@@ -94,6 +106,7 @@ class __$$JobPostingDetailStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? status = null,
+    Object? message = null,
     Object? entity = freezed,
   }) {
     return _then(_$JobPostingDetailStateImpl(
@@ -101,6 +114,10 @@ class __$$JobPostingDetailStateImplCopyWithImpl<$Res>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as JobPostingDetailStatus,
+      message: null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
       entity: freezed == entity
           ? _value.entity
           : entity // ignore: cast_nullable_to_non_nullable
@@ -112,16 +129,19 @@ class __$$JobPostingDetailStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$JobPostingDetailStateImpl implements _JobPostingDetailState {
-  _$JobPostingDetailStateImpl({required this.status, this.entity});
+  _$JobPostingDetailStateImpl(
+      {required this.status, required this.message, this.entity});
 
   @override
   final JobPostingDetailStatus status;
+  @override
+  final String message;
   @override
   final JobPostingDetailEntity? entity;
 
   @override
   String toString() {
-    return 'JobPostingDetailState(status: $status, entity: $entity)';
+    return 'JobPostingDetailState(status: $status, message: $message, entity: $entity)';
   }
 
   @override
@@ -130,11 +150,12 @@ class _$JobPostingDetailStateImpl implements _JobPostingDetailState {
         (other.runtimeType == runtimeType &&
             other is _$JobPostingDetailStateImpl &&
             (identical(other.status, status) || other.status == status) &&
+            (identical(other.message, message) || other.message == message) &&
             (identical(other.entity, entity) || other.entity == entity));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, status, entity);
+  int get hashCode => Object.hash(runtimeType, status, message, entity);
 
   /// Create a copy of JobPostingDetailState
   /// with the given fields replaced by the non-null parameter values.
@@ -149,10 +170,13 @@ class _$JobPostingDetailStateImpl implements _JobPostingDetailState {
 abstract class _JobPostingDetailState implements JobPostingDetailState {
   factory _JobPostingDetailState(
       {required final JobPostingDetailStatus status,
+      required final String message,
       final JobPostingDetailEntity? entity}) = _$JobPostingDetailStateImpl;
 
   @override
   JobPostingDetailStatus get status;
+  @override
+  String get message;
   @override
   JobPostingDetailEntity? get entity;
 

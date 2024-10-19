@@ -17,8 +17,18 @@ class JobPostingDetailBloc
   JobPostingDetailBloc({required this.useCase})
       : super(JobPostingDetailState(
           status: JobPostingDetailStatus.initial,
+          message: '',
         )) {
+    on<ClearMessage>(_clearMessage);
     on<OnGettingDetailData>(_onGettingDetailData);
+  }
+
+  /// 메시지 초기화 이벤트.
+  void _clearMessage(
+    ClearMessage event,
+    Emitter<JobPostingDetailState> emit,
+  ) {
+    emit(state.copyWith(message: ''));
   }
 
   /// 상세 API 조회
@@ -28,18 +38,21 @@ class JobPostingDetailBloc
   ) async {
     emit(state.copyWith(status: JobPostingDetailStatus.loading));
 
-    final Either<JobPostingDetailEntity> result =
-        await useCase.getJobPosting(jobPostingId: event.id);
+    final Either<JobPostingDetailEntity> result = await useCase.getJobPosting(
+      jobPostingId: event.id,
+    );
 
     result.when(success: (JobPostingDetailEntity data) {
       emit(state.copyWith(
         status: JobPostingDetailStatus.success,
         entity: data,
+        message: '',
       ));
     }, fail: (String message) {
       emit(state.copyWith(
         status: JobPostingDetailStatus.fail,
         entity: null,
+        message: message,
       ));
     });
   }

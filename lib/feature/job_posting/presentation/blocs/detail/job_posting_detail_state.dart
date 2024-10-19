@@ -20,6 +20,7 @@ extension JobPostingDetailStatusExt on JobPostingDetailStatus {
 class JobPostingDetailState with _$JobPostingDetailState {
   factory JobPostingDetailState({
     required JobPostingDetailStatus status,
+    required String message,
     JobPostingDetailEntity? entity,
   }) = _JobPostingDetailState;
 }

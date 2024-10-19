@@ -8,3 +8,6 @@ class OnGettingDetailData extends JobPostingDetailEvent {
 
   OnGettingDetailData({required this.id});
 }
+
+/// 메시지 초기화
+class ClearMessage extends JobPostingDetailEvent {}

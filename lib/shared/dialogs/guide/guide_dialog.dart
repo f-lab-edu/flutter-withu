@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:withu_app/core/utils/utils.dart';
-import 'package:withu_app/shared/dialogs/base_dialog/base_dialog.dart';
+import 'package:withu_app/shared/dialogs/dialogs.dart';
 
 class GuideDialog extends StatelessWidget {
   final String title;
