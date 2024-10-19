@@ -22,6 +22,10 @@ JobPostingDetailDto _$JobPostingDetailDtoFromJson(Map<String, dynamic> json) {
 mixin _$JobPostingDetailDto {
   String get id => throw _privateConstructorUsedError; // 공고 ID
   String get companyId => throw _privateConstructorUsedError; // 회사 ID
+  String get companyThumbnail =>
+      throw _privateConstructorUsedError; // 회사 썸네일 이미지
+  String get companyName => throw _privateConstructorUsedError; // 회사명
+  int get views => throw _privateConstructorUsedError; // 조회수
   String get title => throw _privateConstructorUsedError; // 공고명
   String get content => throw _privateConstructorUsedError; // 근로 내용
   JobCategoryType get specialtyField =>
@@ -70,6 +74,9 @@ abstract class $JobPostingDetailDtoCopyWith<$Res> {
   $Res call(
       {String id,
       String companyId,
+      String companyThumbnail,
+      String companyName,
+      int views,
       String title,
       String content,
       JobCategoryType specialtyField,
@@ -111,6 +118,9 @@ class _$JobPostingDetailDtoCopyWithImpl<$Res, $Val extends JobPostingDetailDto>
   $Res call({
     Object? id = null,
     Object? companyId = null,
+    Object? companyThumbnail = null,
+    Object? companyName = null,
+    Object? views = null,
     Object? title = null,
     Object? content = null,
     Object? specialtyField = null,
@@ -143,6 +153,18 @@ class _$JobPostingDetailDtoCopyWithImpl<$Res, $Val extends JobPostingDetailDto>
           ? _value.companyId
           : companyId // ignore: cast_nullable_to_non_nullable
               as String,
+      companyThumbnail: null == companyThumbnail
+          ? _value.companyThumbnail
+          : companyThumbnail // ignore: cast_nullable_to_non_nullable
+              as String,
+      companyName: null == companyName
+          ? _value.companyName
+          : companyName // ignore: cast_nullable_to_non_nullable
+              as String,
+      views: null == views
+          ? _value.views
+          : views // ignore: cast_nullable_to_non_nullable
+              as int,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -246,6 +268,9 @@ abstract class _$$JobPostingDetailDtoImplCopyWith<$Res>
   $Res call(
       {String id,
       String companyId,
+      String companyThumbnail,
+      String companyName,
+      int views,
       String title,
       String content,
       JobCategoryType specialtyField,
@@ -285,6 +310,9 @@ class __$$JobPostingDetailDtoImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? companyId = null,
+    Object? companyThumbnail = null,
+    Object? companyName = null,
+    Object? views = null,
     Object? title = null,
     Object? content = null,
     Object? specialtyField = null,
@@ -317,6 +345,18 @@ class __$$JobPostingDetailDtoImplCopyWithImpl<$Res>
           ? _value.companyId
           : companyId // ignore: cast_nullable_to_non_nullable
               as String,
+      companyThumbnail: null == companyThumbnail
+          ? _value.companyThumbnail
+          : companyThumbnail // ignore: cast_nullable_to_non_nullable
+              as String,
+      companyName: null == companyName
+          ? _value.companyName
+          : companyName // ignore: cast_nullable_to_non_nullable
+              as String,
+      views: null == views
+          ? _value.views
+          : views // ignore: cast_nullable_to_non_nullable
+              as int,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -415,6 +455,9 @@ class _$JobPostingDetailDtoImpl implements _JobPostingDetailDto {
   const _$JobPostingDetailDtoImpl(
       {required this.id,
       required this.companyId,
+      required this.companyThumbnail,
+      required this.companyName,
+      required this.views,
       required this.title,
       required this.content,
       required this.specialtyField,
@@ -447,6 +490,15 @@ class _$JobPostingDetailDtoImpl implements _JobPostingDetailDto {
   @override
   final String companyId;
 // 회사 ID
+  @override
+  final String companyThumbnail;
+// 회사 썸네일 이미지
+  @override
+  final String companyName;
+// 회사명
+  @override
+  final int views;
+// 조회수
   @override
   final String title;
 // 공고명
@@ -515,7 +567,7 @@ class _$JobPostingDetailDtoImpl implements _JobPostingDetailDto {
 
   @override
   String toString() {
-    return 'JobPostingDetailDto(id: $id, companyId: $companyId, title: $title, content: $content, specialtyField: $specialtyField, contractType: $contractType, contractStartDate: $contractStartDate, contractEndDate: $contractEndDate, isTimeUndecided: $isTimeUndecided, payType: $payType, payAmount: $payAmount, workAddress: $workAddress, latitude: $latitude, longitude: $longitude, participants: $participants, hasTravelTime: $hasTravelTime, hasBreakTime: $hasBreakTime, isMealProvided: $isMealProvided, isUrgent: $isUrgent, preferredQualifications: $preferredQualifications, workStartTime: $workStartTime, workEndTime: $workEndTime, isTravelTimePaid: $isTravelTimePaid, isBreakTimePaid: $isBreakTimePaid)';
+    return 'JobPostingDetailDto(id: $id, companyId: $companyId, companyThumbnail: $companyThumbnail, companyName: $companyName, views: $views, title: $title, content: $content, specialtyField: $specialtyField, contractType: $contractType, contractStartDate: $contractStartDate, contractEndDate: $contractEndDate, isTimeUndecided: $isTimeUndecided, payType: $payType, payAmount: $payAmount, workAddress: $workAddress, latitude: $latitude, longitude: $longitude, participants: $participants, hasTravelTime: $hasTravelTime, hasBreakTime: $hasBreakTime, isMealProvided: $isMealProvided, isUrgent: $isUrgent, preferredQualifications: $preferredQualifications, workStartTime: $workStartTime, workEndTime: $workEndTime, isTravelTimePaid: $isTravelTimePaid, isBreakTimePaid: $isBreakTimePaid)';
   }
 
   @override
@@ -526,6 +578,11 @@ class _$JobPostingDetailDtoImpl implements _JobPostingDetailDto {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.companyId, companyId) ||
                 other.companyId == companyId) &&
+            (identical(other.companyThumbnail, companyThumbnail) ||
+                other.companyThumbnail == companyThumbnail) &&
+            (identical(other.companyName, companyName) ||
+                other.companyName == companyName) &&
+            (identical(other.views, views) || other.views == views) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.content, content) || other.content == content) &&
             (identical(other.specialtyField, specialtyField) ||
@@ -576,6 +633,9 @@ class _$JobPostingDetailDtoImpl implements _JobPostingDetailDto {
         runtimeType,
         id,
         companyId,
+        companyThumbnail,
+        companyName,
+        views,
         title,
         content,
         specialtyField,
@@ -621,6 +681,9 @@ abstract class _JobPostingDetailDto implements JobPostingDetailDto {
   const factory _JobPostingDetailDto(
       {required final String id,
       required final String companyId,
+      required final String companyThumbnail,
+      required final String companyName,
+      required final int views,
       required final String title,
       required final String content,
       required final JobCategoryType specialtyField,
@@ -651,6 +714,12 @@ abstract class _JobPostingDetailDto implements JobPostingDetailDto {
   String get id; // 공고 ID
   @override
   String get companyId; // 회사 ID
+  @override
+  String get companyThumbnail; // 회사 썸네일 이미지
+  @override
+  String get companyName; // 회사명
+  @override
+  int get views; // 조회수
   @override
   String get title; // 공고명
   @override

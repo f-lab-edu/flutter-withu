@@ -92,6 +92,9 @@ class JobPostingMockApi extends JobPostingApi with MockAPI {
       final responseData = JobPostingDetailDto(
         id: jobPostingId,
         companyId: '1',
+        companyThumbnail: 'https://picsum.photos/200',
+        companyName: 'COCO',
+        views: 1000,
         title: '공고제목입니다:)',
         content: '열심히 일하시면 됩니다.',
         specialtyField: JobCategoryType.catering,
@@ -119,7 +122,7 @@ class JobPostingMockApi extends JobPostingApi with MockAPI {
         (server) => server.reply(
           200,
           responseData,
-          delay: const Duration(seconds: 1),
+          delay: const Duration(milliseconds: 300),
         ),
       );
 

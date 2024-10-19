@@ -11,6 +11,9 @@ class JobPostingDetailDto with _$JobPostingDetailDto {
   const factory JobPostingDetailDto({
     required String id, // 공고 ID
     required String companyId, // 회사 ID
+    required String companyThumbnail, // 회사 썸네일 이미지
+    required String companyName, // 회사명
+    required int views, // 조회수
     required String title, // 공고명
     required String content, // 근로 내용
     required JobCategoryType specialtyField, // 카테고리

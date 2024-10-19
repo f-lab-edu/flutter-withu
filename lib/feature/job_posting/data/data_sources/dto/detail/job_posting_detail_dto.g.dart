@@ -11,6 +11,9 @@ _$JobPostingDetailDtoImpl _$$JobPostingDetailDtoImplFromJson(
     _$JobPostingDetailDtoImpl(
       id: json['id'] as String,
       companyId: json['companyId'] as String,
+      companyThumbnail: json['companyThumbnail'] as String,
+      companyName: json['companyName'] as String,
+      views: (json['views'] as num).toInt(),
       title: json['title'] as String,
       content: json['content'] as String,
       specialtyField:
@@ -45,6 +48,9 @@ Map<String, dynamic> _$$JobPostingDetailDtoImplToJson(
     <String, dynamic>{
       'id': instance.id,
       'companyId': instance.companyId,
+      'companyThumbnail': instance.companyThumbnail,
+      'companyName': instance.companyName,
+      'views': instance.views,
       'title': instance.title,
       'content': instance.content,
       'specialtyField': _$JobCategoryTypeEnumMap[instance.specialtyField]!,

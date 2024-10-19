@@ -50,7 +50,11 @@ class _JobPostingDetailPage extends StatelessWidget {
           child: CustomScrollView(
             slivers: [
               _AppBar(),
-              _Header(),
+              _Header(
+                companyThumbnail: state.entity?.companyThumbnail ?? '',
+                companyName: state.entity?.companyName ?? '',
+                views: state.entity?.views ?? 0,
+              ),
               SliverFillRemaining(
                 child: SingleChildScrollView(
                   padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -165,6 +169,18 @@ class _AppBar extends StatelessWidget {
 
 /// Header 영역
 class _Header extends StatelessWidget {
+  final String companyThumbnail;
+
+  final String companyName;
+
+  final int views;
+
+  const _Header({
+    required this.companyThumbnail,
+    required this.companyName,
+    required this.views,
+  });
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<JobPostingDetailBloc, JobPostingDetailState>(
@@ -224,15 +240,20 @@ class _Header extends StatelessWidget {
                       decoration: const BoxDecoration(
                         shape: BoxShape.circle,
                       ),
-                      // TODO: 회사 정보 변경
                       child: Image.network(
-                        'https://picsum.photos/200',
+                        companyThumbnail,
                         fit: BoxFit.cover,
+                        errorBuilder: (
+                          BuildContext context,
+                          Object error,
+                          StackTrace? stackTrace,
+                        ) =>
+                            const SizedBox(),
                       ),
                     ),
                     const SizedBox(width: 5),
                     Text(
-                      '회사이름',
+                      companyName,
                       style: context.textTheme.bodySmall,
                     ),
                     const SizedBox(width: 17),
@@ -242,7 +263,7 @@ class _Header extends StatelessWidget {
                     ),
                     const SizedBox(width: 17),
                     Text(
-                      '조회수 100',
+                      '조회수 $views',
                       style: context.textTheme.bodySmall,
                     ),
                   ],

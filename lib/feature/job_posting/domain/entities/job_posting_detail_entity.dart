@@ -9,6 +9,15 @@ class JobPostingDetailEntity {
   /// 회사 ID
   final String companyId;
 
+  /// 회사 썸네일.
+  final String companyThumbnail;
+
+  /// 회사 이름
+  final String companyName;
+
+  /// 공고 조회수
+  final int views;
+
   /// 공고명
   final String title;
 
@@ -69,6 +78,9 @@ class JobPostingDetailEntity {
   JobPostingDetailEntity({
     required this.id,
     required this.companyId,
+    required this.companyThumbnail,
+    required this.companyName,
+    required this.views,
     required this.title,
     required this.content,
     required this.isTBC,
@@ -95,6 +107,9 @@ class JobPostingDetailEntity {
     final JobPostingDetailDto(
       :id,
       :companyId,
+      :companyThumbnail,
+      :companyName,
+      :views,
       :title,
       :content,
       :isTimeUndecided,
@@ -119,6 +134,9 @@ class JobPostingDetailEntity {
     return JobPostingDetailEntity(
       id: id,
       companyId: companyId,
+      companyThumbnail: companyThumbnail,
+      companyName: companyName,
+      views: views,
       title: title,
       content: content,
       isTBC: isTimeUndecided,
