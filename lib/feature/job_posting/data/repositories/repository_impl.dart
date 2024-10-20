@@ -10,7 +10,7 @@ class JobPostingRepositoryImpl implements JobPostingRepository {
   });
 
   @override
-  Future<List<JobPostingModel>?> searchJobPostings({
+  Future<List<JobPostingsItemModel>?> searchJobPostings({
     required JobPostingStatusType status,
     required int page,
   }) async {
@@ -20,5 +20,12 @@ class JobPostingRepositoryImpl implements JobPostingRepository {
       logger.e(e);
       return null;
     }
+  }
+
+  @override
+  Future<ApiResponse<JobPostingDetailDto>> createJobPosting({
+    required JobPostingRequestDto dto,
+  }) async {
+    return await api.createJobPosting(requestData: dto);
   }
 }

@@ -17,5 +17,9 @@ class AppRouter extends RootStackRouter {
           page: JobPostingsRoute.page,
           path: '/job-postings',
         ),
+        AutoRoute(
+          page: JobPostingFormRoute.page,
+          path: '/job-posting-form',
+        ),
       ];
 }

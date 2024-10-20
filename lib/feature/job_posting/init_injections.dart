@@ -25,4 +25,7 @@ initJobPostingInjections() {
   getIt.registerFactory<JobPostingsTabBloc>(
     () => JobPostingsTabBloc(),
   );
+  getIt.registerFactory<JobPostingFormBloc>(
+    () => JobPostingFormBloc(useCase: getIt()),
+  );
 }

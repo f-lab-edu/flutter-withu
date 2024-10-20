@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:withu_app/core/core.dart';
+import 'package:withu_app/core/router/router.gr.dart';
 import 'package:withu_app/feature/feature.dart';
 import 'package:withu_app/feature/job_posting/domain/domain.dart';
+import 'package:withu_app/gen/colors.gen.dart';
 import 'package:withu_app/shared/shared.dart';
 
 /// 공고 목록 화면
@@ -29,8 +31,23 @@ class JobPostingsPage extends StatelessWidget {
 class _JobPostingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
+    return PageRoot(
+      isLoading: false,
+      fab: FloatingActionButton(
+        backgroundColor: ColorName.primary80,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(50),
+        ),
+        onPressed: () {
+          context.pushRoute(const JobPostingFormRoute());
+        },
+        child: const Icon(
+          Icons.add,
+          size: 30,
+          color: Colors.white,
+        ),
+      ),
+      child: SafeArea(
         child: Container(
           width: double.infinity,
           height: double.infinity,
