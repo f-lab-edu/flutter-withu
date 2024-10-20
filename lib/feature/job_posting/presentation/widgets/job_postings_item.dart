@@ -8,29 +8,39 @@ import 'package:withu_app/shared/shared.dart';
 class JobPostingsItem extends StatelessWidget {
   final JobPostingEntity entity;
 
-  const JobPostingsItem({super.key, required this.entity});
+  final VoidCallback onPressed;
+
+  const JobPostingsItem({
+    super.key,
+    required this.entity,
+    required this.onPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(12),
-      decoration: const BoxDecoration(
-        border: Border(
-          bottom: BorderSide(
-            color: ColorName.teritary,
-            width: 0.5,
+    return InkWell(
+      splashColor: Colors.transparent,
+      onTap: onPressed,
+      child: Container(
+        padding: const EdgeInsets.all(12),
+        decoration: const BoxDecoration(
+          border: Border(
+            bottom: BorderSide(
+              color: ColorName.teritary,
+              width: 0.5,
+            ),
           ),
         ),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          Expanded(
-            child: _Information(entity: entity),
-          ),
-          _RightView(entity: entity),
-        ],
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            Expanded(
+              child: _Information(entity: entity),
+            ),
+            _RightView(entity: entity),
+          ],
+        ),
       ),
     );
   }

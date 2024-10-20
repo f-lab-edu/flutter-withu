@@ -25,3 +25,20 @@ abstract class FailResponse with _$FailResponse {
   factory FailResponse.fromJson(Map<String, dynamic> json) =>
       _$FailResponseFromJson(json);
 }
+
+extension ApiResponseExt on ApiResponse {
+  bool get isSuccess => maybeWhen(
+        success: (_) => true,
+        orElse: () => false,
+      );
+
+  bool get isFail => maybeWhen(
+        fail: (_) => true,
+        orElse: () => false,
+      );
+
+  bool get isError => maybeWhen(
+        error: () => true,
+        orElse: () => false,
+      );
+}

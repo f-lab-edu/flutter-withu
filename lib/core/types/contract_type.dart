@@ -1,6 +1,8 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:withu_app/core/core.dart';
 
 /// 계약 타입
+@JsonEnum(valueField: 'serverKey')
 enum ContractType with L10nKeyProvider {
   /// 단기
   short(l10nKey: 'shortTerm', serverKey: 'SHORT_TERM'),

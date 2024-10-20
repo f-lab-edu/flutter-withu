@@ -1,6 +1,7 @@
 import 'package:withu_app/core/core.dart';
 import 'package:withu_app/feature/job_posting/data/data.dart';
 import 'package:withu_app/feature/job_posting/domain/domain.dart';
+import 'package:withu_app/feature/job_posting/domain/entities/job_posting_detail_entity.dart';
 
 abstract class JobPostingUseCase {
   /// 공고 목록 조회
@@ -11,6 +12,11 @@ abstract class JobPostingUseCase {
 
   /// 공고 등록
   Future<bool> createJobPosting(JobPostingRequestEntity entity);
+
+  /// 공고 상세 조회
+  Future<Either<JobPostingDetailEntity>> getJobPosting({
+    required String jobPostingId,
+  });
 }
 
 class JobPostingUseCaseImpl implements JobPostingUseCase {
@@ -56,6 +62,26 @@ class JobPostingUseCaseImpl implements JobPostingUseCase {
     final result = await repository.createJobPosting(dto: dto);
 
     return result.maybeWhen<bool>(success: (_) => true, orElse: () => false);
+  }
+
+  /// 공고 상세 조회
+  @override
+  Future<Either<JobPostingDetailEntity>> getJobPosting({
+    required String jobPostingId,
+  }) async {
+    final result = await repository.getJobPosting(jobPostingId: jobPostingId);
+
+    return result.when(
+      success: (JobPostingDetailDto dto) {
+        return Either.success(JobPostingDetailEntity.fromDto(dto));
+      },
+      fail: (FailResponse fail) {
+        return Either.fail(fail.message);
+      },
+      error: () {
+        return Either.fail(StringRes.serverError.tr);
+      },
+    );
   }
 }
 

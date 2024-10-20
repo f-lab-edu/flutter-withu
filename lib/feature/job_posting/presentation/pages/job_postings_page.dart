@@ -181,8 +181,12 @@ class JobPostingsListState<B extends JobPostingsBloc>
         padding: const EdgeInsets.symmetric(vertical: 20),
         builderDelegate: PagedChildBuilderDelegate<JobPostingEntity>(
           itemBuilder: (context, item, index) => JobPostingsItem(
-            entity: item,
-          ),
+              entity: item,
+              onPressed: () {
+                context.router.push(
+                  JobPostingDetailRoute(jobPostingId: item.id),
+                );
+              }),
           firstPageProgressIndicatorBuilder: (context) => _emptyView(),
           noItemsFoundIndicatorBuilder: (context) => _emptyView(),
         ),

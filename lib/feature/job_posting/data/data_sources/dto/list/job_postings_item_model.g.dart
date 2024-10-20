@@ -35,10 +35,10 @@ Map<String, dynamic> _$$JobPostingsItemModelImplToJson(
     };
 
 const _$JobCategoryTypeEnumMap = {
-  JobCategoryType.photography: 'photography',
-  JobCategoryType.catering: 'catering',
-  JobCategoryType.foodStyling: 'foodStyling',
-  JobCategoryType.florist: 'florist',
+  JobCategoryType.photography: 'PHOTOGRAPHY',
+  JobCategoryType.catering: 'CATERING',
+  JobCategoryType.foodStyling: 'FOOD_STYLING',
+  JobCategoryType.florist: 'FLORIST',
 };
 
 const _$JobPostingStatusTypeEnumMap = {

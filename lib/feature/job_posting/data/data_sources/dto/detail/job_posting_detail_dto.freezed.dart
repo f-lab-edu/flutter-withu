@@ -22,17 +22,22 @@ JobPostingDetailDto _$JobPostingDetailDtoFromJson(Map<String, dynamic> json) {
 mixin _$JobPostingDetailDto {
   String get id => throw _privateConstructorUsedError; // 공고 ID
   String get companyId => throw _privateConstructorUsedError; // 회사 ID
+  String get companyThumbnail =>
+      throw _privateConstructorUsedError; // 회사 썸네일 이미지
+  String get companyName => throw _privateConstructorUsedError; // 회사명
+  int get views => throw _privateConstructorUsedError; // 조회수
   String get title => throw _privateConstructorUsedError; // 공고명
   String get content => throw _privateConstructorUsedError; // 근로 내용
-  String get specialtyField => throw _privateConstructorUsedError; // 카테고리
-  String get contractType =>
+  JobCategoryType get specialtyField =>
+      throw _privateConstructorUsedError; // 카테고리
+  ContractType get contractType =>
       throw _privateConstructorUsedError; // 계약 타입: 단기, 장기
   DateTime get contractStartDate =>
       throw _privateConstructorUsedError; // 근로 시작 날
   DateTime get contractEndDate =>
       throw _privateConstructorUsedError; // 근로 종료 날짜
   bool get isTimeUndecided => throw _privateConstructorUsedError; // 시간 미정 여부
-  String get payType => throw _privateConstructorUsedError; // 급여 타입: 시급, 일급
+  PayType get payType => throw _privateConstructorUsedError; // 급여 타입: 시급, 일급
   int get payAmount => throw _privateConstructorUsedError; // 금액
   String get workAddress => throw _privateConstructorUsedError; // 근무지 주소
   double get latitude => throw _privateConstructorUsedError; // 근무지 위도
@@ -69,14 +74,17 @@ abstract class $JobPostingDetailDtoCopyWith<$Res> {
   $Res call(
       {String id,
       String companyId,
+      String companyThumbnail,
+      String companyName,
+      int views,
       String title,
       String content,
-      String specialtyField,
-      String contractType,
+      JobCategoryType specialtyField,
+      ContractType contractType,
       DateTime contractStartDate,
       DateTime contractEndDate,
       bool isTimeUndecided,
-      String payType,
+      PayType payType,
       int payAmount,
       String workAddress,
       double latitude,
@@ -110,6 +118,9 @@ class _$JobPostingDetailDtoCopyWithImpl<$Res, $Val extends JobPostingDetailDto>
   $Res call({
     Object? id = null,
     Object? companyId = null,
+    Object? companyThumbnail = null,
+    Object? companyName = null,
+    Object? views = null,
     Object? title = null,
     Object? content = null,
     Object? specialtyField = null,
@@ -142,6 +153,18 @@ class _$JobPostingDetailDtoCopyWithImpl<$Res, $Val extends JobPostingDetailDto>
           ? _value.companyId
           : companyId // ignore: cast_nullable_to_non_nullable
               as String,
+      companyThumbnail: null == companyThumbnail
+          ? _value.companyThumbnail
+          : companyThumbnail // ignore: cast_nullable_to_non_nullable
+              as String,
+      companyName: null == companyName
+          ? _value.companyName
+          : companyName // ignore: cast_nullable_to_non_nullable
+              as String,
+      views: null == views
+          ? _value.views
+          : views // ignore: cast_nullable_to_non_nullable
+              as int,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -153,11 +176,11 @@ class _$JobPostingDetailDtoCopyWithImpl<$Res, $Val extends JobPostingDetailDto>
       specialtyField: null == specialtyField
           ? _value.specialtyField
           : specialtyField // ignore: cast_nullable_to_non_nullable
-              as String,
+              as JobCategoryType,
       contractType: null == contractType
           ? _value.contractType
           : contractType // ignore: cast_nullable_to_non_nullable
-              as String,
+              as ContractType,
       contractStartDate: null == contractStartDate
           ? _value.contractStartDate
           : contractStartDate // ignore: cast_nullable_to_non_nullable
@@ -173,7 +196,7 @@ class _$JobPostingDetailDtoCopyWithImpl<$Res, $Val extends JobPostingDetailDto>
       payType: null == payType
           ? _value.payType
           : payType // ignore: cast_nullable_to_non_nullable
-              as String,
+              as PayType,
       payAmount: null == payAmount
           ? _value.payAmount
           : payAmount // ignore: cast_nullable_to_non_nullable
@@ -245,14 +268,17 @@ abstract class _$$JobPostingDetailDtoImplCopyWith<$Res>
   $Res call(
       {String id,
       String companyId,
+      String companyThumbnail,
+      String companyName,
+      int views,
       String title,
       String content,
-      String specialtyField,
-      String contractType,
+      JobCategoryType specialtyField,
+      ContractType contractType,
       DateTime contractStartDate,
       DateTime contractEndDate,
       bool isTimeUndecided,
-      String payType,
+      PayType payType,
       int payAmount,
       String workAddress,
       double latitude,
@@ -284,6 +310,9 @@ class __$$JobPostingDetailDtoImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? companyId = null,
+    Object? companyThumbnail = null,
+    Object? companyName = null,
+    Object? views = null,
     Object? title = null,
     Object? content = null,
     Object? specialtyField = null,
@@ -316,6 +345,18 @@ class __$$JobPostingDetailDtoImplCopyWithImpl<$Res>
           ? _value.companyId
           : companyId // ignore: cast_nullable_to_non_nullable
               as String,
+      companyThumbnail: null == companyThumbnail
+          ? _value.companyThumbnail
+          : companyThumbnail // ignore: cast_nullable_to_non_nullable
+              as String,
+      companyName: null == companyName
+          ? _value.companyName
+          : companyName // ignore: cast_nullable_to_non_nullable
+              as String,
+      views: null == views
+          ? _value.views
+          : views // ignore: cast_nullable_to_non_nullable
+              as int,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -327,11 +368,11 @@ class __$$JobPostingDetailDtoImplCopyWithImpl<$Res>
       specialtyField: null == specialtyField
           ? _value.specialtyField
           : specialtyField // ignore: cast_nullable_to_non_nullable
-              as String,
+              as JobCategoryType,
       contractType: null == contractType
           ? _value.contractType
           : contractType // ignore: cast_nullable_to_non_nullable
-              as String,
+              as ContractType,
       contractStartDate: null == contractStartDate
           ? _value.contractStartDate
           : contractStartDate // ignore: cast_nullable_to_non_nullable
@@ -347,7 +388,7 @@ class __$$JobPostingDetailDtoImplCopyWithImpl<$Res>
       payType: null == payType
           ? _value.payType
           : payType // ignore: cast_nullable_to_non_nullable
-              as String,
+              as PayType,
       payAmount: null == payAmount
           ? _value.payAmount
           : payAmount // ignore: cast_nullable_to_non_nullable
@@ -414,6 +455,9 @@ class _$JobPostingDetailDtoImpl implements _JobPostingDetailDto {
   const _$JobPostingDetailDtoImpl(
       {required this.id,
       required this.companyId,
+      required this.companyThumbnail,
+      required this.companyName,
+      required this.views,
       required this.title,
       required this.content,
       required this.specialtyField,
@@ -447,16 +491,25 @@ class _$JobPostingDetailDtoImpl implements _JobPostingDetailDto {
   final String companyId;
 // 회사 ID
   @override
+  final String companyThumbnail;
+// 회사 썸네일 이미지
+  @override
+  final String companyName;
+// 회사명
+  @override
+  final int views;
+// 조회수
+  @override
   final String title;
 // 공고명
   @override
   final String content;
 // 근로 내용
   @override
-  final String specialtyField;
+  final JobCategoryType specialtyField;
 // 카테고리
   @override
-  final String contractType;
+  final ContractType contractType;
 // 계약 타입: 단기, 장기
   @override
   final DateTime contractStartDate;
@@ -468,7 +521,7 @@ class _$JobPostingDetailDtoImpl implements _JobPostingDetailDto {
   final bool isTimeUndecided;
 // 시간 미정 여부
   @override
-  final String payType;
+  final PayType payType;
 // 급여 타입: 시급, 일급
   @override
   final int payAmount;
@@ -514,7 +567,7 @@ class _$JobPostingDetailDtoImpl implements _JobPostingDetailDto {
 
   @override
   String toString() {
-    return 'JobPostingDetailDto(id: $id, companyId: $companyId, title: $title, content: $content, specialtyField: $specialtyField, contractType: $contractType, contractStartDate: $contractStartDate, contractEndDate: $contractEndDate, isTimeUndecided: $isTimeUndecided, payType: $payType, payAmount: $payAmount, workAddress: $workAddress, latitude: $latitude, longitude: $longitude, participants: $participants, hasTravelTime: $hasTravelTime, hasBreakTime: $hasBreakTime, isMealProvided: $isMealProvided, isUrgent: $isUrgent, preferredQualifications: $preferredQualifications, workStartTime: $workStartTime, workEndTime: $workEndTime, isTravelTimePaid: $isTravelTimePaid, isBreakTimePaid: $isBreakTimePaid)';
+    return 'JobPostingDetailDto(id: $id, companyId: $companyId, companyThumbnail: $companyThumbnail, companyName: $companyName, views: $views, title: $title, content: $content, specialtyField: $specialtyField, contractType: $contractType, contractStartDate: $contractStartDate, contractEndDate: $contractEndDate, isTimeUndecided: $isTimeUndecided, payType: $payType, payAmount: $payAmount, workAddress: $workAddress, latitude: $latitude, longitude: $longitude, participants: $participants, hasTravelTime: $hasTravelTime, hasBreakTime: $hasBreakTime, isMealProvided: $isMealProvided, isUrgent: $isUrgent, preferredQualifications: $preferredQualifications, workStartTime: $workStartTime, workEndTime: $workEndTime, isTravelTimePaid: $isTravelTimePaid, isBreakTimePaid: $isBreakTimePaid)';
   }
 
   @override
@@ -525,6 +578,11 @@ class _$JobPostingDetailDtoImpl implements _JobPostingDetailDto {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.companyId, companyId) ||
                 other.companyId == companyId) &&
+            (identical(other.companyThumbnail, companyThumbnail) ||
+                other.companyThumbnail == companyThumbnail) &&
+            (identical(other.companyName, companyName) ||
+                other.companyName == companyName) &&
+            (identical(other.views, views) || other.views == views) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.content, content) || other.content == content) &&
             (identical(other.specialtyField, specialtyField) ||
@@ -575,6 +633,9 @@ class _$JobPostingDetailDtoImpl implements _JobPostingDetailDto {
         runtimeType,
         id,
         companyId,
+        companyThumbnail,
+        companyName,
+        views,
         title,
         content,
         specialtyField,
@@ -620,14 +681,17 @@ abstract class _JobPostingDetailDto implements JobPostingDetailDto {
   const factory _JobPostingDetailDto(
       {required final String id,
       required final String companyId,
+      required final String companyThumbnail,
+      required final String companyName,
+      required final int views,
       required final String title,
       required final String content,
-      required final String specialtyField,
-      required final String contractType,
+      required final JobCategoryType specialtyField,
+      required final ContractType contractType,
       required final DateTime contractStartDate,
       required final DateTime contractEndDate,
       required final bool isTimeUndecided,
-      required final String payType,
+      required final PayType payType,
       required final int payAmount,
       required final String workAddress,
       required final double latitude,
@@ -651,13 +715,19 @@ abstract class _JobPostingDetailDto implements JobPostingDetailDto {
   @override
   String get companyId; // 회사 ID
   @override
+  String get companyThumbnail; // 회사 썸네일 이미지
+  @override
+  String get companyName; // 회사명
+  @override
+  int get views; // 조회수
+  @override
   String get title; // 공고명
   @override
   String get content; // 근로 내용
   @override
-  String get specialtyField; // 카테고리
+  JobCategoryType get specialtyField; // 카테고리
   @override
-  String get contractType; // 계약 타입: 단기, 장기
+  ContractType get contractType; // 계약 타입: 단기, 장기
   @override
   DateTime get contractStartDate; // 근로 시작 날
   @override
@@ -665,7 +735,7 @@ abstract class _JobPostingDetailDto implements JobPostingDetailDto {
   @override
   bool get isTimeUndecided; // 시간 미정 여부
   @override
-  String get payType; // 급여 타입: 시급, 일급
+  PayType get payType; // 급여 타입: 시급, 일급
   @override
   int get payAmount; // 금액
   @override

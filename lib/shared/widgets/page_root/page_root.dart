@@ -13,13 +13,20 @@ class PageRoot extends StatelessWidget {
 
   final EdgeInsets? padding;
 
-  const PageRoot(
-      {super.key,
-      required this.child,
-      required this.isLoading,
-      this.appBar,
-      this.fab,
-      this.padding});
+  final bool safeAreaTop;
+
+  final bool safeAreaBottom;
+
+  const PageRoot({
+    super.key,
+    required this.child,
+    required this.isLoading,
+    this.appBar,
+    this.fab,
+    this.padding,
+    this.safeAreaTop = true,
+    this.safeAreaBottom = true,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +38,8 @@ class PageRoot extends StatelessWidget {
             floatingActionButton: fab,
             backgroundColor: Colors.white,
             body: SafeArea(
+              top: safeAreaTop,
+              bottom: safeAreaBottom,
               child: Container(
                 width: double.infinity,
                 height: double.infinity,

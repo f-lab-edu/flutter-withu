@@ -6,10 +6,16 @@ class BaseSwitch extends StatelessWidget {
 
   final VoidCallback onTap;
 
+  final double width;
+
+  final double height;
+
   const BaseSwitch({
     super.key,
     required this.isOn,
     required this.onTap,
+    this.width = 32.0,
+    this.height = 16,
   });
 
   Color get trackColor => isOn ? ColorName.primary80 : ColorName.white;
@@ -26,8 +32,8 @@ class BaseSwitch extends StatelessWidget {
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
         curve: Curves.easeInOut,
-        width: 32,
-        height: 16,
+        width: width,
+        height: height,
         padding: const EdgeInsets.all(2),
         alignment: align,
         decoration: BoxDecoration(
