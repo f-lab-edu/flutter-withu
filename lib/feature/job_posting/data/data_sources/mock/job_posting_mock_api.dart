@@ -125,7 +125,7 @@ class JobPostingMockApi extends JobPostingApi with MockAPI {
         (server) => server.reply(
           200,
           JobPostingDetailDto.mock(id: jobPostingId).toJson(),
-          delay: const Duration(milliseconds: 300),
+          delay: const Duration(milliseconds: 1000),
         ),
       );
 

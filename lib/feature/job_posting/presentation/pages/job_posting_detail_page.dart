@@ -41,7 +41,15 @@ class _JobPostingDetailPage extends StatelessWidget {
       listener: (context, state) {
         if (state.message.isNotEmpty) {
           CustomAlertDialog.showContentAlert(
-              context: context, content: state.message, closeCallback: () {});
+            context: context,
+            content: state.message,
+            closeCallback: () {},
+          );
+        }
+
+        // 마감으로 변경되었을 때
+        if (state.status.isClosed) {
+          context.router.back();
         }
       },
       builder: (context, state) {
@@ -155,14 +163,48 @@ class _AppBar extends StatelessWidget {
             },
           ),
           actions: [
-            MoreOptions<DetailMoreOptionsType>(
-              items: DetailMoreOptionsType.values,
-              onSelected: (DetailMoreOptionsType item) {
-                logger.i(item);
-              },
-            ),
+            _MoreOptionButton(),
           ],
         );
+      },
+    );
+  }
+}
+
+/// 더보기 버튼
+class _MoreOptionButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MoreOptions<DetailMoreOptionsType>(
+      items: DetailMoreOptionsType.values,
+      onSelected: (DetailMoreOptionsType item) {
+        switch (item) {
+          case DetailMoreOptionsType.update:
+            DescriptionBottomSheet.show(
+              context: context,
+              description: StringRes.isNotDeadlineYetConfirmClose.tr,
+              actionText: StringRes.update.tr,
+              onTap: () {},
+            );
+          case DetailMoreOptionsType.delete:
+            DescriptionBottomSheet.show(
+              context: context,
+              description: StringRes.isNotDeadlineYetConfirmClose.tr,
+              actionText: StringRes.delete.tr,
+              onTap: () {},
+            );
+          case DetailMoreOptionsType.close:
+            DescriptionBottomSheet.show(
+              context: context,
+              description: StringRes.isNotDeadlineYetConfirmClose.tr,
+              actionText: StringRes.close.tr,
+              onTap: () {
+                context.read<JobPostingDetailBloc>().add(OnClosedJobPosting());
+              },
+            );
+          default:
+            break;
+        }
       },
     );
   }

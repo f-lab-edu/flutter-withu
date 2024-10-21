@@ -50,6 +50,8 @@ enum StringRes {
   update,
   delete,
   close,
+  cancel,
+  isNotDeadlineYetConfirmClose,
 }
 
 extension StringResEx on StringRes {

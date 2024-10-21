@@ -48,5 +48,7 @@
   "mealGuideDescription": "긱워커가 현장에서 일할 때\n식비를 지급하는 체크하는 부분입니다.",
   "update": "수정",
   "delete": "삭제",
-  "close": "마감"
+  "close": "마감",
+  "cancel": "취소",
+  "isNotDeadlineYetConfirmClose": "아직 마감날이 아닙니다. 마감할까요?"
 }
