@@ -38,4 +38,12 @@ class JobPostingRepositoryImpl implements JobPostingRepository {
   }) async {
     return await api.getJobPosting(jobPostingId: jobPostingId);
   }
+
+  /// 공고 상세 조회
+  @override
+  Future<ApiResponse<JobPostingDetailDto>> closeJobPosting({
+    required String jobPostingId,
+  }) async {
+    return await api.closeJobPosting(jobPostingId: jobPostingId);
+  }
 }
