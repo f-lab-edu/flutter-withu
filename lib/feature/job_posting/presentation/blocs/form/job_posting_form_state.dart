@@ -4,9 +4,11 @@ enum JobPostingFormStatus { initial, loading, success }
 
 extension JobPostingFormStatusExt on JobPostingFormStatus {
   bool get isSuccess => this == JobPostingFormStatus.success;
+
   bool get isLoading => this == JobPostingFormStatus.loading;
 }
 
+// TODO: 내용이 길면 Sub File 로 분리.
 class JobPostingFormState extends Equatable {
   /// 상태값
   final JobPostingFormStatus status;
