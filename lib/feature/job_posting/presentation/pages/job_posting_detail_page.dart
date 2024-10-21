@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:withu_app/core/core.dart';
+import 'package:withu_app/feature/feature.dart';
 import 'package:withu_app/feature/job_posting/domain/entities/job_posting_detail_entity.dart';
 import 'package:withu_app/feature/job_posting/presentation/blocs/detail/job_posting_detail_bloc.dart';
 import 'package:withu_app/gen/colors.gen.dart';
@@ -154,10 +155,10 @@ class _AppBar extends StatelessWidget {
             },
           ),
           actions: [
-            IconButton(
-              icon: const Icon(Icons.more_vert),
-              onPressed: () {
-                // TODO: 추가 예정.
+            MoreOptions<DetailMoreOptionsType>(
+              items: DetailMoreOptionsType.values,
+              onSelected: (DetailMoreOptionsType item) {
+                logger.i(item);
               },
             ),
           ],

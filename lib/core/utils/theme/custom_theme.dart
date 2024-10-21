@@ -10,6 +10,7 @@ class CustomTheme {
       textSelectionTheme: const TextSelectionThemeData(
         cursorColor: ColorName.primary,
       ),
+      highlightColor: ColorName.teritary, // PopupMenu selected color
       textTheme: textTheme,
     );
   }

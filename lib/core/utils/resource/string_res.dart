@@ -47,6 +47,9 @@ enum StringRes {
   travelTimeGuideDescription,
   breakTimeGuideDescription,
   mealGuideDescription,
+  update,
+  delete,
+  close,
 }
 
 extension StringResEx on StringRes {
