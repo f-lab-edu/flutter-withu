@@ -106,9 +106,7 @@ class JobPostingDetailEntity {
   factory JobPostingDetailEntity.fromDto(JobPostingDetailDto dto) {
     final JobPostingDetailDto(
       :id,
-      :companyId,
-      :companyThumbnail,
-      :companyName,
+      :company,
       :views,
       :title,
       :content,
@@ -133,9 +131,9 @@ class JobPostingDetailEntity {
 
     return JobPostingDetailEntity(
       id: id,
-      companyId: companyId,
-      companyThumbnail: companyThumbnail,
-      companyName: companyName,
+      companyId: company.id,
+      companyThumbnail: company.thumbnailUrl,
+      companyName: company.name,
       views: views,
       title: title,
       content: content,

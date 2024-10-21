@@ -18,4 +18,9 @@ abstract class JobPostingApi extends API {
   FutureOr<ApiResponse<JobPostingDetailDto>> getJobPosting({
     required String jobPostingId,
   });
+
+  /// 공고 마감
+  FutureOr<ApiResponse<JobPostingDetailDto>> closeJobPosting({
+    required String jobPostingId,
+  });
 }

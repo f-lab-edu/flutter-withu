@@ -10,9 +10,7 @@ _$JobPostingDetailDtoImpl _$$JobPostingDetailDtoImplFromJson(
         Map<String, dynamic> json) =>
     _$JobPostingDetailDtoImpl(
       id: json['id'] as String,
-      companyId: json['companyId'] as String,
-      companyThumbnail: json['companyThumbnail'] as String,
-      companyName: json['companyName'] as String,
+      company: CompanyDto.fromJson(json['company'] as Map<String, dynamic>),
       views: (json['views'] as num).toInt(),
       title: json['title'] as String,
       content: json['content'] as String,
@@ -47,9 +45,7 @@ Map<String, dynamic> _$$JobPostingDetailDtoImplToJson(
         _$JobPostingDetailDtoImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'companyId': instance.companyId,
-      'companyThumbnail': instance.companyThumbnail,
-      'companyName': instance.companyName,
+      'company': instance.company,
       'views': instance.views,
       'title': instance.title,
       'content': instance.content,
