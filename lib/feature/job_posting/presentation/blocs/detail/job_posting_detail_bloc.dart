@@ -76,7 +76,9 @@ class JobPostingDetailBloc
     );
 
     result.when(success: (JobPostingDetailEntity data) {
-      emit(state.copyWith(status: JobPostingDetailStatus.closed));
+      emit(state.copyWith(
+        status: JobPostingDetailStatus.closed,
+      ));
     }, fail: (String message) {
       emit(state.copyWith(
         status: JobPostingDetailStatus.fail,

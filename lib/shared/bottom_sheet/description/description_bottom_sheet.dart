@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:withu_app/core/utils/utils.dart';
 import 'package:withu_app/gen/colors.gen.dart';
 import 'package:withu_app/shared/shared.dart';
@@ -53,21 +53,22 @@ class DescriptionBottomSheet extends StatelessWidget {
   /// 바텀 시트 보기.
   static Future show({
     required BuildContext context,
-    required description,
-    required String actionText,
-    required VoidCallback onTap,
+    required DescriptionBottomSheetOption option,
+    Bloc? bloc,
   }) {
     return showModalBottomSheet(
       context: context,
       backgroundColor: Colors.transparent,
-      builder: (context) => DescriptionBottomSheet(
-        description: description,
-        actionText: actionText,
-        onTap: () {
-          onTap();
-          Navigator.pop(context);
-        },
-      ),
+      builder: (context) {
+        return DescriptionBottomSheet(
+          description: option.description,
+          actionText: option.actionText,
+          onTap: () {
+            option.exec(bloc);
+            Navigator.pop(context);
+          },
+        );
+      },
     );
   }
 }

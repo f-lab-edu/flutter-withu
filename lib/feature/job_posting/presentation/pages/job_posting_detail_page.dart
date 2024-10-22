@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:withu_app/core/core.dart';
 import 'package:withu_app/feature/feature.dart';
 import 'package:withu_app/feature/job_posting/domain/entities/job_posting_detail_entity.dart';
-import 'package:withu_app/feature/job_posting/presentation/blocs/detail/job_posting_detail_bloc.dart';
 import 'package:withu_app/gen/colors.gen.dart';
 import 'package:withu_app/shared/shared.dart';
 
@@ -175,36 +174,20 @@ class _AppBar extends StatelessWidget {
 class _MoreOptionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MoreOptions<DetailMoreOptionsType>(
-      items: DetailMoreOptionsType.values,
-      onSelected: (DetailMoreOptionsType item) {
-        switch (item) {
-          case DetailMoreOptionsType.update:
-            DescriptionBottomSheet.show(
-              context: context,
-              description: StringRes.isNotDeadlineYetConfirmClose.tr,
-              actionText: StringRes.update.tr,
-              onTap: () {},
-            );
-          case DetailMoreOptionsType.delete:
-            DescriptionBottomSheet.show(
-              context: context,
-              description: StringRes.isNotDeadlineYetConfirmClose.tr,
-              actionText: StringRes.delete.tr,
-              onTap: () {},
-            );
-          case DetailMoreOptionsType.close:
-            DescriptionBottomSheet.show(
-              context: context,
-              description: StringRes.isNotDeadlineYetConfirmClose.tr,
-              actionText: StringRes.close.tr,
-              onTap: () {
-                context.read<JobPostingDetailBloc>().add(OnClosedJobPosting());
-              },
-            );
-          default:
-            break;
+    return MoreOptions<DetailBottomSheetType>(
+      items: DetailBottomSheetType.values,
+      onSelected: (DetailBottomSheetType item) {
+        final option = DetailBottomSheetFactory.getOption(item);
+
+        if (option == null) {
+          return;
         }
+
+        DescriptionBottomSheet.show(
+          context: context,
+          option: option,
+          bloc: context.read<JobPostingDetailBloc>(),
+        );
       },
     );
   }
