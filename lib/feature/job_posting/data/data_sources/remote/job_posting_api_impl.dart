@@ -27,4 +27,12 @@ class JobPostingApiImpl extends JobPostingApi {
   }) {
     return const ApiResponse.error();
   }
+
+  /// 공고 마감
+  @override
+  FutureOr<ApiResponse<JobPostingDetailDto>> closeJobPosting({
+    required String jobPostingId,
+  }) {
+    return const ApiResponse.error();
+  }
 }

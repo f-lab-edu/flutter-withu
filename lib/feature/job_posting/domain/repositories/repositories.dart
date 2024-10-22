@@ -17,4 +17,9 @@ abstract class JobPostingRepository {
   Future<ApiResponse<JobPostingDetailDto>> getJobPosting({
     required String jobPostingId,
   });
+
+  /// 공고 마감
+  Future<ApiResponse<JobPostingDetailDto>> closeJobPosting({
+    required String jobPostingId,
+  });
 }

@@ -2,8 +2,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:withu_app/core/core.dart';
+import 'package:withu_app/feature/feature.dart';
 import 'package:withu_app/feature/job_posting/domain/entities/job_posting_detail_entity.dart';
-import 'package:withu_app/feature/job_posting/presentation/blocs/detail/job_posting_detail_bloc.dart';
 import 'package:withu_app/gen/colors.gen.dart';
 import 'package:withu_app/shared/shared.dart';
 
@@ -40,7 +40,15 @@ class _JobPostingDetailPage extends StatelessWidget {
       listener: (context, state) {
         if (state.message.isNotEmpty) {
           CustomAlertDialog.showContentAlert(
-              context: context, content: state.message, closeCallback: () {});
+            context: context,
+            content: state.message,
+            closeCallback: () {},
+          );
+        }
+
+        // 마감으로 변경되었을 때
+        if (state.status.isClosed) {
+          context.router.back();
         }
       },
       builder: (context, state) {
@@ -154,13 +162,31 @@ class _AppBar extends StatelessWidget {
             },
           ),
           actions: [
-            IconButton(
-              icon: const Icon(Icons.more_vert),
-              onPressed: () {
-                // TODO: 추가 예정.
-              },
-            ),
+            _MoreOptionButton(),
           ],
+        );
+      },
+    );
+  }
+}
+
+/// 더보기 버튼
+class _MoreOptionButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MoreOptions<DetailBottomSheetType>(
+      items: DetailBottomSheetType.values,
+      onSelected: (DetailBottomSheetType item) {
+        final option = DetailBottomSheetFactory.getOption(item);
+
+        if (option == null) {
+          return;
+        }
+
+        DescriptionBottomSheet.show(
+          context: context,
+          option: option,
+          bloc: context.read<JobPostingDetailBloc>(),
         );
       },
     );

@@ -1,18 +1,19 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:withu_app/core/core.dart';
+import 'package:withu_app/feature/company/data/data_sources/dto/base/company_dto.dart';
 
 part 'job_posting_detail_dto.freezed.dart';
 
 part 'job_posting_detail_dto.g.dart';
+
+part 'job_posting_detail_dto.mock.dart';
 
 /// 공고 상세 모델
 @freezed
 class JobPostingDetailDto with _$JobPostingDetailDto {
   const factory JobPostingDetailDto({
     required String id, // 공고 ID
-    required String companyId, // 회사 ID
-    required String companyThumbnail, // 회사 썸네일 이미지
-    required String companyName, // 회사명
+    required CompanyDto company, // 회사 정보
     required int views, // 조회수
     required String title, // 공고명
     required String content, // 근로 내용
@@ -40,4 +41,8 @@ class JobPostingDetailDto with _$JobPostingDetailDto {
 
   factory JobPostingDetailDto.fromJson(Map<String, Object?> json) =>
       _$JobPostingDetailDtoFromJson(json);
+
+  /// Mock 데이터 생성
+  factory JobPostingDetailDto.mock({required String id}) =>
+      JobPostingDetailDtoMock.mock(id: id);
 }

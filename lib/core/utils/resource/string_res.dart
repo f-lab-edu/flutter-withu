@@ -47,6 +47,13 @@ enum StringRes {
   travelTimeGuideDescription,
   breakTimeGuideDescription,
   mealGuideDescription,
+  update,
+  delete,
+  close,
+  cancel,
+  isNotDeadlineYetConfirmClose,
+  isUpdateContentCorrect,
+  canRevertFromPostingManagement,
 }
 
 extension StringResEx on StringRes {
