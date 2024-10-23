@@ -22,6 +22,7 @@ class JobPostingDetailBloc
     on<ClearMessage>(_clearMessage);
     on<OnGettingDetailData>(_onGettingDetailData);
     on<OnClosedJobPosting>(_onClosedJobPosting);
+    on<OnDeletedJobPosting>(_onDeletedJobPosting);
   }
 
   /// 메시지 초기화 이벤트.
@@ -75,16 +76,57 @@ class JobPostingDetailBloc
       jobPostingId: jobPostingId,
     );
 
-    result.when(success: (JobPostingDetailEntity data) {
-      emit(state.copyWith(
-        status: JobPostingDetailStatus.closed,
-      ));
-    }, fail: (String message) {
-      emit(state.copyWith(
-        status: JobPostingDetailStatus.fail,
-        entity: null,
-        message: message,
-      ));
-    });
+    result.when(
+      success: (JobPostingDetailEntity data) {
+        emit(
+          state.copyWith(
+            status: JobPostingDetailStatus.closed,
+          ),
+        );
+      },
+      fail: (String message) {
+        emit(
+          state.copyWith(
+            status: JobPostingDetailStatus.fail,
+            entity: null,
+            message: message,
+          ),
+        );
+      },
+    );
+  }
+
+  /// 공고 삭제
+  void _onDeletedJobPosting(
+    OnDeletedJobPosting event,
+    Emitter<JobPostingDetailState> emit,
+  ) async {
+    final String? jobPostingId = state.entity?.id;
+
+    if (jobPostingId == null) {
+      return;
+    }
+
+    emit(state.copyWith(status: JobPostingDetailStatus.loading));
+
+    final Either<bool> result = await useCase.deleteJobPosting(
+      jobPostingId: jobPostingId,
+    );
+
+    result.when(
+      success: (bool data) {
+        emit(
+          state.copyWith(status: JobPostingDetailStatus.deleted),
+        );
+      },
+      fail: (String message) {
+        emit(
+          state.copyWith(
+            status: JobPostingDetailStatus.fail,
+            message: message,
+          ),
+        );
+      },
+    );
   }
 }
