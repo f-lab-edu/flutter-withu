@@ -4,8 +4,9 @@ part of 'job_posting_detail_bloc.dart';
 /// loading: Api 통신 중
 /// success: API 통신 성공
 /// fail: API 통신 실패
-/// closed: 마감 상태로 변경됨
-enum JobPostingDetailStatus { initial, loading, success, fail, closed }
+/// closed: 마감 상태
+/// deleted: 삭제 상태
+enum JobPostingDetailStatus { initial, loading, success, fail, closed, deleted }
 
 extension JobPostingDetailStatusExt on JobPostingDetailStatus {
   bool get isInitial => this == JobPostingDetailStatus.initial;
