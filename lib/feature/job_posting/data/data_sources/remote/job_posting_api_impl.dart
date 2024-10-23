@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:withu_app/core/core.dart';
 import 'package:withu_app/feature/job_posting/data/data.dart';
+import 'package:withu_app/shared/data/data.dart';
 
 class JobPostingApiImpl extends JobPostingApi {
   /// 공고 목록
@@ -31,6 +32,14 @@ class JobPostingApiImpl extends JobPostingApi {
   /// 공고 마감
   @override
   FutureOr<ApiResponse<JobPostingDetailDto>> closeJobPosting({
+    required String jobPostingId,
+  }) {
+    return const ApiResponse.error();
+  }
+
+  /// 공고 삭제
+  @override
+  FutureOr<ApiResponse<DeleteResponseDto>> deleteJobPosting({
     required String jobPostingId,
   }) {
     return const ApiResponse.error();

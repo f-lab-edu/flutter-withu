@@ -1,7 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:withu_app/core/core.dart';
 import 'package:withu_app/feature/feature.dart';
-import 'package:withu_app/feature/job_posting/presentation/widgets/detail_bottom_sheet/detail_bottom_sheet_type.dart';
 import 'package:withu_app/shared/bottom_sheet/bottom_sheet.dart';
 
 /// 공고 상세보기 바텀 시트 Factory
