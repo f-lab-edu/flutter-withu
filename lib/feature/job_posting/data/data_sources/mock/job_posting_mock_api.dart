@@ -156,7 +156,7 @@ class JobPostingMockApi extends JobPostingApi with MockAPI {
         url,
         (server) => server.reply(
           200,
-          DeleteResponseDto.mockFail(id: jobPostingId).toJson(),
+          DeleteResponseDto.mockSuccess(id: jobPostingId).toJson(),
           delay: const Duration(milliseconds: 1000),
         ),
       );

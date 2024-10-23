@@ -50,7 +50,7 @@ class _JobPostingDetailPage extends StatelessWidget {
 
         // 마감으로 변경되었을 때
         if (state.status.isClosed || state.status.isDeleted) {
-          context.router.back();
+          context.router.maybePop(true);
         }
       },
       builder: (context, state) {
@@ -160,7 +160,7 @@ class _AppBar extends StatelessWidget {
           leading: IconButton(
             icon: const Icon(Icons.arrow_back),
             onPressed: () {
-              context.back();
+              context.router.back();
             },
           ),
           actions: [
