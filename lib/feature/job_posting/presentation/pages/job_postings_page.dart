@@ -189,7 +189,6 @@ class JobPostingsListState<B extends JobPostingsBloc>
 
                 if(result == true) {
                   // TODO: 리프레시 추가.
-                  logger.i('refresh!');
                 }
               }),
           firstPageProgressIndicatorBuilder: (context) => _emptyView(),
