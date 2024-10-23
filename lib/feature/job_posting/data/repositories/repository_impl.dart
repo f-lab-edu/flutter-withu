@@ -58,4 +58,12 @@ class JobPostingRepositoryImpl implements JobPostingRepository {
   }) async {
     return await jobPostingApi.deleteJobPosting(jobPostingId: jobPostingId);
   }
+
+  /// 공고 삭제
+  @override
+  Future<ApiResponse<DeleteResponseDto>> deleteJobPosting({
+    required String jobPostingId,
+  }) async {
+    return await api.deleteJobPosting(jobPostingId: jobPostingId);
+  }
 }
