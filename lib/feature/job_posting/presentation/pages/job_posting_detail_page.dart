@@ -42,12 +42,14 @@ class _JobPostingDetailPage extends StatelessWidget {
           CustomAlertDialog.showContentAlert(
             context: context,
             content: state.message,
-            closeCallback: () {},
+            closeCallback: () {
+              context.read<JobPostingDetailBloc>().add(ClearMessage());
+            },
           );
         }
 
         // 마감으로 변경되었을 때
-        if (state.status.isClosed) {
+        if (state.status.isClosed || state.status.isDeleted) {
           context.router.back();
         }
       },
