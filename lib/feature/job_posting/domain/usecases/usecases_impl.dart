@@ -29,7 +29,9 @@ class JobPostingUseCaseImpl implements JobPostingUseCase {
 
   /// 공고 등록
   @override
-  Future<bool> createJobPosting(JobPostingRequestEntity entity) async {
+  Future<bool> createJobPosting({
+    required JobPostingRequestEntity entity,
+  }) async {
     if (!isValidEntity(entity)) {
       return false;
     }
@@ -41,6 +43,30 @@ class JobPostingUseCaseImpl implements JobPostingUseCase {
     }
 
     final result = await repository.createJobPosting(dto: dto);
+
+    return result.maybeWhen<bool>(success: (_) => true, orElse: () => false);
+  }
+
+  /// 공고 수정
+  @override
+  Future<bool> updateJobPosting({
+    required String jobPostingId,
+    required JobPostingRequestEntity entity,
+  }) async {
+    if (!isValidEntity(entity)) {
+      return false;
+    }
+
+    final dto = entity.toDto();
+
+    if (dto == null) {
+      return false;
+    }
+
+    final result = await repository.updateJobPosting(
+      jobPostingId: jobPostingId,
+      dto: dto,
+    );
 
     return result.maybeWhen<bool>(success: (_) => true, orElse: () => false);
   }
