@@ -156,15 +156,8 @@ class JobPostingMockApi extends JobPostingApi with MockAPI {
       );
 
       final response = await dio.delete(url);
-
-      if (response.statusCode == 200) {
-        return ApiResponse.success(
-          DeleteResponseDto.fromJson(response.data),
-        );
-      }
-
-      return ApiResponse.fail(
-        FailResponse.fromJson(response.data),
+      return ApiResponse.success(
+        DeleteResponseDto.fromJson(response.data),
       );
     } catch (e) {
       return const ApiResponse.error();

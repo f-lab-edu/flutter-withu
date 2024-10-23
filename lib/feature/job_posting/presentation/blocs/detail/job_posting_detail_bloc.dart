@@ -116,7 +116,9 @@ class JobPostingDetailBloc
     result.when(
       success: (bool data) {
         emit(
-          state.copyWith(status: JobPostingDetailStatus.deleted),
+          state.copyWith(
+            status: JobPostingDetailStatus.deleted,
+          ),
         );
       },
       fail: (String message) {

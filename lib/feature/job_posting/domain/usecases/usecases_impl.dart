@@ -86,16 +86,13 @@ class JobPostingUseCaseImpl implements JobPostingUseCase {
     final result =
         await repository.deleteJobPosting(jobPostingId: jobPostingId);
 
-    return result.when(
+    return result.maybeWhen(
       success: (DeleteResponseDto dto) {
         return dto.deleted
             ? const Either.success(true)
             : Either.fail(dto.message ?? '');
       },
-      fail: (FailResponse fail) {
-        return Either.fail(fail.message);
-      },
-      error: () {
+      orElse: () {
         return Either.fail(StringRes.serverError.tr);
       },
     );
