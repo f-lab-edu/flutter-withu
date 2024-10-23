@@ -21,6 +21,15 @@ class JobPostingApiImpl extends JobPostingApi {
     return const ApiResponse.error();
   }
 
+  /// 공고 수정
+  @override
+  FutureOr<ApiResponse<JobPostingDetailDto>> updateJobPosting({
+    required String jobPostingId,
+    required JobPostingRequestDto requestData,
+  }) {
+    return const ApiResponse.error();
+  }
+
   /// 공고 상세 조회
   @override
   FutureOr<ApiResponse<JobPostingDetailDto>> getJobPosting({

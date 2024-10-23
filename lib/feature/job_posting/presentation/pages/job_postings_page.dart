@@ -187,7 +187,7 @@ class JobPostingsListState<B extends JobPostingsBloc>
                   JobPostingDetailRoute(jobPostingId: item.id),
                 );
 
-                if(result == true) {
+                if (result == true) {
                   // TODO: 리프레시 추가.
                 }
               }),
