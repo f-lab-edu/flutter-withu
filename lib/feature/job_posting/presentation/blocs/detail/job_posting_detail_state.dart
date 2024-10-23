@@ -16,6 +16,8 @@ extension JobPostingDetailStatusExt on JobPostingDetailStatus {
   bool get isSuccess => this == JobPostingDetailStatus.success;
 
   bool get isClosed => this == JobPostingDetailStatus.closed;
+
+  bool get isDeleted => this == JobPostingDetailStatus.deleted;
 }
 
 @freezed

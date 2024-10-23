@@ -40,7 +40,11 @@ class _DeleteBottomSheet implements DescriptionBottomSheetOption {
   String get description => StringRes.canRevertFromPostingManagement.tr;
 
   @override
-  Function(Bloc? bloc) get exec => (Bloc? bloc) {};
+  Function(Bloc? bloc) get exec => (Bloc? bloc) {
+    if (bloc is JobPostingDetailBloc) {
+      bloc.add(OnDeletedJobPosting());
+    }
+  };
 }
 
 /// 공고 마감
