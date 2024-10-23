@@ -14,6 +14,12 @@ abstract class JobPostingRepository {
     required JobPostingRequestDto dto,
   });
 
+  /// 공고 수정
+  Future<ApiResponse<JobPostingDetailDto>> updateJobPosting({
+    required String jobPostingId,
+    required JobPostingRequestDto dto,
+  });
+
   /// 공고 상세 조회
   Future<ApiResponse<JobPostingDetailDto>> get({
     required String id,
