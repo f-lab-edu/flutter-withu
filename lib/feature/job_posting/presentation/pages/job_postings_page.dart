@@ -182,10 +182,15 @@ class JobPostingsListState<B extends JobPostingsBloc>
         builderDelegate: PagedChildBuilderDelegate<JobPostingEntity>(
           itemBuilder: (context, item, index) => JobPostingsItem(
               entity: item,
-              onPressed: () {
-                context.router.push(
+              onPressed: () async {
+                final bool? result = await context.router.push<bool>(
                   JobPostingDetailRoute(jobPostingId: item.id),
                 );
+
+                if(result == true) {
+                  // TODO: 리프레시 추가.
+                  logger.i('refresh!');
+                }
               }),
           firstPageProgressIndicatorBuilder: (context) => _emptyView(),
           noItemsFoundIndicatorBuilder: (context) => _emptyView(),
