@@ -73,7 +73,6 @@ class JobPostingMockApi extends JobPostingApi with MockAPI {
         FailResponse.fromJson(response.data),
       );
     } catch (e) {
-      logger.e(e);
       return const ApiResponse.error();
     }
   }
@@ -156,8 +155,15 @@ class JobPostingMockApi extends JobPostingApi with MockAPI {
       );
 
       final response = await dio.delete(url);
-      return ApiResponse.success(
-        DeleteResponseDto.fromJson(response.data),
+
+      if (response.statusCode == 200) {
+        return ApiResponse.success(
+          DeleteResponseDto.fromJson(response.data),
+        );
+      }
+
+      return ApiResponse.fail(
+        FailResponse.fromJson(response.data),
       );
     } catch (e) {
       return const ApiResponse.error();
