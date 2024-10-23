@@ -32,6 +32,18 @@ class JobPostingRepositoryImpl implements JobPostingRepository {
     return await api.createJobPosting(requestData: dto);
   }
 
+  /// 공고 수정
+  @override
+  Future<ApiResponse<JobPostingDetailDto>> updateJobPosting({
+    required String jobPostingId,
+    required JobPostingRequestDto dto,
+  }) async {
+    return await api.updateJobPosting(
+      jobPostingId: jobPostingId,
+      requestData: dto,
+    );
+  }
+
   /// 공고 상세 조회
   @override
   Future<ApiResponse<JobPostingDetailDto>> getJobPosting({
