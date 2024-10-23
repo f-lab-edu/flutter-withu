@@ -1,6 +1,7 @@
 import 'package:withu_app/core/core.dart';
 import 'package:withu_app/feature/job_posting/data/data.dart';
 import 'package:withu_app/feature/job_posting/domain/domain.dart';
+import 'package:withu_app/shared/data/data.dart';
 
 class JobPostingRepositoryImpl implements JobPostingRepository {
   final JobPostingApi api;
@@ -39,11 +40,19 @@ class JobPostingRepositoryImpl implements JobPostingRepository {
     return await api.getJobPosting(jobPostingId: jobPostingId);
   }
 
-  /// 공고 상세 조회
+  /// 공고 마감
   @override
   Future<ApiResponse<JobPostingDetailDto>> closeJobPosting({
     required String jobPostingId,
   }) async {
     return await api.closeJobPosting(jobPostingId: jobPostingId);
+  }
+
+  /// 공고 삭제
+  @override
+  Future<ApiResponse<DeleteResponseDto>> deleteJobPosting({
+    required String jobPostingId,
+  }) async {
+    return await api.deleteJobPosting(jobPostingId: jobPostingId);
   }
 }
