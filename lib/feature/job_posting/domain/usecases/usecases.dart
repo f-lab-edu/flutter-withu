@@ -30,4 +30,9 @@ abstract class JobPostingUseCase {
   Future<Either<bool>> deleteJobPosting({
     required String jobPostingId,
   });
+
+  /// 공고 삭제
+  Future<Either<bool>> deleteJobPosting({
+    required String jobPostingId,
+  });
 }
