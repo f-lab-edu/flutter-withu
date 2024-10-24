@@ -50,21 +50,6 @@ class _JobPostingWorkersPage extends StatelessWidget {
             },
           );
         }
-
-        /// 공고 상세로 이동
-        if (state.status.isDetail) {
-          final String? jobPostingId = state.jobPostingId;
-
-          if (jobPostingId != null) {
-            await context.router.push(
-              JobPostingDetailRoute(jobPostingId: jobPostingId),
-            );
-          }
-
-          context
-              .read<JobPostingWorkersBloc>()
-              .add(JobPostingWorkersDetailPopped());
-        }
       },
       builder: (context, state) {
         return PageRoot(
@@ -74,10 +59,13 @@ class _JobPostingWorkersPage extends StatelessWidget {
             context: context,
             trailing: [
               TextButton(
-                onPressed: () {
-                  context
-                      .read<JobPostingWorkersBloc>()
-                      .add(JobPostingWorkersDetailPressed());
+                onPressed: () async {
+                  final jobPostingId = state.jobPostingId;
+                  if (jobPostingId != null) {
+                    await context.router.push(
+                      JobPostingDetailRoute(jobPostingId: jobPostingId),
+                    );
+                  }
                 },
                 child: Text(
                   StringRes.showJobPosting.tr,

@@ -19,9 +19,3 @@ class JobPostingWorkersSearched extends JobPostingWorkersEvent {
 
 /// 메시지 초기화
 class JobPostingWorkersMessageCleared extends JobPostingWorkersEvent {}
-
-/// 공고보기 클릭
-class JobPostingWorkersDetailPressed extends JobPostingWorkersEvent {}
-
-/// 공고 상세에서 돌아 왔을 때
-class JobPostingWorkersDetailPopped extends JobPostingWorkersEvent {}

@@ -1,7 +1,6 @@
 part of 'job_posting_workers_bloc.dart';
 
 enum JobPostingWorkersStatus {
-
   /// 초기 상태
   initial,
 
@@ -12,16 +11,11 @@ enum JobPostingWorkersStatus {
   success,
 
   /// API 조회 실패
-  failure,
-
-  /// 상세로 이동
-  detail,
+  failure;
 }
 
 extension JobPostingWorkersStatusExt on JobPostingWorkersStatus {
   bool get isLoading => this == JobPostingWorkersStatus.loading;
-
-  bool get isDetail => this == JobPostingWorkersStatus.detail;
 }
 
 @freezed
