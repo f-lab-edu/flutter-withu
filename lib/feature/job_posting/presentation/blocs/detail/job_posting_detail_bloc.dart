@@ -68,14 +68,14 @@ class JobPostingDetailBloc
       success: (JobPostingDetailEntity data) {
         emit(
           state.copyWith(
-            status: JobPostingDetailStatus.closed,
+            status: JobPostingDetailStatus.close,
           ),
         );
       },
       fail: (String message) {
         emit(
           state.copyWith(
-            status: JobPostingDetailStatus.fail,
+            status: JobPostingDetailStatus.failure,
             entity: null,
             message: message,
           ),
@@ -105,14 +105,14 @@ class JobPostingDetailBloc
       success: (bool data) {
         emit(
           state.copyWith(
-            status: JobPostingDetailStatus.deleted,
+            status: JobPostingDetailStatus.delete,
           ),
         );
       },
       fail: (String message) {
         emit(
           state.copyWith(
-            status: JobPostingDetailStatus.fail,
+            status: JobPostingDetailStatus.failure,
             message: message,
           ),
         );
@@ -125,7 +125,7 @@ class JobPostingDetailBloc
     OnPressedUpdate event,
     Emitter<JobPostingDetailState> emit,
   ) {
-    emit(state.copyWith(status: JobPostingDetailStatus.pushUpdate));
+    emit(state.copyWith(status: JobPostingDetailStatus.update));
   }
 
   /// 수정화면에서 돌아왔을 때 이벤트.
@@ -171,7 +171,7 @@ class JobPostingDetailBloc
       ));
     }, fail: (String message) {
       emit(state.copyWith(
-        status: JobPostingDetailStatus.fail,
+        status: JobPostingDetailStatus.failure,
         entity: null,
         message: message,
       ));
