@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:withu_app/core/core.dart';
 import 'package:withu_app/feature/job_posting/domain/domain.dart';
 
@@ -7,13 +8,31 @@ part 'job_posting_form_state.dart';
 
 part 'job_posting_form_event.dart';
 
+part 'job_posting_form_state_ext.dart';
+
+part 'job_posting_form_bloc.freezed.dart';
+
 class JobPostingFormBloc
     extends Bloc<JobPostingFormEvent, JobPostingFormState> {
   final JobPostingUseCase useCase;
 
   JobPostingFormBloc({
     required this.useCase,
-  }) : super(const JobPostingFormState(status: JobPostingFormStatus.initial)) {
+  }) : super(JobPostingFormState(
+          status: JobPostingFormStatus.initial,
+          title: '',
+          content: '',
+          participants: '',
+          pay: '',
+          address: '',
+          preferredQualifications: '',
+          isVisibleStartCalendar: false,
+          isVisibleEndCalendar: false,
+          isTBC: true,
+          hasTravelTime: false,
+          hasBreakTime: false,
+          isMealProvided: false,
+        )) {
     on<OnChangedTitle>(_onChangedTitle);
     on<OnChangedContent>(_onChangedContent);
     on<OnPressedJobCategory>(_onPressedJobCategory);
@@ -214,7 +233,9 @@ class JobPostingFormBloc
   ) async {
     try {
       emit(state.copyWith(status: JobPostingFormStatus.loading));
-      final result = await useCase.createJobPosting(state.toEntity());
+      final result = await useCase.createJobPosting(
+        entity: state.toEntity(),
+      );
       if (result) {
         emit(state.copyWith(status: JobPostingFormStatus.success));
       } else {
