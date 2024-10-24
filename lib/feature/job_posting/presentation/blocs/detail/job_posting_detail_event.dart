@@ -23,3 +23,6 @@ class OnPressedUpdate extends JobPostingDetailEvent {}
 
 /// 수정화면에서 돌아왔을 때
 class OnPopForm extends JobPostingDetailEvent {}
+
+/// 리프레시
+class JobPostingDetailRefreshed extends JobPostingDetailEvent {}

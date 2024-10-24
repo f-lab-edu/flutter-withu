@@ -55,10 +55,15 @@ class _JobPostingDetailPage extends StatelessWidget {
 
         if (state.status.isPushUpdate) {
           final bloc = context.read<JobPostingDetailBloc>();
-          await context.router.push(JobPostingFormRoute(
+          final bool? isUpdated = await context.router.push(JobPostingFormRoute(
             jobPostingId: state.entity?.id,
           ));
+
           bloc.add(OnPopForm());
+
+          if (isUpdated == true) {
+            bloc.add(JobPostingDetailRefreshed());
+          }
         }
       },
       builder: (context, state) {
@@ -168,7 +173,7 @@ class _AppBar extends StatelessWidget {
           leading: IconButton(
             icon: const Icon(Icons.arrow_back),
             onPressed: () {
-              context.router.back();
+              context.router.maybePop();
             },
           ),
           actions: [
