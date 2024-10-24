@@ -27,7 +27,7 @@ class CustomAppBar extends AppBar {
         // TODO: 이미지 바꾸기.
         icon: const Icon(Icons.arrow_back),
         onPressed: () {
-          context.back();
+          context.router.maybePop();
         },
       ),
       trailing: trailing,

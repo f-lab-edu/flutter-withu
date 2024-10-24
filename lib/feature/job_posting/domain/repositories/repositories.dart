@@ -34,4 +34,10 @@ abstract class JobPostingRepository {
   Future<ApiResponse<DeleteResponseDto>> deleteJobPosting({
     required String jobPostingId,
   });
+
+  /// 지원자 목록
+  Future<ApiResponse<JobPostingWorkersDto>> searchJobPostingWorkers({
+    required String jobPostingId,
+    required int page,
+  });
 }

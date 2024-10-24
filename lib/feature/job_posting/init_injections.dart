@@ -2,6 +2,7 @@ import 'package:withu_app/core/core.dart';
 import 'package:withu_app/feature/job_posting/data/data.dart';
 import 'package:withu_app/feature/job_posting/domain/domain.dart';
 import 'package:withu_app/feature/job_posting/job_posting.dart';
+import 'package:withu_app/feature/job_posting/presentation/blocs/workers/job_posting_workers_bloc.dart';
 
 initJobPostingInjections() {
   getIt.registerSingleton<JobPostingApi>(
@@ -30,5 +31,8 @@ initJobPostingInjections() {
   );
   getIt.registerFactory<JobPostingDetailBloc>(
         () => JobPostingDetailBloc(useCase: getIt()),
+  );
+  getIt.registerFactory<JobPostingWorkersBloc>(
+        () => JobPostingWorkersBloc(useCase: getIt()),
   );
 }
