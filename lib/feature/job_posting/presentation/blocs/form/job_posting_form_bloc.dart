@@ -1,11 +1,17 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:withu_app/core/core.dart';
 import 'package:withu_app/feature/job_posting/domain/domain.dart';
+import 'package:withu_app/feature/job_posting/domain/entities/job_posting_detail_entity.dart';
 
 part 'job_posting_form_state.dart';
 
 part 'job_posting_form_event.dart';
+
+part 'job_posting_form_state_ext.dart';
+
+part 'job_posting_form_bloc.freezed.dart';
 
 class JobPostingFormBloc
     extends Bloc<JobPostingFormEvent, JobPostingFormState> {
@@ -13,7 +19,21 @@ class JobPostingFormBloc
 
   JobPostingFormBloc({
     required this.useCase,
-  }) : super(const JobPostingFormState(status: JobPostingFormStatus.initial)) {
+  }) : super(JobPostingFormState(
+          status: JobPostingFormStatus.initial,
+          title: '',
+          content: '',
+          participants: '',
+          pay: '',
+          address: '',
+          preferredQualifications: '',
+          isVisibleStartCalendar: false,
+          isVisibleEndCalendar: false,
+          isTBC: true,
+          hasTravelTime: false,
+          hasBreakTime: false,
+          isMealProvided: false,
+        )) {
     on<OnChangedTitle>(_onChangedTitle);
     on<OnChangedContent>(_onChangedContent);
     on<OnPressedJobCategory>(_onPressedJobCategory);
@@ -35,7 +55,9 @@ class JobPostingFormBloc
     on<OnToggleHasBreakTime>(_onToggleHasBreakTime);
     on<OnSelectBreakTimePaid>(_onSelectBreakTimePaid);
     on<OnToggleHasMealPaid>(_onToggleHasMealPaid);
-    on<OnPressedSubmit>(_onPressedSubmit);
+    on<JobPostingFormSubmitted>(_onSubmitted);
+    on<JobPostingFormIdSet>(_onIdSet);
+    on<JobPostingFormDetailFetched>(_onDetailFetched);
   }
 
   /// 공고 제목 변경 이벤트.
@@ -207,23 +229,62 @@ class JobPostingFormBloc
     emit(state.copyWith(isMealProvided: !state.isMealProvided));
   }
 
-  /// 등록하기 클릭.
-  void _onPressedSubmit(
-    OnPressedSubmit event,
+  /// 등록/수정 클릭.
+  void _onSubmitted(
+    JobPostingFormSubmitted event,
     Emitter<JobPostingFormState> emit,
   ) async {
     try {
       emit(state.copyWith(status: JobPostingFormStatus.loading));
-      final result = await useCase.createJobPosting(state.toEntity());
+
+      final result = await useCase.submitJobPosting(
+        entity: state.toEntity(),
+        jobPostingId: state.jobPostingId,
+      );
+
       if (result) {
         emit(state.copyWith(status: JobPostingFormStatus.success));
-      } else {
-        logger.i('등록 실패');
       }
     } catch (e) {
       logger.e(e);
     } finally {
       emit(state.copyWith(status: JobPostingFormStatus.initial));
     }
+  }
+
+  /// 공고 ID 설정
+  void _onIdSet(
+    JobPostingFormIdSet event,
+    Emitter<JobPostingFormState> emit,
+  ) {
+    emit(state.copyWith(jobPostingId: event.id));
+  }
+
+  /// 공고 상세 조회
+  void _onDetailFetched(
+    JobPostingFormDetailFetched event,
+    Emitter<JobPostingFormState> emit,
+  ) async {
+    final id = state.jobPostingId;
+    if (id == null) {
+      return;
+    }
+    emit(state.copyWith(status: JobPostingFormStatus.loading));
+
+    final Either<JobPostingDetailEntity> result = await useCase.getJobPosting(
+      jobPostingId: id,
+    );
+
+    result.when(success: (JobPostingDetailEntity data) {
+      emit(state.copyWithEntity(
+        status: JobPostingFormStatus.loaded,
+        entity: data,
+      ));
+    }, fail: (String message) {
+      emit(state.copyWith(
+        status: JobPostingFormStatus.fail,
+        message: message,
+      ));
+    });
   }
 }

@@ -39,7 +39,7 @@ class _JobPostingsPage extends StatelessWidget {
           borderRadius: BorderRadius.circular(50),
         ),
         onPressed: () {
-          context.pushRoute(const JobPostingFormRoute());
+          context.pushRoute(JobPostingFormRoute());
         },
         child: const Icon(
           Icons.add,
@@ -187,7 +187,7 @@ class JobPostingsListState<B extends JobPostingsBloc>
                   JobPostingDetailRoute(jobPostingId: item.id),
                 );
 
-                if(result == true) {
+                if (result == true) {
                   // TODO: 리프레시 추가.
                 }
               }),

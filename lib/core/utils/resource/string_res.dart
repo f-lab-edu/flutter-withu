@@ -42,7 +42,7 @@ enum StringRes {
   workHours,
   numberOfPeopleUnit,
   wonUnit,
-  register,
+  registration,
   serverError,
   travelTimeGuideDescription,
   breakTimeGuideDescription,

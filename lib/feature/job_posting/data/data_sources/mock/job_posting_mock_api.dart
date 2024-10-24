@@ -51,24 +51,59 @@ class JobPostingMockApi extends JobPostingApi with MockAPI {
   FutureOr<ApiResponse<JobPostingDetailDto>> createJobPosting({
     required JobPostingRequestDto requestData,
   }) async {
-    final JobPostingDetailDto responseData = JobPostingDetailDto.fromJson({
-      'id': '1',
-      'latitude': 37.5664056,
-      'longitude': 126.9778222,
-      ...requestData.toJson(),
-    });
-
     try {
       dioAdapter.onPost(
-        url,
+        path,
         (server) => server.reply(
           200,
-          responseData.toJson(),
+          JobPostingDetailDto.mock(id: '1').toJson(),
           delay: const Duration(seconds: 1),
         ),
+        data: requestData.toJson(),
       );
 
-      final response = await dio.post(url);
+      final response = await dio.post(
+        path,
+        data: requestData.toJson(),
+      );
+
+      if (response.statusCode == 200) {
+        return ApiResponse.success(
+          JobPostingDetailDto.fromJson(response.data),
+        );
+      }
+
+      return ApiResponse.fail(
+        FailResponse.fromJson(response.data),
+      );
+    } catch (e) {
+      return const ApiResponse.error();
+    }
+  }
+
+  /// 공고 수정
+  @override
+  FutureOr<ApiResponse<JobPostingDetailDto>> updateJobPosting({
+    required String jobPostingId,
+    required JobPostingRequestDto requestData,
+  }) async {
+    try {
+      final fullPath = '$path/$jobPostingId';
+
+      dioAdapter.onPut(
+        fullPath,
+        (server) => server.reply(
+          200,
+          JobPostingDetailDto.mock(id: jobPostingId).toJson(),
+          delay: const Duration(seconds: 1),
+        ),
+        data: requestData.toJson(),
+      );
+
+      final response = await dio.put(
+        fullPath,
+        data: requestData.toJson(),
+      );
 
       if (response.statusCode == 200) {
         return ApiResponse.success(
@@ -90,8 +125,10 @@ class JobPostingMockApi extends JobPostingApi with MockAPI {
     required String jobPostingId,
   }) async {
     try {
+      final fullPath = '$path/$jobPostingId';
+
       dioAdapter.onGet(
-        url,
+        fullPath,
         (server) => server.reply(
           200,
           JobPostingDetailDto.mock(id: jobPostingId).toJson(),
@@ -99,7 +136,7 @@ class JobPostingMockApi extends JobPostingApi with MockAPI {
         ),
       );
 
-      final response = await dio.get(url);
+      final response = await dio.get(fullPath);
 
       if (response.statusCode == 200) {
         return ApiResponse.success(
@@ -121,8 +158,10 @@ class JobPostingMockApi extends JobPostingApi with MockAPI {
     required String jobPostingId,
   }) async {
     try {
+      final fullPath = '$path/$jobPostingId';
+
       dioAdapter.onPut(
-        url,
+        fullPath,
         (server) => server.reply(
           200,
           JobPostingDetailDto.mock(id: jobPostingId).toJson(),
@@ -130,7 +169,7 @@ class JobPostingMockApi extends JobPostingApi with MockAPI {
         ),
       );
 
-      final response = await dio.put(url);
+      final response = await dio.put(fullPath);
 
       if (response.statusCode == 200) {
         return ApiResponse.success(
@@ -152,8 +191,10 @@ class JobPostingMockApi extends JobPostingApi with MockAPI {
     required String jobPostingId,
   }) async {
     try {
+      final fullPath = '$path/$jobPostingId';
+
       dioAdapter.onDelete(
-        url,
+        fullPath,
         (server) => server.reply(
           200,
           DeleteResponseDto.mockSuccess(id: jobPostingId).toJson(),
@@ -161,7 +202,7 @@ class JobPostingMockApi extends JobPostingApi with MockAPI {
         ),
       );
 
-      final response = await dio.delete(url);
+      final response = await dio.delete(fullPath);
       return ApiResponse.success(
         DeleteResponseDto.fromJson(response.data),
       );

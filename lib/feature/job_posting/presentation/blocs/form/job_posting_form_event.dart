@@ -199,9 +199,25 @@ class OnToggleHasMealPaid extends JobPostingFormEvent {
 }
 
 /// 등록하기 버튼 클릭
-class OnPressedSubmit extends JobPostingFormEvent {
-  OnPressedSubmit();
+class JobPostingFormSubmitted extends JobPostingFormEvent {
+  JobPostingFormSubmitted();
 
+  @override
+  List<Object?> get props => [];
+}
+
+/// 공고 Id 저장
+class JobPostingFormIdSet extends JobPostingFormEvent {
+  final String? id;
+
+  JobPostingFormIdSet({required this.id});
+
+  @override
+  List<Object?> get props => [id];
+}
+
+/// 상세 조회 이벤트
+class JobPostingFormDetailFetched extends JobPostingFormEvent {
   @override
   List<Object?> get props => [];
 }

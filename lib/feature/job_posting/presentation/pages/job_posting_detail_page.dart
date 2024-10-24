@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:withu_app/core/core.dart';
+import 'package:withu_app/core/router/router.gr.dart';
 import 'package:withu_app/feature/feature.dart';
 import 'package:withu_app/feature/job_posting/domain/entities/job_posting_detail_entity.dart';
 import 'package:withu_app/gen/colors.gen.dart';
@@ -37,7 +38,7 @@ class _JobPostingDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<JobPostingDetailBloc, JobPostingDetailState>(
-      listener: (context, state) {
+      listener: (context, state) async {
         if (state.message.isNotEmpty) {
           CustomAlertDialog.showContentAlert(
             context: context,
@@ -48,9 +49,21 @@ class _JobPostingDetailPage extends StatelessWidget {
           );
         }
 
-        // 마감으로 변경되었을 때
         if (state.status.isClosed || state.status.isDeleted) {
           context.router.maybePop(true);
+        }
+
+        if (state.status.isPushUpdate) {
+          final bloc = context.read<JobPostingDetailBloc>();
+          final bool? isUpdated = await context.router.push(JobPostingFormRoute(
+            jobPostingId: state.entity?.id,
+          ));
+
+          bloc.add(OnPopForm());
+
+          if (isUpdated == true) {
+            bloc.add(JobPostingDetailRefreshed());
+          }
         }
       },
       builder: (context, state) {
@@ -160,7 +173,7 @@ class _AppBar extends StatelessWidget {
           leading: IconButton(
             icon: const Icon(Icons.arrow_back),
             onPressed: () {
-              context.router.back();
+              context.router.maybePop();
             },
           ),
           actions: [

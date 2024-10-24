@@ -68,10 +68,17 @@ class JobPostingDetailRouteArgs {
 
 /// generated route for
 /// [_i2.JobPostingFormPage]
-class JobPostingFormRoute extends _i5.PageRouteInfo<void> {
-  const JobPostingFormRoute({List<_i5.PageRouteInfo>? children})
-      : super(
+class JobPostingFormRoute extends _i5.PageRouteInfo<JobPostingFormRouteArgs> {
+  JobPostingFormRoute({
+    _i6.Key? key,
+    String? jobPostingId,
+    List<_i5.PageRouteInfo>? children,
+  }) : super(
           JobPostingFormRoute.name,
+          args: JobPostingFormRouteArgs(
+            key: key,
+            jobPostingId: jobPostingId,
+          ),
           initialChildren: children,
         );
 
@@ -80,9 +87,30 @@ class JobPostingFormRoute extends _i5.PageRouteInfo<void> {
   static _i5.PageInfo page = _i5.PageInfo(
     name,
     builder: (data) {
-      return const _i2.JobPostingFormPage();
+      final args = data.argsAs<JobPostingFormRouteArgs>(
+          orElse: () => const JobPostingFormRouteArgs());
+      return _i2.JobPostingFormPage(
+        key: args.key,
+        jobPostingId: args.jobPostingId,
+      );
     },
   );
+}
+
+class JobPostingFormRouteArgs {
+  const JobPostingFormRouteArgs({
+    this.key,
+    this.jobPostingId,
+  });
+
+  final _i6.Key? key;
+
+  final String? jobPostingId;
+
+  @override
+  String toString() {
+    return 'JobPostingFormRouteArgs{key: $key, jobPostingId: $jobPostingId}';
+  }
 }
 
 /// generated route for

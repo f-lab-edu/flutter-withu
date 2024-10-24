@@ -28,7 +28,11 @@ class _UpdateBottomSheet implements DescriptionBottomSheetOption {
   String get description => StringRes.isNotDeadlineYetConfirmClose.tr;
 
   @override
-  Function(Bloc? bloc) get exec => (Bloc? bloc) {};
+  Function(Bloc? bloc) get exec => (Bloc? bloc) {
+    if (bloc is JobPostingDetailBloc) {
+      bloc.add(OnPressedUpdate());
+    }
+  };
 }
 
 /// 공고 삭제
