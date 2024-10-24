@@ -882,26 +882,34 @@ class _MealPaidField extends StatelessWidget {
 class _SubmitButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      borderRadius: BorderRadius.circular(10),
-      onTap: () {
-        context.read<JobPostingFormBloc>().add(OnPressedSubmit());
-      },
-      child: Container(
-        width: double.infinity,
-        height: 48,
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          color: ColorName.primary80,
+    return BlocBuilder<JobPostingFormBloc, JobPostingFormState>(
+      builder: (context, state) {
+        final String text = state.isRegistration
+            ? StringRes.registration.tr
+            : StringRes.update.tr;
+
+        return InkWell(
           borderRadius: BorderRadius.circular(10),
-        ),
-        child: Text(
-          StringRes.register.tr,
-          style: context.textTheme.bodyMediumBold?.copyWith(
-            color: ColorName.white,
+          onTap: () {
+            context.read<JobPostingFormBloc>().add(JobPostingFormSubmitted());
+          },
+          child: Container(
+            width: double.infinity,
+            height: 48,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: ColorName.primary80,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Text(
+              text,
+              style: context.textTheme.bodyMediumBold?.copyWith(
+                color: ColorName.white,
+              ),
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }

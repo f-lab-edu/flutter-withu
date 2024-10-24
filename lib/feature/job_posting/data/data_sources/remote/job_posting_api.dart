@@ -4,6 +4,8 @@ import 'package:withu_app/feature/job_posting/data/data.dart';
 import 'package:withu_app/shared/data/data.dart';
 
 abstract class JobPostingApi extends API {
+  final String path = '/job-postings';
+
   /// 공고 목록
   FutureOr<List<JobPostingsItemModel>> search({
     required JobPostingStatusType status,

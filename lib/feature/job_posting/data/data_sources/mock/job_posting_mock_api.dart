@@ -6,7 +6,7 @@ import 'package:withu_app/shared/data/data.dart';
 class JobPostingMockApi extends JobPostingApi with MockAPI {
   /// 공고 목록
   @override
-  FutureOr<List<JobPostingsItemModel>> search({
+  FutureOr<List<JobPostingsItemModel>> fetchList({
     required JobPostingStatusType status,
     required int page,
   }) async {
@@ -48,20 +48,24 @@ class JobPostingMockApi extends JobPostingApi with MockAPI {
 
   /// 공고 등록
   @override
-  FutureOr<ApiResponse<JobPostingDetailDto>> create({
+  FutureOr<ApiResponse<JobPostingDetailDto>> createJobPosting({
     required JobPostingRequestDto requestData,
   }) async {
     try {
       dioAdapter.onPost(
-        url,
+        path,
         (server) => server.reply(
           200,
-          JobPostingDetailDtoMock.mock(id: '1'),
+          JobPostingDetailDto.mock(id: '1').toJson(),
           delay: const Duration(seconds: 1),
         ),
+        data: requestData.toJson(),
       );
 
-      final response = await dio.post(url);
+      final response = await dio.post(
+        path,
+        data: requestData.toJson(),
+      );
 
       if (response.statusCode == 200) {
         return ApiResponse.success(
@@ -84,7 +88,8 @@ class JobPostingMockApi extends JobPostingApi with MockAPI {
     required JobPostingRequestDto requestData,
   }) async {
     try {
-      final fullPath = '$url/$jobPostingId';
+      final fullPath = '$path/$jobPostingId';
+
       dioAdapter.onPut(
         fullPath,
         (server) => server.reply(
@@ -92,6 +97,7 @@ class JobPostingMockApi extends JobPostingApi with MockAPI {
           JobPostingDetailDto.mock(id: jobPostingId).toJson(),
           delay: const Duration(seconds: 1),
         ),
+        data: requestData.toJson(),
       );
 
       final response = await dio.put(
@@ -115,17 +121,17 @@ class JobPostingMockApi extends JobPostingApi with MockAPI {
 
   /// 공고 상세 조회
   @override
-  FutureOr<ApiResponse<JobPostingDetailDto>> get({
-    required String id,
+  FutureOr<ApiResponse<JobPostingDetailDto>> getJobPosting({
+    required String jobPostingId,
   }) async {
     try {
-      final fullPath = '$url/$jobPostingId';
+      final fullPath = '$path/$jobPostingId';
 
       dioAdapter.onGet(
         fullPath,
         (server) => server.reply(
           200,
-          JobPostingDetailDto.mock(id: id).toJson(),
+          JobPostingDetailDto.mock(id: jobPostingId).toJson(),
           delay: const Duration(milliseconds: 300),
         ),
       );
@@ -148,20 +154,22 @@ class JobPostingMockApi extends JobPostingApi with MockAPI {
 
   /// 공고 마감
   @override
-  FutureOr<ApiResponse<JobPostingDetailDto>> close({
-    required String id,
+  FutureOr<ApiResponse<JobPostingDetailDto>> closeJobPosting({
+    required String jobPostingId,
   }) async {
     try {
+      final fullPath = '$path/$jobPostingId';
+
       dioAdapter.onPut(
-        url,
+        fullPath,
         (server) => server.reply(
           200,
-          JobPostingDetailDto.mock(id: id).toJson(),
+          JobPostingDetailDto.mock(id: jobPostingId).toJson(),
           delay: const Duration(milliseconds: 1000),
         ),
       );
 
-      final response = await dio.put(url);
+      final response = await dio.put(fullPath);
 
       if (response.statusCode == 200) {
         return ApiResponse.success(
@@ -183,8 +191,10 @@ class JobPostingMockApi extends JobPostingApi with MockAPI {
     required String jobPostingId,
   }) async {
     try {
+      final fullPath = '$path/$jobPostingId';
+
       dioAdapter.onDelete(
-        url,
+        fullPath,
         (server) => server.reply(
           200,
           DeleteResponseDto.mockSuccess(id: jobPostingId).toJson(),
@@ -192,16 +202,9 @@ class JobPostingMockApi extends JobPostingApi with MockAPI {
         ),
       );
 
-      final response = await dio.delete(url);
-
-      if (response.statusCode == 200) {
-        return ApiResponse.success(
-          DeleteResponseDto.fromJson(response.data),
-        );
-      }
-
-      return ApiResponse.fail(
-        FailResponse.fromJson(response.data),
+      final response = await dio.delete(fullPath);
+      return ApiResponse.success(
+        DeleteResponseDto.fromJson(response.data),
       );
     } catch (e) {
       return const ApiResponse.error();

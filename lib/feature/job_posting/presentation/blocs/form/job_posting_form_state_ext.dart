@@ -1,6 +1,9 @@
 part of 'job_posting_form_bloc.dart';
 
 extension JobPostingFormStateExt on JobPostingFormState {
+  /// 등록/수정 여부
+  bool get isRegistration => jobPostingId == null;
+
   /// 시작 날짜 문자열
   String get contractStartDateStr =>
       contractStartDate?.format('yyyy-MM-dd') ?? '';

@@ -55,7 +55,7 @@ class JobPostingFormBloc
     on<OnToggleHasBreakTime>(_onToggleHasBreakTime);
     on<OnSelectBreakTimePaid>(_onSelectBreakTimePaid);
     on<OnToggleHasMealPaid>(_onToggleHasMealPaid);
-    on<OnPressedSubmit>(_onPressedSubmit);
+    on<JobPostingFormSubmitted>(_onSubmitted);
     on<JobPostingFormIdSet>(_onIdSet);
     on<JobPostingFormDetailFetched>(_onDetailFetched);
   }
@@ -229,20 +229,21 @@ class JobPostingFormBloc
     emit(state.copyWith(isMealProvided: !state.isMealProvided));
   }
 
-  /// 등록하기 클릭.
-  void _onPressedSubmit(
-    OnPressedSubmit event,
+  /// 등록/수정 클릭.
+  void _onSubmitted(
+    JobPostingFormSubmitted event,
     Emitter<JobPostingFormState> emit,
   ) async {
     try {
       emit(state.copyWith(status: JobPostingFormStatus.loading));
-      final result = await useCase.createJobPosting(
+
+      final result = await useCase.submitJobPosting(
         entity: state.toEntity(),
+        jobPostingId: state.jobPostingId,
       );
+
       if (result) {
         emit(state.copyWith(status: JobPostingFormStatus.success));
-      } else {
-        logger.i('등록 실패');
       }
     } catch (e) {
       logger.e(e);
