@@ -5,6 +5,8 @@ part 'job_posting_worker_dto.freezed.dart';
 
 part 'job_posting_worker_dto.g.dart';
 
+part 'job_posting_worker_dto.mock.dart';
+
 @freezed
 class JobPostingWorkerDto with _$JobPostingWorkerDto {
   factory JobPostingWorkerDto({

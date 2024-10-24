@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:withu_app/core/core.dart';
 import 'package:withu_app/feature/job_posting/data/data.dart';
+import 'package:withu_app/feature/job_posting/data/data_sources/dto/worker/job_posting_workers_dto.dart';
 import 'package:withu_app/shared/data/data.dart';
 
 abstract class JobPostingApi extends API {
@@ -36,5 +37,11 @@ abstract class JobPostingApi extends API {
   /// 공고 삭제
   FutureOr<ApiResponse<DeleteResponseDto>> deleteJobPosting({
     required String jobPostingId,
+  });
+
+  /// 지원자 목록
+  FutureOr<ApiResponse<JobPostingWorkersDto>> searchJobPostingWorkers({
+    required String jobPostingId,
+    required int page,
   });
 }

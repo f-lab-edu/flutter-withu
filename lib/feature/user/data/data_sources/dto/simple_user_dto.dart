@@ -4,6 +4,8 @@ part 'simple_user_dto.freezed.dart';
 
 part 'simple_user_dto.g.dart';
 
+part 'simple_user_dto.mock.dart';
+
 @freezed
 class SimpleUserDto with _$SimpleUserDto {
   factory SimpleUserDto({

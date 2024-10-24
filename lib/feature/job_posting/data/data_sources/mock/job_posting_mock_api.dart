@@ -210,4 +210,38 @@ class JobPostingMockApi extends JobPostingApi with MockAPI {
       return const ApiResponse.error();
     }
   }
+
+  /// 지원자 목록
+  @override
+  FutureOr<ApiResponse<JobPostingWorkersDto>> searchJobPostingWorkers({
+    required String jobPostingId,
+    required int page,
+  }) async {
+    const path = '/workers';
+    try {
+      dioAdapter.onGet(
+        path,
+        (server) => server.reply(
+          200,
+          JobPostingWorkersDtoExt.mock(page: page),
+          delay: const Duration(milliseconds: 300),
+        ),
+      );
+
+      final response = await dio.get(path);
+
+      if (response.statusCode == 200) {
+        return ApiResponse.success(
+          JobPostingWorkersDto.fromJson(
+            response.data,
+            JobPostingWorkerDto.fromJson,
+          ),
+        );
+      }
+      return ApiResponse.fail(FailResponse.fromJson(response.data));
+    } catch (e) {
+      logger.e(e);
+      return const ApiResponse.error();
+    }
+  }
 }
