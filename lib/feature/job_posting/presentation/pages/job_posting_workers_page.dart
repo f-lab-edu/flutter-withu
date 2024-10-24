@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:withu_app/core/core.dart';
+import 'package:withu_app/core/router/router.gr.dart';
 import 'package:withu_app/feature/job_posting/domain/domain.dart';
 import 'package:withu_app/feature/job_posting/presentation/blocs/workers/job_posting_workers_bloc.dart';
 import 'package:withu_app/feature/user/presentation/presentation.dart';
@@ -49,6 +50,21 @@ class _JobPostingWorkersPage extends StatelessWidget {
             },
           );
         }
+
+        /// 공고 상세로 이동
+        if (state.status.isDetail) {
+          final String? jobPostingId = state.jobPostingId;
+
+          if (jobPostingId != null) {
+            await context.router.push(
+              JobPostingDetailRoute(jobPostingId: jobPostingId),
+            );
+          }
+
+          context
+              .read<JobPostingWorkersBloc>()
+              .add(JobPostingWorkersDetailPopped());
+        }
       },
       builder: (context, state) {
         return PageRoot(
@@ -58,7 +74,11 @@ class _JobPostingWorkersPage extends StatelessWidget {
             context: context,
             trailing: [
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  context
+                      .read<JobPostingWorkersBloc>()
+                      .add(JobPostingWorkersDetailPressed());
+                },
                 child: Text(
                   StringRes.showJobPosting.tr,
                   style: context.textTheme.bodyMedium,
@@ -178,7 +198,7 @@ class _WorkerListState extends State<_WorkerList> {
   Widget build(BuildContext context) {
     return BlocListener<JobPostingWorkersBloc, JobPostingWorkersState>(
       listener: (context, state) {
-        if (state.status == JobPostingWorkersStatus.loaded) {
+        if (state.status == JobPostingWorkersStatus.success) {
           final isLast = state.isLast;
           if (isLast) {
             _pagingController.appendLastPage(state.list);

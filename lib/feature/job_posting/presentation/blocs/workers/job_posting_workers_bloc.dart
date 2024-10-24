@@ -30,6 +30,8 @@ class JobPostingWorkersBloc
     on<JobPostingWorkersIdStored>(_onIdStored);
     on<JobPostingWorkersSearched>(_onSearched);
     on<JobPostingWorkersMessageCleared>(_onMessageCleared);
+    on<JobPostingWorkersDetailPressed>(_onDetailPressed);
+    on<JobPostingWorkersDetailPopped>(_onDetailPopped);
   }
 }
 
@@ -63,7 +65,7 @@ extension JobPostingWorkersBlocHandler on JobPostingWorkersBloc {
 
     result.when(success: (JobPostingWorkersEntity data) {
       emit(state.copyWith(
-        status: JobPostingWorkersStatus.loaded,
+        status: JobPostingWorkersStatus.success,
         title: data.title,
         applicants: data.applicants,
         participants: data.participants,
@@ -87,5 +89,21 @@ extension JobPostingWorkersBlocHandler on JobPostingWorkersBloc {
     Emitter<JobPostingWorkersState> emit,
   ) {
     emit(state.copyWith(message: ''));
+  }
+
+  /// 공고보기 클릭 이벤트.
+  void _onDetailPressed(
+    JobPostingWorkersDetailPressed event,
+    Emitter<JobPostingWorkersState> emit,
+  ) {
+    emit(state.copyWith(status: JobPostingWorkersStatus.detail));
+  }
+
+  /// 공고 상세에서 돌아왔을 때
+  void _onDetailPopped(
+    JobPostingWorkersDetailPopped event,
+    Emitter<JobPostingWorkersState> emit,
+  ) {
+    emit(state.copyWith(status: JobPostingWorkersStatus.success));
   }
 }
