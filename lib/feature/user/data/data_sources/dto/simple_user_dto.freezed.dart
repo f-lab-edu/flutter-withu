@@ -14,12 +14,19 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
+SimpleUserDto _$SimpleUserDtoFromJson(Map<String, dynamic> json) {
+  return _SimpleUserDto.fromJson(json);
+}
+
 /// @nodoc
 mixin _$SimpleUserDto {
   String get id => throw _privateConstructorUsedError; // id
   String get name => throw _privateConstructorUsedError; // 이름
   int get age => throw _privateConstructorUsedError; // 나이
   String get profile => throw _privateConstructorUsedError;
+
+  /// Serializes this SimpleUserDto to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
   /// Create a copy of SimpleUserDto
   /// with the given fields replaced by the non-null parameter values.
@@ -129,13 +136,16 @@ class __$$SimpleUserDtoImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$SimpleUserDtoImpl implements _SimpleUserDto {
   _$SimpleUserDtoImpl(
       {required this.id,
       required this.name,
       required this.age,
       required this.profile});
+
+  factory _$SimpleUserDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$SimpleUserDtoImplFromJson(json);
 
   @override
   final String id;
@@ -165,6 +175,7 @@ class _$SimpleUserDtoImpl implements _SimpleUserDto {
             (identical(other.profile, profile) || other.profile == profile));
   }
 
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, name, age, profile);
 
@@ -175,6 +186,13 @@ class _$SimpleUserDtoImpl implements _SimpleUserDto {
   @pragma('vm:prefer-inline')
   _$$SimpleUserDtoImplCopyWith<_$SimpleUserDtoImpl> get copyWith =>
       __$$SimpleUserDtoImplCopyWithImpl<_$SimpleUserDtoImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$SimpleUserDtoImplToJson(
+      this,
+    );
+  }
 }
 
 abstract class _SimpleUserDto implements SimpleUserDto {
@@ -183,6 +201,9 @@ abstract class _SimpleUserDto implements SimpleUserDto {
       required final String name,
       required final int age,
       required final String profile}) = _$SimpleUserDtoImpl;
+
+  factory _SimpleUserDto.fromJson(Map<String, dynamic> json) =
+      _$SimpleUserDtoImpl.fromJson;
 
   @override
   String get id; // id
