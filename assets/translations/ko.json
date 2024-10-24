@@ -41,7 +41,7 @@
   "workHours": "근무시간",
   "numberOfPeopleUnit": "명",
   "wonUnit": "원",
-  "register": "등록하기",
+  "registration": "등록",
   "serverError": "서버 에러",
   "travelTimeGuideDescription": "긱워커가 현장에서 일할 때\n이동시간이 있는지 체크하는 부분입니다.\n\n비급여시 근무시간에서 이동시간을\n제외해서 급여가 측정됩니다.",
   "breakTimeGuideDescription": "긱워커가 현장에서 일할 때\n휴게시간이 있는지 체크하는 부분입니다.\n\n비급여시 근무시간에서 휴게시간을\n제외해서 급여가 측정됩니다.",

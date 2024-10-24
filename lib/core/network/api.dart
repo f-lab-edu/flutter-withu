@@ -4,7 +4,11 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 class API {
   final String url = 'https://example.com';
 
-  final _dio = Dio(BaseOptions())
+  late final _dio = Dio(BaseOptions(
+    baseUrl: url,
+    contentType: 'application/json',
+    responseType: ResponseType.json,
+  ))
     ..interceptors.add(
       PrettyDioLogger(
         requestBody: true,

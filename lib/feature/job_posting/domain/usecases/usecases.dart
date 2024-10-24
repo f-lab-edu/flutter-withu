@@ -13,16 +13,12 @@ abstract class JobPostingUseCase {
     required int page,
   });
 
-  /// 공고 등록
-  Future<bool> createJobPosting({
+  /// 공고 등록/수정
+  Future<bool> submitJobPosting({
     required JobPostingRequestEntity entity,
+    String? jobPostingId
   });
 
-  /// 공고 수정
-  Future<bool> updateJobPosting({
-    required String jobPostingId,
-    required JobPostingRequestEntity entity,
-  });
 
   /// 공고 상세 조회
   Future<Either<JobPostingDetailEntity>> getJobPosting({

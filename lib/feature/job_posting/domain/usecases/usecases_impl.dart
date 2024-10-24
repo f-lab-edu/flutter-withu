@@ -27,48 +27,52 @@ class JobPostingUseCaseImpl implements JobPostingUseCase {
     }
   }
 
-  /// 공고 등록
+  /// 공고 등록/수정
   @override
-  Future<bool> createJobPosting({
+  Future<bool> submitJobPosting({
     required JobPostingRequestEntity entity,
+    String? jobPostingId,
   }) async {
     if (!isValidEntity(entity)) {
       return false;
     }
 
-    final dto = entity.toDto();
+    final JobPostingRequestDto? dto = entity.toDto();
 
     if (dto == null) {
       return false;
     }
 
-    final result = await repository.createJobPosting(dto: dto);
+    late final ApiResponse<JobPostingDetailDto> result;
+
+    if (jobPostingId == null) {
+      result = await _createJobPosting(dto: dto);
+    } else {
+      result = await _updateJobPosting(
+        jobPostingId: jobPostingId,
+        dto: dto,
+      );
+    }
 
     return result.maybeWhen<bool>(success: (_) => true, orElse: () => false);
   }
 
+  /// 공고 등록
+  Future<ApiResponse<JobPostingDetailDto>> _createJobPosting({
+    required JobPostingRequestDto dto,
+  }) {
+    return repository.createJobPosting(dto: dto);
+  }
+
   /// 공고 수정
-  @override
-  Future<bool> updateJobPosting({
+  Future<ApiResponse<JobPostingDetailDto>> _updateJobPosting({
     required String jobPostingId,
-    required JobPostingRequestEntity entity,
-  }) async {
-    if (!isValidEntity(entity)) {
-      return false;
-    }
-
-    final dto = entity.toDto();
-
-    if (dto == null) {
-      return false;
-    }
-
-    final result = await repository.updateJobPosting(
+    required JobPostingRequestDto dto,
+  }) {
+    return repository.updateJobPosting(
       jobPostingId: jobPostingId,
       dto: dto,
     );
-
-    return result.maybeWhen<bool>(success: (_) => true, orElse: () => false);
   }
 
   /// 공고 상세 조회

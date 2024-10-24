@@ -199,8 +199,8 @@ class OnToggleHasMealPaid extends JobPostingFormEvent {
 }
 
 /// 등록하기 버튼 클릭
-class OnPressedSubmit extends JobPostingFormEvent {
-  OnPressedSubmit();
+class JobPostingFormSubmitted extends JobPostingFormEvent {
+  JobPostingFormSubmitted();
 
   @override
   List<Object?> get props => [];
