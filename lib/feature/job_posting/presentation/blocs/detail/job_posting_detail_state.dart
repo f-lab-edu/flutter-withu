@@ -6,7 +6,15 @@ part of 'job_posting_detail_bloc.dart';
 /// fail: API 통신 실패
 /// closed: 마감 상태
 /// deleted: 삭제 상태
-enum JobPostingDetailStatus { initial, loading, success, fail, closed, deleted }
+enum JobPostingDetailStatus {
+  initial,
+  loading,
+  success,
+  fail,
+  closed,
+  deleted,
+  pushUpdate,
+}
 
 extension JobPostingDetailStatusExt on JobPostingDetailStatus {
   bool get isInitial => this == JobPostingDetailStatus.initial;
@@ -18,6 +26,8 @@ extension JobPostingDetailStatusExt on JobPostingDetailStatus {
   bool get isClosed => this == JobPostingDetailStatus.closed;
 
   bool get isDeleted => this == JobPostingDetailStatus.deleted;
+
+  bool get isPushUpdate => this == JobPostingDetailStatus.pushUpdate;
 }
 
 @freezed
