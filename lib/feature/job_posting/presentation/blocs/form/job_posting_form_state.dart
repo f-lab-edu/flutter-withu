@@ -1,6 +1,6 @@
 part of 'job_posting_form_bloc.dart';
 
-enum JobPostingFormStatus { initial, loading, success }
+enum JobPostingFormStatus { initial, loading, loaded, success, fail }
 
 extension JobPostingFormStatusExt on JobPostingFormStatus {
   bool get isSuccess => this == JobPostingFormStatus.success;
@@ -24,6 +24,7 @@ class JobPostingFormState with _$JobPostingFormState {
     required bool hasTravelTime,
     required bool hasBreakTime,
     required bool isMealProvided,
+    String? jobPostingId,
     JobCategoryType? category,
     ContractType? contractType,
     DateTime? contractStartDate,
@@ -33,6 +34,7 @@ class JobPostingFormState with _$JobPostingFormState {
     PayType? payType,
     bool? isTravelTimePaid,
     bool? isBreakTimePaid,
+    String? message,
   }) = _JobPostingFormState;
 
 }

@@ -11,13 +11,22 @@ import 'package:withu_app/shared/shared.dart';
 /// 공고 등록/수정 화면
 @RoutePage()
 class JobPostingFormPage extends StatelessWidget {
-  const JobPostingFormPage({super.key});
+  final String? jobPostingId;
+
+  const JobPostingFormPage({
+    super.key,
+    this.jobPostingId,
+  });
 
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<JobPostingFormBloc>(create: (context) => getIt()),
+        BlocProvider<JobPostingFormBloc>(
+          create: (context) => getIt()
+            ..add(JobPostingFormIdSet(id: jobPostingId))
+            ..add(JobPostingFormDetailFetched()),
+        ),
       ],
       child: BlocListener<JobPostingFormBloc, JobPostingFormState>(
         listener: (context, state) {
