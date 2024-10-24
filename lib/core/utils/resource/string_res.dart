@@ -54,6 +54,7 @@ enum StringRes {
   isNotDeadlineYetConfirmClose,
   isUpdateContentCorrect,
   canRevertFromPostingManagement,
+  yearsOld,
 }
 
 extension StringResEx on StringRes {
