@@ -39,7 +39,7 @@ class _JobPostingsPage extends StatelessWidget {
           borderRadius: BorderRadius.circular(50),
         ),
         onPressed: () {
-          context.pushRoute(const JobPostingFormRoute());
+          context.pushRoute(JobPostingFormRoute());
         },
         child: const Icon(
           Icons.add,

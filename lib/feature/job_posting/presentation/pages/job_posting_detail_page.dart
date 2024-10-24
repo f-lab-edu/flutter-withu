@@ -55,7 +55,9 @@ class _JobPostingDetailPage extends StatelessWidget {
 
         if (state.status.isPushUpdate) {
           final bloc = context.read<JobPostingDetailBloc>();
-          await context.router.push(const JobPostingFormRoute());
+          await context.router.push(JobPostingFormRoute(
+            jobPostingId: state.entity?.id,
+          ));
           bloc.add(OnPopForm());
         }
       },
