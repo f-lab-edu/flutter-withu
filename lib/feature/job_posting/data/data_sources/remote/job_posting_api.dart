@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:withu_app/core/core.dart';
 import 'package:withu_app/feature/job_posting/data/data.dart';
-import 'package:withu_app/feature/job_posting/data/data_sources/dto/worker/job_posting_workers_dto.dart';
 import 'package:withu_app/shared/data/data.dart';
 
 abstract class JobPostingApi extends API {

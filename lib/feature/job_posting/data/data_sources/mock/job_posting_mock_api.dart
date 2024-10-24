@@ -232,10 +232,7 @@ class JobPostingMockApi extends JobPostingApi with MockAPI {
 
       if (response.statusCode == 200) {
         return ApiResponse.success(
-          JobPostingWorkersDto.fromJson(
-            response.data,
-            JobPostingWorkerDto.fromJson,
-          ),
+          JobPostingWorkersDto.fromJson(response.data),
         );
       }
       return ApiResponse.fail(FailResponse.fromJson(response.data));
