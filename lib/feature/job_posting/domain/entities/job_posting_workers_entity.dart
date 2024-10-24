@@ -6,7 +6,10 @@ class JobPostingWorkersEntity {
   /// 공고명
   final String title;
 
-  /// 인원 수
+  /// 지원한 수
+  final int applicants;
+
+  /// 최대 인원 수
   final int participants;
 
   /// 근무 시작 일
@@ -20,6 +23,7 @@ class JobPostingWorkersEntity {
 
   JobPostingWorkersEntity({
     required this.title,
+    required this.applicants,
     required this.participants,
     required this.workStartDate,
     required this.workEndDate,
@@ -31,6 +35,7 @@ extension JobPostingWorkersEntityExt on JobPostingWorkersEntity {
   static JobPostingWorkersEntity fromDto(JobPostingWorkersDto dto) {
     return JobPostingWorkersEntity(
       title: dto.title,
+      applicants: dto.totalElements,
       participants: dto.participants,
       workStartDate: dto.workStartDate,
       workEndDate: dto.workEndDate,

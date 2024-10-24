@@ -55,6 +55,13 @@ enum StringRes {
   isUpdateContentCorrect,
   canRevertFromPostingManagement,
   yearsOld,
+  showJobPosting,
+  workStatus,
+  attendance,
+  leaveWork,
+  attendanceScheduled,
+  attendanceCompleted,
+  noApplicants,
 }
 
 extension StringResEx on StringRes {

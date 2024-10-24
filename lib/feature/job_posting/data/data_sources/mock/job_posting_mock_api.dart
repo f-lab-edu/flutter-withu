@@ -223,7 +223,7 @@ class JobPostingMockApi extends JobPostingApi with MockAPI {
         path,
         (server) => server.reply(
           200,
-          JobPostingWorkersDtoExt.mock(page: page),
+          JobPostingWorkersDtoExt.mock(page: page).toJson(),
           delay: const Duration(milliseconds: 300),
         ),
       );

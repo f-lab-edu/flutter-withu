@@ -19,6 +19,7 @@ mixin _$JobPostingWorkersState {
   JobPostingWorkersStatus get status => throw _privateConstructorUsedError;
   String get message => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
+  int get applicants => throw _privateConstructorUsedError;
   int get participants => throw _privateConstructorUsedError;
   String get workStartDate => throw _privateConstructorUsedError;
   String get workEndDate => throw _privateConstructorUsedError;
@@ -43,6 +44,7 @@ abstract class $JobPostingWorkersStateCopyWith<$Res> {
       {JobPostingWorkersStatus status,
       String message,
       String title,
+      int applicants,
       int participants,
       String workStartDate,
       String workEndDate,
@@ -70,6 +72,7 @@ class _$JobPostingWorkersStateCopyWithImpl<$Res,
     Object? status = null,
     Object? message = null,
     Object? title = null,
+    Object? applicants = null,
     Object? participants = null,
     Object? workStartDate = null,
     Object? workEndDate = null,
@@ -90,6 +93,10 @@ class _$JobPostingWorkersStateCopyWithImpl<$Res,
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
+      applicants: null == applicants
+          ? _value.applicants
+          : applicants // ignore: cast_nullable_to_non_nullable
+              as int,
       participants: null == participants
           ? _value.participants
           : participants // ignore: cast_nullable_to_non_nullable
@@ -131,6 +138,7 @@ abstract class _$$JobPostingWorkersStateImplCopyWith<$Res>
       {JobPostingWorkersStatus status,
       String message,
       String title,
+      int applicants,
       int participants,
       String workStartDate,
       String workEndDate,
@@ -157,6 +165,7 @@ class __$$JobPostingWorkersStateImplCopyWithImpl<$Res>
     Object? status = null,
     Object? message = null,
     Object? title = null,
+    Object? applicants = null,
     Object? participants = null,
     Object? workStartDate = null,
     Object? workEndDate = null,
@@ -177,6 +186,10 @@ class __$$JobPostingWorkersStateImplCopyWithImpl<$Res>
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
+      applicants: null == applicants
+          ? _value.applicants
+          : applicants // ignore: cast_nullable_to_non_nullable
+              as int,
       participants: null == participants
           ? _value.participants
           : participants // ignore: cast_nullable_to_non_nullable
@@ -212,6 +225,7 @@ class _$JobPostingWorkersStateImpl implements _JobPostingWorkersState {
       {required this.status,
       required this.message,
       required this.title,
+      required this.applicants,
       required this.participants,
       required this.workStartDate,
       required this.workEndDate,
@@ -226,6 +240,8 @@ class _$JobPostingWorkersStateImpl implements _JobPostingWorkersState {
   final String message;
   @override
   final String title;
+  @override
+  final int applicants;
   @override
   final int participants;
   @override
@@ -247,7 +263,7 @@ class _$JobPostingWorkersStateImpl implements _JobPostingWorkersState {
 
   @override
   String toString() {
-    return 'JobPostingWorkersState(status: $status, message: $message, title: $title, participants: $participants, workStartDate: $workStartDate, workEndDate: $workEndDate, list: $list, isLast: $isLast, jobPostingId: $jobPostingId)';
+    return 'JobPostingWorkersState(status: $status, message: $message, title: $title, applicants: $applicants, participants: $participants, workStartDate: $workStartDate, workEndDate: $workEndDate, list: $list, isLast: $isLast, jobPostingId: $jobPostingId)';
   }
 
   @override
@@ -258,6 +274,8 @@ class _$JobPostingWorkersStateImpl implements _JobPostingWorkersState {
             (identical(other.status, status) || other.status == status) &&
             (identical(other.message, message) || other.message == message) &&
             (identical(other.title, title) || other.title == title) &&
+            (identical(other.applicants, applicants) ||
+                other.applicants == applicants) &&
             (identical(other.participants, participants) ||
                 other.participants == participants) &&
             (identical(other.workStartDate, workStartDate) ||
@@ -276,6 +294,7 @@ class _$JobPostingWorkersStateImpl implements _JobPostingWorkersState {
       status,
       message,
       title,
+      applicants,
       participants,
       workStartDate,
       workEndDate,
@@ -298,6 +317,7 @@ abstract class _JobPostingWorkersState implements JobPostingWorkersState {
       {required final JobPostingWorkersStatus status,
       required final String message,
       required final String title,
+      required final int applicants,
       required final int participants,
       required final String workStartDate,
       required final String workEndDate,
@@ -311,6 +331,8 @@ abstract class _JobPostingWorkersState implements JobPostingWorkersState {
   String get message;
   @override
   String get title;
+  @override
+  int get applicants;
   @override
   int get participants;
   @override

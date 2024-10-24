@@ -50,6 +50,7 @@ class _ProfileImage extends StatelessWidget {
     return AspectRatio(
       aspectRatio: 1,
       child: Container(
+        clipBehavior: Clip.hardEdge,
         decoration: BoxDecoration(
           color: ColorName.teritary,
           borderRadius: BorderRadius.circular(20),
@@ -82,19 +83,22 @@ class _UserInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Text(
-          name,
-          style: context.textTheme.bodyMediumBold,
-        ),
-        const SizedBox(width: 1),
-        Text(
-          '$age${StringRes.yearsOld.tr}',
-          style: context.textTheme.bodySmall,
-        ),
-        const Spacer(),
-      ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 4),
+      child: Row(
+        children: [
+          Text(
+            name,
+            style: context.textTheme.bodyMediumBold,
+          ),
+          const SizedBox(width: 1),
+          Text(
+            '$age${StringRes.yearsOld.tr}',
+            style: context.textTheme.bodySmall,
+          ),
+          const Spacer(),
+        ],
+      ),
     );
   }
 }

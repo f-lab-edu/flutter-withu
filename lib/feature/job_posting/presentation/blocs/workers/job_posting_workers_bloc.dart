@@ -19,6 +19,7 @@ class JobPostingWorkersBloc
             status: JobPostingWorkersStatus.initial,
             message: '',
             title: '',
+            applicants: 0,
             participants: 0,
             workStartDate: '',
             workEndDate: '',
@@ -27,7 +28,8 @@ class JobPostingWorkersBloc
           ),
         ) {
     on<JobPostingWorkersIdStored>(_onIdStored);
-    on<JobPostingWorkersInitialized>(_onInitialized);
+    on<JobPostingWorkersSearched>(_onSearched);
+    on<JobPostingWorkersMessageCleared>(_onMessageCleared);
   }
 }
 
@@ -41,8 +43,8 @@ extension JobPostingWorkersBlocHandler on JobPostingWorkersBloc {
   }
 
   /// 초기화 작업
-  void _onInitialized(
-    JobPostingWorkersInitialized event,
+  void _onSearched(
+    JobPostingWorkersSearched event,
     Emitter<JobPostingWorkersState> emit,
   ) async {
     final jobPostingId = state.jobPostingId;
@@ -56,17 +58,19 @@ extension JobPostingWorkersBlocHandler on JobPostingWorkersBloc {
     final Either<JobPostingWorkersEntity> result =
         await useCase.searchJobPostingWorkers(
       jobPostingId: jobPostingId,
-      page: 0,
+      page: event.page,
     );
 
     result.when(success: (JobPostingWorkersEntity data) {
       emit(state.copyWith(
         status: JobPostingWorkersStatus.loaded,
         title: data.title,
+        applicants: data.applicants,
         participants: data.participants,
-        workStartDate: data.workStartDate.format('yyyy-MM-dd'),
-        workEndDate: data.workEndDate.format('yyyy-MM-dd'),
+        workStartDate: data.workStartDate.format('yy / MM / dd (E)'),
+        workEndDate: data.workEndDate.format('yy / MM / dd (E)'),
         list: data.workers,
+        isLast: data.workers.length < 10,
         message: '',
       ));
     }, fail: (String message) {
@@ -75,5 +79,13 @@ extension JobPostingWorkersBlocHandler on JobPostingWorkersBloc {
         message: message,
       ));
     });
+  }
+
+  /// 메시지 초기화
+  void _onMessageCleared(
+    JobPostingWorkersMessageCleared event,
+    Emitter<JobPostingWorkersState> emit,
+  ) {
+    emit(state.copyWith(message: ''));
   }
 }

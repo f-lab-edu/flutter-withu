@@ -11,7 +11,11 @@ class JobPostingWorkersIdStored extends JobPostingWorkersEvent {
 }
 
 /// 화면 초기화
-class JobPostingWorkersInitialized extends JobPostingWorkersEvent {}
+class JobPostingWorkersSearched extends JobPostingWorkersEvent {
+  final int page;
+
+  JobPostingWorkersSearched({required this.page});
+}
 
 /// 메시지 초기화
 class JobPostingWorkersMessageCleared extends JobPostingWorkersEvent {}

@@ -5,7 +5,7 @@ extension JobPostingWorkerDtoExt on JobPostingWorkerDto {
     required String id,
   }) {
     return JobPostingWorkerDto(
-      id: '',
+      id: id,
       workStatus: false,
       userInfo: SimpleUserDtoExt.mock(id: id),
       workStartTime: DateTime.now(),
