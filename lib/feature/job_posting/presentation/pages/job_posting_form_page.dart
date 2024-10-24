@@ -31,7 +31,8 @@ class JobPostingFormPage extends StatelessWidget {
       child: BlocListener<JobPostingFormBloc, JobPostingFormState>(
         listener: (context, state) {
           if (state.status.isSuccess) {
-            context.back();
+            // result: 수정 여부
+            context.router.maybePop(true);
           }
         },
         child: _JobPostingFormPage(),

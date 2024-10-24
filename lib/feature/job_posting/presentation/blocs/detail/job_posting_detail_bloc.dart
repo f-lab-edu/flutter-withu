@@ -25,6 +25,7 @@ class JobPostingDetailBloc
     on<OnDeletedJobPosting>(_onDeletedJobPosting);
     on<OnPressedUpdate>(_onPressedUpdate);
     on<OnPopForm>(_onPopForm);
+    on<JobPostingDetailRefreshed>(_onRefreshed);
   }
 
   /// 메시지 초기화 이벤트.
@@ -40,25 +41,10 @@ class JobPostingDetailBloc
     OnGettingDetailData event,
     Emitter<JobPostingDetailState> emit,
   ) async {
-    emit(state.copyWith(status: JobPostingDetailStatus.loading));
-
-    final Either<JobPostingDetailEntity> result = await useCase.getJobPosting(
+    await _fetchData(
       jobPostingId: event.id,
+      emit: emit,
     );
-
-    result.when(success: (JobPostingDetailEntity data) {
-      emit(state.copyWith(
-        status: JobPostingDetailStatus.success,
-        entity: data,
-        message: '',
-      ));
-    }, fail: (String message) {
-      emit(state.copyWith(
-        status: JobPostingDetailStatus.fail,
-        entity: null,
-        message: message,
-      ));
-    });
   }
 
   /// 공고 마감
@@ -143,7 +129,52 @@ class JobPostingDetailBloc
   }
 
   /// 수정화면에서 돌아왔을 때 이벤트.
-  void _onPopForm(OnPopForm event, Emitter<JobPostingDetailState> emit) {
+  void _onPopForm(
+    OnPopForm event,
+    Emitter<JobPostingDetailState> emit,
+  ) {
     emit(state.copyWith(status: JobPostingDetailStatus.success));
+  }
+
+  /// 리프레시
+  void _onRefreshed(
+    JobPostingDetailRefreshed event,
+    Emitter<JobPostingDetailState> emit,
+  ) async {
+    final jobPostingId = state.entity?.id;
+    if (jobPostingId == null) {
+      return;
+    }
+
+    await _fetchData(
+      jobPostingId: jobPostingId,
+      emit: emit,
+    );
+  }
+
+  /// 공고 상세 조회
+  Future _fetchData({
+    required String jobPostingId,
+    required Emitter<JobPostingDetailState> emit,
+  }) async {
+    emit(state.copyWith(status: JobPostingDetailStatus.loading));
+
+    final Either<JobPostingDetailEntity> result = await useCase.getJobPosting(
+      jobPostingId: jobPostingId,
+    );
+
+    result.when(success: (JobPostingDetailEntity data) {
+      emit(state.copyWith(
+        status: JobPostingDetailStatus.success,
+        entity: data,
+        message: '',
+      ));
+    }, fail: (String message) {
+      emit(state.copyWith(
+        status: JobPostingDetailStatus.fail,
+        entity: null,
+        message: message,
+      ));
+    });
   }
 }
