@@ -33,10 +33,10 @@ abstract class JobPostingUseCase {
   Future<Either<bool>> deleteJobPosting({
     required String jobPostingId,
   });
-  //
-  // /// 지원자 목록
-  // Future<ApiResponse<JobPostingWorkersDto>> searchJobPostingWorkers({
-  //   required String jobPostingId,
-  //   required int page,
-  // });
+
+  /// 지원자 목록
+  Future<Either<JobPostingWorkersEntity>> searchJobPostingWorkers({
+    required String jobPostingId,
+    required int page,
+  });
 }

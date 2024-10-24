@@ -28,7 +28,7 @@ class JobPostingWorkersEntity {
 }
 
 extension JobPostingWorkersEntityExt on JobPostingWorkersEntity {
-  JobPostingWorkersEntity fromDto(JobPostingWorkersDto dto) {
+  static JobPostingWorkersEntity fromDto(JobPostingWorkersDto dto) {
     return JobPostingWorkersEntity(
       title: dto.title,
       participants: dto.participants,
