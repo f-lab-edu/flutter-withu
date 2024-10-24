@@ -23,6 +23,8 @@ class JobPostingDetailBloc
     on<OnGettingDetailData>(_onGettingDetailData);
     on<OnClosedJobPosting>(_onClosedJobPosting);
     on<OnDeletedJobPosting>(_onDeletedJobPosting);
+    on<OnPressedUpdate>(_onPressedUpdate);
+    on<OnPopForm>(_onPopForm);
   }
 
   /// 메시지 초기화 이벤트.
@@ -130,5 +132,18 @@ class JobPostingDetailBloc
         );
       },
     );
+  }
+
+  /// 수정 클릭 이벤트
+  void _onPressedUpdate(
+    OnPressedUpdate event,
+    Emitter<JobPostingDetailState> emit,
+  ) {
+    emit(state.copyWith(status: JobPostingDetailStatus.pushUpdate));
+  }
+
+  /// 수정화면에서 돌아왔을 때 이벤트.
+  void _onPopForm(OnPopForm event, Emitter<JobPostingDetailState> emit) {
+    emit(state.copyWith(status: JobPostingDetailStatus.success));
   }
 }

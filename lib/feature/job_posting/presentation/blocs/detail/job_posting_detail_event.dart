@@ -17,3 +17,9 @@ class OnClosedJobPosting extends JobPostingDetailEvent {}
 
 /// 공고 삭제
 class OnDeletedJobPosting extends JobPostingDetailEvent {}
+
+/// 수정 클릭 이벤트
+class OnPressedUpdate extends JobPostingDetailEvent {}
+
+/// 수정화면에서 돌아왔을 때
+class OnPopForm extends JobPostingDetailEvent {}
