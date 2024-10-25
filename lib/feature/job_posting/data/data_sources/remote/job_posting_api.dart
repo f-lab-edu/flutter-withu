@@ -7,7 +7,7 @@ abstract class JobPostingApi extends API {
   final String path = '/job-postings';
 
   /// 공고 목록
-  FutureOr<List<JobPostingsItemModel>> fetchList({
+  FutureOr<ApiResponse<JobPostingsDto>> fetchList({
     required JobPostingStatusType status,
     required int page,
   });

@@ -5,7 +5,7 @@ import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:withu_app/core/core.dart';
 import 'package:withu_app/core/router/router.gr.dart';
 import 'package:withu_app/feature/feature.dart';
-import 'package:withu_app/feature/job_posting/domain/domain.dart';
+import 'package:withu_app/feature/job_posting/domain/entities/list/job_postings_item_entity.dart';
 import 'package:withu_app/gen/colors.gen.dart';
 import 'package:withu_app/shared/shared.dart';
 
@@ -130,7 +130,7 @@ class JobPostingsList<B extends JobPostingsBloc> extends StatefulWidget {
 
 class JobPostingsListState<B extends JobPostingsBloc>
     extends State<JobPostingsList> with AutomaticKeepAliveClientMixin {
-  final PagingController<int, JobPostingEntity> _pagingController =
+  final PagingController<int, JobPostingsItemEntity> _pagingController =
       PagingController(firstPageKey: 0);
 
   @override
@@ -164,7 +164,7 @@ class JobPostingsListState<B extends JobPostingsBloc>
       listeners: [
         BlocListener<B, JobPostingState>(
           listener: (context, state) {
-            if (state.status == JobPostingsStatus.success) {
+            if (state.status.isSuccess) {
               final isLast = state.isLast;
               if (isLast) {
                 _pagingController.appendLastPage(state.list);
@@ -176,10 +176,10 @@ class JobPostingsListState<B extends JobPostingsBloc>
           },
         ),
       ],
-      child: PagedListView<int, JobPostingEntity>(
+      child: PagedListView<int, JobPostingsItemEntity>(
         pagingController: _pagingController,
         padding: const EdgeInsets.symmetric(vertical: 20),
-        builderDelegate: PagedChildBuilderDelegate<JobPostingEntity>(
+        builderDelegate: PagedChildBuilderDelegate<JobPostingsItemEntity>(
           itemBuilder: (context, item, index) => JobPostingsItem(
               entity: item,
               onPressed: () async {

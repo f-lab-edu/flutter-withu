@@ -9,22 +9,23 @@ class JobPostingUseCaseImpl implements JobPostingUseCase {
 
   /// 공고 목록 조회
   @override
-  Future<List<JobPostingEntity>> searchJobPostings({
+  Future<Either<JobPostingsEntity>> searchJobPostings({
     required JobPostingStatusType status,
     required int page,
   }) async {
-    try {
-      final List<JobPostingsItemModel>? result =
-          await repository.searchJobPostings(
-        status: status,
-        page: page,
-      );
+    final result = await repository.searchJobPostings(
+      status: status,
+      page: page,
+    );
 
-      return result?.map(JobPostingEntity.fromModel).toList() ?? [];
-    } catch (e) {
-      logger.e(e);
-      return [];
-    }
+    return result.maybeWhen(
+      success: (JobPostingsDto dto) {
+        return Either.success(JobPostingsEntityParser.fromDto(dto));
+      },
+      orElse: () {
+        return Either.fail(StringRes.serverError.tr);
+      },
+    );
   }
 
   /// 공고 등록/수정

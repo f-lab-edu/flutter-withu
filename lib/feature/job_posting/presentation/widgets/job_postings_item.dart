@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:withu_app/core/core.dart';
-import 'package:withu_app/feature/job_posting/domain/domain.dart';
+import 'package:withu_app/feature/job_posting/domain/entities/list/job_postings_item_entity.dart';
 import 'package:withu_app/gen/colors.gen.dart';
 import 'package:withu_app/shared/shared.dart';
 
 /// 공고 목록 아이템
 class JobPostingsItem extends StatelessWidget {
-  final JobPostingEntity entity;
+  final JobPostingsItemEntity entity;
 
   final VoidCallback onPressed;
 
@@ -47,7 +47,7 @@ class JobPostingsItem extends StatelessWidget {
 }
 
 class _Information extends StatelessWidget {
-  final JobPostingEntity entity;
+  final JobPostingsItemEntity entity;
 
   const _Information({required this.entity});
 
@@ -97,7 +97,7 @@ class _Information extends StatelessWidget {
 }
 
 class _RightView extends StatelessWidget {
-  final JobPostingEntity entity;
+  final JobPostingsItemEntity entity;
 
   const _RightView({required this.entity});
 

@@ -14,3 +14,8 @@ abstract class PaginationDto<T> {
     required this.number,
   });
 }
+
+extension ParginationDtoUtils on PaginationDto {
+  /// 마지막 여부
+  bool get isLast => totalPages == number;
+}
