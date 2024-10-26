@@ -23,6 +23,7 @@ class JobPostingsBloc extends BaseBloc<JobPostingsEvent, JobPostingState> {
         ) {
     on<JobPostingsInitialized>(_onInitialized);
     on<JobPostingsNextPaginated>(_onNextPaginated);
+    on<JobPostingsRefreshed>(_onRefreshed);
   }
 
   void _onInitialized(
@@ -43,6 +44,17 @@ class JobPostingsBloc extends BaseBloc<JobPostingsEvent, JobPostingState> {
       page: event.page,
       emit: emit,
     );
+  }
+
+  void _onRefreshed(
+    JobPostingsRefreshed event,
+    Emitter<JobPostingState> emit,
+  ) async {
+    emit(state.copyWith(
+      status: BaseBlocStatus.refresh(),
+      isLast: false,
+      list: [],
+    ));
   }
 
   /// API: 공고 목록 조회

@@ -8,16 +8,24 @@ abstract class BaseBlocStatus {
 
   factory BaseBlocStatus.loading() => BaseBlocStatusLoading();
 
+  factory BaseBlocStatus.refresh() => BaseBlocStatusRefresh();
+
   factory BaseBlocStatus.success() => BaseBlocStatusSuccess();
 
   factory BaseBlocStatus.failure() => BaseBlocStatusFailure();
 
+  bool get isLoading => this is BaseBlocStatusLoading;
+
   bool get isSuccess => this is BaseBlocStatusSuccess;
+
+  bool get isRefresh => this is BaseBlocStatusRefresh;
 }
 
 class BaseBlocStatusInitial extends BaseBlocStatus {}
 
 class BaseBlocStatusLoading extends BaseBlocStatus {}
+
+class BaseBlocStatusRefresh extends BaseBlocStatus {}
 
 class BaseBlocStatusSuccess extends BaseBlocStatus {}
 

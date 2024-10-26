@@ -13,3 +13,6 @@ class JobPostingsNextPaginated extends JobPostingsEvent {
     required this.page,
   });
 }
+
+/// 리프레시
+class JobPostingsRefreshed extends JobPostingsEvent {}

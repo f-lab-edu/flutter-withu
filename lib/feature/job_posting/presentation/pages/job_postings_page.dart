@@ -159,11 +159,17 @@ class JobPostingsListState<B extends JobPostingsBloc>
                 _pagingController.appendPage(state.list, nextPageKey);
               }
             }
+
+            if (state.status.isRefresh) {
+              _pagingController.refresh();
+            }
           },
         ),
       ],
       child: RefreshIndicator(
-        onRefresh: pullToRefresh,
+        onRefresh: () async {
+          context.read<B>().add(JobPostingsRefreshed());
+        },
         backgroundColor: ColorName.teritary,
         color: ColorName.primary,
         child: PagedListView<int, JobPostingsItemEntity>(
@@ -178,8 +184,8 @@ class JobPostingsListState<B extends JobPostingsBloc>
                   entity: item,
                 );
 
-                if (result == true) {
-                  _pagingController.refresh();
+                if (result == true && context.mounted) {
+                  context.read<B>().add(JobPostingsRefreshed());
                 }
               },
             ),
@@ -193,6 +199,7 @@ class JobPostingsListState<B extends JobPostingsBloc>
 
   // Pull-to-Refresh
   Future<void> pullToRefresh() async {
+    context.read<JobPostingsBloc>().add(JobPostingsRefreshed());
     _pagingController.refresh();
   }
 
