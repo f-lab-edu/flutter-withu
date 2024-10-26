@@ -12,15 +12,17 @@ part 'job_postings_event.dart';
 part 'job_postings_bloc.freezed.dart';
 
 class JobPostingsBloc extends BaseBloc<JobPostingsEvent, JobPostingState> {
+  final JobPostingStatusType status;
   final JobPostingUseCase useCase;
 
   JobPostingsBloc({
+    required this.status,
     required this.useCase,
   }) : super(
           JobPostingState(status: BaseBlocStatus.initial()),
         ) {
     on<JobPostingsInitialized>(_onInitialized);
-    on<OnGettingListEvent>(_onGettingListEvent);
+    on<JobPostingsNextPaginated>(_onNextPaginated);
   }
 
   void _onInitialized(
@@ -28,18 +30,16 @@ class JobPostingsBloc extends BaseBloc<JobPostingsEvent, JobPostingState> {
     Emitter<JobPostingState> emit,
   ) async {
     await searchList(
-      type: event.type,
       page: 0,
       emit: emit,
     );
   }
 
-  _onGettingListEvent(
-    OnGettingListEvent event,
+  void _onNextPaginated(
+    JobPostingsNextPaginated event,
     Emitter<JobPostingState> emit,
   ) async {
     await searchList(
-      type: event.type,
       page: event.page,
       emit: emit,
     );
@@ -47,7 +47,6 @@ class JobPostingsBloc extends BaseBloc<JobPostingsEvent, JobPostingState> {
 
   /// API: 공고 목록 조회
   Future<void> searchList({
-    required JobPostingStatusType type,
     required int page,
     required Emitter<JobPostingState> emit,
   }) async {
@@ -57,7 +56,7 @@ class JobPostingsBloc extends BaseBloc<JobPostingsEvent, JobPostingState> {
     emit(state.copyWith(status: BaseBlocStatus.loading()));
 
     final Either<JobPostingsEntity> result = await useCase.searchJobPostings(
-      status: type,
+      status: status,
       page: page,
     );
 
@@ -76,17 +75,23 @@ class JobPostingsBloc extends BaseBloc<JobPostingsEvent, JobPostingState> {
   }
 }
 
-/// 임시저장 Bloc
-class JobPostingsTemporaryBloc extends JobPostingsBloc {
-  JobPostingsTemporaryBloc({required super.useCase});
-}
-
 /// 진행 Bloc
 class JobPostingsInProgressBloc extends JobPostingsBloc {
-  JobPostingsInProgressBloc({required super.useCase});
+  JobPostingsInProgressBloc({
+    required super.useCase,
+  }) : super(status: JobPostingStatusType.inProgress);
 }
 
 /// 마감 Bloc
 class JobPostingsClosedBloc extends JobPostingsBloc {
-  JobPostingsClosedBloc({required super.useCase});
+  JobPostingsClosedBloc({
+    required super.useCase,
+  }) : super(status: JobPostingStatusType.close);
+}
+
+/// 삭제 Bloc
+class JobPostingsDeleteBloc extends JobPostingsBloc {
+  JobPostingsDeleteBloc({
+    required super.useCase,
+  }) : super(status: JobPostingStatusType.delete);
 }

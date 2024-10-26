@@ -19,7 +19,7 @@ class JobPostingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<JobPostingsTemporaryBloc>(create: (context) => getIt()),
+        BlocProvider<JobPostingsDeleteBloc>(create: (context) => getIt()),
         BlocProvider<JobPostingsInProgressBloc>(create: (context) => getIt()),
         BlocProvider<JobPostingsClosedBloc>(create: (context) => getIt()),
         BlocProvider<JobPostingsTabBloc>(create: (context) => getIt()),
@@ -94,20 +94,14 @@ class JobPostingsListPage extends StatelessWidget {
     return BlocBuilder<JobPostingsTabBloc, BaseTabState>(
       builder: (context, state) {
         final selectedType =
-            state.selectedTab?.value ?? JobPostingStatusType.temporary;
+            state.selectedTab?.value ?? JobPostingStatusType.inProgress;
 
         return IndexedStack(
           index: JobPostingStatusType.values.indexOf(selectedType),
           children: const [
-            JobPostingsList<JobPostingsTemporaryBloc>(
-              type: JobPostingStatusType.temporary,
-            ),
-            JobPostingsList<JobPostingsInProgressBloc>(
-              type: JobPostingStatusType.inProgress,
-            ),
-            JobPostingsList<JobPostingsClosedBloc>(
-              type: JobPostingStatusType.closed,
-            ),
+            JobPostingsList<JobPostingsInProgressBloc>(),
+            JobPostingsList<JobPostingsClosedBloc>(),
+            JobPostingsList<JobPostingsDeleteBloc>(),
           ],
         );
       },
@@ -117,12 +111,7 @@ class JobPostingsListPage extends StatelessWidget {
 
 /// 공고 목록 - 리스트
 class JobPostingsList<B extends JobPostingsBloc> extends StatefulWidget {
-  final JobPostingStatusType type;
-
-  const JobPostingsList({
-    super.key,
-    required this.type,
-  });
+  const JobPostingsList({super.key});
 
   @override
   State<StatefulWidget> createState() => JobPostingsListState<B>();
@@ -131,7 +120,9 @@ class JobPostingsList<B extends JobPostingsBloc> extends StatefulWidget {
 class JobPostingsListState<B extends JobPostingsBloc>
     extends State<JobPostingsList> with AutomaticKeepAliveClientMixin {
   final PagingController<int, JobPostingsItemEntity> _pagingController =
-      PagingController(firstPageKey: 0);
+      PagingController(
+    firstPageKey: 0,
+  );
 
   @override
   bool get wantKeepAlive => true;
@@ -140,12 +131,7 @@ class JobPostingsListState<B extends JobPostingsBloc>
   void initState() {
     _pagingController.addPageRequestListener(
       (pageKey) {
-        context.read<B>().add(
-              OnGettingListEvent(
-                type: widget.type,
-                page: pageKey,
-              ),
-            );
+        context.read<B>().add(JobPostingsNextPaginated(page: pageKey));
       },
     );
     super.initState();
@@ -176,37 +162,63 @@ class JobPostingsListState<B extends JobPostingsBloc>
           },
         ),
       ],
-      child: PagedListView<int, JobPostingsItemEntity>(
-        pagingController: _pagingController,
-        padding: const EdgeInsets.symmetric(vertical: 20),
-        builderDelegate: PagedChildBuilderDelegate<JobPostingsItemEntity>(
-          itemBuilder: (context, item, index) => JobPostingsItem(
-            entity: item,
-            onPressed: () async {
-              final bool? result = await context.router.push<bool>(
-                // JobPostingDetailRoute(jobPostingId: item.id),
-                JobPostingWorkersRoute(jobPostingId: item.id),
-              );
+      child: RefreshIndicator(
+        onRefresh: pullToRefresh,
+        backgroundColor: ColorName.teritary,
+        color: ColorName.primary,
+        child: PagedListView<int, JobPostingsItemEntity>(
+          pagingController: _pagingController,
+          padding: const EdgeInsets.symmetric(vertical: 20),
+          builderDelegate: PagedChildBuilderDelegate<JobPostingsItemEntity>(
+            itemBuilder: (context, item, index) => JobPostingsItem(
+              entity: item,
+              onPressed: () async {
+                final bool? result = await _navigate(
+                  context: context,
+                  entity: item,
+                );
 
-              if (result == true) {
-                // TODO: 리프레시 추가.
-              }
-            },
+                if (result == true) {
+                  _pagingController.refresh();
+                }
+              },
+            ),
+            firstPageProgressIndicatorBuilder: (context) => _emptyView(),
+            noItemsFoundIndicatorBuilder: (context) => _emptyView(),
           ),
-          firstPageProgressIndicatorBuilder: (context) => _emptyView(),
-          noItemsFoundIndicatorBuilder: (context) => _emptyView(),
         ),
       ),
     );
+  }
+
+  // Pull-to-Refresh
+  Future<void> pullToRefresh() async {
+    _pagingController.refresh();
   }
 
   /// 페이지 비어있을 때.
   Widget _emptyView() {
     return Center(
       child: Text(
-        '저장된 공고가 없습니다!',
+        StringRes.noSavedJobPosting.tr,
         style: context.textTheme.bodyMedium,
       ),
+    );
+  }
+
+  /// 화면 이동 작업
+  Future<bool?> _navigate({
+    required BuildContext context,
+    required JobPostingsItemEntity entity,
+  }) {
+    if (entity.status.isInProgress) {
+      return context.router.push<bool>(
+        JobPostingWorkersRoute(jobPostingId: entity.id),
+      );
+    }
+
+    return context.router.push<bool>(
+      JobPostingDetailRoute(jobPostingId: entity.id),
     );
   }
 }

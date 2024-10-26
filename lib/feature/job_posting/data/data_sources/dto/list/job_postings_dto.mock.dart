@@ -2,7 +2,8 @@ part of 'job_postings_dto.dart';
 
 extension JobPostingsDtoMock on JobPostingsDto {
   static JobPostingsDto mock({
-    int page = 0,
+    required int page,
+    required JobPostingStatusType status,
   }) {
     const int totalElements = 27;
     const int size = 10;
@@ -11,6 +12,7 @@ extension JobPostingsDtoMock on JobPostingsDto {
       length,
       (int index) => JobPostingsItemDtoMock.mock(
         id: '${(page * size) + index}',
+        status: status,
       ),
     );
 

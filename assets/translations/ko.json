@@ -60,5 +60,7 @@
   "leaveWork": "퇴근",
   "attendanceScheduled": "출근예정",
   "attendanceCompleted": "출근완료",
-  "noApplicants": "지원자가 없습니다."
+  "noApplicants": "지원자가 없습니다.",
+  "closingRecruitment": "모집마감",
+  "noSavedJobPosting": "저장된 공고가 없습니다!"
 }

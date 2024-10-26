@@ -42,7 +42,7 @@ const _$JobCategoryTypeEnumMap = {
 };
 
 const _$JobPostingStatusTypeEnumMap = {
-  JobPostingStatusType.temporary: 'temporary',
-  JobPostingStatusType.inProgress: 'inProgress',
-  JobPostingStatusType.closed: 'closed',
+  JobPostingStatusType.inProgress: 'IN_PROGRESS',
+  JobPostingStatusType.close: 'CLOSE',
+  JobPostingStatusType.delete: 'DELETE',
 };

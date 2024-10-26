@@ -12,19 +12,19 @@ class JobPostingMockApi extends JobPostingApi with MockAPI {
   }) async {
     try {
       dioAdapter.onGet(
-        path,
+        '$path?page=$page&status=${status.serverKey}',
         (server) => server.reply(
           200,
-          JobPostingsDtoMock.mock(page: page),
+          JobPostingsDtoMock.mock(
+            page: page,
+            status: status,
+          ).toJson(),
           delay: const Duration(seconds: 1),
         ),
       );
 
       final response = await dio.get(
-        path,
-        queryParameters: {
-          'page': page,
-        },
+        '$path?page=$page&status=${status.serverKey}',
       );
 
       if (response.statusCode == 200) {

@@ -18,6 +18,10 @@ class JobPostingsItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final crossAlign = entity.status.isInProgress
+        ? CrossAxisAlignment.end
+        : CrossAxisAlignment.center;
+
     return InkWell(
       splashColor: Colors.transparent,
       onTap: onPressed,
@@ -33,7 +37,7 @@ class JobPostingsItem extends StatelessWidget {
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.end,
+          crossAxisAlignment: crossAlign,
           children: [
             Expanded(
               child: _Information(entity: entity),
@@ -104,29 +108,18 @@ class _RightView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     switch (entity.status) {
-      case JobPostingStatusType.temporary:
-        return const _TemporaryView();
       case JobPostingStatusType.inProgress:
         return _InProgressView(
           max: entity.maxMemberCount,
           current: entity.currentMemberCount,
         );
-      case JobPostingStatusType.closed:
+      case JobPostingStatusType.close:
         return const _ClosedView();
+      case JobPostingStatusType.delete:
+        return const _Delete();
+      default:
+        return const SizedBox();
     }
-  }
-}
-
-/// 임시저장
-class _TemporaryView extends StatelessWidget {
-  const _TemporaryView();
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      StringRes.temporarySave.tr,
-      style: context.textTheme.bodySmall,
-    );
   }
 }
 
@@ -171,7 +164,20 @@ class _ClosedView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      StringRes.closed.tr,
+      StringRes.closingRecruitment.tr,
+      style: context.textTheme.bodySmall,
+    );
+  }
+}
+
+/// 삭제
+class _Delete extends StatelessWidget {
+  const _Delete();
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      StringRes.delete.tr,
       style: context.textTheme.bodySmall,
     );
   }

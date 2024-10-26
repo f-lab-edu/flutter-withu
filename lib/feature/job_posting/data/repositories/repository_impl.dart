@@ -16,7 +16,10 @@ class JobPostingRepositoryImpl implements JobPostingRepository {
     required JobPostingStatusType status,
     required int page,
   }) async {
-    return await api.fetchList(status: status, page: page);
+    return await api.fetchList(
+      status: status,
+      page: page,
+    );
   }
 
   /// 공고 등록
