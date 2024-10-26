@@ -17,5 +17,5 @@ abstract class PaginationDto<T> {
 
 extension ParginationDtoUtils on PaginationDto {
   /// 마지막 여부
-  bool get isLast => totalPages == number;
+  bool get isLast => totalPages == (number + 1);
 }

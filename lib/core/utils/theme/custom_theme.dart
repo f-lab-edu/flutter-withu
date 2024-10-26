@@ -7,14 +7,30 @@ class CustomTheme {
   static ThemeData get theme {
     return ThemeData(
       primaryColor: ColorName.primary,
-      textSelectionTheme: const TextSelectionThemeData(
-        cursorColor: ColorName.primary,
-      ),
-      highlightColor: ColorName.teritary, // PopupMenu selected color
+      textSelectionTheme: textSelectionTheme,
       textTheme: textTheme,
+      progressIndicatorTheme: progressTheme,
+
+      /// PopupMenu selected color
+      highlightColor: ColorName.teritary,
     );
   }
 
+  /// Indicator Theme
+  static ProgressIndicatorThemeData get progressTheme {
+    return const ProgressIndicatorThemeData(
+      color: ColorName.annotations,
+    );
+  }
+
+  /// Text Input related
+  static TextSelectionThemeData get textSelectionTheme {
+    return const TextSelectionThemeData(
+      cursorColor: ColorName.primary,
+    );
+  }
+
+  /// 텍스트 테마
   static TextTheme get textTheme {
     return const TextTheme(
       headlineLarge: TextStyle(

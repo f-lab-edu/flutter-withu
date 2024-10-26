@@ -51,6 +51,9 @@ class JobPostingsBloc extends BaseBloc<JobPostingsEvent, JobPostingState> {
     required int page,
     required Emitter<JobPostingState> emit,
   }) async {
+    if (state.isLast) {
+      return;
+    }
     emit(state.copyWith(status: BaseBlocStatus.loading()));
 
     final Either<JobPostingsEntity> result = await useCase.searchJobPostings(

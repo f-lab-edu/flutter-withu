@@ -12,7 +12,7 @@ class JobPostingMockApi extends JobPostingApi with MockAPI {
   }) async {
     try {
       dioAdapter.onGet(
-        url,
+        path,
         (server) => server.reply(
           200,
           JobPostingsDtoMock.mock(page: page),
@@ -20,7 +20,12 @@ class JobPostingMockApi extends JobPostingApi with MockAPI {
         ),
       );
 
-      final response = await dio.get(url);
+      final response = await dio.get(
+        path,
+        queryParameters: {
+          'page': page,
+        },
+      );
 
       if (response.statusCode == 200) {
         return ApiResponse.success(

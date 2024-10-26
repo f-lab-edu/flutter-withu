@@ -181,17 +181,18 @@ class JobPostingsListState<B extends JobPostingsBloc>
         padding: const EdgeInsets.symmetric(vertical: 20),
         builderDelegate: PagedChildBuilderDelegate<JobPostingsItemEntity>(
           itemBuilder: (context, item, index) => JobPostingsItem(
-              entity: item,
-              onPressed: () async {
-                final bool? result = await context.router.push<bool>(
-                  // JobPostingDetailRoute(jobPostingId: item.id),
-                  JobPostingWorkersRoute(jobPostingId: item.id),
-                );
+            entity: item,
+            onPressed: () async {
+              final bool? result = await context.router.push<bool>(
+                // JobPostingDetailRoute(jobPostingId: item.id),
+                JobPostingWorkersRoute(jobPostingId: item.id),
+              );
 
-                if (result == true) {
-                  // TODO: 리프레시 추가.
-                }
-              }),
+              if (result == true) {
+                // TODO: 리프레시 추가.
+              }
+            },
+          ),
           firstPageProgressIndicatorBuilder: (context) => _emptyView(),
           noItemsFoundIndicatorBuilder: (context) => _emptyView(),
         ),

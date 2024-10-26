@@ -130,7 +130,7 @@ class _$JobPostingStateImpl implements _JobPostingState {
   _$JobPostingStateImpl(
       {required this.status,
       final List<JobPostingsItemEntity> list = const [],
-      this.isLast = true})
+      this.isLast = false})
       : _list = list;
 
   /// 상태.
