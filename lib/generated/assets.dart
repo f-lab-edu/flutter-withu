@@ -3,6 +3,7 @@ class Assets {
   Assets._();
 
   static const String colorColors = 'assets/color/colors.xml';
+  static const String imagesPlus = 'assets/images/plus.svg';
   static const String translationsKo = 'assets/translations/ko.json';
 
 }

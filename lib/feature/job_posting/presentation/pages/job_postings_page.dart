@@ -6,6 +6,7 @@ import 'package:withu_app/core/core.dart';
 import 'package:withu_app/core/router/router.gr.dart';
 import 'package:withu_app/feature/feature.dart';
 import 'package:withu_app/feature/job_posting/domain/entities/list/job_postings_item_entity.dart';
+import 'package:withu_app/gen/assets.gen.dart';
 import 'package:withu_app/gen/colors.gen.dart';
 import 'package:withu_app/shared/shared.dart';
 
@@ -41,10 +42,9 @@ class _JobPostingsPage extends StatelessWidget {
         onPressed: () {
           context.pushRoute(JobPostingFormRoute());
         },
-        child: const Icon(
-          Icons.add,
-          size: 30,
-          color: Colors.white,
+        child: Assets.images.plus.svg(
+          width: 30,
+          height: 30,
         ),
       ),
       child: SafeArea(
