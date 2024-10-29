@@ -35,6 +35,7 @@ Map<String, dynamic> _$$JobPostingsItemModelImplToJson(
     };
 
 const _$JobCategoryTypeEnumMap = {
+  JobCategoryType.none: '',
   JobCategoryType.photography: 'PHOTOGRAPHY',
   JobCategoryType.catering: 'CATERING',
   JobCategoryType.foodStyling: 'FOOD_STYLING',
@@ -42,7 +43,8 @@ const _$JobCategoryTypeEnumMap = {
 };
 
 const _$JobPostingStatusTypeEnumMap = {
-  JobPostingStatusType.temporary: 'temporary',
-  JobPostingStatusType.inProgress: 'inProgress',
-  JobPostingStatusType.closed: 'closed',
+  JobPostingStatusType.none: '',
+  JobPostingStatusType.temporary: 'TEMPORARY',
+  JobPostingStatusType.inProgress: 'IN_PROGRESS',
+  JobPostingStatusType.closed: 'CLOSED',
 };

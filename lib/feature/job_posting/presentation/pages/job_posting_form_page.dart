@@ -208,7 +208,7 @@ class _CategorySelect extends StatelessWidget {
     return BlocBuilder<JobPostingFormBloc, JobPostingFormState>(
       builder: (context, state) {
         return Row(
-          children: JobCategoryType.values
+          children: JobCategoryType.valuesWithoutNone
               .map(
                 (category) => RadioChip(
                   text: category.tr,
@@ -239,7 +239,7 @@ class _ContractType extends StatelessWidget {
         children: [
           _FieldName(text: StringRes.periodFormat.tr),
           const Spacer(),
-          ...ContractType.values.map(
+          ...ContractType.valuesWithoutNone.map(
             (type) => RadioChip(
               text: type.tr,
               isSelected: state.contractType == type,
@@ -591,7 +591,7 @@ class _PayTypeState extends State<_PayType> {
         return Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            ...PayType.values.map(
+            ...PayType.valuesWithoutNone.map(
               (type) => RadioChip(
                 text: type.tr,
                 isSelected: type == state.payType,

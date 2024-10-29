@@ -25,18 +25,18 @@ class JobPostingFormState extends Equatable {
   final ContractType contractType;
 
   /// 계약 시작 날짜
-  final DateTime? contractStartDate;
+  final DateTime contractStartDate;
 
   String get contractStartDateStr =>
-      contractStartDate?.format('yyyy-MM-dd') ?? '';
+      contractStartDate.format('yyyy-MM-dd');
 
   /// 계약 시작 달력 노출 여부
   final bool isVisibleStartCalendar;
 
   /// 계약 종료 날짜
-  final DateTime? contractEndDate;
+  final DateTime contractEndDate;
 
-  String get contractEndDateStr => contractEndDate?.format('yyyy-MM-dd') ?? '';
+  String get contractEndDateStr => contractEndDate.format('yyyy-MM-dd');
 
   /// 계약 종료 달력 노출 여부
   final bool isVisibleEndCalendar;
@@ -82,13 +82,13 @@ class JobPostingFormState extends Equatable {
 
   const JobPostingFormState({
     required this.status,
+    required this.contractStartDate,
+    required this.contractEndDate,
     this.title = '',
     this.content = '',
     this.category = JobCategoryType.none,
     this.contractType = ContractType.none,
-    this.contractStartDate,
     this.isVisibleStartCalendar = false,
-    this.contractEndDate,
     this.isVisibleEndCalendar = false,
     this.isTBC = true,
     this.workStartTime,
@@ -188,6 +188,9 @@ extension JobPostingFormStateExt on JobPostingFormState {
   /// 등록/수정 요청 Entity로 변경
   JobPostingRequestEntity toEntity() {
     // TODO: companyId 추후 추가 예정
+    final payAmount = int.tryParse(pay) ?? 0;
+    final participants = int.tryParse(this.participants) ?? 0;
+
     return JobPostingRequestEntity(
       companyId: '1',
       title: title,
@@ -198,7 +201,7 @@ extension JobPostingFormStateExt on JobPostingFormState {
       contractEndDate: contractEndDate,
       isTBC: isTBC,
       payType: payType,
-      payAmount: pay,
+      payAmount: payAmount,
       workAddress: address,
       participants: participants,
       hasTravelTime: hasTravelTime,

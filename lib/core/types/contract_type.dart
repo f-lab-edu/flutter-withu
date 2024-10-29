@@ -30,4 +30,8 @@ enum ContractType with L10nKeyProvider {
 
   /// 장기 여부
   bool get isLong => this == ContractType.long;
+
+  /// None을 제외한 값들
+  static List<ContractType> get valuesWithoutNone =>
+      values.where((type) => type != none).toList();
 }

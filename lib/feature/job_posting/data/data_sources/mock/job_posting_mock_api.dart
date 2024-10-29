@@ -50,19 +50,12 @@ class JobPostingMockApi extends JobPostingApi with MockAPI {
   FutureOr<ApiResponse<JobPostingDetailDto>> create({
     required JobPostingRequestDto requestData,
   }) async {
-    final JobPostingDetailDto responseData = JobPostingDetailDto.fromJson({
-      'id': '1',
-      'latitude': 37.5664056,
-      'longitude': 126.9778222,
-      ...requestData.toJson(),
-    });
-
     try {
       dioAdapter.onPost(
         url,
         (server) => server.reply(
           200,
-          responseData.toJson(),
+          JobPostingDetailDtoMock.mock(id: '1'),
           delay: const Duration(seconds: 1),
         ),
       );
@@ -79,6 +72,7 @@ class JobPostingMockApi extends JobPostingApi with MockAPI {
         FailResponse.fromJson(response.data),
       );
     } catch (e) {
+      logger.e(e);
       return const ApiResponse.error();
     }
   }

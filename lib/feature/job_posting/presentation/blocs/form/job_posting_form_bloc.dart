@@ -13,7 +13,11 @@ class JobPostingFormBloc
 
   JobPostingFormBloc({
     required this.useCase,
-  }) : super(const JobPostingFormState(status: JobPostingFormStatus.initial)) {
+  }) : super(JobPostingFormState(
+          status: JobPostingFormStatus.initial,
+          contractStartDate: DateTime.now(),
+          contractEndDate: DateTime.now(),
+        )) {
     on<OnChangedTitle>(_onChangedTitle);
     on<OnChangedContent>(_onChangedContent);
     on<OnPressedJobCategory>(_onPressedJobCategory);

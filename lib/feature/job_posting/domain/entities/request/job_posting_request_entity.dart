@@ -1,6 +1,10 @@
 import 'package:withu_app/core/core.dart';
 import 'package:withu_app/feature/job_posting/data/data.dart';
 
+part 'job_posting_request_entity.validator.dart';
+
+part 'job_posting_request_entity.parser.dart';
+
 /// 공고 등록/수정 요청 엔티티
 class JobPostingRequestEntity {
   /// 회사 ID
@@ -19,10 +23,10 @@ class JobPostingRequestEntity {
   final ContractType contractType;
 
   /// 근로 시작 날
-  final DateTime? contractStartDate;
+  final DateTime contractStartDate;
 
   /// 근로 종료 날짜
-  final DateTime? contractEndDate;
+  final DateTime contractEndDate;
 
   /// 시간 미정 여부
   final bool isTBC;
@@ -31,13 +35,13 @@ class JobPostingRequestEntity {
   final PayType payType;
 
   /// 금액
-  final String payAmount;
+  final int payAmount;
 
   /// 근무지 주소
   final String workAddress;
 
   /// 모집인원
-  final String participants;
+  final int participants;
 
   /// 이동시간 유무
   final bool hasTravelTime;
@@ -77,61 +81,12 @@ class JobPostingRequestEntity {
     required this.preferredQualifications,
     required this.workStartTime,
     required this.workEndTime,
+    required this.contractStartDate,
+    required this.contractEndDate,
     this.categoryType = JobCategoryType.none,
     this.contractType = ContractType.none,
     this.payType = PayType.none,
-    this.contractStartDate,
-    this.contractEndDate,
     this.isTravelTimePaid,
     this.isBreakTimePaid,
   });
-}
-
-extension JobPostingRequestEntityExt on JobPostingRequestEntity {
-  /// DTO로 변경
-  JobPostingRequestDto? toDto() {
-    final categoryType = this.categoryType;
-    final contractType = this.contractType;
-    final startDate = contractStartDate;
-    final endDate =
-        contractType == ContractType.short ? startDate : contractEndDate;
-    final payType = this.payType;
-    final payAmount = int.tryParse(this.payAmount);
-    final participants = int.tryParse(this.participants);
-
-    if (categoryType.isNone ||
-        contractType.isNone ||
-        payType.isNone ||
-        startDate == null ||
-        endDate == null ||
-        payAmount == null ||
-        participants == null) {
-      return null;
-    }
-
-    // TODO: companyId, isUrgent 추가 예정.
-    return JobPostingRequestDto(
-      companyId: '1',
-      title: title,
-      content: content,
-      specialtyField: categoryType.serverKey,
-      contractType: contractType.serverKey,
-      contractStartDate: startDate,
-      contractEndDate: endDate,
-      isTimeUndecided: isTBC,
-      payType: payType.serverKey,
-      payAmount: payAmount,
-      workAddress: workAddress,
-      participants: participants,
-      hasTravelTime: hasTravelTime,
-      isTravelTimePaid: isTravelTimePaid,
-      hasBreakTime: hasBreakTime,
-      isBreakTimePaid: isBreakTimePaid,
-      isMealProvided: isMealProvided,
-      preferredQualifications: preferredQualifications,
-      workStartTime: workStartTime,
-      workEndTime: workEndTime,
-      isUrgent: false,
-    );
-  }
 }
