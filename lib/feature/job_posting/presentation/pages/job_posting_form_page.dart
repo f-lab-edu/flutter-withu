@@ -263,7 +263,7 @@ class _ContractStartDate extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<JobPostingFormBloc, JobPostingFormState>(
       builder: (context, state) {
-        final fieldName = state.contractType?.isLong == true
+        final fieldName = state.contractType.isLong == true
             ? StringRes.workContractStartPeriod.tr
             : StringRes.workContractPeriod.tr;
         return Row(
@@ -347,7 +347,7 @@ class _ContractEndDate extends StatelessWidget {
     return BlocBuilder<JobPostingFormBloc, JobPostingFormState>(
       builder: (context, state) {
         return Visibility(
-          visible: state.contractType?.isLong == true,
+          visible: state.contractType.isLong == true,
           child: Row(
             children: [
               _FieldName(text: StringRes.workContractEndPeriod.tr),
@@ -386,7 +386,7 @@ class _ContractEndCalendar extends StatelessWidget {
         builder: (context, state) {
       return Visibility(
         visible:
-            state.contractType?.isLong == true && state.isVisibleEndCalendar,
+            state.contractType.isLong == true && state.isVisibleEndCalendar,
         child: Container(
           margin: const EdgeInsets.only(top: 14),
           padding: const EdgeInsets.only(top: 8),

@@ -104,12 +104,12 @@ extension on JobPostingUseCase {
       return false;
     }
 
-    if (entity.categoryType == null) {
+    if (entity.categoryType.isNone) {
       logger.i('카테고리를 선택해 주세요.');
       return false;
     }
 
-    if (entity.contractType == null) {
+    if (entity.contractType.isNone) {
       logger.i('기간형식을 선택해 주세요.');
       return false;
     }
@@ -141,7 +141,7 @@ extension on JobPostingUseCase {
       return false;
     }
 
-    if (entity.payType == null) {
+    if (entity.payType.isNone) {
       logger.i('급여 방법을 선택해 주세요.');
       return false;
     }
