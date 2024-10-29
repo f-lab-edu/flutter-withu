@@ -4,6 +4,8 @@ import 'package:withu_app/core/core.dart';
 /// 급여 타입
 @JsonEnum(valueField: 'serverKey')
 enum PayType with L10nKeyProvider {
+  none(l10nKey: '', serverKey: ''),
+
   /// 시급
   hour(l10nKey: 'hourlyWage', serverKey: 'HOURLY'),
 
@@ -19,4 +21,7 @@ enum PayType with L10nKeyProvider {
     required this.l10nKey,
     required this.serverKey,
   });
+
+  /// None 여부
+  bool get isNone => this == PayType.none;
 }

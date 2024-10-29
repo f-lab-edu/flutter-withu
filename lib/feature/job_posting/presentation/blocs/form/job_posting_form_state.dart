@@ -8,7 +8,6 @@ extension JobPostingFormStatusExt on JobPostingFormStatus {
   bool get isLoading => this == JobPostingFormStatus.loading;
 }
 
-// TODO: 내용이 길면 Sub File 로 분리.
 class JobPostingFormState extends Equatable {
   /// 상태값
   final JobPostingFormStatus status;
@@ -20,10 +19,10 @@ class JobPostingFormState extends Equatable {
   final String content;
 
   /// 카테고리
-  final JobCategoryType? category;
+  final JobCategoryType category;
 
   /// 기간 형식
-  final ContractType? contractType;
+  final ContractType contractType;
 
   /// 계약 시작 날짜
   final DateTime? contractStartDate;
@@ -55,7 +54,7 @@ class JobPostingFormState extends Equatable {
   final String participants;
 
   /// 급여 타입
-  final PayType? payType;
+  final PayType payType;
 
   /// 급여
   final String pay;
@@ -85,8 +84,8 @@ class JobPostingFormState extends Equatable {
     required this.status,
     this.title = '',
     this.content = '',
-    this.category,
-    this.contractType,
+    this.category = JobCategoryType.none,
+    this.contractType = ContractType.none,
     this.contractStartDate,
     this.isVisibleStartCalendar = false,
     this.contractEndDate,
@@ -95,7 +94,7 @@ class JobPostingFormState extends Equatable {
     this.workStartTime,
     this.workEndTime,
     this.participants = '',
-    this.payType,
+    this.payType = PayType.none,
     this.pay = '',
     this.address = '',
     this.preferredQualifications = '',

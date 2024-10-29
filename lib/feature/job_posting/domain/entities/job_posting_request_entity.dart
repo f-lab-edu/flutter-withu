@@ -13,10 +13,10 @@ class JobPostingRequestEntity {
   final String content;
 
   /// 카테고리
-  final JobCategoryType? categoryType;
+  final JobCategoryType categoryType;
 
   /// 계약 타입: 단기, 장기
-  final ContractType? contractType;
+  final ContractType contractType;
 
   /// 근로 시작 날
   final DateTime? contractStartDate;
@@ -28,7 +28,7 @@ class JobPostingRequestEntity {
   final bool isTBC;
 
   /// 급여 타입: 시급, 일급
-  final PayType? payType;
+  final PayType payType;
 
   /// 금액
   final String payAmount;
@@ -77,11 +77,11 @@ class JobPostingRequestEntity {
     required this.preferredQualifications,
     required this.workStartTime,
     required this.workEndTime,
-    this.categoryType,
-    this.contractType,
+    this.categoryType = JobCategoryType.none,
+    this.contractType = ContractType.none,
+    this.payType = PayType.none,
     this.contractStartDate,
     this.contractEndDate,
-    this.payType,
     this.isTravelTimePaid,
     this.isBreakTimePaid,
   });
@@ -99,11 +99,11 @@ extension JobPostingRequestEntityExt on JobPostingRequestEntity {
     final payAmount = int.tryParse(this.payAmount);
     final participants = int.tryParse(this.participants);
 
-    if (categoryType == null ||
-        contractType == null ||
+    if (categoryType.isNone ||
+        contractType.isNone ||
+        payType.isNone ||
         startDate == null ||
         endDate == null ||
-        payType == null ||
         payAmount == null ||
         participants == null) {
       return null;
