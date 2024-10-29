@@ -21,18 +21,8 @@ class JobPostingFormBloc
     required this.useCase,
   }) : super(JobPostingFormState(
           status: JobPostingFormStatus.initial,
-          title: '',
-          content: '',
-          participants: '',
-          pay: '',
-          address: '',
-          preferredQualifications: '',
-          isVisibleStartCalendar: false,
-          isVisibleEndCalendar: false,
-          isTBC: true,
-          hasTravelTime: false,
-          hasBreakTime: false,
-          isMealProvided: false,
+          contractStartDate: DateTime.now(),
+          contractEndDate: DateTime.now(),
         )) {
     on<OnChangedTitle>(_onChangedTitle);
     on<OnChangedContent>(_onChangedContent);
