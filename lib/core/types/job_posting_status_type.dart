@@ -24,8 +24,4 @@ enum JobPostingStatusType with L10nKeyProvider {
     required this.l10nKey,
     required this.serverKey,
   });
-
-  /// None을 제외한 값들
-  static List<JobPostingStatusType> get valuesWithoutNone =>
-      values.where((type) => type != none).toList();
 }

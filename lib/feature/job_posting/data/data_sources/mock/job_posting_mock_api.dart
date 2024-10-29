@@ -6,7 +6,7 @@ import 'package:withu_app/shared/data/data.dart';
 class JobPostingMockApi extends JobPostingApi with MockAPI {
   /// 공고 목록
   @override
-  FutureOr<List<JobPostingsItemModel>> fetchList({
+  FutureOr<List<JobPostingsItemModel>> search({
     required JobPostingStatusType status,
     required int page,
   }) async {
@@ -48,7 +48,7 @@ class JobPostingMockApi extends JobPostingApi with MockAPI {
 
   /// 공고 등록
   @override
-  FutureOr<ApiResponse<JobPostingDetailDto>> createJobPosting({
+  FutureOr<ApiResponse<JobPostingDetailDto>> create({
     required JobPostingRequestDto requestData,
   }) async {
     try {
@@ -121,8 +121,8 @@ class JobPostingMockApi extends JobPostingApi with MockAPI {
 
   /// 공고 상세 조회
   @override
-  FutureOr<ApiResponse<JobPostingDetailDto>> getJobPosting({
-    required String jobPostingId,
+  FutureOr<ApiResponse<JobPostingDetailDto>> get({
+    required String id,
   }) async {
     try {
       final fullPath = '$path/$jobPostingId';
@@ -131,7 +131,7 @@ class JobPostingMockApi extends JobPostingApi with MockAPI {
         fullPath,
         (server) => server.reply(
           200,
-          JobPostingDetailDto.mock(id: jobPostingId).toJson(),
+          JobPostingDetailDto.mock(id: id).toJson(),
           delay: const Duration(milliseconds: 300),
         ),
       );
@@ -154,8 +154,8 @@ class JobPostingMockApi extends JobPostingApi with MockAPI {
 
   /// 공고 마감
   @override
-  FutureOr<ApiResponse<JobPostingDetailDto>> closeJobPosting({
-    required String jobPostingId,
+  FutureOr<ApiResponse<JobPostingDetailDto>> close({
+    required String id,
   }) async {
     try {
       final fullPath = '$path/$jobPostingId';
@@ -164,7 +164,7 @@ class JobPostingMockApi extends JobPostingApi with MockAPI {
         fullPath,
         (server) => server.reply(
           200,
-          JobPostingDetailDto.mock(id: jobPostingId).toJson(),
+          JobPostingDetailDto.mock(id: id).toJson(),
           delay: const Duration(milliseconds: 1000),
         ),
       );

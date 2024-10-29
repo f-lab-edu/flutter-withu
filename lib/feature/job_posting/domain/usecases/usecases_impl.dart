@@ -1,21 +1,21 @@
 part of 'usecases.dart';
 
 class JobPostingUseCaseImpl implements JobPostingUseCase {
-  final JobPostingRepository repository;
+  final JobPostingRepository jobPostingRepo;
 
   JobPostingUseCaseImpl({
-    required this.repository,
+    required this.jobPostingRepo,
   });
 
   /// 공고 목록 조회
   @override
-  Future<List<JobPostingEntity>> searchJobPostings({
+  Future<List<JobPostingEntity>> search({
     required JobPostingStatusType status,
     required int page,
   }) async {
     try {
       final List<JobPostingsItemModel>? result =
-          await repository.searchJobPostings(
+          await jobPostingRepo.search(
         status: status,
         page: page,
       );
@@ -77,10 +77,10 @@ class JobPostingUseCaseImpl implements JobPostingUseCase {
 
   /// 공고 상세 조회
   @override
-  Future<Either<JobPostingDetailEntity>> getJobPosting({
+  Future<Either<JobPostingDetailEntity>> get({
     required String jobPostingId,
   }) async {
-    final result = await repository.getJobPosting(jobPostingId: jobPostingId);
+    final result = await jobPostingRepo.get(id: jobPostingId);
 
     return result.when(
       success: (JobPostingDetailDto dto) {
@@ -97,10 +97,10 @@ class JobPostingUseCaseImpl implements JobPostingUseCase {
 
   /// 공고 마감
   @override
-  Future<Either<JobPostingDetailEntity>> closeJobPosting({
+  Future<Either<JobPostingDetailEntity>> close({
     required String jobPostingId,
   }) async {
-    final result = await repository.closeJobPosting(jobPostingId: jobPostingId);
+    final result = await jobPostingRepo.close(id: jobPostingId);
 
     return result.when(
       success: (JobPostingDetailDto dto) {

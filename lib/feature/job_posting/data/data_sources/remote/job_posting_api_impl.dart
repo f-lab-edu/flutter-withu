@@ -53,12 +53,4 @@ class JobPostingApiImpl extends JobPostingApi {
   }) {
     return const ApiResponse.error();
   }
-
-  /// 공고 삭제
-  @override
-  FutureOr<ApiResponse<DeleteResponseDto>> deleteJobPosting({
-    required String jobPostingId,
-  }) {
-    return const ApiResponse.error();
-  }
 }
