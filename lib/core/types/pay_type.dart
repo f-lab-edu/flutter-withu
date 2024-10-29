@@ -24,8 +24,4 @@ enum PayType with L10nKeyProvider {
 
   /// None 여부
   bool get isNone => this == PayType.none;
-
-  /// None을 제외한 값들
-  static List<PayType> get valuesWithoutNone =>
-      values.where((type) => type != none).toList();
 }

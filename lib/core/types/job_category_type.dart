@@ -29,9 +29,5 @@ enum JobCategoryType with L10nKeyProvider {
   });
 
   /// None 여부
-  bool get isNone => this == none;
-
-  /// None을 제외한 값들
-  static List<JobCategoryType> get valuesWithoutNone =>
-      values.where((type) => type != none).toList();
+  bool get isNone => this == JobCategoryType.none;
 }
