@@ -214,7 +214,7 @@ class JobPostingFormBloc
   ) async {
     try {
       emit(state.copyWith(status: JobPostingFormStatus.loading));
-      final result = await useCase.createJobPosting(state.toEntity());
+      final result = await useCase.create(state.toEntity());
       if (result) {
         emit(state.copyWith(status: JobPostingFormStatus.success));
       } else {

@@ -22,7 +22,7 @@ class JobPostingsBloc extends Bloc<JobPostingsEvent, JobPostingState> {
   ) async {
     emit(state.copyWith(status: JobPostingsStatus.loading));
 
-    final List<JobPostingEntity> entities = await useCase.searchJobPostings(
+    final List<JobPostingEntity> entities = await useCase.search(
           status: event.type,
           page: event.page,
         ) ??

@@ -39,7 +39,7 @@ class JobPostingDetailBloc
   ) async {
     emit(state.copyWith(status: JobPostingDetailStatus.loading));
 
-    final Either<JobPostingDetailEntity> result = await useCase.getJobPosting(
+    final Either<JobPostingDetailEntity> result = await useCase.get(
       jobPostingId: event.id,
     );
 
@@ -71,7 +71,7 @@ class JobPostingDetailBloc
 
     emit(state.copyWith(status: JobPostingDetailStatus.loading));
 
-    final Either<JobPostingDetailEntity> result = await useCase.closeJobPosting(
+    final Either<JobPostingDetailEntity> result = await useCase.close(
       jobPostingId: jobPostingId,
     );
 
