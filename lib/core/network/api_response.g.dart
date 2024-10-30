@@ -9,9 +9,9 @@ part of 'api_response.dart';
 _$FailResponseImpl _$$FailResponseImplFromJson(Map<String, dynamic> json) =>
     _$FailResponseImpl(
       status: (json['status'] as num).toInt(),
-      error: json['error'] as String,
-      message: json['message'] as String,
-      devMessage: json['devMessage'] as String,
+      error: json['error'] as String? ?? '',
+      message: json['message'] as String? ?? '',
+      devMessage: json['devMessage'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$FailResponseImplToJson(_$FailResponseImpl instance) =>

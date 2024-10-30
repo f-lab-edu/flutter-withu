@@ -17,13 +17,19 @@ class ApiResponse<T> with _$ApiResponse<T> {
 abstract class FailResponse with _$FailResponse {
   const factory FailResponse({
     required int status,
-    required String error,
-    required String message,
-    required String devMessage,
+    @Default('') String error,
+    @Default('') String message,
+    @Default('') String devMessage,
   }) = _FailResponse;
 
   factory FailResponse.fromJson(Map<String, dynamic> json) =>
       _$FailResponseFromJson(json);
+
+  /// 서버 에러 시.
+  factory FailResponse.error() => const FailResponse(
+        status: 500,
+        message: '서버 에러',
+      );
 }
 
 extension ApiResponseExt on ApiResponse {
