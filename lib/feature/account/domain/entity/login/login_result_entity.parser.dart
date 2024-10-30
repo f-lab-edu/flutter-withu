@@ -1,6 +1,11 @@
 part of 'login_result_entity.dart';
 
 extension LoginResultEntityParser on LoginResultEntity {
+  /// isLoggedIn -> Bloc Status
+  BaseBlocStatus get blocStatus =>
+      isLoggedIn ? BaseBlocStatus.success() : BaseBlocStatus.failure();
+
+  /// Dto -> Entity
   static LoginResultEntity fromDto({
     required ApiResponse<LoginResponseDto> result,
   }) {
