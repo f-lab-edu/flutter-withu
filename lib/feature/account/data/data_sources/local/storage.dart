@@ -6,7 +6,7 @@ part 'storage_impl.dart';
 
 abstract class AccountStorage {
   /// 세션 Id 불러오기
-  Future<String?> getSessionId();
+  Future<String> getSessionId();
 
   /// 세션 Id 저장
   void setSessionId({

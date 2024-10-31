@@ -6,7 +6,7 @@ import 'package:withu_app/feature/splash/splash.dart';
 final getIt = GetIt.instance;
 
 Future<void> initInjections() async {
+  initAccountInjections();
   initSplashInjections();
   initJobPostingInjections();
-  initAccountInjections();
 }

@@ -14,4 +14,7 @@ abstract class AccountUseCase {
     required String loginId,
     required String password,
   });
+
+  /// 로그인 여부
+  Future<bool> checkLogin();
 }

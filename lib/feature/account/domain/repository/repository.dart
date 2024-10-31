@@ -22,4 +22,7 @@ abstract class AccountRepository {
   void storeSessionId({
     required String id,
   });
+
+  /// Session Id Storage 에 조회
+  Future<String> getSessionId() ;
 }

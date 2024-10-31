@@ -30,4 +30,11 @@ class AccountRepositoryImpl implements AccountRepository {
   }) {
     accountStorage.setSessionId(id: id);
   }
+
+
+  /// Session Id Storage 에 조회
+  @override
+  Future<String> getSessionId() async {
+    return await accountStorage.getSessionId();
+  }
 }

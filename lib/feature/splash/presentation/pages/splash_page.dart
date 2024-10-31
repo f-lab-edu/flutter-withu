@@ -25,8 +25,12 @@ class _SplashPage extends StatelessWidget {
     return Scaffold(
       body: BlocListener<SplashBloc, SplashState>(
         listener: (context, state) {
-          if (state is NavigateToNextScreenState) {
-            context.router.push(const LoginRoute());
+          if (state.status.isSuccess) {
+            if (state.isLoggedIn) {
+              context.router.replaceAll([const JobPostingsRoute()]);
+            } else {
+              context.router.replaceAll([const LoginRoute()]);
+            }
           }
         },
         child: Center(

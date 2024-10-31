@@ -33,4 +33,11 @@ class AccountUseCaseImpl implements AccountUseCase {
       accountRepo.storeSessionId(id: id);
     }
   }
+
+  /// 로그인 여부
+  @override
+  Future<bool> checkLogin() async {
+    final sessionId = await accountRepo.getSessionId();
+    return sessionId.isNotEmpty;
+  }
 }
