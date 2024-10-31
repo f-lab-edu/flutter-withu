@@ -26,6 +26,8 @@ mixin _$LoginResponseDto {
   String? get loginId => throw _privateConstructorUsedError; // email
   String? get name => throw _privateConstructorUsedError;
   String? get sessionId => throw _privateConstructorUsedError;
+  int? get accountId => throw _privateConstructorUsedError;
+  AccountType? get accountType => throw _privateConstructorUsedError;
 
   /// Serializes this LoginResponseDto to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -49,7 +51,9 @@ abstract class $LoginResponseDtoCopyWith<$Res> {
       String? userId,
       String? loginId,
       String? name,
-      String? sessionId});
+      String? sessionId,
+      int? accountId,
+      AccountType? accountType});
 }
 
 /// @nodoc
@@ -73,6 +77,8 @@ class _$LoginResponseDtoCopyWithImpl<$Res, $Val extends LoginResponseDto>
     Object? loginId = freezed,
     Object? name = freezed,
     Object? sessionId = freezed,
+    Object? accountId = freezed,
+    Object? accountType = freezed,
   }) {
     return _then(_value.copyWith(
       status: null == status
@@ -99,6 +105,14 @@ class _$LoginResponseDtoCopyWithImpl<$Res, $Val extends LoginResponseDto>
           ? _value.sessionId
           : sessionId // ignore: cast_nullable_to_non_nullable
               as String?,
+      accountId: freezed == accountId
+          ? _value.accountId
+          : accountId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      accountType: freezed == accountType
+          ? _value.accountType
+          : accountType // ignore: cast_nullable_to_non_nullable
+              as AccountType?,
     ) as $Val);
   }
 }
@@ -117,7 +131,9 @@ abstract class _$$LoginResponseDtoImplCopyWith<$Res>
       String? userId,
       String? loginId,
       String? name,
-      String? sessionId});
+      String? sessionId,
+      int? accountId,
+      AccountType? accountType});
 }
 
 /// @nodoc
@@ -139,6 +155,8 @@ class __$$LoginResponseDtoImplCopyWithImpl<$Res>
     Object? loginId = freezed,
     Object? name = freezed,
     Object? sessionId = freezed,
+    Object? accountId = freezed,
+    Object? accountType = freezed,
   }) {
     return _then(_$LoginResponseDtoImpl(
       status: null == status
@@ -165,6 +183,14 @@ class __$$LoginResponseDtoImplCopyWithImpl<$Res>
           ? _value.sessionId
           : sessionId // ignore: cast_nullable_to_non_nullable
               as String?,
+      accountId: freezed == accountId
+          ? _value.accountId
+          : accountId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      accountType: freezed == accountType
+          ? _value.accountType
+          : accountType // ignore: cast_nullable_to_non_nullable
+              as AccountType?,
     ));
   }
 }
@@ -178,7 +204,9 @@ class _$LoginResponseDtoImpl implements _LoginResponseDto {
       this.userId,
       this.loginId,
       this.name,
-      this.sessionId});
+      this.sessionId,
+      this.accountId,
+      this.accountType});
 
   factory _$LoginResponseDtoImpl.fromJson(Map<String, dynamic> json) =>
       _$$LoginResponseDtoImplFromJson(json);
@@ -197,10 +225,14 @@ class _$LoginResponseDtoImpl implements _LoginResponseDto {
   final String? name;
   @override
   final String? sessionId;
+  @override
+  final int? accountId;
+  @override
+  final AccountType? accountType;
 
   @override
   String toString() {
-    return 'LoginResponseDto(status: $status, message: $message, userId: $userId, loginId: $loginId, name: $name, sessionId: $sessionId)';
+    return 'LoginResponseDto(status: $status, message: $message, userId: $userId, loginId: $loginId, name: $name, sessionId: $sessionId, accountId: $accountId, accountType: $accountType)';
   }
 
   @override
@@ -214,13 +246,17 @@ class _$LoginResponseDtoImpl implements _LoginResponseDto {
             (identical(other.loginId, loginId) || other.loginId == loginId) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.sessionId, sessionId) ||
-                other.sessionId == sessionId));
+                other.sessionId == sessionId) &&
+            (identical(other.accountId, accountId) ||
+                other.accountId == accountId) &&
+            (identical(other.accountType, accountType) ||
+                other.accountType == accountType));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, status, message, userId, loginId, name, sessionId);
+  int get hashCode => Object.hash(runtimeType, status, message, userId, loginId,
+      name, sessionId, accountId, accountType);
 
   /// Create a copy of LoginResponseDto
   /// with the given fields replaced by the non-null parameter values.
@@ -246,7 +282,9 @@ abstract class _LoginResponseDto implements LoginResponseDto {
       final String? userId,
       final String? loginId,
       final String? name,
-      final String? sessionId}) = _$LoginResponseDtoImpl;
+      final String? sessionId,
+      final int? accountId,
+      final AccountType? accountType}) = _$LoginResponseDtoImpl;
 
   factory _LoginResponseDto.fromJson(Map<String, dynamic> json) =
       _$LoginResponseDtoImpl.fromJson;
@@ -263,6 +301,10 @@ abstract class _LoginResponseDto implements LoginResponseDto {
   String? get name;
   @override
   String? get sessionId;
+  @override
+  int? get accountId;
+  @override
+  AccountType? get accountType;
 
   /// Create a copy of LoginResponseDto
   /// with the given fields replaced by the non-null parameter values.

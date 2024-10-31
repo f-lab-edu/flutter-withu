@@ -6,7 +6,7 @@ import 'login_tab_data.dart';
 
 /// 로그인 탭
 class LoginTab extends StatelessWidget {
-  final UserType selectedType;
+  final AccountType selectedType;
 
   final void Function(LoginTabData tab) onTap;
 

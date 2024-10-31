@@ -15,6 +15,9 @@ _$LoginResponseDtoImpl _$$LoginResponseDtoImplFromJson(
       loginId: json['loginId'] as String?,
       name: json['name'] as String?,
       sessionId: json['sessionId'] as String?,
+      accountId: (json['accountId'] as num?)?.toInt(),
+      accountType:
+          $enumDecodeNullable(_$AccountTypeEnumMap, json['accountType']),
     );
 
 Map<String, dynamic> _$$LoginResponseDtoImplToJson(
@@ -26,4 +29,11 @@ Map<String, dynamic> _$$LoginResponseDtoImplToJson(
       'loginId': instance.loginId,
       'name': instance.name,
       'sessionId': instance.sessionId,
+      'accountId': instance.accountId,
+      'accountType': _$AccountTypeEnumMap[instance.accountType],
     };
+
+const _$AccountTypeEnumMap = {
+  AccountType.company: 'COMPANY',
+  AccountType.user: 'USER',
+};

@@ -38,7 +38,7 @@ mixin _$LoginState {
   bool get isEnabledLogin => throw _privateConstructorUsedError;
 
   /// 선택된 탭
-  UserType get selectedTab => throw _privateConstructorUsedError;
+  AccountType get selectedTab => throw _privateConstructorUsedError;
 
   /// Create a copy of LoginState
   /// with the given fields replaced by the non-null parameter values.
@@ -61,7 +61,7 @@ abstract class $LoginStateCopyWith<$Res> {
       String password,
       bool isValidPassword,
       bool isEnabledLogin,
-      UserType selectedTab});
+      AccountType selectedTab});
 }
 
 /// @nodoc
@@ -120,7 +120,7 @@ class _$LoginStateCopyWithImpl<$Res, $Val extends LoginState>
       selectedTab: null == selectedTab
           ? _value.selectedTab
           : selectedTab // ignore: cast_nullable_to_non_nullable
-              as UserType,
+              as AccountType,
     ) as $Val);
   }
 }
@@ -141,7 +141,7 @@ abstract class _$$LoginStateImplCopyWith<$Res>
       String password,
       bool isValidPassword,
       bool isEnabledLogin,
-      UserType selectedTab});
+      AccountType selectedTab});
 }
 
 /// @nodoc
@@ -198,7 +198,7 @@ class __$$LoginStateImplCopyWithImpl<$Res>
       selectedTab: null == selectedTab
           ? _value.selectedTab
           : selectedTab // ignore: cast_nullable_to_non_nullable
-              as UserType,
+              as AccountType,
     ));
   }
 }
@@ -214,7 +214,7 @@ class _$LoginStateImpl implements _LoginState {
       this.password = '',
       this.isValidPassword = true,
       this.isEnabledLogin = false,
-      this.selectedTab = UserType.employer});
+      this.selectedTab = AccountType.company});
 
   /// 상태.
   @override
@@ -253,7 +253,7 @@ class _$LoginStateImpl implements _LoginState {
   /// 선택된 탭
   @override
   @JsonKey()
-  final UserType selectedTab;
+  final AccountType selectedTab;
 
   @override
   String toString() {
@@ -302,7 +302,7 @@ abstract class _LoginState implements LoginState {
       final String password,
       final bool isValidPassword,
       final bool isEnabledLogin,
-      final UserType selectedTab}) = _$LoginStateImpl;
+      final AccountType selectedTab}) = _$LoginStateImpl;
 
   /// 상태.
   @override
@@ -334,7 +334,7 @@ abstract class _LoginState implements LoginState {
 
   /// 선택된 탭
   @override
-  UserType get selectedTab;
+  AccountType get selectedTab;
 
   /// Create a copy of LoginState
   /// with the given fields replaced by the non-null parameter values.

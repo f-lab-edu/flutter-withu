@@ -20,6 +20,7 @@ LoginRequestDto _$LoginRequestDtoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$LoginRequestDto {
+  AccountType get accountType => throw _privateConstructorUsedError;
   LoginType get loginType => throw _privateConstructorUsedError;
   String get loginId => throw _privateConstructorUsedError;
   String get password => throw _privateConstructorUsedError;
@@ -40,7 +41,11 @@ abstract class $LoginRequestDtoCopyWith<$Res> {
           LoginRequestDto value, $Res Function(LoginRequestDto) then) =
       _$LoginRequestDtoCopyWithImpl<$Res, LoginRequestDto>;
   @useResult
-  $Res call({LoginType loginType, String loginId, String password});
+  $Res call(
+      {AccountType accountType,
+      LoginType loginType,
+      String loginId,
+      String password});
 }
 
 /// @nodoc
@@ -58,11 +63,16 @@ class _$LoginRequestDtoCopyWithImpl<$Res, $Val extends LoginRequestDto>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? accountType = null,
     Object? loginType = null,
     Object? loginId = null,
     Object? password = null,
   }) {
     return _then(_value.copyWith(
+      accountType: null == accountType
+          ? _value.accountType
+          : accountType // ignore: cast_nullable_to_non_nullable
+              as AccountType,
       loginType: null == loginType
           ? _value.loginType
           : loginType // ignore: cast_nullable_to_non_nullable
@@ -87,7 +97,11 @@ abstract class _$$LoginRequestDtoImplCopyWith<$Res>
       __$$LoginRequestDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({LoginType loginType, String loginId, String password});
+  $Res call(
+      {AccountType accountType,
+      LoginType loginType,
+      String loginId,
+      String password});
 }
 
 /// @nodoc
@@ -103,11 +117,16 @@ class __$$LoginRequestDtoImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? accountType = null,
     Object? loginType = null,
     Object? loginId = null,
     Object? password = null,
   }) {
     return _then(_$LoginRequestDtoImpl(
+      accountType: null == accountType
+          ? _value.accountType
+          : accountType // ignore: cast_nullable_to_non_nullable
+              as AccountType,
       loginType: null == loginType
           ? _value.loginType
           : loginType // ignore: cast_nullable_to_non_nullable
@@ -128,11 +147,16 @@ class __$$LoginRequestDtoImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$LoginRequestDtoImpl implements _LoginRequestDto {
   _$LoginRequestDtoImpl(
-      {required this.loginType, required this.loginId, required this.password});
+      {required this.accountType,
+      required this.loginType,
+      required this.loginId,
+      required this.password});
 
   factory _$LoginRequestDtoImpl.fromJson(Map<String, dynamic> json) =>
       _$$LoginRequestDtoImplFromJson(json);
 
+  @override
+  final AccountType accountType;
   @override
   final LoginType loginType;
   @override
@@ -142,7 +166,7 @@ class _$LoginRequestDtoImpl implements _LoginRequestDto {
 
   @override
   String toString() {
-    return 'LoginRequestDto(loginType: $loginType, loginId: $loginId, password: $password)';
+    return 'LoginRequestDto(accountType: $accountType, loginType: $loginType, loginId: $loginId, password: $password)';
   }
 
   @override
@@ -150,6 +174,8 @@ class _$LoginRequestDtoImpl implements _LoginRequestDto {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$LoginRequestDtoImpl &&
+            (identical(other.accountType, accountType) ||
+                other.accountType == accountType) &&
             (identical(other.loginType, loginType) ||
                 other.loginType == loginType) &&
             (identical(other.loginId, loginId) || other.loginId == loginId) &&
@@ -159,7 +185,8 @@ class _$LoginRequestDtoImpl implements _LoginRequestDto {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, loginType, loginId, password);
+  int get hashCode =>
+      Object.hash(runtimeType, accountType, loginType, loginId, password);
 
   /// Create a copy of LoginRequestDto
   /// with the given fields replaced by the non-null parameter values.
@@ -180,13 +207,16 @@ class _$LoginRequestDtoImpl implements _LoginRequestDto {
 
 abstract class _LoginRequestDto implements LoginRequestDto {
   factory _LoginRequestDto(
-      {required final LoginType loginType,
+      {required final AccountType accountType,
+      required final LoginType loginType,
       required final String loginId,
       required final String password}) = _$LoginRequestDtoImpl;
 
   factory _LoginRequestDto.fromJson(Map<String, dynamic> json) =
       _$LoginRequestDtoImpl.fromJson;
 
+  @override
+  AccountType get accountType;
   @override
   LoginType get loginType;
   @override

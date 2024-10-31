@@ -9,12 +9,14 @@ class AccountUseCaseImpl implements AccountUseCase {
   /// 로그인
   @override
   Future<LoginResultEntity> login({
+    required AccountType accountType,
     required LoginType loginType,
     required String loginId,
     required String password,
   }) async {
     final result = await accountRepo.login(
         requestData: LoginRequestDto(
+      accountType: accountType,
       loginType: loginType,
       loginId: loginId,
       password: password,

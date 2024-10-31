@@ -55,7 +55,9 @@ class _LoginPageState extends State<_LoginPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 90),
-                Assets.images.logo.svg(),
+                Center(
+                  child: Assets.images.logo.svg(),
+                ),
                 const SizedBox(height: 50),
                 LoginTab(
                   selectedType: state.selectedTab,

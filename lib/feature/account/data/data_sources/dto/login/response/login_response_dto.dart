@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:withu_app/core/core.dart';
 
 part 'login_response_dto.freezed.dart';
 
@@ -15,6 +16,8 @@ class LoginResponseDto with _$LoginResponseDto {
     String? loginId, // email
     String? name,
     String? sessionId,
+    int? accountId,
+    AccountType? accountType,
   }) = _LoginResponseDto;
 
   factory LoginResponseDto.fromJson(Map<String, dynamic> json) =>
