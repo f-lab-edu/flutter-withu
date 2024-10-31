@@ -26,7 +26,7 @@ class _SplashPage extends StatelessWidget {
       body: BlocListener<SplashBloc, SplashState>(
         listener: (context, state) {
           if (state is NavigateToNextScreenState) {
-            context.router.push(const JobPostingsRoute());
+            context.router.push(const LoginRoute());
           }
         },
         child: Center(

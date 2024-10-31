@@ -22,5 +22,6 @@ class LoginBloc extends BaseBloc<LoginEvent, LoginState> {
     on<LoginIdInputted>(_onIdInputted);
     on<LoginPasswordInputted>(_onPasswordInputted);
     on<LoginBtnPressed>(_onBtnPressed);
+    on<LoginTabPressed>(_onTabPressed);
   }
 }

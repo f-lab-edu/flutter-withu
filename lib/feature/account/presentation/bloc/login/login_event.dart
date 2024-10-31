@@ -20,3 +20,10 @@ class LoginPasswordInputted extends LoginEvent {
 class LoginBtnPressed extends LoginEvent {
   LoginBtnPressed();
 }
+
+/// 탭 클릭 이벤트
+class LoginTabPressed extends LoginEvent {
+  final UserType type;
+
+  LoginTabPressed({required this.type});
+}

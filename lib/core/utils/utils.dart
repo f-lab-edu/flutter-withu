@@ -6,3 +6,4 @@ export 'resource/resource.dart';
 export 'mixins/mixins.dart';
 export 'either/either.dart';
 export 'bloc/bloc.dart';
+export 'regex/regex.dart';

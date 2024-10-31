@@ -11,4 +11,7 @@ void initAccountInjections() {
   getIt.registerSingleton<AccountUseCase>(
     AccountUseCaseImpl(accountRepo: getIt()),
   );
+  getIt.registerFactory<LoginBloc>(
+    () => LoginBloc(accountUseCase: getIt()),
+  );
 }

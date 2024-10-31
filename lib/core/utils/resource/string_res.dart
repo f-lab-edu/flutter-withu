@@ -64,6 +64,15 @@ enum StringRes {
   noApplicants,
   closingRecruitment,
   noSavedJobPosting,
+  findingGeekWorker,
+  findingNewJob,
+  pleaseEnterEmail,
+  pleaseEnterPassword,
+  login,
+  findIdPw,
+  signUp,
+  pleaseEnterValidEmail,
+  pleaseEnterValidPassword,
 }
 
 extension StringResEx on StringRes {

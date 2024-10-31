@@ -14,6 +14,10 @@ class AppRouter extends RootStackRouter {
           initial: true,
         ),
         AutoRoute(
+          page: LoginRoute.page,
+          path: '/login',
+        ),
+        AutoRoute(
           page: JobPostingsRoute.page,
           path: '/job-postings',
         ),
