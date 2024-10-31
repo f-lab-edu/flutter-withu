@@ -20,8 +20,17 @@ class AccountUseCaseImpl implements AccountUseCase {
       password: password,
     ));
 
-    // TODO: 로그인 결과를 로컬디비에 저장하기.
+    _storeSessionId(id: result.successData?.sessionId ?? '');
 
     return LoginResultEntityParser.fromDto(result: result);
+  }
+
+  /// 세션 Id 저장
+  void _storeSessionId({
+    required String id,
+  }) {
+    if (id.isNotEmpty) {
+      accountRepo.storeSessionId(id: id);
+    }
   }
 }

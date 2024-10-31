@@ -5,8 +5,14 @@ void initAccountInjections() {
   getIt.registerSingleton<AccountApi>(
     Environment.isProd ? AccountApiImpl() : AccountMockApi(),
   );
+  getIt.registerSingleton<AccountStorage>(
+    AccountStorageImpl(),
+  );
   getIt.registerSingleton<AccountRepository>(
-    AccountRepositoryImpl(accountApi: getIt()),
+    AccountRepositoryImpl(
+      accountApi: getIt(),
+      accountStorage: getIt(),
+    ),
   );
   getIt.registerSingleton<AccountUseCase>(
     AccountUseCaseImpl(accountRepo: getIt()),

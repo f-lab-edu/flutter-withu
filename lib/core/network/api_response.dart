@@ -32,7 +32,7 @@ abstract class FailResponse with _$FailResponse {
       );
 }
 
-extension ApiResponseExt on ApiResponse {
+extension ApiResponseExt<T> on ApiResponse<T> {
   bool get isSuccess => maybeWhen(
         success: (_) => true,
         orElse: () => false,
@@ -46,5 +46,11 @@ extension ApiResponseExt on ApiResponse {
   bool get isError => maybeWhen(
         error: () => true,
         orElse: () => false,
+      );
+
+  /// Success Data 가져오기
+  T? get successData => maybeWhen(
+        success: (T data) => data,
+        orElse: () => null,
       );
 }
