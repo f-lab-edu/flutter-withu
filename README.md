@@ -5,6 +5,23 @@
 * 단순한 기능 개발을 넘어, 코드의 재사용성과 유지보수성을 최우선으로 고려한 체계적인 설계를 지향합니다.
 * BLoC 패턴과 클린 아키텍처를 적용해 유연하고 확장 가능한 구조를 구축하는 것을 목표로 합니다.
 
+### Installing
+1. 프로젝트 clone
+```
+git clone https://github.com/f-lab-edu/flutter-withu.git
+cd flutter-withu
+```
+2. 패키지 설치
+```
+flutter pub get
+```
+3. 코드 생성
+```
+flutter pub run build_runner build
+```
+4. 플러터 실행
+- 플러터 실행시 `core/config/env/` 폴더의 `dev.dart`, `prod.dart`를 실행
+
 ### 프로젝트 사용 기술
 
 * Flutter, Dart
