@@ -4,7 +4,7 @@ import 'package:withu_app/feature/account/data/data_sources/dto/login/response/l
 
 part 'login_result_entity.freezed.dart';
 
-part 'login_result_entity.parser.dart';
+part 'login_result_entity.converter.dart';
 
 @freezed
 class LoginResultEntity with _$LoginResultEntity {

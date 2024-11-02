@@ -11,6 +11,8 @@ part 'login_bloc.freezed.dart';
 
 part 'login_bloc.handler.dart';
 
+part 'login_bloc_converter.dart';
+
 class LoginBloc extends BaseBloc<LoginEvent, LoginState> {
   final AccountUseCase accountUseCase;
 

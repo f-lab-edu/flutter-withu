@@ -33,10 +33,7 @@ extension LoginBlocHandler on LoginBloc {
     emit(state.copyWith(status: BaseBlocStatus.loading()));
 
     final LoginResultEntity result = await accountUseCase.login(
-      accountType: state.selectedTab,
-      loginType: LoginType.email,
-      loginId: state.loginId,
-      password: state.password,
+      entity: toEntity(),
     );
 
     emit(state.copyWith(
