@@ -1,4 +1,3 @@
-
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -45,10 +44,8 @@ void main() {
       when(
         api.login(requestData: requestData),
       ).thenAnswer(
-        (_) async => ApiResponse<LoginResponseDto>.fail(
-          FailResponse.fromJson(
-            LoginResponseDtoMock.failure().toJson(),
-          ),
+        (_) async => ApiResponse<LoginResponseDto>.success(
+          LoginResponseDtoMock.failure(),
         ),
       );
 
