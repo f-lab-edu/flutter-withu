@@ -78,6 +78,10 @@ dev_dependencies:
   # Svg
   flutter_svg:
 
+  # Bloc test
+  test: ^1.25.7
+  bloc_test: ^9.1.7
+
 flutter:
 
   uses-material-design: true

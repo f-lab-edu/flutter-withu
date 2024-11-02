@@ -14,6 +14,8 @@ abstract class BaseBlocStatus {
 
   factory BaseBlocStatus.failure() => BaseBlocStatusFailure();
 
+  bool get isInitial => this is BaseBlocStatusInitial;
+
   bool get isLoading => this is BaseBlocStatusLoading;
 
   bool get isSuccess => this is BaseBlocStatusSuccess;
