@@ -1,9 +1,15 @@
 import 'dart:async';
-
+import 'package:http_mock_adapter/http_mock_adapter.dart';
 import 'package:withu_app/core/core.dart';
 import 'package:withu_app/feature/account/account.dart';
 
-class AccountMockApi extends AccountApiImpl with MockAPI {
+class AccountMockApi extends AccountApiImpl {
+  late final DioAdapter dioAdapter;
+
+  AccountMockApi({required super.api}) {
+    dioAdapter = DioAdapter(dio: api.dio);
+  }
+
   /// 로그인 API
   @override
   FutureOr<ApiResponse<LoginResponseDto>> login({

@@ -3,7 +3,9 @@ import 'package:withu_app/feature/account/account.dart';
 
 void initAccountInjections() {
   getIt.registerSingleton<AccountApi>(
-    Environment.isProd ? AccountApiImpl() : AccountMockApi(),
+    Environment.isProd
+        ? AccountApiImpl(api: getIt())
+        : AccountMockApi(api: getIt()),
   );
   getIt.registerSingleton<AccountStorage>(
     AccountStorageImpl(),
