@@ -15,38 +15,42 @@ void main() {
     useCase = AccountUseCaseImpl(accountRepo: mockRepo);
   });
 
-  test('로그인 성공 테스트', () async {
-    final requestDto = LoginRequestDto(
-      accountType: AccountType.company,
-      loginType: LoginType.email,
-      loginId: 'test@test.com',
-      password: '123qwe!@',
-    );
+  group('Account UseCase 테스트', () {
+    test('로그인 성공', () async {
+      // Given
+      final successResponseDto = LoginResponseDtoMock.success();
 
-    final successResponseDto = LoginResponseDtoMock.success();
+      when(
+        mockRepo.login(requestData: LoginRequestDtoMock.mock()),
+      ).thenAnswer(
+        (_) async => ApiResponse.success(successResponseDto),
+      );
 
-    // arrange
-    when(
-      mockRepo.login(requestData: requestDto),
-    ).thenAnswer(
-      (_) async => ApiResponse.success(successResponseDto),
-    );
+      // When
+      final result = await useCase.login(
+        entity: LoginRequestEntityMock.mock(),
+      );
 
-    // act
-    final result = await useCase.login(
-      accountType: requestDto.accountType,
-      loginType: requestDto.loginType,
-      loginId: requestDto.loginId,
-      password: requestDto.password,
-    );
+      // Then
+      expect(result.isLoggedIn, true);
+    });
 
-    // assert
-    expect(
-      result,
-      LoginResultEntity(
-        isLoggedIn: true,
-        message: successResponseDto.message,
-      ),
-    );
+    test('서버 에러로 인한 로그인 실패', () async {
+      // Given
+      when(
+        mockRepo.login(requestData: LoginRequestDtoMock.mock()),
+      ).thenAnswer(
+        (_) async => ApiResponse.fail(FailResponse.error()),
+      );
+
+      // When
+      final result = await useCase.login(
+        entity: LoginRequestEntityMock.mock(),
+      );
+
+      // Then
+      expect(result.isLoggedIn, false);
+      expect(result.message, StringRes.serverError.tr);
+    });
   });
 }
