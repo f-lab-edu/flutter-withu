@@ -4,16 +4,16 @@ import 'package:withu_app/feature/account/data/data_sources/dto/dto.dart';
 import 'api.dart';
 
 class AccountApiImpl extends AccountApi {
-  final API api;
+  final DioNetwork network;
 
-  AccountApiImpl({required this.api});
+  AccountApiImpl({required this.network});
 
   /// 로그인 API
   @override
   FutureOr<ApiResponse<LoginResponseDto>> login({
     required LoginRequestDto requestData,
   }) async {
-    return api.dio
+    return network.dio
         .post(
           loginPath,
           data: requestData.toJson(),

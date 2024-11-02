@@ -7,7 +7,7 @@ import 'package:withu_app/feature/splash/splash.dart';
 final getIt = GetIt.instance;
 
 void initCommonInjections() {
-  getIt.registerSingleton<API>(API());
+  getIt.registerSingleton<DioNetwork>(DioNetwork());
 }
 
 Future<void> initInjections() async {

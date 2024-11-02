@@ -6,8 +6,8 @@ import 'package:withu_app/feature/account/account.dart';
 class AccountMockApi extends AccountApiImpl {
   late final DioAdapter dioAdapter;
 
-  AccountMockApi({required super.api}) {
-    dioAdapter = DioAdapter(dio: api.dio);
+  AccountMockApi({required super.network}) {
+    dioAdapter = DioAdapter(dio: network.dio);
   }
 
   /// 로그인 API
