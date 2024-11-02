@@ -45,3 +45,7 @@ app.*.map.json
 # Freezed generated files
 *.freezed.dart
 *.g.dart
+
+
+# Mockito generated file
+*.mocks.dart

@@ -14,7 +14,7 @@ extension LoginResponseDtoMock on LoginResponseDto {
     );
   }
 
-  static LoginResponseDto fail() {
+  static LoginResponseDto failure() {
     return LoginResponseDto(
       status: false,
       message: "존재하지 않는 계정입니다.",

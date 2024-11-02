@@ -21,6 +21,8 @@ class AccountApiImpl extends AccountApi {
         .then((response) => ApiResponse.success(
               LoginResponseDto.fromJson(response.data),
             ))
-        .catchError((_) => const ApiResponse<LoginResponseDto>.error());
+        .catchError(
+          (_) => ApiResponse<LoginResponseDto>.fail(FailResponse.error()),
+        );
   }
 }
