@@ -15,6 +15,13 @@ repos:
         type: [ dart ]
         files: lib/.*\.dart$
 
+
+      - id: flutter-test
+        name: flutter-test
+        entry: bash -c 'flutter test'
+        language: system
+        type: [ dart ]
+
 #      - id: dart-format
 #        name: dart-format
 #        entry: bash -c 'dart format "$@"'
