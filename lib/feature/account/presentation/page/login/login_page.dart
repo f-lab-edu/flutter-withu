@@ -16,17 +16,19 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider<LoginBloc>(
       create: (context) => getIt(),
-      child: _LoginPage(),
+      child: const LoginPageContent(),
     );
   }
 }
 
-class _LoginPage extends StatefulWidget {
+class LoginPageContent extends StatefulWidget {
+  const LoginPageContent({super.key});
+
   @override
   State<StatefulWidget> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<_LoginPage> {
+class _LoginPageState extends State<LoginPageContent> {
   @override
   void initState() {
     super.initState();
@@ -69,6 +71,7 @@ class _LoginPageState extends State<_LoginPage> {
                 ),
                 const SizedBox(height: 26),
                 BaseInput.email(
+                  key: const Key('email_input'),
                   textInputAction: TextInputAction.next,
                   errorText: StringRes.pleaseEnterValidEmail.tr,
                   errorVisible: !state.isValidId,
@@ -78,6 +81,7 @@ class _LoginPageState extends State<_LoginPage> {
                 ),
                 const SizedBox(height: 30),
                 BaseInput.password(
+                  key: const Key('password_input'),
                   errorText: StringRes.pleaseEnterValidPassword.tr,
                   errorVisible: !state.isValidPassword,
                   onChanged: (String text) {
@@ -108,6 +112,7 @@ class _LoginPageState extends State<_LoginPage> {
                 ),
                 const SizedBox(height: 10),
                 _LoginButton(
+                  key: const Key('login_button'),
                   enabled: state.isEnabledLogin,
                 ),
                 const SizedBox(height: 20),
@@ -124,6 +129,7 @@ class _LoginButton extends StatelessWidget {
   final bool enabled;
 
   const _LoginButton({
+    super.key,
     required this.enabled,
   });
 

@@ -119,6 +119,7 @@ class BaseInput extends StatelessWidget {
 
   /// 이메일 형식 입력
   factory BaseInput.email({
+    Key? key,
     TextEditingController? controller,
     FocusNode? focusNode,
     TextInputAction? textInputAction,
@@ -127,6 +128,7 @@ class BaseInput extends StatelessWidget {
     bool errorVisible = false,
   }) {
     return BaseInput(
+      key: key,
       controller: controller,
       focusNode: focusNode,
       keyboardType: TextInputType.emailAddress,
@@ -140,6 +142,7 @@ class BaseInput extends StatelessWidget {
 
   /// 비밀번호 형식 입력
   factory BaseInput.password({
+    Key? key,
     TextEditingController? controller,
     FocusNode? focusNode,
     TextInputAction? textInputAction,
@@ -148,6 +151,7 @@ class BaseInput extends StatelessWidget {
     bool errorVisible = false,
   }) {
     return BaseInput(
+      key: key,
       controller: controller,
       focusNode: focusNode,
       textInputAction: textInputAction,
