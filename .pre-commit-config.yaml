@@ -20,10 +20,3 @@ repos:
         entry: bash -c 'flutter test'
         language: system
         type: [ dart ]
-
-#      - id: dart-format
-#        name: dart-format
-#        entry: bash -c 'dart format "$@"'
-#        language: system
-#        type: [ dart ]
-#        files: lib/.*\.dart$
