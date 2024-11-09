@@ -21,6 +21,9 @@ class LoginState extends BaseBlocState with _$LoginState {
     /// password Valid 여부
     @Default(true) bool isValidPassword,
 
+    /// password Visible 여부
+    @Default(false) bool isVisiblePassword,
+
     /// 로그인 버튼 enabled
     @Default(false) bool isEnabledLogin,
 
@@ -30,7 +33,6 @@ class LoginState extends BaseBlocState with _$LoginState {
 }
 
 extension LoginStateExt on LoginState {
-
   /// Id 유효성 검사
   bool checkIdValid(String id) {
     return RegExUtil.emailPattern.hasMatch(id);

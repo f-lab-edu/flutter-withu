@@ -29,7 +29,7 @@ void main() {
     });
 
     blocTest(
-      '새로운 일 찾기 탭 클릭 이벤트',
+      '사용자 유형 선택 - 사용자 찾기 옵션 선택',
       build: () => loginBloc,
       act: (bloc) => bloc.add(LoginTabPressed(type: AccountType.user)),
       expect: () => [

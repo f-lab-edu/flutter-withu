@@ -51,4 +51,14 @@ extension LoginBlocHandler on LoginBloc {
       selectedTab: event.type,
     ));
   }
+
+  /// 비밀번호 표시 토글
+  void _onVisiblePasswordToggled(
+    LoginVisiblePasswordToggled event,
+    Emitter<LoginState> emit,
+  ) {
+    emit(state.copyWith(
+      isVisiblePassword: !state.isVisiblePassword,
+    ));
+  }
 }

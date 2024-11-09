@@ -27,3 +27,8 @@ class LoginTabPressed extends LoginEvent {
 
   LoginTabPressed({required this.type});
 }
+
+/// 비밀번호 표시 토클 이벤트
+class LoginVisiblePasswordToggled extends LoginEvent {
+  LoginVisiblePasswordToggled();
+}

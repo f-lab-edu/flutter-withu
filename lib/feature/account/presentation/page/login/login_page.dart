@@ -84,10 +84,16 @@ class _LoginPageState extends State<LoginPageContent> {
                   key: const Key('password_input'),
                   errorText: StringRes.pleaseEnterValidPassword.tr,
                   errorVisible: !state.isValidPassword,
+                  obscureText: !state.isVisiblePassword,
                   onChanged: (String text) {
                     context
                         .read<LoginBloc>()
                         .add(LoginPasswordInputted(password: text));
+                  },
+                  onSuffixPressed: () {
+                    context
+                        .read<LoginBloc>()
+                        .add(LoginVisiblePasswordToggled());
                   },
                 ),
                 const SizedBox(height: 80),
