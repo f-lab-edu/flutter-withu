@@ -6,7 +6,10 @@ extension LoginBlocHandler on LoginBloc {
     LoginMessageCleared event,
     Emitter<LoginState> emit,
   ) {
-    emit(state.copyWith(message: ''));
+    emit(state.copyWith(
+      status: BaseBlocStatus.initial(),
+      message: '',
+    ));
   }
 
   /// 아이디 입력

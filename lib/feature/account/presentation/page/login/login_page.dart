@@ -42,23 +42,21 @@ class _LoginPageState extends State<LoginPageContent> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<LoginBloc, LoginState>(
-      listener: (context, state) {
+      listener: (context, state) async {
         /// 로그인 성공
         if (state.status.isSuccess) {
           getItAppRouter.replaceAll([const JobPostingsRoute()]);
         }
 
         /// 로그인 실패
-        if (state.status.isFailure) {
-          if (state.message.isNotEmpty) {
-            CustomAlertDialog.showContentAlert(
-              context: context,
-              content: state.message,
-              closeCallback: () {
-                getItLoginBloc.add(LoginMessageCleared());
-              },
-            );
-          }
+        if (state.status.isFailure && state.message.isNotEmpty) {
+          await CustomAlertDialog.showContentAlert(
+            context: context,
+            content: state.message,
+            closeCallback: () {
+              context.read<LoginBloc>().add(LoginMessageCleared());
+            },
+          );
         }
       },
       builder: (context, state) {
