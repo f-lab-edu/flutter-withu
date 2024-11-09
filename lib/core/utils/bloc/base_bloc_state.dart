@@ -20,6 +20,8 @@ abstract class BaseBlocStatus {
 
   bool get isSuccess => this is BaseBlocStatusSuccess;
 
+  bool get isFailure => this is BaseBlocStatusFailure;
+
   bool get isRefresh => this is BaseBlocStatusRefresh;
 }
 

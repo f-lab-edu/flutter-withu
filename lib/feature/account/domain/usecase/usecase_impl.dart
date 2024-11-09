@@ -15,13 +15,13 @@ class AccountUseCaseImpl implements AccountUseCase {
       requestData: entity.toDto(),
     );
 
-    _storeSessionId(id: result.successData?.sessionId ?? '');
+    storeSessionId(id: result.successData?.sessionId ?? '');
 
     return LoginResultEntityConverter.fromDto(result: result);
   }
 
   /// 세션 Id 저장
-  void _storeSessionId({
+  void storeSessionId({
     required String id,
   }) {
     if (id.isNotEmpty) {

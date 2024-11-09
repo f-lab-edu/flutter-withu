@@ -21,6 +21,7 @@ class LoginBloc extends BaseBloc<LoginEvent, LoginState> {
   }) : super(
           LoginState(status: BaseBlocStatus.initial()),
         ) {
+    on<LoginMessageCleared>(_onMessageCleared);
     on<LoginIdInputted>(_onIdInputted);
     on<LoginPasswordInputted>(_onPasswordInputted);
     on<LoginBtnPressed>(_onBtnPressed);

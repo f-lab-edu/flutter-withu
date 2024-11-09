@@ -47,6 +47,19 @@ class _LoginPageState extends State<LoginPageContent> {
         if (state.status.isSuccess) {
           getItAppRouter.replaceAll([const JobPostingsRoute()]);
         }
+
+        /// 로그인 실패
+        if (state.status.isFailure) {
+          if (state.message.isNotEmpty) {
+            CustomAlertDialog.showContentAlert(
+              context: context,
+              content: state.message,
+              closeCallback: () {
+                getItLoginBloc.add(LoginMessageCleared());
+              },
+            );
+          }
+        }
       },
       builder: (context, state) {
         return PageRoot(

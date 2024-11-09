@@ -34,7 +34,7 @@ void main() {
       controller = StreamController();
       mockRouter = MockRouter();
 
-      if(!getIt.isRegistered<AppRouter>()) {
+      if (!getIt.isRegistered<AppRouter>()) {
         getIt.registerSingleton<AppRouter>(mockRouter);
       }
 
@@ -48,8 +48,7 @@ void main() {
 
       registerFallbackValue(FakePageRouteInfo());
       when(() => mockRouter.push(any())).thenAnswer((_) async => null);
-      when(() => mockRouter.replaceAll(any()))
-          .thenAnswer((_) async {});
+      when(() => mockRouter.replaceAll(any())).thenAnswer((_) async {});
 
       testWidget = MaterialApp(
         home: BlocProvider<LoginBloc>(
@@ -106,12 +105,8 @@ void main() {
 
       // Then
       expect(loginBloc.state.selectedTab, equals(AccountType.user));
-      expect(LoginPageTestHelper
-          .getCompanyTab(tester)
-          .isSelected, false);
-      expect(LoginPageTestHelper
-          .getUserTab(tester)
-          .isSelected, true);
+      expect(LoginPageTestHelper.getCompanyTab(tester).isSelected, false);
+      expect(LoginPageTestHelper.getUserTab(tester).isSelected, true);
     });
 
     testWidgets('이메일 유효성 검사 - 성공 케이스', (WidgetTester tester) async {
@@ -238,9 +233,7 @@ void main() {
 
       /// 사전 검증 - 암호화 상태 확인
       expect(loginBloc.state.isVisiblePassword, isFalse);
-      expect(LoginPageTestHelper
-          .getPasswordInput(tester)
-          .obscureText, true);
+      expect(LoginPageTestHelper.getPasswordInput(tester).obscureText, true);
 
       controller.add(initialState.copyWith(isVisiblePassword: true));
       await tester.press(LoginPageTestHelper.passwordVisibleButton());
@@ -248,9 +241,7 @@ void main() {
 
       /// Then
       expect(loginBloc.state.isVisiblePassword, isTrue);
-      expect(LoginPageTestHelper
-          .getPasswordInput(tester)
-          .obscureText, isFalse);
+      expect(LoginPageTestHelper.getPasswordInput(tester).obscureText, isFalse);
     });
 
     testWidgets('비밀번호 텍스트 숨김 테스트', (WidgetTester tester) async {
@@ -262,9 +253,7 @@ void main() {
 
       /// 사전 검증 - 암호화 상태 확인
       expect(loginBloc.state.isVisiblePassword, isTrue);
-      expect(LoginPageTestHelper
-          .getPasswordInput(tester)
-          .obscureText, isFalse);
+      expect(LoginPageTestHelper.getPasswordInput(tester).obscureText, isFalse);
 
       /// 클릭 이벤트 방출
       controller.add(initialState.copyWith(isVisiblePassword: false));
@@ -273,9 +262,7 @@ void main() {
 
       /// Then
       expect(loginBloc.state.isVisiblePassword, isFalse);
-      expect(LoginPageTestHelper
-          .getPasswordInput(tester)
-          .obscureText, isTrue);
+      expect(LoginPageTestHelper.getPasswordInput(tester).obscureText, isTrue);
     });
 
     testWidgets('로그인 요청 - 성공 케이스 테스트', (WidgetTester tester) async {
@@ -305,7 +292,39 @@ void main() {
 
       /// Then
       expect(loginBloc.state.status, isA<BaseBlocStatusSuccess>());
-      verify(() => getItAppRouter.replaceAll([const JobPostingsRoute()])).called(1);
+      verify(() => getItAppRouter.replaceAll([const JobPostingsRoute()]))
+          .called(1);
+    });
+
+    testWidgets('로그인 요청 - 실패 케이스 테스트', (WidgetTester tester) async {
+      /// Given
+      const loginId = 'test@test.com';
+      const password = '123qwe!@';
+      const failMessage = '존재하지 않는 계정입니다.';
+      final state = initialState.copyWith(
+        loginId: loginId,
+        isValidId: true,
+        password: password,
+        isValidPassword: true,
+        isEnabledLogin: true,
+      );
+      controller.add(state);
+
+      /// When
+      await tester.pumpWidget(testWidget);
+      await tester.pumpAndSettle();
+
+      /// 클릭 이벤트 방출
+      controller.add(state.copyWith(
+        status: BaseBlocStatus.failure(),
+        message: failMessage,
+      ));
+      await tester.press(LoginPageTestHelper.loginButtonFinder());
+      await tester.pumpAndSettle();
+
+      /// Then
+      expect(loginBloc.state.status, isA<BaseBlocStatusFailure>());
+      expect(loginBloc.state.message, failMessage);
     });
   });
 }

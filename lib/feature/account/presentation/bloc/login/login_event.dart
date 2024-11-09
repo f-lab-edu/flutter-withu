@@ -2,6 +2,9 @@ part of 'login_bloc.dart';
 
 sealed class LoginEvent extends BaseBlocEvent {}
 
+/// 메시지 초기화
+class LoginMessageCleared extends LoginEvent {}
+
 /// 아이디 입력 이벤트
 class LoginIdInputted extends LoginEvent {
   final String id;

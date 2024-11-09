@@ -26,7 +26,6 @@ void run({
 }
 
 class App extends StatelessWidget {
-
   const App({super.key});
 
   @override

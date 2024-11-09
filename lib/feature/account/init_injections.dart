@@ -1,6 +1,8 @@
 import 'package:withu_app/core/core.dart';
 import 'package:withu_app/feature/account/account.dart';
 
+LoginBloc get getItLoginBloc => getIt<LoginBloc>();
+
 void initAccountInjections() {
   getIt.registerSingleton<AccountApi>(
     Environment.isProd

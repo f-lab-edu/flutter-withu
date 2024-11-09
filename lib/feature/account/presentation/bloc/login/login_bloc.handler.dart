@@ -1,6 +1,14 @@
 part of 'login_bloc.dart';
 
 extension LoginBlocHandler on LoginBloc {
+  /// 메시지 초기화
+  void _onMessageCleared(
+    LoginMessageCleared event,
+    Emitter<LoginState> emit,
+  ) {
+    emit(state.copyWith(message: ''));
+  }
+
   /// 아이디 입력
   void _onIdInputted(
     LoginIdInputted event,
