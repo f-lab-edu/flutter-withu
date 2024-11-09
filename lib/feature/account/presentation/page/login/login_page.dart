@@ -45,7 +45,7 @@ class _LoginPageState extends State<LoginPageContent> {
       listener: (context, state) {
         /// 로그인 성공
         if (state.status.isSuccess) {
-          context.router.replaceAll([const JobPostingsRoute()]);
+          getItAppRouter.replaceAll([const JobPostingsRoute()]);
         }
       },
       builder: (context, state) {

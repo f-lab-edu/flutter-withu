@@ -20,15 +20,14 @@ void run({
       fallbackLocale: const Locale('ko'),
       startLocale: const Locale('ko'),
       path: 'assets/translations',
-      child: App(),
+      child: const App(),
     ),
   );
 }
 
 class App extends StatelessWidget {
-  final _appRouter = AppRouter();
 
-  App({super.key});
+  const App({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +36,7 @@ class App extends StatelessWidget {
       supportedLocales: context.supportedLocales,
       locale: context.locale,
       theme: CustomTheme.theme,
-      routerConfig: _appRouter.config(),
+      routerConfig: getItAppRouter.config(),
     );
   }
 }
