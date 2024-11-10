@@ -14,3 +14,6 @@ class ClearMessage extends JobPostingDetailEvent {}
 
 /// 공고 마감
 class OnClosedJobPosting extends JobPostingDetailEvent {}
+
+/// 공고 삭제
+class OnDeletedJobPosting extends JobPostingDetailEvent {}

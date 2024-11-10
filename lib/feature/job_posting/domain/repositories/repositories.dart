@@ -1,5 +1,6 @@
 import 'package:withu_app/core/core.dart';
 import 'package:withu_app/feature/job_posting/data/data.dart';
+import 'package:withu_app/shared/data/data.dart';
 
 abstract class JobPostingRepository {
   /// 공고 목록 조회
@@ -21,5 +22,10 @@ abstract class JobPostingRepository {
   /// 공고 마감
   Future<ApiResponse<JobPostingDetailDto>> close({
     required String id,
+  });
+
+  /// 공고 삭제
+  Future<ApiResponse<DeleteResponseDto>> deleteJobPosting({
+    required String jobPostingId,
   });
 }

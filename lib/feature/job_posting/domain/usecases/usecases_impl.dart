@@ -77,4 +77,24 @@ class JobPostingUseCaseImpl implements JobPostingUseCase {
       },
     );
   }
+
+  /// 공고 삭제
+  @override
+  Future<Either<bool>> deleteJobPosting({
+    required String jobPostingId,
+  }) async {
+    final result =
+        await repository.deleteJobPosting(jobPostingId: jobPostingId);
+
+    return result.maybeWhen(
+      success: (DeleteResponseDto dto) {
+        return dto.deleted
+            ? const Either.success(true)
+            : Either.fail(dto.message ?? '');
+      },
+      orElse: () {
+        return Either.fail(StringRes.serverError.tr);
+      },
+    );
+  }
 }

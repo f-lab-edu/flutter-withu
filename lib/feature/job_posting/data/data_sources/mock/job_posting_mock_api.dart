@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:withu_app/core/core.dart';
 import 'package:withu_app/feature/job_posting/data/data.dart';
+import 'package:withu_app/shared/data/data.dart';
 
 class JobPostingMockApi extends JobPostingApi with MockAPI {
   /// 공고 목록
@@ -133,6 +134,30 @@ class JobPostingMockApi extends JobPostingApi with MockAPI {
 
       return ApiResponse.fail(
         FailResponse.fromJson(response.data),
+      );
+    } catch (e) {
+      return const ApiResponse.error();
+    }
+  }
+
+  /// 공고 삭제
+  @override
+  FutureOr<ApiResponse<DeleteResponseDto>> deleteJobPosting({
+    required String jobPostingId,
+  }) async {
+    try {
+      dioAdapter.onDelete(
+        url,
+        (server) => server.reply(
+          200,
+          DeleteResponseDto.mockSuccess(id: jobPostingId).toJson(),
+          delay: const Duration(milliseconds: 1000),
+        ),
+      );
+
+      final response = await dio.delete(url);
+      return ApiResponse.success(
+        DeleteResponseDto.fromJson(response.data),
       );
     } catch (e) {
       return const ApiResponse.error();
