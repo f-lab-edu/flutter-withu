@@ -53,7 +53,7 @@ class JobPostingsBloc extends BaseBloc<JobPostingsEvent, JobPostingState> {
     emit(state.copyWith(
       status: BaseBlocStatus.refresh(),
       isLast: false,
-      list: [],
+      jobPostingItems: [],
     ));
   }
 
@@ -78,7 +78,7 @@ class JobPostingsBloc extends BaseBloc<JobPostingsEvent, JobPostingState> {
           state.copyWith(
             status: BaseBlocStatus.success(),
             isLast: entity.isLast,
-            list: entity.list,
+            jobPostingItems: entity.jobPostingItems,
           ),
         );
       },
