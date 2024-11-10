@@ -56,6 +56,6 @@ class JobPostingRepositoryImpl implements JobPostingRepository {
   Future<ApiResponse<DeleteResponseDto>> deleteJobPosting({
     required String jobPostingId,
   }) async {
-    return await api.deleteJobPosting(jobPostingId: jobPostingId);
+    return await jobPostingApi.deleteJobPosting(jobPostingId: jobPostingId);
   }
 }

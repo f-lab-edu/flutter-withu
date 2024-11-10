@@ -84,7 +84,7 @@ class JobPostingUseCaseImpl implements JobPostingUseCase {
     required String jobPostingId,
   }) async {
     final result =
-        await repository.deleteJobPosting(jobPostingId: jobPostingId);
+        await jobPostingRepo.deleteJobPosting(jobPostingId: jobPostingId);
 
     return result.maybeWhen(
       success: (DeleteResponseDto dto) {
