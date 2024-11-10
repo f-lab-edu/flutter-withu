@@ -24,7 +24,7 @@ class OnChangedContent extends JobPostingFormEvent {
 
 /// 카테고리 선택 이벤트
 class OnPressedJobCategory extends JobPostingFormEvent {
-  final JobCategoryType? category;
+  final JobCategoryType category;
 
   OnPressedJobCategory({required this.category});
 
@@ -34,7 +34,7 @@ class OnPressedJobCategory extends JobPostingFormEvent {
 
 /// 기간형식 선택 이벤트
 class OnPressedContractType extends JobPostingFormEvent {
-  final ContractType? contractType;
+  final ContractType contractType;
 
   OnPressedContractType({required this.contractType});
 
@@ -44,7 +44,7 @@ class OnPressedContractType extends JobPostingFormEvent {
 
 /// 계약 시작 날짜 변경 이벤트
 class OnChangedContractStartDate extends JobPostingFormEvent {
-  final DateTime? contractStartDate;
+  final DateTime contractStartDate;
 
   OnChangedContractStartDate({required this.contractStartDate});
 
@@ -54,7 +54,7 @@ class OnChangedContractStartDate extends JobPostingFormEvent {
 
 /// 계약 종료 날짜 변경 이벤트
 class OnChangedContractEndDate extends JobPostingFormEvent {
-  final DateTime? contractEndDate;
+  final DateTime contractEndDate;
 
   OnChangedContractEndDate({required this.contractEndDate});
 

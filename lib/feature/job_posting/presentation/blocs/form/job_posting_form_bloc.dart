@@ -227,9 +227,9 @@ class JobPostingFormBloc
     try {
       emit(state.copyWith(status: JobPostingFormStatus.loading));
 
-      final result = await useCase.submitJobPosting(
+      final result = await useCase.submit(
         entity: state.toEntity(),
-        jobPostingId: state.jobPostingId,
+        id: state.jobPostingId,
       );
 
       if (result) {
@@ -261,8 +261,8 @@ class JobPostingFormBloc
     }
     emit(state.copyWith(status: JobPostingFormStatus.loading));
 
-    final Either<JobPostingDetailEntity> result = await useCase.getJobPosting(
-      jobPostingId: id,
+    final Either<JobPostingDetailEntity> result = await useCase.get(
+      id: id,
     );
 
     result.when(success: (JobPostingDetailEntity data) {

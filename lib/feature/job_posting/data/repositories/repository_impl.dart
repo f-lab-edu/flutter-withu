@@ -37,12 +37,12 @@ class JobPostingRepositoryImpl implements JobPostingRepository {
 
   /// 공고 수정
   @override
-  Future<ApiResponse<JobPostingDetailDto>> updateJobPosting({
-    required String jobPostingId,
+  Future<ApiResponse<JobPostingDetailDto>> update({
+    required String id,
     required JobPostingRequestDto dto,
   }) async {
-    return await api.updateJobPosting(
-      jobPostingId: jobPostingId,
+    return await jobPostingApi.update(
+      id: id,
       requestData: dto,
     );
   }
@@ -65,9 +65,9 @@ class JobPostingRepositoryImpl implements JobPostingRepository {
 
   /// 공고 삭제
   @override
-  Future<ApiResponse<DeleteResponseDto>> deleteJobPosting({
-    required String jobPostingId,
+  Future<ApiResponse<DeleteResponseDto>> delete({
+    required String id,
   }) async {
-    return await api.deleteJobPosting(jobPostingId: jobPostingId);
+    return await jobPostingApi.delete(id: id);
   }
 }

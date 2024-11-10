@@ -14,24 +14,24 @@ abstract class JobPostingUseCase {
   });
 
   /// 공고 등록/수정
-  Future<bool> submitJobPosting({
+  Future<bool> submit({
     required JobPostingRequestEntity entity,
-    String? jobPostingId
+    String? id
   });
 
 
   /// 공고 상세 조회
   Future<Either<JobPostingDetailEntity>> get({
-    required String jobPostingId,
+    required String id,
   });
 
   /// 공고 마감
   Future<Either<JobPostingDetailEntity>> close({
-    required String jobPostingId,
+    required String id,
   });
 
   /// 공고 삭제
-  Future<Either<bool>> deleteJobPosting({
-    required String jobPostingId,
+  Future<Either<bool>> delete({
+    required String id,
   });
 }

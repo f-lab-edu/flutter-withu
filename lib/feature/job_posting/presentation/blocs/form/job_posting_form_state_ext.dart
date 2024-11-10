@@ -6,10 +6,10 @@ extension JobPostingFormStateExt on JobPostingFormState {
 
   /// 시작 날짜 문자열
   String get contractStartDateStr =>
-      contractStartDate?.format('yyyy-MM-dd') ?? '';
+      contractStartDate.format('yyyy-MM-dd') ?? '';
 
   /// 종료 날짜 문자열
-  String get contractEndDateStr => contractEndDate?.format('yyyy-MM-dd') ?? '';
+  String get contractEndDateStr => contractEndDate.format('yyyy-MM-dd') ?? '';
 
   /// 등록/수정 요청 Entity로 변경
   JobPostingRequestEntity toEntity() {
@@ -23,9 +23,9 @@ extension JobPostingFormStateExt on JobPostingFormState {
       contractEndDate: contractEndDate,
       isTBC: isTBC,
       payType: payType,
-      payAmount: pay,
+      payAmount: int.tryParse(pay) ?? 0,
       workAddress: address,
-      participants: participants,
+      participants: int.tryParse(participants) ?? 0,
       hasTravelTime: hasTravelTime,
       isTravelTimePaid: isTravelTimePaid,
       hasBreakTime: hasBreakTime,

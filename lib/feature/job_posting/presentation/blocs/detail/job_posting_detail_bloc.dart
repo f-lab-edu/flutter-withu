@@ -61,7 +61,7 @@ class JobPostingDetailBloc
     emit(state.copyWith(status: JobPostingDetailStatus.loading));
 
     final Either<JobPostingDetailEntity> result = await useCase.close(
-      jobPostingId: jobPostingId,
+      id: jobPostingId,
     );
 
     result.when(
@@ -97,8 +97,8 @@ class JobPostingDetailBloc
 
     emit(state.copyWith(status: JobPostingDetailStatus.loading));
 
-    final Either<bool> result = await useCase.deleteJobPosting(
-      jobPostingId: jobPostingId,
+    final Either<bool> result = await useCase.delete(
+      id: jobPostingId,
     );
 
     result.when(
@@ -159,8 +159,8 @@ class JobPostingDetailBloc
   }) async {
     emit(state.copyWith(status: JobPostingDetailStatus.loading));
 
-    final Either<JobPostingDetailEntity> result = await useCase.getJobPosting(
-      jobPostingId: jobPostingId,
+    final Either<JobPostingDetailEntity> result = await useCase.get(
+      id: jobPostingId,
     );
 
     result.when(success: (JobPostingDetailEntity data) {

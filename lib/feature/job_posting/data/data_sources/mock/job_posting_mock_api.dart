@@ -83,18 +83,18 @@ class JobPostingMockApi extends JobPostingApi with MockAPI {
 
   /// 공고 수정
   @override
-  FutureOr<ApiResponse<JobPostingDetailDto>> updateJobPosting({
-    required String jobPostingId,
+  FutureOr<ApiResponse<JobPostingDetailDto>> update({
+    required String id,
     required JobPostingRequestDto requestData,
   }) async {
     try {
-      final fullPath = '$path/$jobPostingId';
+      final fullPath = '$path/$id';
 
       dioAdapter.onPut(
         fullPath,
         (server) => server.reply(
           200,
-          JobPostingDetailDto.mock(id: jobPostingId).toJson(),
+          JobPostingDetailDto.mock(id: id).toJson(),
           delay: const Duration(seconds: 1),
         ),
         data: requestData.toJson(),
@@ -125,7 +125,7 @@ class JobPostingMockApi extends JobPostingApi with MockAPI {
     required String id,
   }) async {
     try {
-      final fullPath = '$path/$jobPostingId';
+      final fullPath = '$path/$id';
 
       dioAdapter.onGet(
         fullPath,
@@ -158,7 +158,7 @@ class JobPostingMockApi extends JobPostingApi with MockAPI {
     required String id,
   }) async {
     try {
-      final fullPath = '$path/$jobPostingId';
+      final fullPath = '$path/$id';
 
       dioAdapter.onPut(
         fullPath,
@@ -187,17 +187,17 @@ class JobPostingMockApi extends JobPostingApi with MockAPI {
 
   /// 공고 삭제
   @override
-  FutureOr<ApiResponse<DeleteResponseDto>> deleteJobPosting({
-    required String jobPostingId,
+  FutureOr<ApiResponse<DeleteResponseDto>> delete({
+    required String id,
   }) async {
     try {
-      final fullPath = '$path/$jobPostingId';
+      final fullPath = '$path/$id';
 
       dioAdapter.onDelete(
         fullPath,
         (server) => server.reply(
           200,
-          DeleteResponseDto.mockSuccess(id: jobPostingId).toJson(),
+          DeleteResponseDto.mockSuccess(id: id).toJson(),
           delay: const Duration(milliseconds: 1000),
         ),
       );

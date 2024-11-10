@@ -23,8 +23,8 @@ class JobPostingApiImpl extends JobPostingApi {
 
   /// 공고 수정
   @override
-  FutureOr<ApiResponse<JobPostingDetailDto>> updateJobPosting({
-    required String jobPostingId,
+  FutureOr<ApiResponse<JobPostingDetailDto>> update({
+    required String id,
     required JobPostingRequestDto requestData,
   }) {
     return const ApiResponse.error();
@@ -48,8 +48,8 @@ class JobPostingApiImpl extends JobPostingApi {
 
   /// 공고 삭제
   @override
-  FutureOr<ApiResponse<DeleteResponseDto>> deleteJobPosting({
-    required String jobPostingId,
+  FutureOr<ApiResponse<DeleteResponseDto>> delete({
+    required String id,
   }) {
     return const ApiResponse.error();
   }

@@ -17,6 +17,8 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$JobPostingFormState {
   JobPostingFormStatus get status => throw _privateConstructorUsedError;
+  DateTime get contractStartDate => throw _privateConstructorUsedError;
+  DateTime get contractEndDate => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get content => throw _privateConstructorUsedError;
   bool get isVisibleStartCalendar => throw _privateConstructorUsedError;
@@ -29,14 +31,12 @@ mixin _$JobPostingFormState {
   bool get hasTravelTime => throw _privateConstructorUsedError;
   bool get hasBreakTime => throw _privateConstructorUsedError;
   bool get isMealProvided => throw _privateConstructorUsedError;
+  JobCategoryType get category => throw _privateConstructorUsedError;
+  ContractType get contractType => throw _privateConstructorUsedError;
+  PayType get payType => throw _privateConstructorUsedError;
   String? get jobPostingId => throw _privateConstructorUsedError;
-  JobCategoryType? get category => throw _privateConstructorUsedError;
-  ContractType? get contractType => throw _privateConstructorUsedError;
-  DateTime? get contractStartDate => throw _privateConstructorUsedError;
-  DateTime? get contractEndDate => throw _privateConstructorUsedError;
   DateTime? get workStartTime => throw _privateConstructorUsedError;
   DateTime? get workEndTime => throw _privateConstructorUsedError;
-  PayType? get payType => throw _privateConstructorUsedError;
   bool? get isTravelTimePaid => throw _privateConstructorUsedError;
   bool? get isBreakTimePaid => throw _privateConstructorUsedError;
   String? get message => throw _privateConstructorUsedError;
@@ -56,6 +56,8 @@ abstract class $JobPostingFormStateCopyWith<$Res> {
   @useResult
   $Res call(
       {JobPostingFormStatus status,
+      DateTime contractStartDate,
+      DateTime contractEndDate,
       String title,
       String content,
       bool isVisibleStartCalendar,
@@ -68,14 +70,12 @@ abstract class $JobPostingFormStateCopyWith<$Res> {
       bool hasTravelTime,
       bool hasBreakTime,
       bool isMealProvided,
+      JobCategoryType category,
+      ContractType contractType,
+      PayType payType,
       String? jobPostingId,
-      JobCategoryType? category,
-      ContractType? contractType,
-      DateTime? contractStartDate,
-      DateTime? contractEndDate,
       DateTime? workStartTime,
       DateTime? workEndTime,
-      PayType? payType,
       bool? isTravelTimePaid,
       bool? isBreakTimePaid,
       String? message});
@@ -97,6 +97,8 @@ class _$JobPostingFormStateCopyWithImpl<$Res, $Val extends JobPostingFormState>
   @override
   $Res call({
     Object? status = null,
+    Object? contractStartDate = null,
+    Object? contractEndDate = null,
     Object? title = null,
     Object? content = null,
     Object? isVisibleStartCalendar = null,
@@ -109,14 +111,12 @@ class _$JobPostingFormStateCopyWithImpl<$Res, $Val extends JobPostingFormState>
     Object? hasTravelTime = null,
     Object? hasBreakTime = null,
     Object? isMealProvided = null,
+    Object? category = null,
+    Object? contractType = null,
+    Object? payType = null,
     Object? jobPostingId = freezed,
-    Object? category = freezed,
-    Object? contractType = freezed,
-    Object? contractStartDate = freezed,
-    Object? contractEndDate = freezed,
     Object? workStartTime = freezed,
     Object? workEndTime = freezed,
-    Object? payType = freezed,
     Object? isTravelTimePaid = freezed,
     Object? isBreakTimePaid = freezed,
     Object? message = freezed,
@@ -126,6 +126,14 @@ class _$JobPostingFormStateCopyWithImpl<$Res, $Val extends JobPostingFormState>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as JobPostingFormStatus,
+      contractStartDate: null == contractStartDate
+          ? _value.contractStartDate
+          : contractStartDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      contractEndDate: null == contractEndDate
+          ? _value.contractEndDate
+          : contractEndDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -174,26 +182,22 @@ class _$JobPostingFormStateCopyWithImpl<$Res, $Val extends JobPostingFormState>
           ? _value.isMealProvided
           : isMealProvided // ignore: cast_nullable_to_non_nullable
               as bool,
+      category: null == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as JobCategoryType,
+      contractType: null == contractType
+          ? _value.contractType
+          : contractType // ignore: cast_nullable_to_non_nullable
+              as ContractType,
+      payType: null == payType
+          ? _value.payType
+          : payType // ignore: cast_nullable_to_non_nullable
+              as PayType,
       jobPostingId: freezed == jobPostingId
           ? _value.jobPostingId
           : jobPostingId // ignore: cast_nullable_to_non_nullable
               as String?,
-      category: freezed == category
-          ? _value.category
-          : category // ignore: cast_nullable_to_non_nullable
-              as JobCategoryType?,
-      contractType: freezed == contractType
-          ? _value.contractType
-          : contractType // ignore: cast_nullable_to_non_nullable
-              as ContractType?,
-      contractStartDate: freezed == contractStartDate
-          ? _value.contractStartDate
-          : contractStartDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      contractEndDate: freezed == contractEndDate
-          ? _value.contractEndDate
-          : contractEndDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
       workStartTime: freezed == workStartTime
           ? _value.workStartTime
           : workStartTime // ignore: cast_nullable_to_non_nullable
@@ -202,10 +206,6 @@ class _$JobPostingFormStateCopyWithImpl<$Res, $Val extends JobPostingFormState>
           ? _value.workEndTime
           : workEndTime // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      payType: freezed == payType
-          ? _value.payType
-          : payType // ignore: cast_nullable_to_non_nullable
-              as PayType?,
       isTravelTimePaid: freezed == isTravelTimePaid
           ? _value.isTravelTimePaid
           : isTravelTimePaid // ignore: cast_nullable_to_non_nullable
@@ -232,6 +232,8 @@ abstract class _$$JobPostingFormStateImplCopyWith<$Res>
   @useResult
   $Res call(
       {JobPostingFormStatus status,
+      DateTime contractStartDate,
+      DateTime contractEndDate,
       String title,
       String content,
       bool isVisibleStartCalendar,
@@ -244,14 +246,12 @@ abstract class _$$JobPostingFormStateImplCopyWith<$Res>
       bool hasTravelTime,
       bool hasBreakTime,
       bool isMealProvided,
+      JobCategoryType category,
+      ContractType contractType,
+      PayType payType,
       String? jobPostingId,
-      JobCategoryType? category,
-      ContractType? contractType,
-      DateTime? contractStartDate,
-      DateTime? contractEndDate,
       DateTime? workStartTime,
       DateTime? workEndTime,
-      PayType? payType,
       bool? isTravelTimePaid,
       bool? isBreakTimePaid,
       String? message});
@@ -271,6 +271,8 @@ class __$$JobPostingFormStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? status = null,
+    Object? contractStartDate = null,
+    Object? contractEndDate = null,
     Object? title = null,
     Object? content = null,
     Object? isVisibleStartCalendar = null,
@@ -283,14 +285,12 @@ class __$$JobPostingFormStateImplCopyWithImpl<$Res>
     Object? hasTravelTime = null,
     Object? hasBreakTime = null,
     Object? isMealProvided = null,
+    Object? category = null,
+    Object? contractType = null,
+    Object? payType = null,
     Object? jobPostingId = freezed,
-    Object? category = freezed,
-    Object? contractType = freezed,
-    Object? contractStartDate = freezed,
-    Object? contractEndDate = freezed,
     Object? workStartTime = freezed,
     Object? workEndTime = freezed,
-    Object? payType = freezed,
     Object? isTravelTimePaid = freezed,
     Object? isBreakTimePaid = freezed,
     Object? message = freezed,
@@ -300,6 +300,14 @@ class __$$JobPostingFormStateImplCopyWithImpl<$Res>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as JobPostingFormStatus,
+      contractStartDate: null == contractStartDate
+          ? _value.contractStartDate
+          : contractStartDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      contractEndDate: null == contractEndDate
+          ? _value.contractEndDate
+          : contractEndDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -348,26 +356,22 @@ class __$$JobPostingFormStateImplCopyWithImpl<$Res>
           ? _value.isMealProvided
           : isMealProvided // ignore: cast_nullable_to_non_nullable
               as bool,
+      category: null == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as JobCategoryType,
+      contractType: null == contractType
+          ? _value.contractType
+          : contractType // ignore: cast_nullable_to_non_nullable
+              as ContractType,
+      payType: null == payType
+          ? _value.payType
+          : payType // ignore: cast_nullable_to_non_nullable
+              as PayType,
       jobPostingId: freezed == jobPostingId
           ? _value.jobPostingId
           : jobPostingId // ignore: cast_nullable_to_non_nullable
               as String?,
-      category: freezed == category
-          ? _value.category
-          : category // ignore: cast_nullable_to_non_nullable
-              as JobCategoryType?,
-      contractType: freezed == contractType
-          ? _value.contractType
-          : contractType // ignore: cast_nullable_to_non_nullable
-              as ContractType?,
-      contractStartDate: freezed == contractStartDate
-          ? _value.contractStartDate
-          : contractStartDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      contractEndDate: freezed == contractEndDate
-          ? _value.contractEndDate
-          : contractEndDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
       workStartTime: freezed == workStartTime
           ? _value.workStartTime
           : workStartTime // ignore: cast_nullable_to_non_nullable
@@ -376,10 +380,6 @@ class __$$JobPostingFormStateImplCopyWithImpl<$Res>
           ? _value.workEndTime
           : workEndTime // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      payType: freezed == payType
-          ? _value.payType
-          : payType // ignore: cast_nullable_to_non_nullable
-              as PayType?,
       isTravelTimePaid: freezed == isTravelTimePaid
           ? _value.isTravelTimePaid
           : isTravelTimePaid // ignore: cast_nullable_to_non_nullable
@@ -401,26 +401,26 @@ class __$$JobPostingFormStateImplCopyWithImpl<$Res>
 class _$JobPostingFormStateImpl implements _JobPostingFormState {
   _$JobPostingFormStateImpl(
       {required this.status,
-      required this.title,
-      required this.content,
-      required this.isVisibleStartCalendar,
-      required this.isVisibleEndCalendar,
-      required this.isTBC,
-      required this.participants,
-      required this.pay,
-      required this.address,
-      required this.preferredQualifications,
-      required this.hasTravelTime,
-      required this.hasBreakTime,
-      required this.isMealProvided,
+      required this.contractStartDate,
+      required this.contractEndDate,
+      this.title = '',
+      this.content = '',
+      this.isVisibleStartCalendar = false,
+      this.isVisibleEndCalendar = false,
+      this.isTBC = true,
+      this.participants = '',
+      this.pay = '',
+      this.address = '',
+      this.preferredQualifications = '',
+      this.hasTravelTime = false,
+      this.hasBreakTime = false,
+      this.isMealProvided = false,
+      this.category = JobCategoryType.none,
+      this.contractType = ContractType.none,
+      this.payType = PayType.none,
       this.jobPostingId,
-      this.category,
-      this.contractType,
-      this.contractStartDate,
-      this.contractEndDate,
       this.workStartTime,
       this.workEndTime,
-      this.payType,
       this.isTravelTimePaid,
       this.isBreakTimePaid,
       this.message});
@@ -428,45 +428,60 @@ class _$JobPostingFormStateImpl implements _JobPostingFormState {
   @override
   final JobPostingFormStatus status;
   @override
+  final DateTime contractStartDate;
+  @override
+  final DateTime contractEndDate;
+  @override
+  @JsonKey()
   final String title;
   @override
+  @JsonKey()
   final String content;
   @override
+  @JsonKey()
   final bool isVisibleStartCalendar;
   @override
+  @JsonKey()
   final bool isVisibleEndCalendar;
   @override
+  @JsonKey()
   final bool isTBC;
   @override
+  @JsonKey()
   final String participants;
   @override
+  @JsonKey()
   final String pay;
   @override
+  @JsonKey()
   final String address;
   @override
+  @JsonKey()
   final String preferredQualifications;
   @override
+  @JsonKey()
   final bool hasTravelTime;
   @override
+  @JsonKey()
   final bool hasBreakTime;
   @override
+  @JsonKey()
   final bool isMealProvided;
   @override
+  @JsonKey()
+  final JobCategoryType category;
+  @override
+  @JsonKey()
+  final ContractType contractType;
+  @override
+  @JsonKey()
+  final PayType payType;
+  @override
   final String? jobPostingId;
-  @override
-  final JobCategoryType? category;
-  @override
-  final ContractType? contractType;
-  @override
-  final DateTime? contractStartDate;
-  @override
-  final DateTime? contractEndDate;
   @override
   final DateTime? workStartTime;
   @override
   final DateTime? workEndTime;
-  @override
-  final PayType? payType;
   @override
   final bool? isTravelTimePaid;
   @override
@@ -476,7 +491,7 @@ class _$JobPostingFormStateImpl implements _JobPostingFormState {
 
   @override
   String toString() {
-    return 'JobPostingFormState(status: $status, title: $title, content: $content, isVisibleStartCalendar: $isVisibleStartCalendar, isVisibleEndCalendar: $isVisibleEndCalendar, isTBC: $isTBC, participants: $participants, pay: $pay, address: $address, preferredQualifications: $preferredQualifications, hasTravelTime: $hasTravelTime, hasBreakTime: $hasBreakTime, isMealProvided: $isMealProvided, jobPostingId: $jobPostingId, category: $category, contractType: $contractType, contractStartDate: $contractStartDate, contractEndDate: $contractEndDate, workStartTime: $workStartTime, workEndTime: $workEndTime, payType: $payType, isTravelTimePaid: $isTravelTimePaid, isBreakTimePaid: $isBreakTimePaid, message: $message)';
+    return 'JobPostingFormState(status: $status, contractStartDate: $contractStartDate, contractEndDate: $contractEndDate, title: $title, content: $content, isVisibleStartCalendar: $isVisibleStartCalendar, isVisibleEndCalendar: $isVisibleEndCalendar, isTBC: $isTBC, participants: $participants, pay: $pay, address: $address, preferredQualifications: $preferredQualifications, hasTravelTime: $hasTravelTime, hasBreakTime: $hasBreakTime, isMealProvided: $isMealProvided, category: $category, contractType: $contractType, payType: $payType, jobPostingId: $jobPostingId, workStartTime: $workStartTime, workEndTime: $workEndTime, isTravelTimePaid: $isTravelTimePaid, isBreakTimePaid: $isBreakTimePaid, message: $message)';
   }
 
   @override
@@ -485,6 +500,10 @@ class _$JobPostingFormStateImpl implements _JobPostingFormState {
         (other.runtimeType == runtimeType &&
             other is _$JobPostingFormStateImpl &&
             (identical(other.status, status) || other.status == status) &&
+            (identical(other.contractStartDate, contractStartDate) ||
+                other.contractStartDate == contractStartDate) &&
+            (identical(other.contractEndDate, contractEndDate) ||
+                other.contractEndDate == contractEndDate) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.content, content) || other.content == content) &&
             (identical(other.isVisibleStartCalendar, isVisibleStartCalendar) ||
@@ -505,21 +524,17 @@ class _$JobPostingFormStateImpl implements _JobPostingFormState {
                 other.hasBreakTime == hasBreakTime) &&
             (identical(other.isMealProvided, isMealProvided) ||
                 other.isMealProvided == isMealProvided) &&
-            (identical(other.jobPostingId, jobPostingId) ||
-                other.jobPostingId == jobPostingId) &&
             (identical(other.category, category) ||
                 other.category == category) &&
             (identical(other.contractType, contractType) ||
                 other.contractType == contractType) &&
-            (identical(other.contractStartDate, contractStartDate) ||
-                other.contractStartDate == contractStartDate) &&
-            (identical(other.contractEndDate, contractEndDate) ||
-                other.contractEndDate == contractEndDate) &&
+            (identical(other.payType, payType) || other.payType == payType) &&
+            (identical(other.jobPostingId, jobPostingId) ||
+                other.jobPostingId == jobPostingId) &&
             (identical(other.workStartTime, workStartTime) ||
                 other.workStartTime == workStartTime) &&
             (identical(other.workEndTime, workEndTime) ||
                 other.workEndTime == workEndTime) &&
-            (identical(other.payType, payType) || other.payType == payType) &&
             (identical(other.isTravelTimePaid, isTravelTimePaid) ||
                 other.isTravelTimePaid == isTravelTimePaid) &&
             (identical(other.isBreakTimePaid, isBreakTimePaid) ||
@@ -531,6 +546,8 @@ class _$JobPostingFormStateImpl implements _JobPostingFormState {
   int get hashCode => Object.hashAll([
         runtimeType,
         status,
+        contractStartDate,
+        contractEndDate,
         title,
         content,
         isVisibleStartCalendar,
@@ -543,14 +560,12 @@ class _$JobPostingFormStateImpl implements _JobPostingFormState {
         hasTravelTime,
         hasBreakTime,
         isMealProvided,
-        jobPostingId,
         category,
         contractType,
-        contractStartDate,
-        contractEndDate,
+        payType,
+        jobPostingId,
         workStartTime,
         workEndTime,
-        payType,
         isTravelTimePaid,
         isBreakTimePaid,
         message
@@ -569,32 +584,36 @@ class _$JobPostingFormStateImpl implements _JobPostingFormState {
 abstract class _JobPostingFormState implements JobPostingFormState {
   factory _JobPostingFormState(
       {required final JobPostingFormStatus status,
-      required final String title,
-      required final String content,
-      required final bool isVisibleStartCalendar,
-      required final bool isVisibleEndCalendar,
-      required final bool isTBC,
-      required final String participants,
-      required final String pay,
-      required final String address,
-      required final String preferredQualifications,
-      required final bool hasTravelTime,
-      required final bool hasBreakTime,
-      required final bool isMealProvided,
+      required final DateTime contractStartDate,
+      required final DateTime contractEndDate,
+      final String title,
+      final String content,
+      final bool isVisibleStartCalendar,
+      final bool isVisibleEndCalendar,
+      final bool isTBC,
+      final String participants,
+      final String pay,
+      final String address,
+      final String preferredQualifications,
+      final bool hasTravelTime,
+      final bool hasBreakTime,
+      final bool isMealProvided,
+      final JobCategoryType category,
+      final ContractType contractType,
+      final PayType payType,
       final String? jobPostingId,
-      final JobCategoryType? category,
-      final ContractType? contractType,
-      final DateTime? contractStartDate,
-      final DateTime? contractEndDate,
       final DateTime? workStartTime,
       final DateTime? workEndTime,
-      final PayType? payType,
       final bool? isTravelTimePaid,
       final bool? isBreakTimePaid,
       final String? message}) = _$JobPostingFormStateImpl;
 
   @override
   JobPostingFormStatus get status;
+  @override
+  DateTime get contractStartDate;
+  @override
+  DateTime get contractEndDate;
   @override
   String get title;
   @override
@@ -620,21 +639,17 @@ abstract class _JobPostingFormState implements JobPostingFormState {
   @override
   bool get isMealProvided;
   @override
+  JobCategoryType get category;
+  @override
+  ContractType get contractType;
+  @override
+  PayType get payType;
+  @override
   String? get jobPostingId;
-  @override
-  JobCategoryType? get category;
-  @override
-  ContractType? get contractType;
-  @override
-  DateTime? get contractStartDate;
-  @override
-  DateTime? get contractEndDate;
   @override
   DateTime? get workStartTime;
   @override
   DateTime? get workEndTime;
-  @override
-  PayType? get payType;
   @override
   bool? get isTravelTimePaid;
   @override
