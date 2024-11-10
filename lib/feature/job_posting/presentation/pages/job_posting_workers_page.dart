@@ -6,7 +6,6 @@ import 'package:withu_app/core/core.dart';
 import 'package:withu_app/core/router/router.gr.dart';
 import 'package:withu_app/feature/job_posting/domain/domain.dart';
 import 'package:withu_app/feature/job_posting/presentation/blocs/workers/job_posting_workers_bloc.dart';
-import 'package:withu_app/feature/user/presentation/presentation.dart';
 import 'package:withu_app/shared/shared.dart';
 
 import '../widgets/worker_profile/worker_profile.dart';
@@ -213,7 +212,7 @@ class _WorkerListState extends State<_WorkerList> {
               age: userInfo.age,
               startTime: item.workStartTime?.format('HH:mm') ?? '',
               endTime: item.workEndTime?.format('HH:mm') ?? '',
-              workStatus: item.workStatus,
+              workStatus: item.isOnsite,
             );
           },
         ),

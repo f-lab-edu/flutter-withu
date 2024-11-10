@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of '../workers/job_posting_workers_dto.dart';
+part of 'job_posting_workers_dto.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
