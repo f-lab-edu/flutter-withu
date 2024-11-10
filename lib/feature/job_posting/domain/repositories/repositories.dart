@@ -4,13 +4,13 @@ import 'package:withu_app/shared/data/data.dart';
 
 abstract class JobPostingRepository {
   /// 공고 목록 조회
-  Future<List<JobPostingsItemModel>?> searchJobPostings({
+  Future<List<JobPostingsItemModel>?> search({
     required JobPostingStatusType status,
     required int page,
   });
 
   /// 공고 등록
-  Future<ApiResponse<JobPostingDetailDto>> createJobPosting({
+  Future<ApiResponse<JobPostingDetailDto>> create({
     required JobPostingRequestDto dto,
   });
 
@@ -21,13 +21,13 @@ abstract class JobPostingRepository {
   });
 
   /// 공고 상세 조회
-  Future<ApiResponse<JobPostingDetailDto>> getJobPosting({
-    required String jobPostingId,
+  Future<ApiResponse<JobPostingDetailDto>> get({
+    required String id,
   });
 
   /// 공고 마감
-  Future<ApiResponse<JobPostingDetailDto>> closeJobPosting({
-    required String jobPostingId,
+  Future<ApiResponse<JobPostingDetailDto>> close({
+    required String id,
   });
 
   /// 공고 삭제

@@ -4,20 +4,23 @@ import 'package:withu_app/feature/job_posting/domain/domain.dart';
 import 'package:withu_app/shared/data/data.dart';
 
 class JobPostingRepositoryImpl implements JobPostingRepository {
-  final JobPostingApi api;
+  final JobPostingApi jobPostingApi;
 
   JobPostingRepositoryImpl({
-    required this.api,
+    required this.jobPostingApi,
   });
 
   /// 공고 목록 조회
   @override
-  Future<List<JobPostingsItemModel>?> searchJobPostings({
+  Future<List<JobPostingsItemModel>?> search({
     required JobPostingStatusType status,
     required int page,
   }) async {
     try {
-      return await api.fetchList(status: status, page: page);
+      return await jobPostingApi.search(
+        status: status,
+        page: page,
+      );
     } catch (e) {
       logger.e(e);
       return null;
@@ -26,10 +29,10 @@ class JobPostingRepositoryImpl implements JobPostingRepository {
 
   /// 공고 등록
   @override
-  Future<ApiResponse<JobPostingDetailDto>> createJobPosting({
+  Future<ApiResponse<JobPostingDetailDto>> create({
     required JobPostingRequestDto dto,
   }) async {
-    return await api.createJobPosting(requestData: dto);
+    return await jobPostingApi.create(requestData: dto);
   }
 
   /// 공고 수정
@@ -46,18 +49,18 @@ class JobPostingRepositoryImpl implements JobPostingRepository {
 
   /// 공고 상세 조회
   @override
-  Future<ApiResponse<JobPostingDetailDto>> getJobPosting({
-    required String jobPostingId,
+  Future<ApiResponse<JobPostingDetailDto>> get({
+    required String id,
   }) async {
-    return await api.getJobPosting(jobPostingId: jobPostingId);
+    return await jobPostingApi.get(id: id);
   }
 
   /// 공고 마감
   @override
-  Future<ApiResponse<JobPostingDetailDto>> closeJobPosting({
-    required String jobPostingId,
+  Future<ApiResponse<JobPostingDetailDto>> close({
+    required String id,
   }) async {
-    return await api.closeJobPosting(jobPostingId: jobPostingId);
+    return await jobPostingApi.close(id: id);
   }
 
   /// 공고 삭제

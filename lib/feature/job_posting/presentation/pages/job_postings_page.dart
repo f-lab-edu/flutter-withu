@@ -97,7 +97,7 @@ class JobPostingsListPage extends StatelessWidget {
             state.selectedTab?.value ?? JobPostingStatusType.temporary;
 
         return IndexedStack(
-          index: JobPostingStatusType.values.indexOf(selectedType),
+          index: JobPostingStatusType.valuesWithoutNone.indexOf(selectedType),
           children: const [
             JobPostingsList<JobPostingsTemporaryBloc>(
               type: JobPostingStatusType.temporary,

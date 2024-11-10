@@ -51,6 +51,13 @@ class JobPostingMockApi extends JobPostingApi with MockAPI {
   FutureOr<ApiResponse<JobPostingDetailDto>> createJobPosting({
     required JobPostingRequestDto requestData,
   }) async {
+    final JobPostingDetailDto responseData = JobPostingDetailDto.fromJson({
+      'id': '1',
+      'latitude': 37.5664056,
+      'longitude': 126.9778222,
+      ...requestData.toJson(),
+    });
+
     try {
       dioAdapter.onPost(
         path,
@@ -115,14 +122,15 @@ class JobPostingMockApi extends JobPostingApi with MockAPI {
         FailResponse.fromJson(response.data),
       );
     } catch (e) {
+      logger.e(e);
       return const ApiResponse.error();
     }
   }
 
   /// 공고 상세 조회
   @override
-  FutureOr<ApiResponse<JobPostingDetailDto>> getJobPosting({
-    required String jobPostingId,
+  FutureOr<ApiResponse<JobPostingDetailDto>> get({
+    required String id,
   }) async {
     try {
       final fullPath = '$path/$jobPostingId';
@@ -131,7 +139,7 @@ class JobPostingMockApi extends JobPostingApi with MockAPI {
         fullPath,
         (server) => server.reply(
           200,
-          JobPostingDetailDto.mock(id: jobPostingId).toJson(),
+          JobPostingDetailDto.mock(id: id).toJson(),
           delay: const Duration(milliseconds: 300),
         ),
       );
@@ -154,8 +162,8 @@ class JobPostingMockApi extends JobPostingApi with MockAPI {
 
   /// 공고 마감
   @override
-  FutureOr<ApiResponse<JobPostingDetailDto>> closeJobPosting({
-    required String jobPostingId,
+  FutureOr<ApiResponse<JobPostingDetailDto>> close({
+    required String id,
   }) async {
     try {
       final fullPath = '$path/$jobPostingId';
@@ -164,7 +172,7 @@ class JobPostingMockApi extends JobPostingApi with MockAPI {
         fullPath,
         (server) => server.reply(
           200,
-          JobPostingDetailDto.mock(id: jobPostingId).toJson(),
+          JobPostingDetailDto.mock(id: id).toJson(),
           delay: const Duration(milliseconds: 1000),
         ),
       );

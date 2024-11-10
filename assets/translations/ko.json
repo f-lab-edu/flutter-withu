@@ -52,5 +52,25 @@
   "cancel": "취소",
   "isNotDeadlineYetConfirmClose": "아직 마감날이 아닙니다. 마감할까요?",
   "isUpdateContentCorrect": "수정하신 내용이 맞으신가요?",
-  "canRevertFromPostingManagement": "공고 관리에서 다시 되돌릴 수 있습니다."
+  "canRevertFromPostingManagement": "공고 관리에서 다시 되돌릴 수 있습니다.",
+  "pleaseEnterJobPostingTitle": "공고 제목을 입력해주세요.",
+  "validationMessage": {
+    "jobPosting": {
+      "title": "공고 제목을 입력해 주세요.",
+      "content": "근무내용을 입력해 주세요.",
+      "category": "카테고리를 선택해 주세요.",
+      "contractType": "기간형식을 선택해 주세요.",
+      "contractStartDate": "근로 계약 기간을 선택해 주세요.",
+      "contractEndDate": "근로 계약 종료 기간을 선택해 주세요.",
+      "workStartTime": "근무 시작 시간을 선택해 주세요.",
+      "workEndTime": "근무 종료 시간을 선택해 주세요.",
+      "participants": "모집인원을 0명 이상 입력해 주세요.",
+      "payType": "급여 방법을 선택해 주세요.",
+      "payAmount": "급여를 0원 이상 입력해 주세요.",
+      "address": "주소를 입력해 주세요.",
+      "preferredQualification": "우대사항을 입력해 주세요.",
+      "travelTimePaid": "이동시간 급여 여부를 선택해 주세요.",
+      "breakTimePaid": "휴게시간 급여 여부를 선택해 주세요."
+    }
+  }
 }
