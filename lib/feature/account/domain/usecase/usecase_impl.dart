@@ -15,12 +15,13 @@ class AccountUseCaseImpl implements AccountUseCase {
     required String password,
   }) async {
     final result = await accountRepo.login(
-        requestData: LoginRequestDto(
-      accountType: accountType,
-      loginType: loginType,
-      loginId: loginId,
-      password: password,
-    ));
+      requestData: LoginRequestDto(
+        accountType: accountType,
+        loginType: loginType,
+        loginId: loginId,
+        password: password,
+      ),
+    );
 
     _storeSessionId(id: result.successData?.sessionId ?? '');
 

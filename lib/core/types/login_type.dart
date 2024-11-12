@@ -5,7 +5,7 @@ enum LoginType {
   email(serverKey: 'EMAIL'),
   kakao(serverKey: 'KAKAO'),
   naver(serverKey: 'NAVER'),
-  apple(serverKey: 'APPLe');
+  apple(serverKey: 'APPLE');
 
   final String serverKey;
 
