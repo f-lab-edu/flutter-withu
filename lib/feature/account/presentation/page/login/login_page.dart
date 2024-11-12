@@ -85,21 +85,21 @@ class _LoginPageState extends State<LoginPageContent> {
                   key: const Key('email_input'),
                   textInputAction: TextInputAction.next,
                   errorText: StringRes.pleaseEnterValidEmail.tr,
-                  errorVisible: !state.isValidId,
+                  errorVisible: !state.loginId.isValid,
                   onChanged: (String text) {
-                    context.read<LoginBloc>().add(LoginIdInputted(id: text));
+                    context.read<LoginBloc>().add(LoginIdInputted(value: text));
                   },
                 ),
                 const SizedBox(height: 30),
                 BaseInput.password(
                   key: const Key('password_input'),
                   errorText: StringRes.pleaseEnterValidPassword.tr,
-                  errorVisible: !state.isValidPassword,
                   obscureText: !state.isVisiblePassword,
+                  errorVisible: !state.password.isValid,
                   onChanged: (String text) {
                     context
                         .read<LoginBloc>()
-                        .add(LoginPasswordInputted(password: text));
+                        .add(LoginPasswordInputted(value: text));
                   },
                   onSuffixPressed: () {
                     context

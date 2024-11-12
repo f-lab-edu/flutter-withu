@@ -12,16 +12,18 @@ extension LoginBlocHandler on LoginBloc {
     ));
   }
 
+  /// 로그인 버튼 활성화 상태 체크 및 emit
+  void _checkLoginEnabled(Emitter<LoginState> emit) {
+    emit(state.copyWith(isEnabledLogin: state.checkLoginEnabled()));
+  }
+
   /// 아이디 입력
   void _onIdInputted(
     LoginIdInputted event,
     Emitter<LoginState> emit,
   ) {
-    emit(state.copyWith(
-      loginId: event.id,
-      isValidId: state.checkIdValid(event.id),
-      isEnabledLogin: state.checkLoginEnabled(id: event.id),
-    ));
+    emit(state.copyWith(loginId: event.email));
+    _checkLoginEnabled(emit);
   }
 
   /// 비밀번호 입력
@@ -29,11 +31,8 @@ extension LoginBlocHandler on LoginBloc {
     LoginPasswordInputted event,
     Emitter<LoginState> emit,
   ) {
-    emit(state.copyWith(
-      password: event.password,
-      isValidPassword: state.checkPwValid(event.password),
-      isEnabledLogin: state.checkLoginEnabled(pw: event.password),
-    ));
+    emit(state.copyWith(password: event.password));
+    _checkLoginEnabled(emit);
   }
 
   /// 로그인 버튼 클릭

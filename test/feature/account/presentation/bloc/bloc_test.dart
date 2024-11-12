@@ -21,10 +21,9 @@ void main() {
     test('Initial state', () {
       expect(loginBloc.state.status.isInitial, true);
       expect(loginBloc.state.selectedTab, AccountType.company);
-      expect(loginBloc.state.loginId, '');
-      expect(loginBloc.state.password, '');
-      expect(loginBloc.state.isValidId, true);
-      expect(loginBloc.state.isValidPassword, true);
+      expect(loginBloc.state.loginId, Email.empty);
+      expect(loginBloc.state.password, Password.empty);
+      expect(loginBloc.state.isVisiblePassword, false);
       expect(loginBloc.state.isEnabledLogin, false);
     });
 
@@ -44,16 +43,16 @@ void main() {
     blocTest(
       '이메일 입력 이벤트 검사',
       build: () => loginBloc,
-      act: (bloc) => bloc.add(LoginIdInputted(id: 'test@test.com')),
+      act: (bloc) => bloc.add(LoginIdInputted(value: 'test@test.com')),
       expect: () => [
         isA<LoginState>()
             .having(
               (state) => state.loginId,
               'loginId',
-              'test@test.com',
+              const Email('test@test.com'),
             )
             .having(
-              (state) => state.isValidId,
+              (state) => state.loginId.isValid,
               'isValidId',
               true,
             )
@@ -68,17 +67,17 @@ void main() {
     blocTest(
       '잘못된 이메일 입력 이벤트 검사',
       build: () => loginBloc,
-      act: (bloc) => bloc.add(LoginIdInputted(id: 'test')),
+      act: (bloc) => bloc.add(LoginIdInputted(value: 'test')),
       expect: () => [
         isA<LoginState>()
             .having(
               (state) => state.loginId,
               'loginId',
-              'test',
+              const Email('test'),
             )
             .having(
-              (state) => state.isValidId,
-              'isValidId',
+              (state) => state.loginId.isValid,
+              'isValid',
               false,
             )
             .having(
@@ -92,24 +91,48 @@ void main() {
     blocTest(
       '비밀번호 입력 이벤트 검사',
       build: () => loginBloc,
-      act: (bloc) => bloc.add(LoginPasswordInputted(password: '123qwe!@')),
+      act: (bloc) => bloc.add(LoginPasswordInputted(value: '123qwe!@')),
       expect: () => [
         isA<LoginState>()
-            .having((state) => state.password, 'password', '123qwe!@')
-            .having((state) => state.isValidPassword, 'isValidPassword', true)
-            .having((state) => state.isEnabledLogin, 'isEnabledLogin', false),
+            .having(
+              (state) => state.password,
+              'password',
+              const Password('123qwe!@'),
+            )
+            .having(
+              (state) => state.password.isValid,
+              'isValid',
+              true,
+            )
+            .having(
+              (state) => state.isEnabledLogin,
+              'isEnabledLogin',
+              false,
+            ),
       ],
     );
 
     blocTest(
       '8자리 미만 비밀번호 입력 이벤트 검사',
       build: () => loginBloc,
-      act: (bloc) => bloc.add(LoginPasswordInputted(password: '12qw!@')),
+      act: (bloc) => bloc.add(LoginPasswordInputted(value: '12qw!@')),
       expect: () => [
         isA<LoginState>()
-            .having((state) => state.password, 'password', '12qw!@')
-            .having((state) => state.isValidPassword, 'isValidPassword', false)
-            .having((state) => state.isEnabledLogin, 'isEnabledLogin', false),
+            .having(
+              (state) => state.password,
+              'password',
+              const Password('12qw!@'),
+            )
+            .having(
+              (state) => state.password.isValid,
+              'isValidPassword',
+              false,
+            )
+            .having(
+              (state) => state.isEnabledLogin,
+              'isEnabledLogin',
+              false,
+            ),
       ],
     );
 
@@ -117,22 +140,28 @@ void main() {
       '아이디, 비밀번호 입력 시 isEnabledLogin 검사',
       build: () => loginBloc,
       act: (bloc) => [
-        bloc.add(LoginIdInputted(id: 'test@test.com')),
-        bloc.add(LoginPasswordInputted(password: '123qwe!@')),
+        bloc.add(LoginIdInputted(value: 'test@test.com')),
+        bloc.add(LoginPasswordInputted(value: '123qwe!@')),
       ],
-      expect: () => [
-        /// 이메일 입력 후 상태
-        isA<LoginState>()
-            .having((state) => state.loginId, 'loginId', 'test@test.com')
-            .having((state) => state.isValidId, 'isValidId', true)
-            .having((state) => state.isEnabledLogin, 'isEnabledLogin', false),
+      expect: () {
+        const loginId = Email('test@test.com');
+        const password = Password('123qwe!@');
+        return [
+          /// 이메일 입력 후 상태
+          isA<LoginState>()
+              .having((state) => state.loginId, 'loginId', loginId)
+              .having((state) => state.loginId.isValid, 'isValid', true),
 
-        /// 비밀번호도 입력 후 상태
-        isA<LoginState>()
-            .having((state) => state.password, 'password', '123qwe!@')
-            .having((state) => state.isValidPassword, 'isValidPassword', true)
-            .having((state) => state.isEnabledLogin, 'isEnabledLogin', true),
-      ],
+          /// 비밀번호도 입력 후 상태
+          isA<LoginState>()
+              .having((state) => state.password, 'password', password)
+              .having((state) => state.password.isValid, 'isValid', true),
+
+          /// 비밀번호도 입력 후 상태
+          isA<LoginState>()
+              .having((state) => state.isEnabledLogin, 'isEnabledLogin', true),
+        ];
+      },
     );
 
     blocTest(

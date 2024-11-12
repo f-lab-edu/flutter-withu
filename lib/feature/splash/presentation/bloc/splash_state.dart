@@ -10,6 +10,6 @@ class SplashState extends BaseBlocState with _$SplashState {
     @Default('') String message,
 
     /// 로그인 여부
-    @Default(false) bool isLoggedIn,
+    @Default(SplashNextPageType.none) SplashNextPageType nextPage,
   }) = _SplashState;
 }

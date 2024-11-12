@@ -5,8 +5,8 @@ extension LoginBlocConverter on LoginBloc {
     return LoginRequestEntity(
       accountType: state.selectedTab,
       loginType: LoginType.email,
-      loginId: state.loginId,
-      password: state.password,
+      loginId: state.loginId.value,
+      password: state.password.value,
     );
   }
 }

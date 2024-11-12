@@ -4,6 +4,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:withu_app/core/core.dart';
 import 'package:withu_app/feature/account/account.dart';
+import 'package:withu_app/feature/splash/type/type.dart';
 
 part 'splash_event.dart';
 
@@ -16,9 +17,9 @@ class SplashBloc extends BaseBloc<SplashEvent, SplashState> {
 
   SplashBloc({
     required this.accountUseCase,
-  }) : super(
-          SplashState(status: BaseBlocStatus.initial()),
-        ) {
+  }) : super(SplashState(
+          status: BaseBlocStatus.initial(),
+        )) {
     on<OnInitializeApp>(_onOnInitializeApp);
   }
 
@@ -38,7 +39,7 @@ class SplashBloc extends BaseBloc<SplashEvent, SplashState> {
 
     emit(state.copyWith(
       status: BaseBlocStatus.success(),
-      isLoggedIn: isLoggedIn,
+      nextPage: SplashNextPageTypeExt.getNextPage(isLoggedIn),
     ));
   }
 }

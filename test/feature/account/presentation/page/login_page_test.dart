@@ -117,8 +117,7 @@ void main() {
         Stream.fromIterable([
           initialState,
           initialState.copyWith(
-            loginId: email,
-            isValidId: true,
+            loginId: const Email(email),
           ),
         ]),
         initialState: initialState,
@@ -130,8 +129,8 @@ void main() {
       await tester.pumpAndSettle();
 
       // Then
-      expect(loginBloc.state.loginId, equals(email));
-      expect(loginBloc.state.isValidId, isTrue);
+      expect(loginBloc.state.loginId, equals(const Email(email)));
+      expect(loginBloc.state.loginId.isValid, isTrue);
       expect(find.text(email), findsOneWidget);
       expect(LoginPageTestHelper.idErrorMessageFinder(), findsNothing);
     });
@@ -144,8 +143,7 @@ void main() {
         Stream.fromIterable([
           initialState,
           initialState.copyWith(
-            loginId: email,
-            isValidId: false,
+            loginId: const Email(email),
           ),
         ]),
         initialState: initialState,
@@ -157,8 +155,8 @@ void main() {
       await tester.pumpAndSettle();
 
       // Then
-      expect(loginBloc.state.loginId, equals(email));
-      expect(loginBloc.state.isValidId, isFalse);
+      expect(loginBloc.state.loginId, equals(const Email(email)));
+      expect(loginBloc.state.loginId.isValid, isFalse);
       expect(find.text(email), findsOneWidget);
       expect(LoginPageTestHelper.idErrorMessageFinder(), findsOneWidget);
       expect(find.text(StringRes.pleaseEnterValidEmail.tr), findsOneWidget);
@@ -172,8 +170,7 @@ void main() {
         Stream.fromIterable([
           initialState,
           initialState.copyWith(
-            password: password,
-            isValidPassword: true,
+            password: const Password(password),
           ),
         ]),
         initialState: initialState,
@@ -186,8 +183,8 @@ void main() {
       await tester.pumpAndSettle();
 
       // Then
-      expect(loginBloc.state.password, equals(password));
-      expect(loginBloc.state.isValidPassword, isTrue);
+      expect(loginBloc.state.password, equals(const Password(password),));
+      expect(loginBloc.state.password.isValid, isTrue);
       expect(find.text(password), findsOneWidget);
       expect(LoginPageTestHelper.passwordErrorMessageFinder(), findsNothing);
     });
@@ -200,8 +197,7 @@ void main() {
         Stream.fromIterable([
           initialState,
           initialState.copyWith(
-            password: password,
-            isValidPassword: false,
+            password: const Password(password),
           ),
         ]),
         initialState: initialState,
@@ -216,8 +212,8 @@ void main() {
       await tester.pumpAndSettle();
 
       // Then
-      expect(loginBloc.state.password, equals(password));
-      expect(loginBloc.state.isValidPassword, isFalse);
+      expect(loginBloc.state.password, equals(const Password(password)));
+      expect(loginBloc.state.password.isValid, isFalse);
       expect(find.text(password), findsOneWidget);
       expect(LoginPageTestHelper.passwordErrorMessageFinder(), findsOneWidget);
       expect(find.text(StringRes.pleaseEnterValidPassword.tr), findsOneWidget);
@@ -270,10 +266,8 @@ void main() {
       const loginId = 'test@test.com';
       const password = '123qwe!@';
       final state = initialState.copyWith(
-        loginId: loginId,
-        isValidId: true,
-        password: password,
-        isValidPassword: true,
+        loginId: const Email(loginId),
+        password: const Password(password),
         isEnabledLogin: true,
       );
       controller.add(state);
@@ -302,10 +296,8 @@ void main() {
       const password = '123qwe!@';
       const failMessage = '존재하지 않는 계정입니다.';
       final state = initialState.copyWith(
-        loginId: loginId,
-        isValidId: true,
-        password: password,
-        isValidPassword: true,
+        loginId: const Email(loginId),
+        password: const Password(password),
         isEnabledLogin: true,
       );
       controller.add(state);
