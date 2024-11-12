@@ -13,7 +13,6 @@ extension LoginResultEntityConverter on LoginResultEntity {
       success: (dto) {
         return LoginResultEntity(
           isLoggedIn: dto.status,
-          message: dto.message,
         );
       },
       orElse: () {

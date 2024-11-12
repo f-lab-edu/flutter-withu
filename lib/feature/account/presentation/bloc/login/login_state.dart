@@ -31,4 +31,7 @@ extension LoginStateExt on LoginState {
   bool checkLoginEnabled() {
     return loginId.isValid && password.isValid;
   }
+
+  /// 메시지가 있는지 검사.
+  bool get hasFailMessage => status.isFailure && message.isNotEmpty;
 }

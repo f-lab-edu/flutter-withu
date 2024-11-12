@@ -48,8 +48,7 @@ class _LoginPageState extends State<LoginPageContent> {
           getItAppRouter.replaceAll([const JobPostingsRoute()]);
         }
 
-        /// 로그인 실패
-        if (state.status.isFailure && state.message.isNotEmpty) {
+        if (state.hasFailMessage) {
           await CustomAlertDialog.showContentAlert(
             context: context,
             content: state.message,
