@@ -71,19 +71,19 @@ class _LoginPageState extends State<_LoginPage> {
                 BaseInput.email(
                   textInputAction: TextInputAction.next,
                   errorText: StringRes.pleaseEnterValidEmail.tr,
-                  errorVisible: !state.isValidId,
+                  errorVisible: !state.loginId.isValid,
                   onChanged: (String text) {
-                    context.read<LoginBloc>().add(LoginIdInputted(id: text));
+                    context.read<LoginBloc>().add(LoginIdInputted(value: text));
                   },
                 ),
                 const SizedBox(height: 30),
                 BaseInput.password(
                   errorText: StringRes.pleaseEnterValidPassword.tr,
-                  errorVisible: !state.isValidPassword,
+                  errorVisible: !state.password.isValid,
                   onChanged: (String text) {
                     context
                         .read<LoginBloc>()
-                        .add(LoginPasswordInputted(password: text));
+                        .add(LoginPasswordInputted(value: text));
                   },
                 ),
                 const SizedBox(height: 80),

@@ -7,9 +7,8 @@ extension LoginBlocHandler on LoginBloc {
     Emitter<LoginState> emit,
   ) {
     emit(state.copyWith(
-      loginId: event.id,
-      isValidId: state.checkIdValid(event.id),
-      isEnabledLogin: state.checkLoginEnabled(id: event.id),
+      loginId: event.email,
+      isEnabledLogin: state.checkLoginEnabled(loginId: event.email),
     ));
   }
 
@@ -20,8 +19,7 @@ extension LoginBlocHandler on LoginBloc {
   ) {
     emit(state.copyWith(
       password: event.password,
-      isValidPassword: state.checkPwValid(event.password),
-      isEnabledLogin: state.checkLoginEnabled(pw: event.password),
+      isEnabledLogin: state.checkLoginEnabled(password: event.password),
     ));
   }
 
@@ -35,8 +33,8 @@ extension LoginBlocHandler on LoginBloc {
     final LoginResultEntity result = await accountUseCase.login(
       accountType: state.selectedTab,
       loginType: LoginType.email,
-      loginId: state.loginId,
-      password: state.password,
+      loginId: state.loginId.value,
+      password: state.password.value,
     );
 
     emit(state.copyWith(
