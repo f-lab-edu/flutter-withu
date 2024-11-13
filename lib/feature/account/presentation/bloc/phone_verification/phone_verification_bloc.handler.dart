@@ -11,18 +11,18 @@ extension PhoneVerificationBlocHandler on PhoneVerificationBloc {
   }
 
   void _onAuthCodeRequested(
-    PhoneVerificationCodeRequested event,
+    PhoneVerificationAuthCodeRequested event,
     Emitter<PhoneVerificationState> emit,
   ) {
     // TODO: API 호출하기
   }
 
   void _onAuthCodeInputted(
-    PhoneVerificationCodeInputted event,
+    PhoneVerificationAuthCodeInputted event,
     Emitter<PhoneVerificationState> emit,
   ) {
     emit(state.copyWith(
-      code: event.code,
+      authCode: event.code,
     ));
   }
 }

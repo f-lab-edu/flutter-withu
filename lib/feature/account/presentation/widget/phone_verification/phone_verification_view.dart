@@ -16,7 +16,7 @@ class PhoneVerificationView extends StatelessWidget {
       child: const Column(
         children: [
           PhoneInput(),
-          VerificationCodeInput(),
+          AuthCodeInput(),
         ],
       ),
     );
@@ -42,7 +42,7 @@ class PhoneInput extends StatelessWidget {
           onChanged: (String text) {
             context
                 .read<PhoneVerificationBloc>()
-                .add(PhoneVerificationCodeInputted(value: text));
+                .add(PhoneVerificationAuthCodeInputted(value: text));
           },
         );
       },
@@ -65,7 +65,7 @@ class VerificationBtn extends StatelessWidget {
             }
             context
                 .read<PhoneVerificationBloc>()
-                .add(PhoneVerificationCodeRequested());
+                .add(PhoneVerificationAuthCodeRequested());
           },
           child: Text(
             StringRes.verification.tr,
@@ -78,18 +78,18 @@ class VerificationBtn extends StatelessWidget {
 }
 
 /// 인증번호 입력
-class VerificationCodeInput extends StatelessWidget {
-  const VerificationCodeInput({super.key});
+class AuthCodeInput extends StatelessWidget {
+  const AuthCodeInput({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<PhoneVerificationBloc, PhoneVerificationState>(
       builder: (context, state) {
         return BaseInput(
-          key: const Key('verification_code_input'),
+          key: const Key('auth_code_input'),
           hintText: StringRes.enterVerificationCode.tr,
           errorText: "! ${StringRes.invalidVerificationCode.tr}",
-          errorVisible: state.code.isValid,
+          errorVisible: state.authCode.isValid,
           maxLength: 6,
           keyboardType: TextInputType.number,
           inputFormatters: [
@@ -98,7 +98,7 @@ class VerificationCodeInput extends StatelessWidget {
           onChanged: (String text) {
             context
                 .read<PhoneVerificationBloc>()
-                .add(PhoneVerificationCodeInputted(value: text));
+                .add(PhoneVerificationAuthCodeInputted(value: text));
           },
         );
       },

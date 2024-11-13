@@ -20,7 +20,7 @@ class PhoneVerificationBloc extends BaseBloc<PhoneVerificationEvent, PhoneVerifi
           PhoneVerificationState(status: BaseBlocStatus.initial()),
         ) {
     on<PhoneVerificationPhoneInputted>(_onPhoneInputted);
-    on<PhoneVerificationCodeRequested>(_onAuthCodeRequested);
-    on<PhoneVerificationCodeInputted>(_onAuthCodeInputted);
+    on<PhoneVerificationAuthCodeRequested>(_onAuthCodeRequested);
+    on<PhoneVerificationAuthCodeInputted>(_onAuthCodeInputted);
   }
 }

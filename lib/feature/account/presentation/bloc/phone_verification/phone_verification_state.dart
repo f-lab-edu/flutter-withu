@@ -9,7 +9,7 @@ class PhoneVerificationState extends BaseBlocState with _$PhoneVerificationState
     @Default(Phone.empty) Phone phone,
 
     /// 인증번호
-    @Default(VerificationCode.empty) VerificationCode code,
+    @Default(AuthCode.empty) AuthCode authCode,
   }) = _PhoneVerificationState;
 }
 

@@ -1,12 +1,12 @@
 import 'package:equatable/equatable.dart';
 
 /// 인증번호 Value Object
-class VerificationCode extends Equatable {
+class AuthCode extends Equatable {
   final String value;
 
-  const VerificationCode(this.value);
+  const AuthCode(this.value);
 
-  static const empty = VerificationCode('');
+  static const empty = AuthCode('');
 
   @override
   List<Object?> get props => [value];
