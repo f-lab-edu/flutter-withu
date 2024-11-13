@@ -74,9 +74,9 @@ enum StringRes {
   pleaseEnterValidEmail,
   pleaseEnterValidPassword,
   enterOnlyNumber,
-  enterAuthCode,
-  authentication,
-  invalidAuthCode,
+  enterVerificationCode,
+  verification,
+  invalidVerificationCode,
 }
 
 extension StringResEx on StringRes {

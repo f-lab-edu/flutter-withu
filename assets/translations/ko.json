@@ -73,7 +73,7 @@
   "pleaseEnterValidEmail": "! 올바른 이메일을 입력해주세요.",
   "pleaseEnterValidPassword": "! 8자리 이상의 비밀번호를 입력하세요.",
   "enterOnlyNumber": "숫자만 입력하세요.",
-  "enterAuthCode": "인증번호 입력",
-  "authentication": "인증",
-  "invalidAuthCode": "인증번호가 틀립니다,"
+  "enterVerificationCode": "인증번호 입력",
+  "verification": "인증",
+  "invalidVerificationCode": "인증번호가 틀립니다,"
 }

@@ -19,6 +19,9 @@ void initAccountInjections() {
   getIt.registerSingleton<AccountUseCase>(
     AccountUseCaseImpl(accountRepo: getIt()),
   );
+  getIt.registerFactory<PhoneVerificationBloc>(
+    () => PhoneVerificationBloc(accountUseCase: getIt()),
+  );
   getIt.registerFactory<LoginBloc>(
     () => LoginBloc(accountUseCase: getIt()),
   );
