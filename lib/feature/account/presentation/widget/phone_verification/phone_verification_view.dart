@@ -42,7 +42,7 @@ class PhoneInput extends StatelessWidget {
           onChanged: (String text) {
             context
                 .read<PhoneVerificationBloc>()
-                .add(PhoneVerificationAuthCodeInputted(value: text));
+                .add(PhoneVerificationPhoneInputted(value: text));
           },
         );
       },
@@ -89,7 +89,7 @@ class AuthCodeInput extends StatelessWidget {
           key: const Key('auth_code_input'),
           hintText: StringRes.enterVerificationCode.tr,
           errorText: "! ${StringRes.invalidVerificationCode.tr}",
-          errorVisible: state.authCode.isValid,
+          errorVisible: state.isVisibleAuthCodeError,
           maxLength: 6,
           keyboardType: TextInputType.number,
           inputFormatters: [

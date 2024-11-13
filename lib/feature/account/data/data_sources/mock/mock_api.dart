@@ -36,7 +36,7 @@ class AccountMockApi extends AccountApiImpl {
   }) async {
     /// Mock 응답 등록
     dioAdapter.onPost(
-      loginPath,
+      verifyPhonePath,
       (server) => server.reply(
         200,
         VerifyPhoneResponseDtoMock.success().toJson(),
@@ -58,7 +58,7 @@ class AccountMockApi extends AccountApiImpl {
       verifyAuthCodePath,
       (server) => server.reply(
         200,
-        BaseResponseDtoMock.mock(true),
+        BaseResponseDtoMock.mock(true).toJson((value) => value),
         delay: const Duration(seconds: 1),
       ),
       data: dto.toJson(),

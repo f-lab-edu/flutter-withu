@@ -16,6 +16,11 @@ class BaseResponseDto<T> with _$BaseResponseDto<T> {
   }) = _BaseResponseDto;
 
   factory BaseResponseDto.fromJson(
-          Map<String, dynamic> json, T Function(Object?) fromJsonT) =>
-      _$BaseResponseDtoFromJson(json, fromJsonT);
+    Map<String, dynamic> json,
+    T Function(Object?) fromJsonT,
+  ) =>
+      _$BaseResponseDtoFromJson(
+        json,
+        fromJsonT,
+      );
 }

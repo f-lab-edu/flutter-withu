@@ -12,5 +12,8 @@ class Phone extends Equatable {
   @override
   List<Object?> get props => [value];
 
+  @override
+  String toString() => value;
+
   bool get isValid => RegExUtil.phonePattern.hasMatch(value);
 }

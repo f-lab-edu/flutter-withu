@@ -38,7 +38,7 @@ class AccountUseCaseImpl implements AccountUseCase {
 
   /// 휴대폰 인증번호 발송 요청
   @override
-  FutureOr<PhoneVerificationEntity> requestPhoneVerification({
+  Future<PhoneVerificationEntity> requestPhoneVerification({
     required String phone,
   }) async {
     final result = await accountRepo.accountApi.verifyPhone(
