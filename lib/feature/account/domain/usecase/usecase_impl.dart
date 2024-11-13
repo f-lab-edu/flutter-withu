@@ -35,4 +35,31 @@ class AccountUseCaseImpl implements AccountUseCase {
     final sessionId = await accountRepo.getSessionId();
     return sessionId.isNotEmpty;
   }
+
+  /// 휴대폰 인증번호 발송 요청
+  @override
+  FutureOr<PhoneVerificationEntity> requestPhoneVerification({
+    required String phone,
+  }) async {
+    final result = await accountRepo.accountApi.verifyPhone(
+      phone: phone,
+    );
+
+    return result.maybeWhen(
+      success: (dto) => PhoneVerificationEntityParser.fromDto(dto),
+      orElse: () => PhoneVerificationEntityMock.serverError(),
+    );
+  }
+
+  /// 인증번호 검증
+  @override
+  Future<bool> authCodeVerification({
+    required AuthCodeVerificationEntity entity,
+  }) async {
+    final result = await accountRepo.accountApi.verifyAuthCode(
+      dto: entity.toDto(),
+    );
+
+    return result.successData?.info == true;
+  }
 }

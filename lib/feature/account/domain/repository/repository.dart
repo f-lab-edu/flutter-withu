@@ -24,5 +24,15 @@ abstract class AccountRepository {
   });
 
   /// Session Id Storage 에 조회
-  Future<String> getSessionId() ;
+  Future<String> getSessionId();
+
+  /// 휴대폰 인증번호 발송 요청
+  Future<ApiResponse<VerifyPhoneResponseDto>> requestPhoneVerification({
+    required String phone,
+  });
+
+  /// 인증번호 검증
+  Future<ApiResponse<BaseResponseDto<bool>>> authCodeVerification({
+    required AuthCodeVerificationRequestDto dto,
+  });
 }

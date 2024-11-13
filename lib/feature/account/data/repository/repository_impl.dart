@@ -31,10 +31,25 @@ class AccountRepositoryImpl implements AccountRepository {
     accountStorage.setSessionId(id: id);
   }
 
-
   /// Session Id Storage 에 조회
   @override
   Future<String> getSessionId() async {
     return await accountStorage.getSessionId();
+  }
+
+  /// 휴대폰 인증번호 발송 요청
+  @override
+  Future<ApiResponse<VerifyPhoneResponseDto>> requestPhoneVerification({
+    required String phone,
+  }) async {
+    return await accountApi.verifyPhone(phone: phone);
+  }
+
+  /// 인증번호 검증
+  @override
+  Future<ApiResponse<BaseResponseDto<bool>>> authCodeVerification({
+    required AuthCodeVerificationRequestDto dto,
+  }) async {
+    return await accountApi.verifyAuthCode(dto: dto);
   }
 }
