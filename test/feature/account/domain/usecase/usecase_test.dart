@@ -100,7 +100,7 @@ void main() {
       final expectDto = FailResponse.error();
 
       when(
-        () => mockRepo.sendAuthCode(phone: any(named: 'phone')),
+        () => mockRepo.sendAuthCode(phone: any(named: 'phone_auth.dart')),
       ).thenAnswer(
         (_) async => ApiResponse.fail(expectDto),
       );
@@ -114,7 +114,7 @@ void main() {
       expect(result.status, isFalse);
       expect(result.message, StringRes.serverError.tr);
       verify(
-        () => mockRepo.sendAuthCode(phone: any(named: 'phone')),
+        () => mockRepo.sendAuthCode(phone: any(named: 'phone_auth.dart')),
       ).called(1);
     });
   });

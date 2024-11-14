@@ -132,8 +132,6 @@ class _LoginPageState extends State<LoginPageContent> {
                   enabled: state.isEnabledLogin,
                 ),
                 const SizedBox(height: 20),
-                const PhoneAuthWidget(),
-                const SizedBox(height: 50),
               ],
             ),
           ),

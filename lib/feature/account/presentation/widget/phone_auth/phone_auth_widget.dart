@@ -32,13 +32,14 @@ class PhoneInput extends StatelessWidget {
     return BlocBuilder<PhoneAuthBloc, PhoneAuthState>(
       builder: (context, state) {
         return BaseInput(
+          key: PhoneAuthWidgetKey.phoneInput.toKey(),
           hintText: StringRes.enterOnlyNumber.tr,
           maxLength: 11,
           keyboardType: TextInputType.phone,
           inputFormatters: [
             FilteringTextInputFormatter.digitsOnly,
           ],
-          suffix: const VerificationBtn(),
+          suffix: const SendAuthBtn(),
           onChanged: (String text) {
             context
                 .read<PhoneAuthBloc>()
@@ -51,21 +52,20 @@ class PhoneInput extends StatelessWidget {
 }
 
 /// 인증 버튼
-class VerificationBtn extends StatelessWidget {
-  const VerificationBtn({super.key});
+class SendAuthBtn extends StatelessWidget {
+  const SendAuthBtn({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<PhoneAuthBloc, PhoneAuthState>(
       builder: (context, state) {
         return InkWell(
+          key: PhoneAuthWidgetKey.sendAuthBtn.toKey(),
           onTap: () {
             if (!state.canRequestVerification) {
               return;
             }
-            context
-                .read<PhoneAuthBloc>()
-                .add(PhoneAuthAuthCodeRequested());
+            context.read<PhoneAuthBloc>().add(PhoneAuthAuthCodeSent());
           },
           child: Text(
             StringRes.verification.tr,
@@ -86,7 +86,7 @@ class AuthCodeInput extends StatelessWidget {
     return BlocBuilder<PhoneAuthBloc, PhoneAuthState>(
       builder: (context, state) {
         return BaseInput(
-          key: const Key('auth_code_input'),
+          key: PhoneAuthWidgetKey.authCodeInput.toKey(),
           hintText: StringRes.enterVerificationCode.tr,
           errorText: "! ${StringRes.invalidVerificationCode.tr}",
           errorVisible: state.isVisibleAuthCodeError,

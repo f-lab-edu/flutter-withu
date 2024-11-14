@@ -1,6 +1,6 @@
 part of 'phone_auth_bloc.dart';
 
-sealed class PhoneAuthEvent extends BaseBlocEvent {}
+abstract class PhoneAuthEvent extends Equatable {}
 
 /// 휴대폰 번호 입력 이벤트.
 class PhoneAuthPhoneInputted extends PhoneAuthEvent {
@@ -9,10 +9,16 @@ class PhoneAuthPhoneInputted extends PhoneAuthEvent {
   PhoneAuthPhoneInputted({required this.value});
 
   Phone get phone => Phone(value);
+
+  @override
+  List<Object?> get props => [value];
 }
 
 /// 인증 번호 요청 이벤트.
-class PhoneAuthAuthCodeRequested extends PhoneAuthEvent {}
+class PhoneAuthAuthCodeSent extends PhoneAuthEvent {
+  @override
+  List<Object?> get props => ['auth_code_sent'];
+}
 
 /// 인증번호 입력 이벤트.
 class PhoneAuthAuthCodeInputted extends PhoneAuthEvent {
@@ -21,4 +27,7 @@ class PhoneAuthAuthCodeInputted extends PhoneAuthEvent {
   PhoneAuthAuthCodeInputted({required this.value});
 
   AuthCode get code => AuthCode(value);
+
+  @override
+  List<Object?> get props => [];
 }

@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:withu_app/core/core.dart';
@@ -14,7 +15,7 @@ part 'phone_auth_bloc.handler.dart';
 part 'phone_auth_bloc.parser.dart';
 
 class PhoneAuthBloc
-    extends BaseBloc<PhoneAuthEvent, PhoneAuthState> {
+    extends Bloc<PhoneAuthEvent, PhoneAuthState> {
   final AccountUseCase accountUseCase;
 
   PhoneAuthBloc({
@@ -23,7 +24,7 @@ class PhoneAuthBloc
           PhoneAuthState(status: BaseBlocStatus.initial()),
         ) {
     on<PhoneAuthPhoneInputted>(_onPhoneInputted);
-    on<PhoneAuthAuthCodeRequested>(_onAuthCodeRequested);
+    on<PhoneAuthAuthCodeSent>(_onAuthCodeRequested);
     on<PhoneAuthAuthCodeInputted>(_onAuthCodeInputted);
   }
 }

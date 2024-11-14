@@ -13,7 +13,7 @@ extension PhoneAuthBlocHandler on PhoneAuthBloc {
 
   /// 인증번호 발송 요청 이벤트.
   void _onAuthCodeRequested(
-    PhoneAuthAuthCodeRequested event,
+    PhoneAuthAuthCodeSent event,
     Emitter<PhoneAuthState> emit,
   ) async {
     await accountUseCase.sendAuthCode(
