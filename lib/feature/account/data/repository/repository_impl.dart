@@ -39,7 +39,7 @@ class AccountRepositoryImpl implements AccountRepository {
 
   /// 휴대폰 인증번호 발송 요청
   @override
-  Future<ApiResponse<VerifyPhoneResponseDto>> requestPhoneVerification({
+  Future<ApiResponse<VerifyPhoneResponseDto>> sendAuthCode({
     required String phone,
   }) async {
     return await accountApi.verifyPhone(phone: phone);

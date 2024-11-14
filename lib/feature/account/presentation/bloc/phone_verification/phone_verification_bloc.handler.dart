@@ -1,6 +1,7 @@
 part of 'phone_verification_bloc.dart';
 
 extension PhoneVerificationBlocHandler on PhoneVerificationBloc {
+  /// 휴대폰 번호 입력 이벤트.
   void _onPhoneInputted(
     PhoneVerificationPhoneInputted event,
     Emitter<PhoneVerificationState> emit,
@@ -10,15 +11,17 @@ extension PhoneVerificationBlocHandler on PhoneVerificationBloc {
     ));
   }
 
+  /// 인증번호 발송 요청 이벤트.
   void _onAuthCodeRequested(
     PhoneVerificationAuthCodeRequested event,
     Emitter<PhoneVerificationState> emit,
   ) async {
-    await accountUseCase.requestPhoneVerification(
+    await accountUseCase.sendAuthCode(
       phone: state.phone.value,
     );
   }
 
+  /// 인증번호 입력 이벤트.
   void _onAuthCodeInputted(
     PhoneVerificationAuthCodeInputted event,
     Emitter<PhoneVerificationState> emit,

@@ -19,7 +19,7 @@ abstract class AccountUseCase {
   Future<bool> checkLogin();
 
   /// 휴대폰 인증번호 발송 요청
-  Future<PhoneVerificationEntity> requestPhoneVerification({
+  Future<SendAuthCodeResultEntity> sendAuthCode({
     required String phone,
   });
 

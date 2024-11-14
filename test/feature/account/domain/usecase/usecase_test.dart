@@ -3,6 +3,8 @@ import 'package:withu_app/core/core.dart';
 import 'package:withu_app/feature/account/account.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+class MockAccountApi extends Mock implements AccountApi {}
+
 class MockAccountRepository extends Mock implements AccountRepository {}
 
 void main() {
@@ -18,7 +20,7 @@ void main() {
     useCase = AccountUseCaseImpl(accountRepo: mockRepo);
   });
 
-  group('Account UseCase 테스트', () {
+  group('로그인 요청 테스트', () {
     test('로그인 요청 - 성공 케이스 테스트', () async {
       // Given
       final successResponseDto = LoginResponseDtoMock.success();
@@ -63,6 +65,34 @@ void main() {
           .called(1);
       expect(result.isLoggedIn, isFalse);
       expect(result.message, StringRes.serverError.tr);
+    });
+  });
+
+  group('휴대폰 번호 인증 테스트', () {
+    test('휴대폰 번호 인증번호 발송 요청 테스트', () async {
+      // Given
+      const phone = "01012345678";
+      final expectDto = VerifyPhoneResponseDtoMock.success();
+
+      when(
+        () => mockRepo.sendAuthCode(phone: phone),
+      ).thenAnswer(
+        (_) async => ApiResponse.success(expectDto),
+      );
+
+      // When
+      final result = await useCase.sendAuthCode(
+        phone: phone,
+      );
+
+      // Then
+      expect(
+        result,
+        equals(SendAuthCodeResultEntityParser.fromDto(expectDto)),
+      );
+      verify(
+        () => mockRepo.sendAuthCode(phone: phone),
+      ).called(1);
     });
   });
 }

@@ -38,16 +38,14 @@ class AccountUseCaseImpl implements AccountUseCase {
 
   /// 휴대폰 인증번호 발송 요청
   @override
-  Future<PhoneVerificationEntity> requestPhoneVerification({
+  Future<SendAuthCodeResultEntity> sendAuthCode({
     required String phone,
   }) async {
-    final result = await accountRepo.accountApi.verifyPhone(
-      phone: phone,
-    );
+    final result = await accountRepo.sendAuthCode(phone: phone);
 
     return result.maybeWhen(
-      success: (dto) => PhoneVerificationEntityParser.fromDto(dto),
-      orElse: () => PhoneVerificationEntityMock.serverError(),
+      success: (dto) => SendAuthCodeResultEntityParser.fromDto(dto),
+      orElse: () => SendAuthCodeResultEntityMock.serverError(),
     );
   }
 
