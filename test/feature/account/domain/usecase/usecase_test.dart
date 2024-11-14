@@ -69,10 +69,10 @@ void main() {
   });
 
   group('휴대폰 번호 인증 테스트', () {
-    test('휴대폰 번호 인증번호 발송 요청 테스트', () async {
+    test('휴대폰 번호 인증번호 전송 - 성공 케이스', () async {
       // Given
       const phone = "01012345678";
-      final expectDto = VerifyPhoneResponseDtoMock.success();
+      final expectDto = SendAuthCodeResponseDtoMock.success();
 
       when(
         () => mockRepo.sendAuthCode(phone: phone),
@@ -92,6 +92,29 @@ void main() {
       );
       verify(
         () => mockRepo.sendAuthCode(phone: phone),
+      ).called(1);
+    });
+
+    test('휴대폰 번호 인증번호 전송 - 실패 케이스', () async {
+      // Given
+      final expectDto = FailResponse.error();
+
+      when(
+        () => mockRepo.sendAuthCode(phone: any(named: 'phone')),
+      ).thenAnswer(
+        (_) async => ApiResponse.fail(expectDto),
+      );
+
+      // When
+      final result = await useCase.sendAuthCode(
+        phone: '01012345678',
+      );
+
+      // Then
+      expect(result.status, isFalse);
+      expect(result.message, StringRes.serverError.tr);
+      verify(
+        () => mockRepo.sendAuthCode(phone: any(named: 'phone')),
       ).called(1);
     });
   });

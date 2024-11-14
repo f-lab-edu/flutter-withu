@@ -27,7 +27,7 @@ abstract class AccountRepository {
   Future<String> getSessionId();
 
   /// 휴대폰 인증번호 발송 요청
-  Future<ApiResponse<VerifyPhoneResponseDto>> sendAuthCode({
+  Future<ApiResponse<SendAuthCodeResponseDto>> sendAuthCode({
     required String phone,
   });
 

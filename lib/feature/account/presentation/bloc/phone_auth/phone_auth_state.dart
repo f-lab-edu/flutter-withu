@@ -1,9 +1,9 @@
-part of 'phone_verification_bloc.dart';
+part of 'phone_auth_bloc.dart';
 
 @freezed
-class PhoneVerificationState extends BaseBlocState
-    with _$PhoneVerificationState {
-  factory PhoneVerificationState({
+class PhoneAuthState extends BaseBlocState
+    with _$PhoneAuthState {
+  factory PhoneAuthState({
     required BaseBlocStatus status,
 
     /// 휴대폰
@@ -14,10 +14,10 @@ class PhoneVerificationState extends BaseBlocState
 
     /// 인증번호 에러 문구 노출 여부
     @Default(VisibleType.none) VisibleType authCodeErrorVisible,
-  }) = _PhoneVerificationState;
+  }) = _PhoneAuthState;
 }
 
-extension PhoneVerificationStateExt on PhoneVerificationState {
+extension PhoneAuthStateExt on PhoneAuthState {
   /// 인증번호 검증 요청 가능 여부
   bool get canAuthCodeVerification => phone.isValid && authCode.isValid;
 

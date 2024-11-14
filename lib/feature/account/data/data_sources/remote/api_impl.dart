@@ -32,21 +32,21 @@ class AccountApiImpl extends AccountApi {
 
   /// 인증번호 요청
   @override
-  FutureOr<ApiResponse<VerifyPhoneResponseDto>> verifyPhone({
+  FutureOr<ApiResponse<SendAuthCodeResponseDto>> sendAuthCode({
     required String phone,
   }) async {
     return network.dio
         .post(
-          verifyPhonePath,
+          sendAuthCodePath,
           data: {phone: phone},
         )
         .then(
           (response) => ApiResponse.success(
-            VerifyPhoneResponseDto.fromJson(response.data),
+            SendAuthCodeResponseDto.fromJson(response.data),
           ),
         )
         .catchError(
-          (_) => ApiResponse<VerifyPhoneResponseDto>.fail(
+          (_) => ApiResponse<SendAuthCodeResponseDto>.fail(
             FailResponse.error(),
           ),
         );

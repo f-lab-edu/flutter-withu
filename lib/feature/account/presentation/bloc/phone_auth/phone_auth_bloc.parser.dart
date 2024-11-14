@@ -1,6 +1,6 @@
-part of 'phone_verification_bloc.dart';
+part of 'phone_auth_bloc.dart';
 
-extension PhoneVerificationBlocParser on PhoneVerificationBloc {
+extension PhoneAuthBlocParser on PhoneAuthBloc {
   AuthCodeVerificationEntity toEntity() {
     return AuthCodeVerificationEntity(
       phone: state.phone.value,

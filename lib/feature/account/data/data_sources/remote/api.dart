@@ -10,7 +10,7 @@ abstract class AccountApi {
   late final loginPath = '$path/login';
 
   /// 휴대폰 인증 요청 주소
-  late final verifyPhonePath = '$path/verify/phone';
+  late final sendAuthCodePath = '$path/verify/phone';
 
   /// 인증번호 검증 요청
   late final verifyAuthCodePath = '$path/verify/code';
@@ -21,7 +21,7 @@ abstract class AccountApi {
   });
 
   /// 인증번호 요청 API
-  FutureOr<ApiResponse<VerifyPhoneResponseDto>> verifyPhone({
+  FutureOr<ApiResponse<SendAuthCodeResponseDto>> sendAuthCode({
     required String phone,
   });
 

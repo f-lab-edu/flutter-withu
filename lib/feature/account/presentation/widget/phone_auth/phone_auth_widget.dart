@@ -6,12 +6,12 @@ import 'package:withu_app/feature/account/account.dart';
 import 'package:withu_app/shared/shared.dart';
 
 /// 휴대폰 번호 인증 UI
-class PhoneVerificationView extends StatelessWidget {
-  const PhoneVerificationView({super.key});
+class PhoneAuthWidget extends StatelessWidget {
+  const PhoneAuthWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<PhoneVerificationBloc>(
+    return BlocProvider<PhoneAuthBloc>(
       create: (context) => getIt(),
       child: const Column(
         children: [
@@ -29,7 +29,7 @@ class PhoneInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<PhoneVerificationBloc, PhoneVerificationState>(
+    return BlocBuilder<PhoneAuthBloc, PhoneAuthState>(
       builder: (context, state) {
         return BaseInput(
           hintText: StringRes.enterOnlyNumber.tr,
@@ -41,8 +41,8 @@ class PhoneInput extends StatelessWidget {
           suffix: const VerificationBtn(),
           onChanged: (String text) {
             context
-                .read<PhoneVerificationBloc>()
-                .add(PhoneVerificationPhoneInputted(value: text));
+                .read<PhoneAuthBloc>()
+                .add(PhoneAuthPhoneInputted(value: text));
           },
         );
       },
@@ -56,7 +56,7 @@ class VerificationBtn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<PhoneVerificationBloc, PhoneVerificationState>(
+    return BlocBuilder<PhoneAuthBloc, PhoneAuthState>(
       builder: (context, state) {
         return InkWell(
           onTap: () {
@@ -64,8 +64,8 @@ class VerificationBtn extends StatelessWidget {
               return;
             }
             context
-                .read<PhoneVerificationBloc>()
-                .add(PhoneVerificationAuthCodeRequested());
+                .read<PhoneAuthBloc>()
+                .add(PhoneAuthAuthCodeRequested());
           },
           child: Text(
             StringRes.verification.tr,
@@ -83,7 +83,7 @@ class AuthCodeInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<PhoneVerificationBloc, PhoneVerificationState>(
+    return BlocBuilder<PhoneAuthBloc, PhoneAuthState>(
       builder: (context, state) {
         return BaseInput(
           key: const Key('auth_code_input'),
@@ -97,8 +97,8 @@ class AuthCodeInput extends StatelessWidget {
           ],
           onChanged: (String text) {
             context
-                .read<PhoneVerificationBloc>()
-                .add(PhoneVerificationAuthCodeInputted(value: text));
+                .read<PhoneAuthBloc>()
+                .add(PhoneAuthAuthCodeInputted(value: text));
           },
         );
       },

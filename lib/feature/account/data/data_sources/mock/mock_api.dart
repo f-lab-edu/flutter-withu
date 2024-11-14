@@ -31,21 +31,21 @@ class AccountMockApi extends AccountApiImpl {
 
   /// 인증번호 요청
   @override
-  FutureOr<ApiResponse<VerifyPhoneResponseDto>> verifyPhone({
+  FutureOr<ApiResponse<SendAuthCodeResponseDto>> sendAuthCode({
     required String phone,
   }) async {
     /// Mock 응답 등록
     dioAdapter.onPost(
-      verifyPhonePath,
+      sendAuthCodePath,
       (server) => server.reply(
         200,
-        VerifyPhoneResponseDtoMock.success().toJson(),
+        SendAuthCodeResponseDtoMock.success().toJson(),
         delay: const Duration(seconds: 1),
       ),
       data: {phone: phone},
     );
 
-    return await super.verifyPhone(phone: phone);
+    return await super.sendAuthCode(phone: phone);
   }
 
   /// 인증번호 검증

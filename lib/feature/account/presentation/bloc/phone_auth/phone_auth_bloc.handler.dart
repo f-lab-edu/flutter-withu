@@ -1,10 +1,10 @@
-part of 'phone_verification_bloc.dart';
+part of 'phone_auth_bloc.dart';
 
-extension PhoneVerificationBlocHandler on PhoneVerificationBloc {
+extension PhoneAuthBlocHandler on PhoneAuthBloc {
   /// 휴대폰 번호 입력 이벤트.
   void _onPhoneInputted(
-    PhoneVerificationPhoneInputted event,
-    Emitter<PhoneVerificationState> emit,
+    PhoneAuthPhoneInputted event,
+    Emitter<PhoneAuthState> emit,
   ) {
     emit(state.copyWith(
       phone: event.phone,
@@ -13,8 +13,8 @@ extension PhoneVerificationBlocHandler on PhoneVerificationBloc {
 
   /// 인증번호 발송 요청 이벤트.
   void _onAuthCodeRequested(
-    PhoneVerificationAuthCodeRequested event,
-    Emitter<PhoneVerificationState> emit,
+    PhoneAuthAuthCodeRequested event,
+    Emitter<PhoneAuthState> emit,
   ) async {
     await accountUseCase.sendAuthCode(
       phone: state.phone.value,
@@ -23,8 +23,8 @@ extension PhoneVerificationBlocHandler on PhoneVerificationBloc {
 
   /// 인증번호 입력 이벤트.
   void _onAuthCodeInputted(
-    PhoneVerificationAuthCodeInputted event,
-    Emitter<PhoneVerificationState> emit,
+    PhoneAuthAuthCodeInputted event,
+    Emitter<PhoneAuthState> emit,
   ) async {
     emit(state.copyWith(
       authCode: event.code,
