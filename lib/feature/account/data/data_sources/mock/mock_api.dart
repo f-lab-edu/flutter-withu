@@ -66,4 +66,24 @@ class AccountMockApi extends AccountApiImpl {
 
     return await super.verifyAuthCode(dto: dto);
   }
+
+  /// 이메일 중복 검사 API
+  @override
+  FutureOr<ApiResponse<BaseResponseDto<bool>>> checkEmailDuplicate({
+    required String email,
+  }) async {
+    final isDuplicate = email == 'test@test.com';
+
+    /// Mock 응답 등록
+    dioAdapter.onPost(
+      checkEmailDuplicatePath,
+      (server) => server.reply(
+        200,
+        BaseResponseDtoMock.mock(isDuplicate).toJson((value) => value),
+        delay: const Duration(seconds: 1),
+      ),
+      data: {"loginId": email},
+    );
+    return super.checkEmailDuplicate(email: email);
+  }
 }
