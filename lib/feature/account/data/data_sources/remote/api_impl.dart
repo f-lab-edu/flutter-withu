@@ -96,8 +96,8 @@ class AccountApiImpl extends AccountApi {
           ),
         )
         .catchError(
-          (_) => ApiResponse<BaseResponseDto<bool>>.fail(
-            FailResponse.error(),
+          (e) => ApiResponse<BaseResponseDto<bool>>.fail(
+            FailResponseExt.fromException(e),
           ),
         );
   }
