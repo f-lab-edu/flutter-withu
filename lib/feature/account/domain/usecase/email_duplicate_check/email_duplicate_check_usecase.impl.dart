@@ -1,4 +1,4 @@
-part of 'email_duplicate_check_use_case.dart';
+part of 'email_duplicate_check_usecase.dart';
 
 class EmailDuplicateCheckUseCaseImpl implements EmailDuplicateCheckUseCase {
   @override

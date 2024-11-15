@@ -1,7 +1,7 @@
 import 'package:withu_app/core/core.dart';
 import 'package:withu_app/feature/account/account.dart';
 
-import 'domain/usecase/email_duplicate_check/email_duplicate_check_use_case.dart';
+import 'domain/usecase/email_duplicate_check/email_duplicate_check_usecase.dart';
 
 void initAccountInjections() {
   initAccountDataInjections();

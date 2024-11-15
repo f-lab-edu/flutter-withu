@@ -96,7 +96,7 @@ void main() {
   });
 
   group('이메일 중복 검사 API 테스트', () {
-    test('중복 검사 - 중복 아닌 경우', () async {
+    test('이메일 중복 검사 - 중복 아닌 경우', () async {
       // Given
       const email = "test@test.co.kr";
       when(
@@ -120,7 +120,7 @@ void main() {
       expect(result.successData?.info, isTrue);
     });
 
-    test('중복 검사 - 중복인 경우', () async {
+    test('이메일 중복 검사 - 중복인 경우', () async {
       // Given
       const email = "test@test.com";
       when(
@@ -142,6 +142,29 @@ void main() {
       /// Then
       expect(result, isA<ApiResponse<BaseResponseDto<bool>>>());
       expect(result.successData?.info, isFalse);
+    });
+
+    test('중복 검사 서버 에러 테스트', () async {
+      // Given
+      const email = "test@test.com";
+      when(
+        mockDio.post(
+          api.checkEmailDuplicatePath,
+          data: {"loginId": email},
+        ),
+      ).thenAnswer((_) async {
+        return Response(
+          data: const FailResponse(status: 400),
+          statusCode: 400,
+          requestOptions: RequestOptions(),
+        );
+      });
+
+      /// When
+      final result = await api.checkEmailDuplicate(email: email);
+
+      /// Then
+      expect(result, isA<ApiResponse<FailResponse>>());
     });
   });
 }

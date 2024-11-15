@@ -5,53 +5,36 @@ import 'package:withu_app/feature/account/account.dart';
 import 'package:withu_app/shared/shared.dart';
 
 /// 이메일 입력 및 중복 검사 위젯
-class EmailDuplicateCheckWidget extends StatefulWidget {
-  const EmailDuplicateCheckWidget({super.key});
-
-  @override
-  State<StatefulWidget> createState() => _EmailDuplicateCheckWidget();
-}
-
-class _EmailDuplicateCheckWidget extends State<EmailDuplicateCheckWidget> {
-  late final TextEditingController _controller;
-  late final _bloc = getIt<EmailDuplicateCheckBloc>();
+class EmailDuplicateCheckWidget extends StatelessWidget {
+  final TextEditingController? controller;
 
   final _debounce = Debouncer(milliseconds: 500);
 
-  @override
-  void initState() {
-    super.initState();
-    _controller = TextEditingController();
-    _controller.addListener(_onTextChanged);
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  void _onTextChanged() {
-    _debounce.run(() {
-      _bloc.add(
-        EmailDuplicateCheckInputted(value: _controller.text),
-      );
-    });
-  }
+  EmailDuplicateCheckWidget({
+    super.key,
+    this.controller,
+  });
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider<EmailDuplicateCheckBloc>(
-      create: (context) => _bloc,
+      create: (context) => getIt(),
       child: BlocConsumer<EmailDuplicateCheckBloc, EmailDuplicateCheckState>(
         listener: (context, state) {},
         builder: (context, state) {
           return BaseInput(
-            controller: _controller,
+            controller: controller,
             key: EmailDuplicateCheckKey.emailInput.toKey(),
             hintText: StringRes.pleaseEnterEmail.tr,
             errorText: state.errorText,
             errorVisible: state.errorVisible.isVisible,
+            onChanged: (String text) {
+              _debounce.run(() {
+                context
+                    .read<EmailDuplicateCheckBloc>()
+                    .add(EmailDuplicateCheckInputted(value: text));
+              });
+            },
           );
         },
       ),
