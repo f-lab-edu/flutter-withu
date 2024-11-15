@@ -2,7 +2,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:withu_app/core/core.dart';
 import 'package:withu_app/feature/account/account.dart';
-import 'package:withu_app/feature/account/domain/usecase/email_duplicate_check/email_duplicate_check_usecase.dart';
 
 class MockAccountApi extends Mock implements AccountApi {}
 

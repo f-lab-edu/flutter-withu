@@ -4,7 +4,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:withu_app/core/core.dart';
 import 'package:withu_app/feature/account/account.dart';
 
-class MockAccountUseCase extends Mock implements AccountUseCase {}
+class MockAccountUseCase extends Mock implements PhoneAuthUseCase {}
 
 class FakeAuthCodeVerificationEntity extends Mock
     implements AuthCodeVerificationEntity {}
@@ -19,7 +19,7 @@ void main() {
 
   setUp(() {
     mockUseCase = MockAccountUseCase();
-    phoneAuthBloc = PhoneAuthBloc(accountUseCase: mockUseCase);
+    phoneAuthBloc = PhoneAuthBloc(phoneAuthUseCase: mockUseCase);
     registerFallbackValue(FakeAuthCodeVerificationEntity());
   });
 
@@ -73,7 +73,7 @@ void main() {
     build: () => phoneAuthBloc,
     setUp: () {
       when(
-        () => mockUseCase.sendAuthCode(phone: any(named: 'phone_auth.dart')),
+        () => mockUseCase.sendAuthCode(phone: any(named: 'phone')),
       ).thenAnswer(
         (_) async => SendAuthCodeResultEntityMock.success(),
       );
@@ -81,7 +81,7 @@ void main() {
     act: (bloc) => bloc.add(PhoneAuthAuthCodeSent()),
     verify: (_) {
       verify(
-        () => mockUseCase.sendAuthCode(phone: any(named: 'phone_auth.dart')),
+        () => mockUseCase.sendAuthCode(phone: any(named: 'phone')),
       ).called(1);
     },
   );

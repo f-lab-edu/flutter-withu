@@ -1,8 +1,6 @@
 import 'package:withu_app/core/core.dart';
 import 'package:withu_app/feature/account/account.dart';
 
-import 'domain/usecase/email_duplicate_check/email_duplicate_check_usecase.dart';
-
 void initAccountInjections() {
   initAccountDataInjections();
   initAccountDomainInjections();
@@ -27,8 +25,11 @@ void initAccountDataInjections() {
 }
 
 void initAccountDomainInjections() {
-  getIt.registerSingleton<AccountUseCase>(
-    AccountUseCaseImpl(accountRepo: getIt()),
+  getIt.registerSingleton<LoginUseCase>(
+    LoginUseCaseImpl(accountRepo: getIt()),
+  );
+  getIt.registerSingleton<PhoneAuthUseCase>(
+    PhoneAuthUseCaseImpl(accountRepo: getIt()),
   );
   getIt.registerSingleton<EmailDuplicateCheckUseCase>(
     EmailDuplicateCheckUseCaseImpl(accountRepo: getIt()),
@@ -36,13 +37,14 @@ void initAccountDomainInjections() {
 }
 
 void initAccountPresentationInjections() {
-  getIt.registerFactory<EmailDuplicateCheckBloc>(
-    () => EmailDuplicateCheckBloc(useCase: getIt()),
-  );
+
   getIt.registerFactory<PhoneAuthBloc>(
-    () => PhoneAuthBloc(accountUseCase: getIt()),
+    () => PhoneAuthBloc(phoneAuthUseCase: getIt()),
   );
   getIt.registerFactory<LoginBloc>(
-    () => LoginBloc(accountUseCase: getIt()),
+    () => LoginBloc(loginUseCase: getIt()),
+  );
+  getIt.registerFactory<EmailDuplicateCheckBloc>(
+        () => EmailDuplicateCheckBloc(useCase: getIt()),
   );
 }

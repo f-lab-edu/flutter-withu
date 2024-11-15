@@ -1,21 +1,25 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:withu_app/core/core.dart';
 import 'package:withu_app/feature/account/account.dart';
 import 'package:bloc_test/bloc_test.dart';
 
-import 'bloc_test.mocks.dart';
+class MockUseCase extends Mock implements LoginUseCase {}
 
-@GenerateMocks([AccountUseCase])
+class FakeLoginRequestEntity extends Fake implements LoginRequestEntity {}
+
 void main() {
   group(LoginBloc, () {
-    late MockAccountUseCase accountUseCase;
+    late MockUseCase loginUseCase;
     late LoginBloc loginBloc;
 
+    setUpAll(() {
+      registerFallbackValue(FakeLoginRequestEntity());
+    });
+
     setUp(() {
-      accountUseCase = MockAccountUseCase();
-      loginBloc = LoginBloc(accountUseCase: accountUseCase);
+      loginUseCase = MockUseCase();
+      loginBloc = LoginBloc(loginUseCase: loginUseCase);
     });
 
     test('Initial state', () {
@@ -170,7 +174,7 @@ void main() {
       // Given
       setUp: () {
         when(
-          accountUseCase.login(entity: anyNamed('entity')),
+          () => loginUseCase.login(entity: any(named: 'entity')),
         ).thenAnswer(
           (_) async => LoginResultEntity(
             isLoggedIn: true,
@@ -203,7 +207,9 @@ void main() {
             ),
       ],
       verify: (_) {
-        verify(accountUseCase.login(entity: anyNamed('entity'))).called(1);
+        verify(
+          () => loginUseCase.login(entity: any(named: 'entity')),
+        ).called(1);
       },
     );
 
@@ -213,7 +219,7 @@ void main() {
       // Given
       setUp: () {
         when(
-          accountUseCase.login(entity: anyNamed('entity')),
+          () => loginUseCase.login(entity: any(named: 'entity')),
         ).thenAnswer(
           (_) async => LoginResultEntity(
             isLoggedIn: false,
@@ -240,7 +246,9 @@ void main() {
         )
       ],
       verify: (_) {
-        verify(accountUseCase.login(entity: anyNamed('entity'))).called(1);
+        verify(
+          () => loginUseCase.login(entity: any(named: 'entity')),
+        ).called(1);
       },
     );
   });

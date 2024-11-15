@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -18,8 +20,8 @@ class FakePhoneAuthState extends Fake implements PhoneAuthState {}
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  late MockPhoneAuthBloc mockBloc;
   late Widget testWidget;
+  late MockPhoneAuthBloc phoneAuthBloc;
   late PhoneAuthState initialState;
 
   setUpAll(() {
@@ -28,12 +30,12 @@ void main() {
   });
 
   setUp(() {
-    mockBloc = MockPhoneAuthBloc();
+    phoneAuthBloc = MockPhoneAuthBloc();
     initialState = PhoneAuthState(
       status: BaseBlocStatus.initial(),
     );
-    when(() => mockBloc.state).thenReturn(initialState);
-    getIt.registerFactory<PhoneAuthBloc>(() => mockBloc);
+    when(() => phoneAuthBloc.state).thenReturn(initialState);
+    getIt.registerFactory<PhoneAuthBloc>(() => phoneAuthBloc);
     testWidget = const MaterialApp(
       home: Scaffold(
         body: PhoneAuthWidget(),
@@ -42,7 +44,7 @@ void main() {
   });
 
   tearDown(() {
-    mockBloc.close();
+    phoneAuthBloc.close();
     getIt.reset();
   });
 
@@ -61,7 +63,7 @@ void main() {
         /// Then
         expect(find.text(phone), findsOneWidget);
         verify(
-          () => mockBloc.add(PhoneAuthPhoneInputted(value: phone)),
+          () => phoneAuthBloc.add(PhoneAuthPhoneInputted(value: phone)),
         ).called(1);
       },
     );
@@ -71,7 +73,7 @@ void main() {
       (WidgetTester tester) async {
         /// Given
         const phone = "01012345678";
-        when(() => mockBloc.state).thenReturn(
+        when(() => phoneAuthBloc.state).thenReturn(
           initialState.copyWith(phone: const Phone(phone)),
         );
         await tester.pumpWidget(testWidget);
@@ -83,7 +85,7 @@ void main() {
         await tester.pumpAndSettle();
 
         /// Then
-        verify(() => mockBloc.add(PhoneAuthAuthCodeSent())).called(1);
+        verify(() => phoneAuthBloc.add(PhoneAuthAuthCodeSent())).called(1);
       },
     );
 
@@ -92,7 +94,7 @@ void main() {
       (WidgetTester tester) async {
         /// Given
         const phone = "012345";
-        when(() => mockBloc.state).thenReturn(
+        when(() => phoneAuthBloc.state).thenReturn(
           initialState.copyWith(phone: const Phone(phone)),
         );
         await tester.pumpWidget(testWidget);
@@ -104,7 +106,7 @@ void main() {
         await tester.pumpAndSettle();
 
         /// Then
-        verifyNever(() => mockBloc.add(PhoneAuthAuthCodeSent()));
+        verifyNever(() => phoneAuthBloc.add(PhoneAuthAuthCodeSent()));
       },
     );
 
@@ -123,12 +125,10 @@ void main() {
         await tester.pumpAndSettle();
 
         /// Then
-        final authCodeInputKey = PhoneAuthWidgetKey.authCodeInput.name;
-        final errorKey = Key("${authCodeInputKey}_error");
         expect(find.text(authCode), findsOneWidget);
-        expect(find.byKey(errorKey), findsNothing);
+        expect(PhoneAuthWidgetKey.authCodeInputError.toFinder(), findsNothing);
         verify(
-          () => mockBloc.add(PhoneAuthAuthCodeInputted(value: authCode)),
+          () => phoneAuthBloc.add(PhoneAuthAuthCodeInputted(value: authCode)),
         ).called(1);
       },
     );
@@ -138,6 +138,17 @@ void main() {
       (WidgetTester tester) async {
         /// Given
         const authCode = "123456";
+        whenListen(
+          phoneAuthBloc,
+          Stream.fromIterable([
+            initialState,
+            initialState.copyWith(
+              authCodeErrorVisible: VisibleType.visible,
+            ),
+          ]),
+          initialState: initialState,
+        );
+
         await tester.pumpWidget(testWidget);
 
         /// When
@@ -147,18 +158,14 @@ void main() {
         );
         await tester.pumpAndSettle();
 
-        /// 실패 응답 설정
-        when(() => mockBloc.state).thenReturn(initialState.copyWith(
-          authCodeErrorVisible: VisibleType.invisible,
-        ));
-
         /// Then
-        final authCodeInputKey = PhoneAuthWidgetKey.authCodeInput.name;
-        final errorKey = Key("${authCodeInputKey}_error");
         expect(find.text(authCode), findsOneWidget);
-        expect(find.byKey(errorKey), findsOneWidget);
+        expect(
+          PhoneAuthWidgetKey.authCodeInputError.toFinder(),
+          findsOneWidget,
+        );
         verify(
-          () => mockBloc.add(PhoneAuthAuthCodeInputted(value: authCode)),
+          () => phoneAuthBloc.add(PhoneAuthAuthCodeInputted(value: authCode)),
         ).called(1);
       },
     );

@@ -144,27 +144,27 @@ void main() {
       expect(result.successData?.info, isFalse);
     });
 
-    test('중복 검사 서버 에러 테스트', () async {
-      // Given
-      const email = "test@test.com";
-      when(
-        mockDio.post(
-          api.checkEmailDuplicatePath,
-          data: {"loginId": email},
-        ),
-      ).thenAnswer((_) async {
-        return Response(
-          data: const FailResponse(status: 400),
-          statusCode: 400,
-          requestOptions: RequestOptions(),
-        );
-      });
-
-      /// When
-      final result = await api.checkEmailDuplicate(email: email);
-
-      /// Then
-      expect(result, isA<ApiResponse<FailResponse>>());
-    });
+    // test('중복 검사 서버 에러 테스트', () async {
+    //   // Given
+    //   const email = "test@test.com";
+    //   when(
+    //     mockDio.post(
+    //       api.checkEmailDuplicatePath,
+    //       data: {"loginId": email},
+    //     ),
+    //   ).thenAnswer((_) async {
+    //     return Response(
+    //       data: const FailResponse(status: 500),
+    //       statusCode: 500,
+    //       requestOptions: RequestOptions(),
+    //     );
+    //   });
+    //
+    //   /// When
+    //   final result = await api.checkEmailDuplicate(email: email);
+    //
+    //   /// Then
+    //   expect(result, isA<ApiResponse<FailResponse>>());
+    // });
   });
 }

@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:withu_app/core/core.dart';
 import 'package:withu_app/feature/account/account.dart';
-import 'package:withu_app/feature/account/domain/usecase/email_duplicate_check/email_duplicate_check_usecase.dart';
 
 part 'email_duplicate_check_event.dart';
 

@@ -16,7 +16,7 @@ extension PhoneAuthBlocHandler on PhoneAuthBloc {
     PhoneAuthAuthCodeSent event,
     Emitter<PhoneAuthState> emit,
   ) async {
-    await accountUseCase.sendAuthCode(
+    await phoneAuthUseCase.sendAuthCode(
       phone: state.phone.value,
     );
   }
@@ -39,7 +39,7 @@ extension PhoneAuthBlocHandler on PhoneAuthBloc {
 
   /// 인증번호 6자리일 때 인증 요청
   Future<VisibleType> requestAuthCodeVerification() async {
-    final result = await accountUseCase.authCodeVerification(
+    final result = await phoneAuthUseCase.authCodeVerification(
       entity: toEntity(),
     );
 
