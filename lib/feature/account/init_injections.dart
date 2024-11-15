@@ -2,6 +2,12 @@ import 'package:withu_app/core/core.dart';
 import 'package:withu_app/feature/account/account.dart';
 
 void initAccountInjections() {
+  initAccountDataInjections();
+  initAccountDomainInjections();
+  initAccountPresentationInjections();
+}
+
+void initAccountDataInjections() {
   getIt.registerSingleton<AccountApi>(
     Environment.isProd
         ? AccountApiImpl(network: getIt())
@@ -16,13 +22,23 @@ void initAccountInjections() {
       accountStorage: getIt(),
     ),
   );
-  getIt.registerSingleton<AccountUseCase>(
-    AccountUseCaseImpl(accountRepo: getIt()),
+}
+
+void initAccountDomainInjections() {
+  getIt.registerSingleton<LoginUseCase>(
+    LoginUseCaseImpl(accountRepo: getIt()),
   );
+  getIt.registerSingleton<PhoneAuthUseCase>(
+    PhoneAuthUseCaseImpl(accountRepo: getIt()),
+  );
+}
+
+void initAccountPresentationInjections() {
+
   getIt.registerFactory<PhoneAuthBloc>(
-    () => PhoneAuthBloc(accountUseCase: getIt()),
+        () => PhoneAuthBloc(phoneAuthUseCase: getIt()),
   );
   getIt.registerFactory<LoginBloc>(
-    () => LoginBloc(accountUseCase: getIt()),
+        () => LoginBloc(loginUseCase: getIt()),
   );
 }

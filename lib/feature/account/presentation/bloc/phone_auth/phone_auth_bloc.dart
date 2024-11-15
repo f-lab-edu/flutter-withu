@@ -16,10 +16,10 @@ part 'phone_auth_bloc.parser.dart';
 
 class PhoneAuthBloc
     extends Bloc<PhoneAuthEvent, PhoneAuthState> {
-  final AccountUseCase accountUseCase;
+  final PhoneAuthUseCase phoneAuthUseCase;
 
   PhoneAuthBloc({
-    required this.accountUseCase,
+    required this.phoneAuthUseCase,
   }) : super(
           PhoneAuthState(status: BaseBlocStatus.initial()),
         ) {

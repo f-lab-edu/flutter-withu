@@ -14,10 +14,10 @@ part 'login_bloc.handler.dart';
 part 'login_bloc_converter.dart';
 
 class LoginBloc extends BaseBloc<LoginEvent, LoginState> {
-  final AccountUseCase accountUseCase;
+  final LoginUseCase loginUseCase;
 
   LoginBloc({
-    required this.accountUseCase,
+    required this.loginUseCase,
   }) : super(
           LoginState(status: BaseBlocStatus.initial()),
         ) {
