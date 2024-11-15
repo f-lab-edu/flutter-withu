@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:withu_app/core/core.dart';
 import 'package:withu_app/feature/account/account.dart';
-import 'package:withu_app/feature/account/presentation/widget/email_duplicate_check/email_duplicate_check_key.dart';
 import 'package:withu_app/shared/shared.dart';
 
 /// 이메일 입력 및 중복 검사 위젯
@@ -45,15 +44,13 @@ class _EmailDuplicateCheckWidget extends State<EmailDuplicateCheckWidget> {
     return BlocProvider<EmailDuplicateCheckBloc>(
       create: (context) => _bloc,
       child: BlocConsumer<EmailDuplicateCheckBloc, EmailDuplicateCheckState>(
-        listener: (context, state) {
-          logger.i(state.errorVisible);
-        },
+        listener: (context, state) {},
         builder: (context, state) {
           return BaseInput(
             controller: _controller,
             key: EmailDuplicateCheckKey.emailInput.toKey(),
             hintText: StringRes.pleaseEnterEmail.tr,
-            errorText: StringRes.emailDuplicateError.tr,
+            errorText: state.errorText,
             errorVisible: state.errorVisible.isVisible,
           );
         },

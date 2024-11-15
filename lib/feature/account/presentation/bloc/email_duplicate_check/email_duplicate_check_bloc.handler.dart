@@ -9,15 +9,20 @@ extension EmailDuplicateCheckBlocHandler on EmailDuplicateCheckBloc {
 
     /// 이메일 형식이 옳다면 API 호출하기
     if (event.email.isValid) {
-      emit(state.copyWith(
-        errorVisible: await _checkDuplicate(event.value),
-      ));
+      await _checkDuplicate(emit, event.value);
     }
   }
 
   /// 이메일 중복 검사
-  Future<VisibleType> _checkDuplicate(String email) async {
-    final isDuplicate = await useCase.exec(email: email);
-    return VisibleTypeExt.fromBool(isDuplicate);
+  Future _checkDuplicate(
+    Emitter<EmailDuplicateCheckState> emit,
+    String email,
+  ) async {
+    final result = await useCase.exec(email: email);
+
+    emit(state.copyWith(
+      errorText: result,
+      errorVisible: VisibleTypeExt.fromBool(result.isNotEmpty),
+    ));
   }
 }

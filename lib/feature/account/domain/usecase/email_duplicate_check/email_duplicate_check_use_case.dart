@@ -8,5 +8,5 @@ abstract class EmailDuplicateCheckUseCase {
 
   EmailDuplicateCheckUseCase({required this.accountRepo});
 
-  Future<bool> exec({required String email});
+  Future<String> exec({required String email});
 }

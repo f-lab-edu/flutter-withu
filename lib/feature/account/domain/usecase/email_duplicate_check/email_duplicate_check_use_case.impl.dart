@@ -7,13 +7,22 @@ class EmailDuplicateCheckUseCaseImpl implements EmailDuplicateCheckUseCase {
   EmailDuplicateCheckUseCaseImpl({required this.accountRepo});
 
   @override
-  Future<bool> exec({
+  Future<String> exec({
     required String email,
   }) async {
-    final result = await accountRepo.accountApi.checkEmailDuplicate(
+    final result = await accountRepo.checkEmailDuplicate(
       email: email,
     );
 
-    return result.successData?.info == true;
+    return result.maybeWhen(
+      success: (BaseResponseDto<bool> response) {
+        return _getDuplicatedText(response.isTrue);
+      },
+      orElse: () => StringRes.serverError.tr,
+    );
+  }
+
+  String _getDuplicatedText(bool isDuplicated) {
+    return isDuplicated ? StringRes.emailDuplicateError.tr : '';
   }
 }
