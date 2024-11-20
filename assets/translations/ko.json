@@ -52,5 +52,13 @@
   "cancel": "취소",
   "isNotDeadlineYetConfirmClose": "아직 마감날이 아닙니다. 마감할까요?",
   "isUpdateContentCorrect": "수정하신 내용이 맞으신가요?",
-  "canRevertFromPostingManagement": "공고 관리에서 다시 되돌릴 수 있습니다."
+  "canRevertFromPostingManagement": "공고 관리에서 다시 되돌릴 수 있습니다.",
+  "yearsOld": "세",
+  "showJobPosting": "공고보기",
+  "workStatus": "출근현황",
+  "attendance": "출근",
+  "leaveWork": "퇴근",
+  "attendanceScheduled": "출근예정",
+  "attendanceCompleted": "출근완료",
+  "noApplicants": "지원자가 없습니다."
 }

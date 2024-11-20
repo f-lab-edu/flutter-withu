@@ -37,4 +37,10 @@ abstract class JobPostingApi extends API {
   FutureOr<ApiResponse<DeleteResponseDto>> deleteJobPosting({
     required String jobPostingId,
   });
+
+  /// 지원자 목록
+  FutureOr<ApiResponse<JobPostingWorkersDto>> searchJobPostingWorkers({
+    required String jobPostingId,
+    required int page,
+  });
 }

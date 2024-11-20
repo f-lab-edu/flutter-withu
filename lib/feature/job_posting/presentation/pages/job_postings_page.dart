@@ -184,7 +184,8 @@ class JobPostingsListState<B extends JobPostingsBloc>
               entity: item,
               onPressed: () async {
                 final bool? result = await context.router.push<bool>(
-                  JobPostingDetailRoute(jobPostingId: item.id),
+                  // JobPostingDetailRoute(jobPostingId: item.id),
+                  JobPostingWorkersRoute(jobPostingId: item.id),
                 );
 
                 if (result == true) {
