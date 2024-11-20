@@ -4,7 +4,7 @@ import 'package:withu_app/shared/data/data.dart';
 
 abstract class JobPostingRepository {
   /// 공고 목록 조회
-  Future<List<JobPostingsItemModel>?> search({
+  Future<ApiResponse<JobPostingsDto>> search({
     required JobPostingStatusType status,
     required int page,
   });

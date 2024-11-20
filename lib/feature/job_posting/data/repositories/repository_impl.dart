@@ -12,19 +12,14 @@ class JobPostingRepositoryImpl implements JobPostingRepository {
 
   /// 공고 목록 조회
   @override
-  Future<List<JobPostingsItemModel>?> search({
+  Future<ApiResponse<JobPostingsDto>> search({
     required JobPostingStatusType status,
     required int page,
   }) async {
-    try {
-      return await jobPostingApi.search(
-        status: status,
-        page: page,
-      );
-    } catch (e) {
-      logger.e(e);
-      return null;
-    }
+    return await api.fetchList(
+      status: status,
+      page: page,
+    );
   }
 
   /// 공고 등록

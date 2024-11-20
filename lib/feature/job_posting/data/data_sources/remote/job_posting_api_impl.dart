@@ -1,16 +1,14 @@
-import 'dart:async';
-import 'package:withu_app/core/core.dart';
 import 'package:withu_app/feature/job_posting/data/data.dart';
 import 'package:withu_app/shared/data/data.dart';
 
 class JobPostingApiImpl extends JobPostingApi {
   /// 공고 목록
   @override
-  FutureOr<List<JobPostingsItemModel>> search({
+  FutureOr<ApiResponse<JobPostingsDto>> search({
     required JobPostingStatusType status,
     required int page,
   }) async {
-    return [];
+    return const ApiResponse.error();
   }
 
   /// 공고 등록
@@ -25,15 +23,6 @@ class JobPostingApiImpl extends JobPostingApi {
   @override
   FutureOr<ApiResponse<JobPostingDetailDto>> update({
     required String id,
-    required JobPostingRequestDto requestData,
-  }) {
-    return const ApiResponse.error();
-  }
-
-  /// 공고 수정
-  @override
-  FutureOr<ApiResponse<JobPostingDetailDto>> updateJobPosting({
-    required String jobPostingId,
     required JobPostingRequestDto requestData,
   }) {
     return const ApiResponse.error();
@@ -59,14 +48,6 @@ class JobPostingApiImpl extends JobPostingApi {
   @override
   FutureOr<ApiResponse<DeleteResponseDto>> delete({
     required String id,
-  }) {
-    return const ApiResponse.error();
-  }
-
-  /// 공고 삭제
-  @override
-  FutureOr<ApiResponse<DeleteResponseDto>> deleteJobPosting({
-    required String jobPostingId,
   }) {
     return const ApiResponse.error();
   }

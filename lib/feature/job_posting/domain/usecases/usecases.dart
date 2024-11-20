@@ -1,13 +1,14 @@
 import 'package:withu_app/core/core.dart';
 import 'package:withu_app/feature/job_posting/data/data.dart';
 import 'package:withu_app/feature/job_posting/domain/domain.dart';
+import 'package:withu_app/feature/job_posting/domain/entities/list/job_postings_entity.dart';
 import 'package:withu_app/shared/data/data.dart';
 
 part 'usecases_impl.dart';
 
 abstract class JobPostingUseCase {
   /// 공고 목록 조회
-  Future<List<JobPostingEntity>?> search({
+  Future<Either<JobPostingsEntity>> search({
     required JobPostingStatusType status,
     required int page,
   });

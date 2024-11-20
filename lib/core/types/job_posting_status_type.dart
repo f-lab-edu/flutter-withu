@@ -4,16 +4,23 @@ import 'package:withu_app/core/core.dart';
 
 @JsonEnum(valueField: 'serverKey')
 enum JobPostingStatusType with L10nKeyProvider {
-  none(l10nKey: '', serverKey: ''),
-
-  /// 임시저장
-  temporary(l10nKey: 'temporarySave', serverKey: 'TEMPORARY'),
-
   /// 진행
-  inProgress(l10nKey: 'inProgress', serverKey: 'IN_PROGRESS'),
+  inProgress(
+    l10nKey: 'inProgress',
+    serverKey: 'IN_PROGRESS',
+  ),
 
   /// 마감
-  closed(l10nKey: 'closed', serverKey: 'CLOSED');
+  close(
+    l10nKey: 'closed',
+    serverKey: 'CLOSE',
+  ),
+
+  /// 삭제
+  delete(
+    l10nKey: 'delete',
+    serverKey: 'DELETE',
+  );
 
   @override
   final String l10nKey;
@@ -25,7 +32,6 @@ enum JobPostingStatusType with L10nKeyProvider {
     required this.serverKey,
   });
 
-  /// None을 제외한 값들
-  static List<JobPostingStatusType> get valuesWithoutNone =>
-      values.where((type) => type != none).toList();
+  /// 진행 타입 여부
+  bool get isInProgress => this == JobPostingStatusType.inProgress;
 }
