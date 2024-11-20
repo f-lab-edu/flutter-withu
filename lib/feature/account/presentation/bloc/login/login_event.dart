@@ -6,7 +6,7 @@ sealed class LoginEvent extends BaseBlocEvent {}
 class LoginIdInputted extends LoginEvent {
   final String value;
 
-  Email get email => Email(value);
+  LoginId get loginId => Email(value: value);
 
   LoginIdInputted({required this.value});
 }

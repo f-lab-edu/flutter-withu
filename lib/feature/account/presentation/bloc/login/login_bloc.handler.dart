@@ -7,8 +7,8 @@ extension LoginBlocHandler on LoginBloc {
     Emitter<LoginState> emit,
   ) {
     emit(state.copyWith(
-      loginId: event.email,
-      isEnabledLogin: state.checkLoginEnabled(loginId: event.email),
+      loginId: event.loginId,
+      isEnabledLogin: state.checkLoginEnabled(loginId: event.loginId),
     ));
   }
 
