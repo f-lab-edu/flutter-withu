@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:withu_app/core/core.dart';
-import 'package:withu_app/feature/job_posting/domain/domain.dart';
+import 'package:withu_app/feature/job_posting/domain/entities/list/job_postings_item_entity.dart';
 import 'package:withu_app/gen/colors.gen.dart';
 import 'package:withu_app/shared/shared.dart';
 
 /// 공고 목록 아이템
 class JobPostingsItem extends StatelessWidget {
-  final JobPostingEntity entity;
+  final JobPostingsItemEntity entity;
 
   final VoidCallback onPressed;
 
@@ -18,6 +18,10 @@ class JobPostingsItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final crossAlign = entity.status.isInProgress
+        ? CrossAxisAlignment.end
+        : CrossAxisAlignment.center;
+
     return InkWell(
       splashColor: Colors.transparent,
       onTap: onPressed,
@@ -33,7 +37,7 @@ class JobPostingsItem extends StatelessWidget {
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.end,
+          crossAxisAlignment: crossAlign,
           children: [
             Expanded(
               child: _Information(entity: entity),
@@ -47,7 +51,7 @@ class JobPostingsItem extends StatelessWidget {
 }
 
 class _Information extends StatelessWidget {
-  final JobPostingEntity entity;
+  final JobPostingsItemEntity entity;
 
   const _Information({required this.entity});
 
@@ -97,36 +101,25 @@ class _Information extends StatelessWidget {
 }
 
 class _RightView extends StatelessWidget {
-  final JobPostingEntity entity;
+  final JobPostingsItemEntity entity;
 
   const _RightView({required this.entity});
 
   @override
   Widget build(BuildContext context) {
     switch (entity.status) {
-      case JobPostingStatusType.temporary:
-        return const _TemporaryView();
       case JobPostingStatusType.inProgress:
         return _InProgressView(
           max: entity.maxMemberCount,
           current: entity.currentMemberCount,
         );
-      case JobPostingStatusType.closed:
+      case JobPostingStatusType.close:
         return const _ClosedView();
+      case JobPostingStatusType.delete:
+        return const _Delete();
+      default:
+        return const SizedBox();
     }
-  }
-}
-
-/// 임시저장
-class _TemporaryView extends StatelessWidget {
-  const _TemporaryView();
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      StringRes.temporarySave.tr,
-      style: context.textTheme.bodySmall,
-    );
   }
 }
 
@@ -171,7 +164,20 @@ class _ClosedView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      StringRes.closed.tr,
+      StringRes.closingRecruitment.tr,
+      style: context.textTheme.bodySmall,
+    );
+  }
+}
+
+/// 삭제
+class _Delete extends StatelessWidget {
+  const _Delete();
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      StringRes.delete.tr,
       style: context.textTheme.bodySmall,
     );
   }

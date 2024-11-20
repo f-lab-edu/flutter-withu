@@ -6,43 +6,38 @@ import 'package:withu_app/shared/data/data.dart';
 class JobPostingMockApi extends JobPostingApi with MockAPI {
   /// 공고 목록
   @override
-  FutureOr<List<JobPostingsItemModel>> fetchList({
+  FutureOr<ApiResponse<JobPostingsDto>> fetchList({
     required JobPostingStatusType status,
     required int page,
   }) async {
     try {
-      final list = List<JobPostingsItemModel>.generate(
-        30,
-        (int index) => JobPostingsItemModel(
-          id: '$index',
-          title: '공고명 #${index + (page * 30)}',
-          status: status,
-          category: JobCategoryType.values[index % 4],
-          startDate: DateTime.now(),
-          endDate: DateTime.now(),
-          currentMemberCount: index % 3,
-          maxMemberCount: 3,
-        ),
-      );
-
       dioAdapter.onGet(
-        url,
+        '$path?page=$page&status=${status.serverKey}',
         (server) => server.reply(
           200,
-          JobPostingsModel(contents: list),
+          JobPostingsDtoMock.mock(
+            page: page,
+            status: status,
+          ).toJson(),
           delay: const Duration(seconds: 1),
         ),
       );
 
-      final response = await dio.get(url);
+      final response = await dio.get(
+        '$path?page=$page&status=${status.serverKey}',
+      );
 
       if (response.statusCode == 200) {
-        return JobPostingsModel.fromJson(response.data).contents ?? [];
+        return ApiResponse.success(
+          JobPostingsDto.fromJson(response.data),
+        );
       }
-      return [];
+
+      return ApiResponse.fail(
+        FailResponse.fromJson(response.data),
+      );
     } catch (e) {
-      logger.e(e);
-      return [];
+      return const ApiResponse.error();
     }
   }
 

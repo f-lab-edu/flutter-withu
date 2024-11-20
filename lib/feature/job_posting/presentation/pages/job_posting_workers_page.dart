@@ -7,8 +7,7 @@ import 'package:withu_app/core/router/router.gr.dart';
 import 'package:withu_app/feature/job_posting/domain/domain.dart';
 import 'package:withu_app/feature/job_posting/presentation/blocs/workers/job_posting_workers_bloc.dart';
 import 'package:withu_app/shared/shared.dart';
-
-import '../widgets/worker_profile/worker_profile.dart';
+import 'package:withu_app/feature/job_posting/presentation/presentation.dart';
 
 /// 공고 상세 화면
 @RoutePage()

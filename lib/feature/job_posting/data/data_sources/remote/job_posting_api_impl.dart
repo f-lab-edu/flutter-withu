@@ -6,11 +6,11 @@ import 'package:withu_app/shared/data/data.dart';
 class JobPostingApiImpl extends JobPostingApi {
   /// 공고 목록
   @override
-  FutureOr<List<JobPostingsItemModel>> fetchList({
+  FutureOr<ApiResponse<JobPostingsDto>> fetchList({
     required JobPostingStatusType status,
     required int page,
   }) async {
-    return [];
+    return const ApiResponse.error();
   }
 
   /// 공고 등록

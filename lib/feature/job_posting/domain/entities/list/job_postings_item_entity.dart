@@ -1,7 +1,10 @@
 import 'package:withu_app/core/core.dart';
-import 'package:withu_app/feature/job_posting/data/data.dart';
+import 'package:withu_app/feature/job_posting/data/data_sources/dto/list/job_postings_item_dto.dart';
 
-class JobPostingEntity {
+part 'job_postings_item_entity_ext.dart';
+
+/// 공고 목록 아이템 엔티티
+class JobPostingsItemEntity {
   /// id
   final String id;
 
@@ -26,7 +29,7 @@ class JobPostingEntity {
   /// 최대 인원 수
   final int maxMemberCount;
 
-  JobPostingEntity({
+  JobPostingsItemEntity({
     required this.id,
     required this.title,
     required this.category,
@@ -36,29 +39,4 @@ class JobPostingEntity {
     required this.currentMemberCount,
     required this.maxMemberCount,
   });
-
-  /// DTO -> Entity
-  factory JobPostingEntity.fromModel(JobPostingsItemDto model) {
-    final JobPostingsItemDto(
-      :id,
-      :title,
-      :category,
-      :startDate,
-      :endDate,
-      :status,
-      :currentMemberCount,
-      :maxMemberCount,
-    ) = model;
-
-    return JobPostingEntity(
-      id: id,
-      title: title,
-      category: category,
-      startDate: startDate,
-      endDate: endDate,
-      status: status,
-      currentMemberCount: currentMemberCount,
-      maxMemberCount: maxMemberCount,
-    );
-  }
 }

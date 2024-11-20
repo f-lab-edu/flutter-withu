@@ -62,6 +62,8 @@ enum StringRes {
   attendanceScheduled,
   attendanceCompleted,
   noApplicants,
+  closingRecruitment,
+  noSavedJobPosting,
 }
 
 extension StringResEx on StringRes {
