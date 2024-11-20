@@ -166,7 +166,8 @@ class JobPostingDetailBloc
       success: (JobPostingDetailEntity data) {
         emit(
           state.copyWith(
-            status: JobPostingDetailStatus.close,
+            status: JobPostingDetailStatus.success,
+            entity: data
           ),
         );
       },

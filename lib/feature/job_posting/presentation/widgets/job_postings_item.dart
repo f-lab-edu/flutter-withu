@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:withu_app/core/core.dart';
-import 'package:withu_app/feature/job_posting/domain/domain.dart';
+import 'package:withu_app/feature/job_posting/domain/entities/list/job_postings_item_entity.dart';
 import 'package:withu_app/gen/colors.gen.dart';
 import 'package:withu_app/shared/shared.dart';
 

@@ -67,7 +67,7 @@ class JobPostingsBloc extends BaseBloc<JobPostingsEvent, JobPostingState> {
     }
     emit(state.copyWith(status: BaseBlocStatus.loading()));
 
-    final Either<JobPostingsEntity> result = await useCase.searchJobPostings(
+    final Either<JobPostingsEntity> result = await useCase.search(
       status: status,
       page: page,
     );

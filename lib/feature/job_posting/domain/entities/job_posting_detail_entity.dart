@@ -166,10 +166,10 @@ extension JobPostingDetailEntityExt on JobPostingDetailEntity {
     const format = 'yy / MM / dd';
     switch (contractType) {
       case ContractType.short:
-        return contractStartDate?.format(format) ?? '';
+        return contractStartDate.format(format);
       case ContractType.long:
-        final startDate = contractStartDate?.format(format) ?? '';
-        final endDate = contractStartDate?.format(format) ?? '';
+        final startDate = contractStartDate.format(format);
+        final endDate = contractStartDate.format(format);
         return '$startDate - $endDate';
       default:
         return '';

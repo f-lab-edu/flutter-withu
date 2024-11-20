@@ -6,10 +6,10 @@ extension JobPostingFormStateExt on JobPostingFormState {
 
   /// 시작 날짜 문자열
   String get contractStartDateStr =>
-      contractStartDate.format('yyyy-MM-dd') ?? '';
+      contractStartDate.format('yyyy-MM-dd');
 
   /// 종료 날짜 문자열
-  String get contractEndDateStr => contractEndDate.format('yyyy-MM-dd') ?? '';
+  String get contractEndDateStr => contractEndDate.format('yyyy-MM-dd');
 
   /// 등록/수정 요청 Entity로 변경
   JobPostingRequestEntity toEntity() {

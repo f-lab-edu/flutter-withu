@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:withu_app/core/core.dart';
 import 'package:withu_app/feature/job_posting/domain/domain.dart';
-import 'package:withu_app/feature/job_posting/domain/entities/job_posting_detail_entity.dart';
 
 part 'job_posting_form_state.dart';
 

@@ -98,7 +98,7 @@ class _JobPostingDetailPage extends StatelessWidget {
                       ),
                       const SizedBox(height: 30),
                       _PayAmount(
-                        payType: state.entity?.payType?.tr ?? '',
+                        payType: state.entity?.payType.tr ?? '',
                         amount: state.entity?.payAmount ?? '',
                       ),
                       const SizedBox(height: 30),
@@ -253,7 +253,7 @@ class _Header extends StatelessWidget {
                     Visibility(
                       visible: state.entity?.categoryType != null,
                       child: BaseBadge(
-                        text: state.entity?.categoryType?.tr ?? '',
+                        text: state.entity?.categoryType.tr ?? '',
                         backgroundColor: ColorName.primary80,
                         margin: const EdgeInsets.only(right: 8),
                         textStyle: context.textTheme.bodySmall?.copyWith(

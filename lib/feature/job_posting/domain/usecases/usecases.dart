@@ -34,6 +34,7 @@ abstract class JobPostingUseCase {
   Future<Either<bool>> delete({
     required String id,
   });
+
   /// 지원자 목록
   Future<Either<JobPostingWorkersEntity>> searchJobPostingWorkers({
     required String jobPostingId,

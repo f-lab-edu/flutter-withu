@@ -13,7 +13,7 @@ class JobPostingUseCaseImpl implements JobPostingUseCase {
     required JobPostingStatusType status,
     required int page,
   }) async {
-    final result = await repository.searchJobPostings(
+    final result = await jobPostingRepo.search(
       status: status,
       page: page,
     );
@@ -38,12 +38,7 @@ class JobPostingUseCaseImpl implements JobPostingUseCase {
       return false;
     }
 
-    final JobPostingRequestDto? dto = entity.toDto();
-
-    if (dto == null) {
-      return false;
-    }
-
+    final JobPostingRequestDto dto = entity.toDto();
     late final ApiResponse<JobPostingDetailDto> result;
 
     if (id == null) {
@@ -121,8 +116,7 @@ class JobPostingUseCaseImpl implements JobPostingUseCase {
   Future<Either<bool>> delete({
     required String id,
   }) async {
-    final result =
-        await jobPostingRepo.delete(id: id);
+    final result = await jobPostingRepo.delete(id: id);
 
     return result.maybeWhen(
       success: (DeleteResponseDto dto) {

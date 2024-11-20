@@ -97,7 +97,7 @@ class JobPostingsListPage extends StatelessWidget {
             state.selectedTab?.value ?? JobPostingStatusType.inProgress;
 
         return IndexedStack(
-          index: JobPostingStatusType.valuesWithoutNone.indexOf(selectedType),
+          index: JobPostingStatusType.values.indexOf(selectedType),
           children: const [
             JobPostingsList<JobPostingsInProgressBloc>(),
             JobPostingsList<JobPostingsClosedBloc>(),

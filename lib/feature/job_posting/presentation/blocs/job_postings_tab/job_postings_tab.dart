@@ -7,7 +7,7 @@ class JobPostingsTabBloc extends BaseTabBloc {
 
   /// 탭 목록
   static List<BaseTabData<JobPostingStatusType>> _getTabs() {
-    return JobPostingStatusType.valuesWithoutNone
+    return JobPostingStatusType.values
         .map<BaseTabData<JobPostingStatusType>>(
           (type) => BaseTabData(
             text: type.tr,
