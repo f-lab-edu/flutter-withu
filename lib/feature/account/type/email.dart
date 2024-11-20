@@ -1,6 +1,6 @@
 import 'package:withu_app/core/utils/regex/regex_util.dart';
 
-import 'loginId.dart';
+import 'login_id.dart';
 
 /// 이메일 Value Object
 class Email extends LoginId {
