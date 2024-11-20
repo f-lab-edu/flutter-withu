@@ -23,12 +23,6 @@ abstract class JobPostingApi extends API {
     required JobPostingRequestDto requestData,
   });
 
-  /// 공고 수정
-  FutureOr<ApiResponse<JobPostingDetailDto>> updateJobPosting({
-    required String jobPostingId,
-    required JobPostingRequestDto requestData,
-  });
-
   /// 공고 상세 조회
   FutureOr<ApiResponse<JobPostingDetailDto>> get({
     required String id,
@@ -42,11 +36,6 @@ abstract class JobPostingApi extends API {
   /// 공고 삭제
   FutureOr<ApiResponse<DeleteResponseDto>> delete({
     required String id,
-  });
-
-  /// 공고 삭제
-  FutureOr<ApiResponse<DeleteResponseDto>> deleteJobPosting({
-    required String jobPostingId,
   });
 
   /// 지원자 목록

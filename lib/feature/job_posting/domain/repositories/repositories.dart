@@ -20,11 +20,6 @@ abstract class JobPostingRepository {
     required JobPostingRequestDto dto,
   });
 
-  /// 공고 수정
-  Future<ApiResponse<JobPostingDetailDto>> updateJobPosting({
-    required String jobPostingId,
-    required JobPostingRequestDto dto,
-  });
 
   /// 공고 상세 조회
   Future<ApiResponse<JobPostingDetailDto>> get({
@@ -39,11 +34,6 @@ abstract class JobPostingRepository {
   /// 공고 삭제
   Future<ApiResponse<DeleteResponseDto>> delete({
     required String id,
-  });
-
-  /// 공고 삭제
-  Future<ApiResponse<DeleteResponseDto>> deleteJobPosting({
-    required String jobPostingId,
   });
 
   /// 지원자 목록

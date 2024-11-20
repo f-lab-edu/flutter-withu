@@ -140,7 +140,7 @@ class JobPostingUseCaseImpl implements JobPostingUseCase {
     required String jobPostingId,
     required int page,
   }) async {
-    final result = await repository.searchJobPostingWorkers(
+    final result = await jobPostingRepo.searchJobPostingWorkers(
       jobPostingId: jobPostingId,
       page: page,
     );
