@@ -7,35 +7,35 @@ abstract class JobPostingApi extends API {
   final String path = '/job-postings';
 
   /// 공고 목록
-  FutureOr<ApiResponse<JobPostingsDto>> fetchList({
+  FutureOr<ApiResponse<JobPostingsDto>> search({
     required JobPostingStatusType status,
     required int page,
   });
 
   /// 공고 생성
-  FutureOr<ApiResponse<JobPostingDetailDto>> createJobPosting({
+  FutureOr<ApiResponse<JobPostingDetailDto>> create({
     required JobPostingRequestDto requestData,
   });
 
   /// 공고 수정
-  FutureOr<ApiResponse<JobPostingDetailDto>> updateJobPosting({
-    required String jobPostingId,
+  FutureOr<ApiResponse<JobPostingDetailDto>> update({
+    required String id,
     required JobPostingRequestDto requestData,
   });
 
   /// 공고 상세 조회
-  FutureOr<ApiResponse<JobPostingDetailDto>> getJobPosting({
-    required String jobPostingId,
+  FutureOr<ApiResponse<JobPostingDetailDto>> get({
+    required String id,
   });
 
   /// 공고 마감
-  FutureOr<ApiResponse<JobPostingDetailDto>> closeJobPosting({
-    required String jobPostingId,
+  FutureOr<ApiResponse<JobPostingDetailDto>> close({
+    required String id,
   });
 
   /// 공고 삭제
-  FutureOr<ApiResponse<DeleteResponseDto>> deleteJobPosting({
-    required String jobPostingId,
+  FutureOr<ApiResponse<DeleteResponseDto>> delete({
+    required String id,
   });
 
   /// 지원자 목록

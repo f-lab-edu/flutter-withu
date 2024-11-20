@@ -20,7 +20,8 @@ mixin _$JobPostingState {
   BaseBlocStatus get status => throw _privateConstructorUsedError;
 
   /// 공고 목록.
-  List<JobPostingsItemEntity> get list => throw _privateConstructorUsedError;
+  List<JobPostingsItemEntity> get jobPostingItems =>
+      throw _privateConstructorUsedError;
 
   /// 마지막 여부.
   bool get isLast => throw _privateConstructorUsedError;
@@ -39,7 +40,9 @@ abstract class $JobPostingStateCopyWith<$Res> {
       _$JobPostingStateCopyWithImpl<$Res, JobPostingState>;
   @useResult
   $Res call(
-      {BaseBlocStatus status, List<JobPostingsItemEntity> list, bool isLast});
+      {BaseBlocStatus status,
+      List<JobPostingsItemEntity> jobPostingItems,
+      bool isLast});
 }
 
 /// @nodoc
@@ -58,7 +61,7 @@ class _$JobPostingStateCopyWithImpl<$Res, $Val extends JobPostingState>
   @override
   $Res call({
     Object? status = null,
-    Object? list = null,
+    Object? jobPostingItems = null,
     Object? isLast = null,
   }) {
     return _then(_value.copyWith(
@@ -66,9 +69,9 @@ class _$JobPostingStateCopyWithImpl<$Res, $Val extends JobPostingState>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as BaseBlocStatus,
-      list: null == list
-          ? _value.list
-          : list // ignore: cast_nullable_to_non_nullable
+      jobPostingItems: null == jobPostingItems
+          ? _value.jobPostingItems
+          : jobPostingItems // ignore: cast_nullable_to_non_nullable
               as List<JobPostingsItemEntity>,
       isLast: null == isLast
           ? _value.isLast
@@ -87,7 +90,9 @@ abstract class _$$JobPostingStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {BaseBlocStatus status, List<JobPostingsItemEntity> list, bool isLast});
+      {BaseBlocStatus status,
+      List<JobPostingsItemEntity> jobPostingItems,
+      bool isLast});
 }
 
 /// @nodoc
@@ -104,7 +109,7 @@ class __$$JobPostingStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? status = null,
-    Object? list = null,
+    Object? jobPostingItems = null,
     Object? isLast = null,
   }) {
     return _then(_$JobPostingStateImpl(
@@ -112,9 +117,9 @@ class __$$JobPostingStateImplCopyWithImpl<$Res>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as BaseBlocStatus,
-      list: null == list
-          ? _value._list
-          : list // ignore: cast_nullable_to_non_nullable
+      jobPostingItems: null == jobPostingItems
+          ? _value._jobPostingItems
+          : jobPostingItems // ignore: cast_nullable_to_non_nullable
               as List<JobPostingsItemEntity>,
       isLast: null == isLast
           ? _value.isLast
@@ -129,24 +134,24 @@ class __$$JobPostingStateImplCopyWithImpl<$Res>
 class _$JobPostingStateImpl implements _JobPostingState {
   _$JobPostingStateImpl(
       {required this.status,
-      final List<JobPostingsItemEntity> list = const [],
+      final List<JobPostingsItemEntity> jobPostingItems = const [],
       this.isLast = false})
-      : _list = list;
+      : _jobPostingItems = jobPostingItems;
 
   /// 상태.
   @override
   final BaseBlocStatus status;
 
   /// 공고 목록.
-  final List<JobPostingsItemEntity> _list;
+  final List<JobPostingsItemEntity> _jobPostingItems;
 
   /// 공고 목록.
   @override
   @JsonKey()
-  List<JobPostingsItemEntity> get list {
-    if (_list is EqualUnmodifiableListView) return _list;
+  List<JobPostingsItemEntity> get jobPostingItems {
+    if (_jobPostingItems is EqualUnmodifiableListView) return _jobPostingItems;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_list);
+    return EqualUnmodifiableListView(_jobPostingItems);
   }
 
   /// 마지막 여부.
@@ -156,7 +161,7 @@ class _$JobPostingStateImpl implements _JobPostingState {
 
   @override
   String toString() {
-    return 'JobPostingState(status: $status, list: $list, isLast: $isLast)';
+    return 'JobPostingState(status: $status, jobPostingItems: $jobPostingItems, isLast: $isLast)';
   }
 
   @override
@@ -165,13 +170,14 @@ class _$JobPostingStateImpl implements _JobPostingState {
         (other.runtimeType == runtimeType &&
             other is _$JobPostingStateImpl &&
             (identical(other.status, status) || other.status == status) &&
-            const DeepCollectionEquality().equals(other._list, _list) &&
+            const DeepCollectionEquality()
+                .equals(other._jobPostingItems, _jobPostingItems) &&
             (identical(other.isLast, isLast) || other.isLast == isLast));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, status, const DeepCollectionEquality().hash(_list), isLast);
+  int get hashCode => Object.hash(runtimeType, status,
+      const DeepCollectionEquality().hash(_jobPostingItems), isLast);
 
   /// Create a copy of JobPostingState
   /// with the given fields replaced by the non-null parameter values.
@@ -186,7 +192,7 @@ class _$JobPostingStateImpl implements _JobPostingState {
 abstract class _JobPostingState implements JobPostingState {
   factory _JobPostingState(
       {required final BaseBlocStatus status,
-      final List<JobPostingsItemEntity> list,
+      final List<JobPostingsItemEntity> jobPostingItems,
       final bool isLast}) = _$JobPostingStateImpl;
 
   /// 상태.
@@ -195,7 +201,7 @@ abstract class _JobPostingState implements JobPostingState {
 
   /// 공고 목록.
   @override
-  List<JobPostingsItemEntity> get list;
+  List<JobPostingsItemEntity> get jobPostingItems;
 
   /// 마지막 여부.
   @override

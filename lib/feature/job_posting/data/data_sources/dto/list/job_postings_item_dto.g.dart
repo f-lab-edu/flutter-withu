@@ -35,6 +35,7 @@ Map<String, dynamic> _$$JobPostingsItemDtoImplToJson(
     };
 
 const _$JobCategoryTypeEnumMap = {
+  JobCategoryType.none: '',
   JobCategoryType.photography: 'PHOTOGRAPHY',
   JobCategoryType.catering: 'CATERING',
   JobCategoryType.foodStyling: 'FOOD_STYLING',

@@ -7,7 +7,7 @@ class JobPostingState extends BaseBlocState with _$JobPostingState {
     /// 상태.
     required BaseBlocStatus status,
     /// 공고 목록.
-    @Default([]) List<JobPostingsItemEntity> list,
+    @Default([]) List<JobPostingsItemEntity> jobPostingItems,
     /// 마지막 여부.
     @Default(false) bool isLast,
   }) = _JobPostingState;

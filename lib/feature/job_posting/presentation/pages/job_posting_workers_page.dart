@@ -211,7 +211,7 @@ class _WorkerListState extends State<_WorkerList> {
               age: userInfo.age,
               startTime: item.workStartTime?.format('HH:mm') ?? '',
               endTime: item.workEndTime?.format('HH:mm') ?? '',
-              workStatus: item.workStatus,
+              workStatus: item.isOnsite,
             );
           },
         ),
