@@ -30,6 +30,15 @@ class JobPostingApiImpl extends JobPostingApi {
     return const ApiResponse.error();
   }
 
+  /// 공고 수정
+  @override
+  FutureOr<ApiResponse<JobPostingDetailDto>> updateJobPosting({
+    required String jobPostingId,
+    required JobPostingRequestDto requestData,
+  }) {
+    return const ApiResponse.error();
+  }
+
   /// 공고 상세 조회
   @override
   FutureOr<ApiResponse<JobPostingDetailDto>> get({
@@ -50,6 +59,23 @@ class JobPostingApiImpl extends JobPostingApi {
   @override
   FutureOr<ApiResponse<DeleteResponseDto>> delete({
     required String id,
+  }) {
+    return const ApiResponse.error();
+  }
+
+  /// 공고 삭제
+  @override
+  FutureOr<ApiResponse<DeleteResponseDto>> deleteJobPosting({
+    required String jobPostingId,
+  }) {
+    return const ApiResponse.error();
+  }
+
+  /// 지원자 목록
+  @override
+  FutureOr<ApiResponse<JobPostingWorkersDto>> searchJobPostingWorkers({
+    required String jobPostingId,
+    required int page,
   }) {
     return const ApiResponse.error();
   }

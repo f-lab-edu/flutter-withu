@@ -2,7 +2,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:withu_app/core/core.dart';
 import 'package:withu_app/feature/job_posting/domain/domain.dart';
-import 'package:withu_app/feature/job_posting/domain/entities/job_posting_detail_entity.dart';
 
 part 'job_posting_detail_event.dart';
 
@@ -161,6 +160,105 @@ class JobPostingDetailBloc
 
     final Either<JobPostingDetailEntity> result = await useCase.get(
       id: jobPostingId,
+    );
+
+    result.when(
+      success: (JobPostingDetailEntity data) {
+        emit(
+          state.copyWith(
+            status: JobPostingDetailStatus.close,
+          ),
+        );
+      },
+      fail: (String message) {
+        emit(
+          state.copyWith(
+            status: JobPostingDetailStatus.failure,
+            entity: null,
+            message: message,
+          ),
+        );
+      },
+    );
+  }
+
+  /// 공고 삭제
+  void _onDeletedJobPosting(
+    OnDeletedJobPosting event,
+    Emitter<JobPostingDetailState> emit,
+  ) async {
+    final String? jobPostingId = state.entity?.id;
+
+    if (jobPostingId == null) {
+      return;
+    }
+
+    emit(state.copyWith(status: JobPostingDetailStatus.loading));
+
+    final Either<bool> result = await useCase.deleteJobPosting(
+      jobPostingId: jobPostingId,
+    );
+
+    result.when(
+      success: (bool data) {
+        emit(
+          state.copyWith(
+            status: JobPostingDetailStatus.delete,
+          ),
+        );
+      },
+      fail: (String message) {
+        emit(
+          state.copyWith(
+            status: JobPostingDetailStatus.failure,
+            message: message,
+          ),
+        );
+      },
+    );
+  }
+
+  /// 수정 클릭 이벤트
+  void _onPressedUpdate(
+    OnPressedUpdate event,
+    Emitter<JobPostingDetailState> emit,
+  ) {
+    emit(state.copyWith(status: JobPostingDetailStatus.update));
+  }
+
+  /// 수정화면에서 돌아왔을 때 이벤트.
+  void _onPopForm(
+    OnPopForm event,
+    Emitter<JobPostingDetailState> emit,
+  ) {
+    emit(state.copyWith(status: JobPostingDetailStatus.success));
+  }
+
+  /// 리프레시
+  void _onRefreshed(
+    JobPostingDetailRefreshed event,
+    Emitter<JobPostingDetailState> emit,
+  ) async {
+    final jobPostingId = state.entity?.id;
+    if (jobPostingId == null) {
+      return;
+    }
+
+    await _fetchData(
+      jobPostingId: jobPostingId,
+      emit: emit,
+    );
+  }
+
+  /// 공고 상세 조회
+  Future _fetchData({
+    required String jobPostingId,
+    required Emitter<JobPostingDetailState> emit,
+  }) async {
+    emit(state.copyWith(status: JobPostingDetailStatus.loading));
+
+    final Either<JobPostingDetailEntity> result = await useCase.getJobPosting(
+      jobPostingId: jobPostingId,
     );
 
     result.when(success: (JobPostingDetailEntity data) {

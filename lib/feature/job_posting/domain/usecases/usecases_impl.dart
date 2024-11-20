@@ -133,6 +133,27 @@ class JobPostingUseCaseImpl implements JobPostingUseCase {
       },
     );
   }
+
+  /// 지원자 목록
+  @override
+  Future<Either<JobPostingWorkersEntity>> searchJobPostingWorkers({
+    required String jobPostingId,
+    required int page,
+  }) async {
+    final result = await repository.searchJobPostingWorkers(
+      jobPostingId: jobPostingId,
+      page: page,
+    );
+
+    return result.maybeWhen(
+      success: (JobPostingWorkersDto dto) {
+        return Either.success(JobPostingWorkersEntityExt.fromDto(dto));
+      },
+      orElse: () {
+        return Either.fail(StringRes.serverError.tr);
+      },
+    );
+  }
 }
 
 extension on JobPostingUseCase {

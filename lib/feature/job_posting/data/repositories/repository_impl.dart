@@ -47,6 +47,18 @@ class JobPostingRepositoryImpl implements JobPostingRepository {
     );
   }
 
+  /// 공고 수정
+  @override
+  Future<ApiResponse<JobPostingDetailDto>> updateJobPosting({
+    required String jobPostingId,
+    required JobPostingRequestDto dto,
+  }) async {
+    return await api.updateJobPosting(
+      jobPostingId: jobPostingId,
+      requestData: dto,
+    );
+  }
+
   /// 공고 상세 조회
   @override
   Future<ApiResponse<JobPostingDetailDto>> get({
@@ -69,5 +81,25 @@ class JobPostingRepositoryImpl implements JobPostingRepository {
     required String id,
   }) async {
     return await jobPostingApi.delete(id: id);
+  }
+
+  /// 공고 삭제
+  @override
+  Future<ApiResponse<DeleteResponseDto>> deleteJobPosting({
+    required String jobPostingId,
+  }) async {
+    return await api.deleteJobPosting(jobPostingId: jobPostingId);
+  }
+
+  /// 지원자 목록
+  @override
+  Future<ApiResponse<JobPostingWorkersDto>> searchJobPostingWorkers({
+    required String jobPostingId,
+    required int page,
+  }) async {
+    return await api.searchJobPostingWorkers(
+      jobPostingId: jobPostingId,
+      page: page,
+    );
   }
 }
