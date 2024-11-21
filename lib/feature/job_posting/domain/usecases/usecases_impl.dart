@@ -1,19 +1,19 @@
 part of 'usecases.dart';
 
 class JobPostingUseCaseImpl implements JobPostingUseCase {
-  final JobPostingRepository repository;
+  final JobPostingRepository jobPostingRepo;
 
   JobPostingUseCaseImpl({
-    required this.repository,
+    required this.jobPostingRepo,
   });
 
   /// 공고 목록 조회
   @override
-  Future<Either<JobPostingsEntity>> searchJobPostings({
+  Future<Either<JobPostingsEntity>> search({
     required JobPostingStatusType status,
     required int page,
   }) async {
-    final result = await repository.searchJobPostings(
+    final result = await jobPostingRepo.search(
       status: status,
       page: page,
     );
@@ -30,27 +30,22 @@ class JobPostingUseCaseImpl implements JobPostingUseCase {
 
   /// 공고 등록/수정
   @override
-  Future<bool> submitJobPosting({
+  Future<bool> submit({
     required JobPostingRequestEntity entity,
-    String? jobPostingId,
+    String? id,
   }) async {
     if (!isValidEntity(entity)) {
       return false;
     }
 
-    final JobPostingRequestDto? dto = entity.toDto();
-
-    if (dto == null) {
-      return false;
-    }
-
+    final JobPostingRequestDto dto = entity.toDto();
     late final ApiResponse<JobPostingDetailDto> result;
 
-    if (jobPostingId == null) {
+    if (id == null) {
       result = await _createJobPosting(dto: dto);
     } else {
       result = await _updateJobPosting(
-        jobPostingId: jobPostingId,
+        id: id,
         dto: dto,
       );
     }
@@ -62,26 +57,26 @@ class JobPostingUseCaseImpl implements JobPostingUseCase {
   Future<ApiResponse<JobPostingDetailDto>> _createJobPosting({
     required JobPostingRequestDto dto,
   }) {
-    return repository.createJobPosting(dto: dto);
+    return jobPostingRepo.create(dto: dto);
   }
 
   /// 공고 수정
   Future<ApiResponse<JobPostingDetailDto>> _updateJobPosting({
-    required String jobPostingId,
+    required String id,
     required JobPostingRequestDto dto,
   }) {
-    return repository.updateJobPosting(
-      jobPostingId: jobPostingId,
+    return jobPostingRepo.update(
+      id: id,
       dto: dto,
     );
   }
 
   /// 공고 상세 조회
   @override
-  Future<Either<JobPostingDetailEntity>> getJobPosting({
-    required String jobPostingId,
+  Future<Either<JobPostingDetailEntity>> get({
+    required String id,
   }) async {
-    final result = await repository.getJobPosting(jobPostingId: jobPostingId);
+    final result = await jobPostingRepo.get(id: id);
 
     return result.when(
       success: (JobPostingDetailDto dto) {
@@ -98,10 +93,10 @@ class JobPostingUseCaseImpl implements JobPostingUseCase {
 
   /// 공고 마감
   @override
-  Future<Either<JobPostingDetailEntity>> closeJobPosting({
-    required String jobPostingId,
+  Future<Either<JobPostingDetailEntity>> close({
+    required String id,
   }) async {
-    final result = await repository.closeJobPosting(jobPostingId: jobPostingId);
+    final result = await jobPostingRepo.close(id: id);
 
     return result.when(
       success: (JobPostingDetailDto dto) {
@@ -118,11 +113,10 @@ class JobPostingUseCaseImpl implements JobPostingUseCase {
 
   /// 공고 삭제
   @override
-  Future<Either<bool>> deleteJobPosting({
-    required String jobPostingId,
+  Future<Either<bool>> delete({
+    required String id,
   }) async {
-    final result =
-        await repository.deleteJobPosting(jobPostingId: jobPostingId);
+    final result = await jobPostingRepo.delete(id: id);
 
     return result.maybeWhen(
       success: (DeleteResponseDto dto) {
@@ -142,7 +136,7 @@ class JobPostingUseCaseImpl implements JobPostingUseCase {
     required String jobPostingId,
     required int page,
   }) async {
-    final result = await repository.searchJobPostingWorkers(
+    final result = await jobPostingRepo.searchJobPostingWorkers(
       jobPostingId: jobPostingId,
       page: page,
     );
@@ -176,24 +170,13 @@ extension on JobPostingUseCase {
       return false;
     }
 
-    if (entity.categoryType == null) {
+    if (entity.categoryType.isNone) {
       logger.i('카테고리를 선택해 주세요.');
       return false;
     }
 
-    if (entity.contractType == null) {
+    if (entity.contractType.isNone) {
       logger.i('기간형식을 선택해 주세요.');
-      return false;
-    }
-
-    if (entity.contractStartDate == null) {
-      logger.i('근로 계약 기간을 선택해 주세요.');
-      return false;
-    }
-
-    if (entity.contractType == ContractType.long &&
-        entity.contractEndDate == null) {
-      logger.i('근로 계약 종료 기간을 선택해 주세요.');
       return false;
     }
 
@@ -207,19 +190,19 @@ extension on JobPostingUseCase {
       return false;
     }
 
-    final participants = int.tryParse(entity.participants);
-    if (participants == null || participants <= 0) {
+    final participants = entity.participants;
+    if (participants <= 0) {
       logger.i('모집인원을 0명 이상 입력해 주세요.');
       return false;
     }
 
-    if (entity.payType == null) {
+    if (entity.payType.isNone) {
       logger.i('급여 방법을 선택해 주세요.');
       return false;
     }
 
-    final payAmount = int.tryParse(entity.payAmount);
-    if (payAmount == null || payAmount <= 0) {
+    final payAmount = entity.payAmount;
+    if (payAmount <= 0) {
       logger.i('급여를 0원 이상 입력해 주세요.');
       return false;
     }

@@ -53,7 +53,7 @@ class JobPostingsBloc extends BaseBloc<JobPostingsEvent, JobPostingState> {
     emit(state.copyWith(
       status: BaseBlocStatus.refresh(),
       isLast: false,
-      list: [],
+      jobPostingItems: [],
     ));
   }
 
@@ -67,7 +67,7 @@ class JobPostingsBloc extends BaseBloc<JobPostingsEvent, JobPostingState> {
     }
     emit(state.copyWith(status: BaseBlocStatus.loading()));
 
-    final Either<JobPostingsEntity> result = await useCase.searchJobPostings(
+    final Either<JobPostingsEntity> result = await useCase.search(
       status: status,
       page: page,
     );
@@ -78,7 +78,7 @@ class JobPostingsBloc extends BaseBloc<JobPostingsEvent, JobPostingState> {
           state.copyWith(
             status: BaseBlocStatus.success(),
             isLast: entity.isLast,
-            list: entity.list,
+            jobPostingItems: entity.jobPostingItems,
           ),
         );
       },

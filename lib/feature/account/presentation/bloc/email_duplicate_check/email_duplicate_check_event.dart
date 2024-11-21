@@ -8,7 +8,7 @@ class EmailDuplicateCheckInputted extends EmailDuplicateCheckEvent {
 
   EmailDuplicateCheckInputted({required this.value});
 
-  Email get email => Email(value);
+  Email get email => Email(value: value);
 
   @override
   List<Object?> get props => [value];

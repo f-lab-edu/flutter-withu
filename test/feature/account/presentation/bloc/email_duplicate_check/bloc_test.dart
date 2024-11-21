@@ -41,7 +41,7 @@ void main() {
             .having(
               (state) => state.email,
               'email',
-              const Email(nonDuplicatedEmail),
+              const Email(value: nonDuplicatedEmail),
             )
             .having(
               (state) => state.email.isValid,
@@ -85,7 +85,7 @@ void main() {
             .having(
               (state) => state.email,
               'email',
-              const Email(duplicatedEmail),
+              const Email(value: duplicatedEmail),
             )
             .having(
               (state) => state.email.isValid,
@@ -129,7 +129,7 @@ void main() {
             .having(
               (state) => state.email,
               'email',
-              const Email(duplicatedEmail),
+              const Email(value: duplicatedEmail),
             )
             .having(
               (state) => state.email.isValid,

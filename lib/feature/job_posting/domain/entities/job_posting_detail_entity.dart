@@ -25,22 +25,22 @@ class JobPostingDetailEntity {
   final String content;
 
   /// 카테고리
-  final JobCategoryType? categoryType;
+  final JobCategoryType categoryType;
 
   /// 계약 타입: 단기, 장기
-  final ContractType? contractType;
+  final ContractType contractType;
 
   /// 근로 시작 날
-  final DateTime? contractStartDate;
+  final DateTime contractStartDate;
 
   /// 근로 종료 날짜
-  final DateTime? contractEndDate;
+  final DateTime contractEndDate;
 
   /// 시간 미정 여부
   final bool isTBC;
 
   /// 급여 타입: 시급, 일급
-  final PayType? payType;
+  final PayType payType;
 
   /// 금액
   final String payAmount;
@@ -93,11 +93,11 @@ class JobPostingDetailEntity {
     required this.preferredQualifications,
     required this.workStartTime,
     required this.workEndTime,
-    this.categoryType,
-    this.contractType,
-    this.contractStartDate,
-    this.contractEndDate,
-    this.payType,
+    required this.categoryType,
+    required this.contractType,
+    required this.contractStartDate,
+    required this.contractEndDate,
+    required this.payType,
     this.isTravelTimePaid,
     this.isBreakTimePaid,
   });
@@ -166,10 +166,10 @@ extension JobPostingDetailEntityExt on JobPostingDetailEntity {
     const format = 'yy / MM / dd';
     switch (contractType) {
       case ContractType.short:
-        return contractStartDate?.format(format) ?? '';
+        return contractStartDate.format(format);
       case ContractType.long:
-        final startDate = contractStartDate?.format(format) ?? '';
-        final endDate = contractStartDate?.format(format) ?? '';
+        final startDate = contractStartDate.format(format);
+        final endDate = contractStartDate.format(format);
         return '$startDate - $endDate';
       default:
         return '';

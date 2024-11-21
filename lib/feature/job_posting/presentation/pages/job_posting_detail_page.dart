@@ -4,9 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:withu_app/core/core.dart';
 import 'package:withu_app/core/router/router.gr.dart';
 import 'package:withu_app/feature/feature.dart';
-import 'package:withu_app/feature/job_posting/domain/entities/job_posting_detail_entity.dart';
 import 'package:withu_app/gen/colors.gen.dart';
 import 'package:withu_app/shared/shared.dart';
+import 'package:withu_app/feature/job_posting/domain/entities/entities.dart';
 
 /// 공고 상세 화면
 @RoutePage()
@@ -98,7 +98,7 @@ class _JobPostingDetailPage extends StatelessWidget {
                       ),
                       const SizedBox(height: 30),
                       _PayAmount(
-                        payType: state.entity?.payType?.tr ?? '',
+                        payType: state.entity?.payType.tr ?? '',
                         amount: state.entity?.payAmount ?? '',
                       ),
                       const SizedBox(height: 30),
@@ -253,7 +253,7 @@ class _Header extends StatelessWidget {
                     Visibility(
                       visible: state.entity?.categoryType != null,
                       child: BaseBadge(
-                        text: state.entity?.categoryType?.tr ?? '',
+                        text: state.entity?.categoryType.tr ?? '',
                         backgroundColor: ColorName.primary80,
                         margin: const EdgeInsets.only(right: 8),
                         textStyle: context.textTheme.bodySmall?.copyWith(

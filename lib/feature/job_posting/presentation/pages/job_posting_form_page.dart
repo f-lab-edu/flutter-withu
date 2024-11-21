@@ -218,7 +218,7 @@ class _CategorySelect extends StatelessWidget {
     return BlocBuilder<JobPostingFormBloc, JobPostingFormState>(
       builder: (context, state) {
         return Row(
-          children: JobCategoryType.values
+          children: JobCategoryType.valuesWithoutNone
               .map(
                 (category) => RadioChip(
                   text: category.tr,
@@ -249,7 +249,7 @@ class _ContractType extends StatelessWidget {
         children: [
           _FieldName(text: StringRes.periodFormat.tr),
           const Spacer(),
-          ...ContractType.values.map(
+          ...ContractType.valuesWithoutNone.map(
             (type) => RadioChip(
               text: type.tr,
               isSelected: state.contractType == type,
@@ -273,7 +273,7 @@ class _ContractStartDate extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<JobPostingFormBloc, JobPostingFormState>(
       builder: (context, state) {
-        final fieldName = state.contractType?.isLong == true
+        final fieldName = state.contractType.isLong == true
             ? StringRes.workContractStartPeriod.tr
             : StringRes.workContractPeriod.tr;
         return Row(
@@ -357,7 +357,7 @@ class _ContractEndDate extends StatelessWidget {
     return BlocBuilder<JobPostingFormBloc, JobPostingFormState>(
       builder: (context, state) {
         return Visibility(
-          visible: state.contractType?.isLong == true,
+          visible: state.contractType.isLong == true,
           child: Row(
             children: [
               _FieldName(text: StringRes.workContractEndPeriod.tr),
@@ -396,7 +396,7 @@ class _ContractEndCalendar extends StatelessWidget {
         builder: (context, state) {
       return Visibility(
         visible:
-            state.contractType?.isLong == true && state.isVisibleEndCalendar,
+            state.contractType.isLong == true && state.isVisibleEndCalendar,
         child: Container(
           margin: const EdgeInsets.only(top: 14),
           padding: const EdgeInsets.only(top: 8),
@@ -601,7 +601,7 @@ class _PayTypeState extends State<_PayType> {
         return Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            ...PayType.values.map(
+            ...PayType.valuesWithoutNone.map(
               (type) => RadioChip(
                 text: type.tr,
                 isSelected: type == state.payType,

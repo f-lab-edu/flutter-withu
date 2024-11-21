@@ -4,19 +4,19 @@ import 'package:withu_app/feature/job_posting/domain/domain.dart';
 import 'package:withu_app/shared/data/data.dart';
 
 class JobPostingRepositoryImpl implements JobPostingRepository {
-  final JobPostingApi api;
+  final JobPostingApi jobPostingApi;
 
   JobPostingRepositoryImpl({
-    required this.api,
+    required this.jobPostingApi,
   });
 
   /// 공고 목록 조회
   @override
-  Future<ApiResponse<JobPostingsDto>> searchJobPostings({
+  Future<ApiResponse<JobPostingsDto>> search({
     required JobPostingStatusType status,
     required int page,
   }) async {
-    return await api.fetchList(
+    return await jobPostingApi.search(
       status: status,
       page: page,
     );
@@ -24,46 +24,46 @@ class JobPostingRepositoryImpl implements JobPostingRepository {
 
   /// 공고 등록
   @override
-  Future<ApiResponse<JobPostingDetailDto>> createJobPosting({
+  Future<ApiResponse<JobPostingDetailDto>> create({
     required JobPostingRequestDto dto,
   }) async {
-    return await api.createJobPosting(requestData: dto);
+    return await jobPostingApi.create(requestData: dto);
   }
 
   /// 공고 수정
   @override
-  Future<ApiResponse<JobPostingDetailDto>> updateJobPosting({
-    required String jobPostingId,
+  Future<ApiResponse<JobPostingDetailDto>> update({
+    required String id,
     required JobPostingRequestDto dto,
   }) async {
-    return await api.updateJobPosting(
-      jobPostingId: jobPostingId,
+    return await jobPostingApi.update(
+      id: id,
       requestData: dto,
     );
   }
 
   /// 공고 상세 조회
   @override
-  Future<ApiResponse<JobPostingDetailDto>> getJobPosting({
-    required String jobPostingId,
+  Future<ApiResponse<JobPostingDetailDto>> get({
+    required String id,
   }) async {
-    return await api.getJobPosting(jobPostingId: jobPostingId);
+    return await jobPostingApi.get(id: id);
   }
 
   /// 공고 마감
   @override
-  Future<ApiResponse<JobPostingDetailDto>> closeJobPosting({
-    required String jobPostingId,
+  Future<ApiResponse<JobPostingDetailDto>> close({
+    required String id,
   }) async {
-    return await api.closeJobPosting(jobPostingId: jobPostingId);
+    return await jobPostingApi.close(id: id);
   }
 
   /// 공고 삭제
   @override
-  Future<ApiResponse<DeleteResponseDto>> deleteJobPosting({
-    required String jobPostingId,
+  Future<ApiResponse<DeleteResponseDto>> delete({
+    required String id,
   }) async {
-    return await api.deleteJobPosting(jobPostingId: jobPostingId);
+    return await jobPostingApi.delete(id: id);
   }
 
   /// 지원자 목록
@@ -72,7 +72,7 @@ class JobPostingRepositoryImpl implements JobPostingRepository {
     required String jobPostingId,
     required int page,
   }) async {
-    return await api.searchJobPostingWorkers(
+    return await jobPostingApi.searchJobPostingWorkers(
       jobPostingId: jobPostingId,
       page: page,
     );
