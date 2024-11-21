@@ -35,4 +35,9 @@ abstract class AccountRepository {
   Future<ApiResponse<BaseResponseDto<bool>>> authCodeVerification({
     required AuthCodeVerificationRequestDto dto,
   });
+
+  /// 이메일 중복 검사
+  Future<ApiResponse<BaseResponseDto<bool>>> checkEmailDuplicate({
+    required String email,
+  });
 }

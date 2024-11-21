@@ -6,6 +6,8 @@ part 'base_response_dto.g.dart';
 
 part 'base_response_dto.mock.dart';
 
+part 'base_response_dto.utils.dart';
+
 /// 서버 응답 기본 모델
 @Freezed(genericArgumentFactories: true)
 class BaseResponseDto<T> with _$BaseResponseDto<T> {

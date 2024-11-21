@@ -15,6 +15,9 @@ abstract class AccountApi {
   /// 인증번호 검증 요청
   late final verifyAuthCodePath = '$path/verify/code';
 
+  /// 이메일 중복 검사
+  late final checkEmailDuplicatePath = '$path/check/duplicate';
+
   /// 로그인 API
   FutureOr<ApiResponse<LoginResponseDto>> login({
     required LoginRequestDto requestData,
@@ -28,5 +31,10 @@ abstract class AccountApi {
   /// 인증번호 검증 API
   FutureOr<ApiResponse<BaseResponseDto<bool>>> verifyAuthCode({
     required AuthCodeVerificationRequestDto dto,
+  });
+
+  /// 이메일 중복 검사 API
+  FutureOr<ApiResponse<BaseResponseDto<bool>>> checkEmailDuplicate({
+    required String email,
   });
 }

@@ -95,5 +95,6 @@
   "enterOnlyNumber": "숫자만 입력하세요.",
   "enterVerificationCode": "인증번호 입력",
   "verification": "인증",
-  "invalidVerificationCode": "인증번호가 틀립니다,"
+  "invalidVerificationCode": "인증번호가 틀립니다,",
+  "emailDuplicateError": "! 중복된 이메일입니다."
 }
