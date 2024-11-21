@@ -8,7 +8,7 @@ class JobPostingWorkerEntity {
   final SimpleUserEntity userInfo;
 
   /// 출근 여부
-  final bool workStatus;
+  final bool isOnsite;
 
   /// 근무 시작 시간
   final DateTime? workStartTime;
@@ -19,7 +19,7 @@ class JobPostingWorkerEntity {
   JobPostingWorkerEntity({
     required this.id,
     required this.userInfo,
-    required this.workStatus,
+    required this.isOnsite,
     this.workStartTime,
     this.workEndTime,
   });
@@ -30,7 +30,7 @@ extension JobPostingWorkerEntityExt on JobPostingWorkerEntity {
     return JobPostingWorkerEntity(
       id: dto.id,
       userInfo: SimpleUserEntityExt.fromDto(dto.userInfo),
-      workStatus: dto.workStatus,
+      isOnsite: dto.workStatus,
       workStartTime: dto.workStartTime,
       workEndTime: dto.workEndTime,
     );
