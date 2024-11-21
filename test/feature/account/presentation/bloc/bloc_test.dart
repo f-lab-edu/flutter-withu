@@ -49,7 +49,7 @@ void main() {
             .having(
               (state) => state.loginId,
               'loginId',
-              const Email('test@test.com'),
+              const Email(value: 'test@test.com'),
             )
             .having(
               (state) => state.loginId.isValid,
@@ -73,7 +73,7 @@ void main() {
             .having(
               (state) => state.loginId,
               'loginId',
-              const Email('test'),
+              const Email(value: 'test'),
             )
             .having(
               (state) => state.loginId.isValid,
@@ -144,7 +144,7 @@ void main() {
         bloc.add(LoginPasswordInputted(value: '123qwe!@')),
       ],
       expect: () {
-        const loginId = Email('test@test.com');
+        const loginId = Email(value: 'test@test.com');
         const password = Password('123qwe!@');
         return [
           /// 이메일 입력 후 상태

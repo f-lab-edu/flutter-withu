@@ -153,10 +153,10 @@ class JobPostingsListState<B extends JobPostingsBloc>
             if (state.status.isSuccess) {
               final isLast = state.isLast;
               if (isLast) {
-                _pagingController.appendLastPage(state.list);
+                _pagingController.appendLastPage(state.jobPostingItems);
               } else {
                 final nextPageKey = (_pagingController.nextPageKey ?? 0) + 1;
-                _pagingController.appendPage(state.list, nextPageKey);
+                _pagingController.appendPage(state.jobPostingItems, nextPageKey);
               }
             }
 

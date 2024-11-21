@@ -14,7 +14,11 @@ extension LoginBlocHandler on LoginBloc {
 
   /// 로그인 버튼 활성화 상태 체크 및 emit
   void _checkLoginEnabled(Emitter<LoginState> emit) {
-    emit(state.copyWith(isEnabledLogin: state.checkLoginEnabled()));
+    emit(state.copyWith(
+        isEnabledLogin: state.checkLoginEnabled(
+      loginId: state.loginId,
+      password: state.password,
+    )));
   }
 
   /// 아이디 입력
@@ -22,7 +26,7 @@ extension LoginBlocHandler on LoginBloc {
     LoginIdInputted event,
     Emitter<LoginState> emit,
   ) {
-    emit(state.copyWith(loginId: event.email));
+    emit(state.copyWith(loginId: event.loginId));
     _checkLoginEnabled(emit);
   }
 

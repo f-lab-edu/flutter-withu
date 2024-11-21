@@ -9,10 +9,10 @@ initJobPostingInjections() {
     Environment.isProd ? JobPostingApiImpl() : JobPostingMockApi(),
   );
   getIt.registerSingleton<JobPostingRepository>(
-    JobPostingRepositoryImpl(api: getIt()),
+    JobPostingRepositoryImpl(jobPostingApi: getIt()),
   );
   getIt.registerSingleton<JobPostingUseCase>(
-    JobPostingUseCaseImpl(repository: getIt()),
+    JobPostingUseCaseImpl(jobPostingRepo: getIt()),
   );
   getIt.registerFactory<JobPostingsTabBloc>(
         () => JobPostingsTabBloc(),

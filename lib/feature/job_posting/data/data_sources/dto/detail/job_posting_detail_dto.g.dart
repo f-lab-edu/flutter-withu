@@ -72,6 +72,7 @@ Map<String, dynamic> _$$JobPostingDetailDtoImplToJson(
     };
 
 const _$JobCategoryTypeEnumMap = {
+  JobCategoryType.none: '',
   JobCategoryType.photography: 'PHOTOGRAPHY',
   JobCategoryType.catering: 'CATERING',
   JobCategoryType.foodStyling: 'FOOD_STYLING',
@@ -79,11 +80,13 @@ const _$JobCategoryTypeEnumMap = {
 };
 
 const _$ContractTypeEnumMap = {
+  ContractType.none: '',
   ContractType.short: 'SHORT_TERM',
   ContractType.long: 'LONG_TERM',
 };
 
 const _$PayTypeEnumMap = {
+  PayType.none: '',
   PayType.hour: 'HOURLY',
   PayType.day: 'DAILY',
 };

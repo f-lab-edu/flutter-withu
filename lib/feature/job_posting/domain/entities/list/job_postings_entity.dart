@@ -6,13 +6,13 @@ part 'job_postings_entity_ext.dart';
 
 class JobPostingsEntity {
   /// 지원자 목록
-  final List<JobPostingsItemEntity> list;
+  final List<JobPostingsItemEntity> jobPostingItems;
 
   /// 마지막 여부
   final bool isLast;
 
   JobPostingsEntity({
-    required this.list,
+    required this.jobPostingItems,
     required this.isLast,
   });
 }

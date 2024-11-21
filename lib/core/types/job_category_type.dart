@@ -4,6 +4,8 @@ import 'package:withu_app/core/core.dart';
 /// 직업 종류
 @JsonEnum(valueField: 'serverKey')
 enum JobCategoryType with L10nKeyProvider {
+  none(l10nKey: '', serverKey: ''),
+
   /// 촬영
   photography(l10nKey: 'photography', serverKey: 'PHOTOGRAPHY'),
 
@@ -25,4 +27,11 @@ enum JobCategoryType with L10nKeyProvider {
     required this.l10nKey,
     required this.serverKey,
   });
+
+  /// None 여부
+  bool get isNone => this == none;
+
+  /// None을 제외한 값들
+  static List<JobCategoryType> get valuesWithoutNone =>
+      values.where((type) => type != none).toList();
 }

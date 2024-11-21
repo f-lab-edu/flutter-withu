@@ -20,18 +20,8 @@ class JobPostingFormBloc
     required this.useCase,
   }) : super(JobPostingFormState(
           status: JobPostingFormStatus.initial,
-          title: '',
-          content: '',
-          participants: '',
-          pay: '',
-          address: '',
-          preferredQualifications: '',
-          isVisibleStartCalendar: false,
-          isVisibleEndCalendar: false,
-          isTBC: true,
-          hasTravelTime: false,
-          hasBreakTime: false,
-          isMealProvided: false,
+          contractStartDate: DateTime.now(),
+          contractEndDate: DateTime.now(),
         )) {
     on<OnChangedTitle>(_onChangedTitle);
     on<OnChangedContent>(_onChangedContent);
@@ -236,9 +226,9 @@ class JobPostingFormBloc
     try {
       emit(state.copyWith(status: JobPostingFormStatus.loading));
 
-      final result = await useCase.submitJobPosting(
+      final result = await useCase.submit(
         entity: state.toEntity(),
-        jobPostingId: state.jobPostingId,
+        id: state.jobPostingId,
       );
 
       if (result) {
@@ -270,8 +260,8 @@ class JobPostingFormBloc
     }
     emit(state.copyWith(status: JobPostingFormStatus.loading));
 
-    final Either<JobPostingDetailEntity> result = await useCase.getJobPosting(
-      jobPostingId: id,
+    final Either<JobPostingDetailEntity> result = await useCase.get(
+      id: id,
     );
 
     result.when(success: (JobPostingDetailEntity data) {
