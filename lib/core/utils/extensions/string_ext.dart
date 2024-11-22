@@ -15,4 +15,9 @@ extension StringExt on String {
 
     return formatter.format(double.parse(this));
   }
+
+  /// 날짜 형식으로 변경
+  DateTime toDate({String format = 'yyyy-MM-dd'}) {
+    return DateFormat(format).parse(this);
+  }
 }

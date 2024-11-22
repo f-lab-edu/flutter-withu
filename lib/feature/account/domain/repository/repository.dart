@@ -40,4 +40,9 @@ abstract class AccountRepository {
   Future<ApiResponse<BaseResponseDto<bool>>> checkEmailDuplicate({
     required String email,
   });
+
+  /// 회원가입
+  Future<ApiResponse<SignUpResponseDto>> signUp({
+    required SignUpRequestDto dto,
+  });
 }
