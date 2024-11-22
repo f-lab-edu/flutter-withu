@@ -49,4 +49,7 @@ void initAccountPresentationInjections() {
   getIt.registerFactory<EmailDuplicateCheckBloc>(
     () => EmailDuplicateCheckBloc(useCase: getIt()),
   );
+  getIt.registerFactory<SignUpBloc>(
+    () => SignUpBloc(signUpUseCase: getIt()),
+  );
 }
