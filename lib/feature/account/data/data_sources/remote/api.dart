@@ -18,6 +18,9 @@ abstract class AccountApi {
   /// 이메일 중복 검사
   late final checkEmailDuplicatePath = '$path/check/duplicate';
 
+  /// 회원가입
+  late final signUpPath = '$path/signup';
+
   /// 로그인 API
   FutureOr<ApiResponse<LoginResponseDto>> login({
     required LoginRequestDto requestData,
@@ -36,5 +39,10 @@ abstract class AccountApi {
   /// 이메일 중복 검사 API
   FutureOr<ApiResponse<BaseResponseDto<bool>>> checkEmailDuplicate({
     required String email,
+  });
+
+  /// 회원가입 API
+  FutureOr<ApiResponse<SignUpResponseDto>> signUp({
+    required SignUpRequestDto dto,
   });
 }

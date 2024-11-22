@@ -86,4 +86,23 @@ class AccountMockApi extends AccountApiImpl {
     );
     return super.checkEmailDuplicate(email: email);
   }
+
+  /// 회원가입 API
+  @override
+  FutureOr<ApiResponse<SignUpResponseDto>> signUp({
+    required SignUpRequestDto dto,
+  }) async {
+    /// Mock 응답 등록
+    dioAdapter.onPost(
+      signUpPath,
+      (server) => server.reply(
+        200,
+        SignUpResponseDtoMock.success(),
+        delay: const Duration(seconds: 1),
+      ),
+      data: dto.toJson(),
+    );
+
+    return await super.signUp(dto: dto);
+  }
 }
