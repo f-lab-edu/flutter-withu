@@ -173,9 +173,13 @@ flutter test --coverage
 
 # Generate LCOV report from coverage files
 genhtml coverage/lcov.info --output=coverage/report
+or
+derry coverage-report
 
 # Open the coverage report in default browser (optional)
 open coverage/report/index.html
+or
+derry coverage-open
 ```
 
 Coverage 보고서 구성

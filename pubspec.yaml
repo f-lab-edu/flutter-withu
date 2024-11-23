@@ -100,6 +100,11 @@ scripts:
   # 전체 파일 대상으로 pre-commit hooks 스크립트 실행
   pre-commit: pre-commit run --all-files
 
+  # 커버리지 html 파일 생성하기
+  coverage-report: genhtml coverage/lcov.info --output=coverage/report
+  # 커버리지 파일 열기
+  coverage-open: open coverage/report/index.html
+
 # Resource manager
 flutter_gen:
   output: lib/gen/
