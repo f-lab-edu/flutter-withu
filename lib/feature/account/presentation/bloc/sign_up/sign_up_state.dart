@@ -12,5 +12,17 @@ class SignUpState extends BaseBlocState with _$SignUpState {
     @Default(Email.empty) LoginId loginId,
     @Default(Password.empty) Password password,
     @Default(Password.empty) Password passwordVerify,
+    @Default(true) bool isPasswordObscure,
+    @Default(VisibleType.none) VisibleType isPasswordErrorVisible,
   }) = _SignUpState;
+}
+
+extension SignUpStateExt on SignUpState {
+  VisibleType getPasswordErrorVisible() {
+    return VisibleTypeExt.fromBool(!checkPasswordValid());
+  }
+
+  bool checkPasswordValid() {
+    return password.isValid && password.isEqual(passwordVerify);
+  }
 }
