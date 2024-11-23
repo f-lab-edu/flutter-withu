@@ -16,7 +16,7 @@ class RegExUtil {
 
   /// 이름
   static RegExp namePattern = RegExp(
-    r'^[가-힣a-zA-Z]{2,10}\$',
+    r'^[ㄱ-ㅎ가-힣A-Za-z]{2,10}$',
   );
 
   /// 생년월일 패턴

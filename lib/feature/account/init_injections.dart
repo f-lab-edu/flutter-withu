@@ -40,14 +40,14 @@ void initAccountDomainInjections() {
 }
 
 void initAccountPresentationInjections() {
-  getIt.registerFactory<PhoneAuthBloc>(
+  getIt.registerLazySingleton<PhoneAuthBloc>(
     () => PhoneAuthBloc(phoneAuthUseCase: getIt()),
+  );
+  getIt.registerLazySingleton<EmailDuplicateCheckBloc>(
+        () => EmailDuplicateCheckBloc(useCase: getIt()),
   );
   getIt.registerFactory<LoginBloc>(
     () => LoginBloc(loginUseCase: getIt()),
-  );
-  getIt.registerFactory<EmailDuplicateCheckBloc>(
-    () => EmailDuplicateCheckBloc(useCase: getIt()),
   );
   getIt.registerFactory<SignUpBloc>(
     () => SignUpBloc(signUpUseCase: getIt()),

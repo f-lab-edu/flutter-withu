@@ -22,6 +22,34 @@ extension SignUpBlocHandler on SignUpBloc {
     emit(state.copyWith(gender: event.gender));
   }
 
+  void _onPhoneInputted(
+    SignUpPhoneInputted event,
+    Emitter<SignUpState> emit,
+  ) {
+    emit(state.copyWith(phone: event.phone));
+  }
+
+  void _onPhoneAuthChanged(
+    SignUpPhoneAuthChanged event,
+    Emitter<SignUpState> emit,
+  ) {
+    emit(state.copyWith(isAuthPhone: event.isAuth));
+  }
+
+  void _onLoginIdInputted(
+    SignUpLoginIdInputted event,
+    Emitter<SignUpState> emit,
+  ) {
+    emit(state.copyWith(loginId: event.loginId));
+  }
+
+  void _onIsUniqueIdChanged(
+    SignUpIsUniqueIdChanged event,
+    Emitter<SignUpState> emit,
+  ) {
+    emit(state.copyWith(isUniqueId: event.isUnique));
+  }
+
   void _onPasswordObscureToggled(
     SignUpPasswordObscureToggled event,
     Emitter<SignUpState> emit,

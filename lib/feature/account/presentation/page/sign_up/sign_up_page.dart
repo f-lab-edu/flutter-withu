@@ -9,17 +9,49 @@ import 'package:withu_app/shared/shared.dart';
 
 import 'sign_up_page_key.dart';
 
-typedef SignUpBlocBuilder = BlocBuilder<SignUpBloc, SignUpState>;
-
 @RoutePage()
 class SignUpPage extends StatelessWidget {
   const SignUpPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<SignUpBloc>(
-      create: (context) => getIt(),
-      child: const SignUpPageContent(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<PhoneAuthBloc>(
+          create: (context) => getIt<PhoneAuthBloc>(),
+        ),
+        BlocProvider<EmailDuplicateCheckBloc>(
+          create: (context) => getIt<EmailDuplicateCheckBloc>(),
+        ),
+        BlocProvider<SignUpBloc>(
+          create: (context) => getIt<SignUpBloc>(),
+        ),
+      ],
+      child: MultiBlocListener(
+        listeners: [
+          PhoneAuthBlocListener(
+            listener: (context, state) {
+              context
+                  .read<SignUpBloc>()
+                  .add(SignUpPhoneInputted(phone: state.phone));
+              context
+                  .read<SignUpBloc>()
+                  .add(SignUpPhoneAuthChanged(isAuth: state.isAuth));
+            },
+          ),
+          EmailDuplicateCheckBlocListener(
+            listener: (context, state) {
+              context
+                  .read<SignUpBloc>()
+                  .add(SignUpLoginIdInputted(loginId: state.email));
+              context
+                  .read<SignUpBloc>()
+                  .add(SignUpIsUniqueIdChanged(isUnique: state.isUnique));
+            },
+          ),
+        ],
+        child: const SignUpPageContent(),
+      ),
     );
   }
 }
@@ -29,7 +61,7 @@ class SignUpPageContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SignUpBloc, SignUpState>(
+    return SignUpBlocBuilder(
       builder: (context, state) {
         return PageRoot(
           isLoading: state.status.isLoading,
@@ -94,6 +126,7 @@ class NameInput extends StatelessWidget {
     return BaseInput(
       key: SignUpPageKey.name.toKey(),
       hintText: StringRes.enterTwoOrMoreChars.tr,
+      maxLength: 10,
       onChanged: (String text) {
         context.read<SignUpBloc>().add(SignUpNameInputted(value: text));
       },
@@ -110,6 +143,7 @@ class BirthDateInput extends StatelessWidget {
       key: SignUpPageKey.birthDate.toKey(),
       keyboardType: TextInputType.number,
       hintText: StringRes.enterEightChars.tr,
+      maxLength: 8,
       inputFormatters: [
         FilteringTextInputFormatter.digitsOnly,
       ],
@@ -173,7 +207,7 @@ class SubmitButton extends StatelessWidget {
       return EnabledButton(
         key: SignUpPageKey.submitBtn.toKey(),
         text: StringRes.signUp.tr,
-        isEnabled: true,
+        isEnabled: state.isEnabledSubmit,
         onTap: () {
           context.read<SignUpBloc>().add(SignUpSubmitPressed());
         },

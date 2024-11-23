@@ -11,6 +11,8 @@ part 'sign_up_bloc.freezed.dart';
 
 part 'sign_up_bloc.handler.dart';
 
+typedef SignUpBlocBuilder = BlocBuilder<SignUpBloc, SignUpState>;
+
 class SignUpBloc extends BaseBloc<SignUpEvent, SignUpState> {
   final SignUpUseCase signUpUseCase;
 
@@ -22,6 +24,10 @@ class SignUpBloc extends BaseBloc<SignUpEvent, SignUpState> {
     on<SignUpNameInputted>(_onNameInputted);
     on<SignUpBirthDateInputted>(_onBirthDateInputted);
     on<SignUpGenderSelected>(_onGenderSelected);
+    on<SignUpPhoneInputted>(_onPhoneInputted);
+    on<SignUpPhoneAuthChanged>(_onPhoneAuthChanged);
+    on<SignUpLoginIdInputted>(_onLoginIdInputted);
+    on<SignUpIsUniqueIdChanged>(_onIsUniqueIdChanged);
     on<SignUpPasswordObscureToggled>(_onPasswordObscureToggled);
     on<SignUpPasswordInputted>(_onPasswordInputted);
     on<SignUpPasswordVerifyInputted>(_onPasswordVerifyInputted);

@@ -24,3 +24,7 @@ enum GenderType with L10nKeyProvider {
       )
       .toList();
 }
+
+extension GenderTypeExt on GenderType {
+  bool get isNone => this == GenderType.none;
+}

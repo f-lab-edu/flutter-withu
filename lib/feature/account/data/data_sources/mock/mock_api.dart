@@ -53,12 +53,14 @@ class AccountMockApi extends AccountApiImpl {
   FutureOr<ApiResponse<BaseResponseDto<bool>>> verifyAuthCode({
     required AuthCodeVerificationRequestDto dto,
   }) async {
+    final isAuth = '111111' == dto.authCode;
+
     /// Mock 응답 등록
     dioAdapter.onPost(
       verifyAuthCodePath,
       (server) => server.reply(
         200,
-        BaseResponseDtoMock.mock(true).toJson((value) => value),
+        BaseResponseDtoMock.mock(isAuth).toJson((value) => value),
         delay: const Duration(seconds: 1),
       ),
       data: dto.toJson(),

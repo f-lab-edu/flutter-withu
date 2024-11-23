@@ -14,8 +14,9 @@ part 'phone_auth_bloc.handler.dart';
 
 part 'phone_auth_bloc.parser.dart';
 
-class PhoneAuthBloc
-    extends Bloc<PhoneAuthEvent, PhoneAuthState> {
+typedef PhoneAuthBlocListener = BlocListener<PhoneAuthBloc, PhoneAuthState>;
+
+class PhoneAuthBloc extends Bloc<PhoneAuthEvent, PhoneAuthState> {
   final PhoneAuthUseCase phoneAuthUseCase;
 
   PhoneAuthBloc({

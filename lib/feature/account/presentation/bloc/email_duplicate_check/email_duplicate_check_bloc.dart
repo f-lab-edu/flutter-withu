@@ -12,6 +12,9 @@ part 'email_duplicate_check_bloc.freezed.dart';
 
 part 'email_duplicate_check_bloc.handler.dart';
 
+typedef EmailDuplicateCheckBlocListener
+    = BlocListener<EmailDuplicateCheckBloc, EmailDuplicateCheckState>;
+
 class EmailDuplicateCheckBloc
     extends BaseBloc<EmailDuplicateCheckEvent, EmailDuplicateCheckState> {
   final EmailDuplicateCheckUseCase useCase;

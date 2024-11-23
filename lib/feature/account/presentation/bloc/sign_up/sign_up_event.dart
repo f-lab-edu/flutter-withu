@@ -30,6 +30,20 @@ class SignUpGenderSelected extends SignUpEvent {
   SignUpGenderSelected({required this.gender});
 }
 
+/// 휴대폰 입력 이벤트
+class SignUpPhoneInputted extends SignUpEvent {
+  final Phone phone;
+
+  SignUpPhoneInputted({required this.phone});
+}
+
+/// 휴대폰 인증 입력 이벤트
+class SignUpPhoneAuthChanged extends SignUpEvent {
+  final bool isAuth;
+
+  SignUpPhoneAuthChanged({required this.isAuth});
+}
+
 /// 비밀번호 입력 이벤트
 class SignUpPasswordInputted extends SignUpEvent {
   final String value;
@@ -37,6 +51,20 @@ class SignUpPasswordInputted extends SignUpEvent {
   SignUpPasswordInputted({required this.value});
 
   Password get password => Password(value);
+}
+
+/// LoginId 입력 이벤트
+class SignUpLoginIdInputted extends SignUpEvent {
+  final Email loginId;
+
+  SignUpLoginIdInputted({required this.loginId});
+}
+
+/// LoginId 인증 여부
+class SignUpIsUniqueIdChanged extends SignUpEvent {
+  final bool isUnique;
+
+  SignUpIsUniqueIdChanged({required this.isUnique});
 }
 
 /// 비밀번호 확인 입력 이벤트

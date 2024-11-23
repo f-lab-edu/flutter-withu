@@ -20,4 +20,7 @@ class EmailDuplicateCheckState extends BaseBlocState
 extension EmailDuplicateCheckStateExt on EmailDuplicateCheckState {
   /// 에러 문구 노출 여부
   bool get isVisibleError => errorVisible.isVisible;
+
+  /// 유니크 여부
+  bool get isUnique => errorVisible.isInvisible;
 }
