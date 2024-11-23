@@ -18,6 +18,11 @@ enum GenderType with L10nKeyProvider {
     required this.serverKey,
   });
 
+  @override
+  String toString() {
+    return name;
+  }
+
   static List<GenderType> get valuesWithoutNone => values
       .where(
         (type) => type != none,

@@ -35,9 +35,6 @@ class SignUpBirthDateInputted extends SignUpEvent {
   BirthDate get birthDate => BirthDate(value);
 }
 
-/// 비밀번호 표시/숨기기 이벤트
-class SignUpPasswordObscureToggled extends SignUpEvent {}
-
 /// 성별 선택 이벤트
 class SignUpGenderSelected extends SignUpEvent {
   final GenderType gender;
@@ -58,6 +55,9 @@ class SignUpPhoneAuthChanged extends SignUpEvent {
 
   SignUpPhoneAuthChanged({required this.isAuth});
 }
+
+/// 비밀번호 표시/숨기기 이벤트
+class SignUpPasswordObscureToggled extends SignUpEvent {}
 
 /// 비밀번호 입력 이벤트
 class SignUpPasswordInputted extends SignUpEvent {

@@ -4,10 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:withu_app/core/core.dart';
 import 'package:withu_app/feature/account/account.dart';
-import 'package:withu_app/feature/account/presentation/widget/gender_select/gender_select.dart';
 import 'package:withu_app/shared/shared.dart';
-
-import 'sign_up_page_key.dart';
 
 @RoutePage()
 class SignUpPage extends StatelessWidget {
@@ -99,29 +96,29 @@ class SignUpPageContent extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                FieldName(text: StringRes.name.tr),
-                const NameInput(),
+                _FieldName(text: StringRes.name.tr),
+                const _NameInput(),
                 const SizedBox(height: 30),
-                FieldName(text: StringRes.birthDate.tr),
-                const BirthDateInput(),
+                _FieldName(text: StringRes.birthDate.tr),
+                const _BirthDateInput(),
                 const SizedBox(height: 30),
-                FieldName(text: StringRes.gender.tr),
+                _FieldName(text: StringRes.gender.tr),
                 GenderSelect(
                   key: SignUpPageKey.gender.toKey(),
                   selectedType: state.gender,
                 ),
                 const SizedBox(height: 30),
-                FieldName(text: StringRes.phone.tr),
+                _FieldName(text: StringRes.phone.tr),
                 const PhoneAuthWidget(),
                 const SizedBox(height: 30),
-                FieldName(text: StringRes.email.tr),
+                _FieldName(text: StringRes.email.tr),
                 EmailDuplicateCheckWidget(),
                 const SizedBox(height: 30),
-                FieldName(text: StringRes.password.tr),
-                const Password(),
-                const PasswordVerify(),
+                _FieldName(text: StringRes.password.tr),
+                const _PasswordInput(),
+                const _PasswordVerifyInput(),
                 const SizedBox(height: 52),
-                const SubmitButton(),
+                const _SubmitButton(),
                 const SizedBox(height: 40),
               ],
             ),
@@ -132,10 +129,10 @@ class SignUpPageContent extends StatelessWidget {
   }
 }
 
-class FieldName extends StatelessWidget {
+class _FieldName extends StatelessWidget {
   final String text;
 
-  const FieldName({super.key, required this.text});
+  const _FieldName({required this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -146,8 +143,8 @@ class FieldName extends StatelessWidget {
   }
 }
 
-class NameInput extends StatelessWidget {
-  const NameInput({super.key});
+class _NameInput extends StatelessWidget {
+  const _NameInput();
 
   @override
   Widget build(BuildContext context) {
@@ -162,8 +159,8 @@ class NameInput extends StatelessWidget {
   }
 }
 
-class BirthDateInput extends StatelessWidget {
-  const BirthDateInput({super.key});
+class _BirthDateInput extends StatelessWidget {
+  const _BirthDateInput();
 
   @override
   Widget build(BuildContext context) {
@@ -182,8 +179,8 @@ class BirthDateInput extends StatelessWidget {
   }
 }
 
-class Password extends StatelessWidget {
-  const Password({super.key});
+class _PasswordInput extends StatelessWidget {
+  const _PasswordInput();
 
   @override
   Widget build(BuildContext context) {
@@ -204,8 +201,8 @@ class Password extends StatelessWidget {
   }
 }
 
-class PasswordVerify extends StatelessWidget {
-  const PasswordVerify({super.key});
+class _PasswordVerifyInput extends StatelessWidget {
+  const _PasswordVerifyInput();
 
   @override
   Widget build(BuildContext context) {
@@ -226,8 +223,8 @@ class PasswordVerify extends StatelessWidget {
   }
 }
 
-class SubmitButton extends StatelessWidget {
-  const SubmitButton({super.key});
+class _SubmitButton extends StatelessWidget {
+  const _SubmitButton();
 
   @override
   Widget build(BuildContext context) {
