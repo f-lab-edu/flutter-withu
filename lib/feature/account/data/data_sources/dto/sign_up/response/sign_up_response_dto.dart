@@ -14,10 +14,10 @@ class SignUpResponseData with _$SignUpResponseData {
   factory SignUpResponseData({
     required bool status,
     required String message,
-    required int userId,
     required String loginId,
     required String name,
     required String sessionId,
+    int? userId,
     DateTime? birthDate,
     LoginType? loginType,
   }) = _SignUpResponseData;

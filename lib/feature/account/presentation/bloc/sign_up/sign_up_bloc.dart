@@ -13,6 +13,8 @@ part 'sign_up_bloc.handler.dart';
 
 typedef SignUpBlocBuilder = BlocBuilder<SignUpBloc, SignUpState>;
 
+typedef SignUpBlocListener = BlocListener<SignUpBloc, SignUpState>;
+
 class SignUpBloc extends BaseBloc<SignUpEvent, SignUpState> {
   final SignUpUseCase signUpUseCase;
 
@@ -21,6 +23,9 @@ class SignUpBloc extends BaseBloc<SignUpEvent, SignUpState> {
   }) : super(
           SignUpState(status: BaseBlocStatus.initial()),
         ) {
+    on<SignUpLoadingSet>(_onLoadingSet);
+    on<SignUpLoadingUnSet>(_onLoadingUnSet);
+    on<SignUpMessageCleared>(_onMessageCleared);
     on<SignUpNameInputted>(_onNameInputted);
     on<SignUpBirthDateInputted>(_onBirthDateInputted);
     on<SignUpGenderSelected>(_onGenderSelected);

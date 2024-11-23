@@ -2,6 +2,21 @@ part of 'sign_up_bloc.dart';
 
 abstract class SignUpEvent extends BaseBlocEvent {}
 
+/// 로딩 설정
+class SignUpLoadingSet extends SignUpEvent {
+  SignUpLoadingSet();
+}
+
+/// 로딩 설정 해제
+class SignUpLoadingUnSet extends SignUpEvent {
+  SignUpLoadingUnSet();
+}
+
+/// 메시지 클리어
+class SignUpMessageCleared extends SignUpEvent {
+  SignUpMessageCleared();
+}
+
 /// 이름 입력 이벤트
 class SignUpNameInputted extends SignUpEvent {
   final String value;

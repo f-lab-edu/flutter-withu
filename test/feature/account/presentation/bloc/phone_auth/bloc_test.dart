@@ -116,6 +116,11 @@ void main() {
             isTrue,
           ),
       isA<PhoneAuthState>().having(
+        (state) => state.status.isLoading,
+        'loading status',
+        isTrue,
+      ),
+      isA<PhoneAuthState>().having(
         (state) => state.authCodeErrorVisible,
         'authCodeErrorVisible',
         VisibleType.invisible,
@@ -155,6 +160,11 @@ void main() {
             'authCodeValid',
             isTrue,
           ),
+      isA<PhoneAuthState>().having(
+        (state) => state.status.isLoading,
+        'loading status',
+        isTrue,
+      ),
       isA<PhoneAuthState>().having(
         (state) => state.authCodeErrorVisible,
         'authCodeErrorVisible',

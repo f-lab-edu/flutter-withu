@@ -20,6 +20,10 @@ class SignUpState extends BaseBlocState with _$SignUpState {
 }
 
 extension SignUpStateExt on SignUpState {
+  /// 메시지가 있는지 여부
+  bool get hasMessage => message.isNotEmpty;
+
+  /// Password Error 메시지 노출 여부
   VisibleType getPasswordErrorVisible() {
     return VisibleTypeExt.fromBool(!_checkPasswordValid());
   }
@@ -28,6 +32,7 @@ extension SignUpStateExt on SignUpState {
     return password.isValid && password.isEqual(passwordVerify);
   }
 
+  /// Submit 버튼 Enabled 여부
   bool get isEnabledSubmit => _checkSubmitEnabled();
 
   bool _checkSubmitEnabled() {

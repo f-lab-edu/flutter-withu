@@ -99,7 +99,9 @@ class AccountMockApi extends AccountApiImpl {
       signUpPath,
       (server) => server.reply(
         200,
-        SignUpResponseDtoMock.success(),
+        SignUpResponseDtoMock.success().toJson(
+          (data) => data.toJson(),
+        ),
         delay: const Duration(seconds: 1),
       ),
       data: dto.toJson(),

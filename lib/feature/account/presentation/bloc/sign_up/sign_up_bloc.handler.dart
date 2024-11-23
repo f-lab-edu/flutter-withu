@@ -1,6 +1,31 @@
 part of 'sign_up_bloc.dart';
 
 extension SignUpBlocHandler on SignUpBloc {
+  void _onLoadingSet(
+    SignUpLoadingSet event,
+    Emitter<SignUpState> emit,
+  ) {
+    emit(state.copyWith(
+      status: BaseBlocStatus.loading(),
+    ));
+  }
+
+  void _onLoadingUnSet(
+    SignUpLoadingUnSet event,
+    Emitter<SignUpState> emit,
+  ) {
+    emit(state.copyWith(
+      status: BaseBlocStatus.initial(),
+    ));
+  }
+
+  void _onMessageCleared(
+    SignUpMessageCleared event,
+    Emitter<SignUpState> emit,
+  ) {
+    emit(state.copyWith(message: ''));
+  }
+
   void _onNameInputted(
     SignUpNameInputted event,
     Emitter<SignUpState> emit,
@@ -86,5 +111,20 @@ extension SignUpBlocHandler on SignUpBloc {
   void _onSubmitPressed(
     SignUpSubmitPressed event,
     Emitter<SignUpState> emit,
-  ) {}
+  ) async {
+    emit(state.copyWith(status: BaseBlocStatus.loading()));
+
+    final result = await signUpUseCase.exec(
+      entity: SignUpRequestEntityParser.fromState(state),
+    );
+
+    if (result.status) {
+      emit(state.copyWith(status: BaseBlocStatus.success()));
+    } else {
+      emit(state.copyWith(
+        status: BaseBlocStatus.failure(),
+        message: result.message,
+      ));
+    }
+  }
 }

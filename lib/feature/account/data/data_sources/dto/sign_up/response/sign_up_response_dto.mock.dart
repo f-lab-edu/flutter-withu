@@ -1,7 +1,7 @@
 part of 'sign_up_response_dto.dart';
 
 extension SignUpResponseDtoMock on SignUpResponseDto {
-  static Map<String, dynamic> success() {
+  static BaseResponseDto success() {
     return BaseResponseDtoMock.mock(
       SignUpResponseData(
         status: true,
@@ -13,8 +13,21 @@ extension SignUpResponseDtoMock on SignUpResponseDto {
         birthDate: DateTime(2020, 1, 1),
         loginType: LoginType.email,
       ),
-    ).toJson(
-      (data) => data.toJson(),
+    );
+  }
+
+  static BaseResponseDto failure() {
+    return BaseResponseDtoMock.mock(
+      SignUpResponseData(
+        status: false,
+        message: '회원가입에 실패하였습니다.',
+        loginId: '',
+        name: '',
+        sessionId: '',
+        userId: null,
+        birthDate: null,
+        loginType: null,
+      ),
     );
   }
 }

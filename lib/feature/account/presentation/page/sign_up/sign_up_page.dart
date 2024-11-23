@@ -31,6 +31,11 @@ class SignUpPage extends StatelessWidget {
         listeners: [
           PhoneAuthBlocListener(
             listener: (context, state) {
+              if (state.status.isLoading) {
+                context.read<SignUpBloc>().add(SignUpLoadingSet());
+              } else {
+                context.read<SignUpBloc>().add(SignUpLoadingUnSet());
+              }
               context
                   .read<SignUpBloc>()
                   .add(SignUpPhoneInputted(phone: state.phone));
@@ -41,6 +46,11 @@ class SignUpPage extends StatelessWidget {
           ),
           EmailDuplicateCheckBlocListener(
             listener: (context, state) {
+              if (state.status.isLoading) {
+                context.read<SignUpBloc>().add(SignUpLoadingSet());
+              } else {
+                context.read<SignUpBloc>().add(SignUpLoadingUnSet());
+              }
               context
                   .read<SignUpBloc>()
                   .add(SignUpLoginIdInputted(loginId: state.email));
@@ -49,6 +59,24 @@ class SignUpPage extends StatelessWidget {
                   .add(SignUpIsUniqueIdChanged(isUnique: state.isUnique));
             },
           ),
+          SignUpBlocListener(
+            listener: (context, state) async {
+              if (state.hasMessage) {
+                await CustomAlertDialog.showContentAlert(
+                  context: context,
+                  content: state.message,
+                  closeCallback: () {
+                    context.read<SignUpBloc>().add(SignUpMessageCleared());
+                  },
+                );
+              }
+
+              /// 회원가입 성공
+              if (state.status.isSuccess) {
+                getItAppRouter.back();
+              }
+            },
+          )
         ],
         child: const SignUpPageContent(),
       ),

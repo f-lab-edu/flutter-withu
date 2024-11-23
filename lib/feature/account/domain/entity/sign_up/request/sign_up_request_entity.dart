@@ -8,6 +8,7 @@ part 'sign_up_request_entity.parser.dart';
 
 part 'sign_up_request_entity.mock.dart';
 
+
 @freezed
 class SignUpRequestEntity with _$SignUpRequestEntity {
   factory SignUpRequestEntity({
