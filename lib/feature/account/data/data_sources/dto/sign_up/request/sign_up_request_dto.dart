@@ -5,6 +5,8 @@ part 'sign_up_request_dto.freezed.dart';
 
 part 'sign_up_request_dto.g.dart';
 
+part 'sign_up_request_dto.mock.dart';
+
 @freezed
 class SignUpRequestDto with _$SignUpRequestDto {
   factory SignUpRequestDto({

@@ -1,7 +1,7 @@
 part of 'sign_up_response_dto.dart';
 
 extension SignUpResponseDtoMock on SignUpResponseDto {
-  static BaseResponseDto success() {
+  static BaseResponseDto<SignUpResponseData> success() {
     return BaseResponseDtoMock.mock(
       SignUpResponseData(
         status: true,
@@ -16,7 +16,7 @@ extension SignUpResponseDtoMock on SignUpResponseDto {
     );
   }
 
-  static BaseResponseDto failure() {
+  static BaseResponseDto<SignUpResponseData> failure() {
     return BaseResponseDtoMock.mock(
       SignUpResponseData(
         status: false,
