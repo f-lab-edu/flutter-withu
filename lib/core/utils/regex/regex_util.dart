@@ -8,4 +8,9 @@ class RegExUtil {
   static RegExp passwordPattern = RegExp(
     r'^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$',
   );
+
+  /// 휴대폰번호 11자리
+  static RegExp phonePattern = RegExp(
+    r'^(010|011|016|017|018|019)\d{3,4}\d{4}$',
+  );
 }

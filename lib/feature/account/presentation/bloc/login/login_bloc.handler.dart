@@ -46,7 +46,7 @@ extension LoginBlocHandler on LoginBloc {
   ) async {
     emit(state.copyWith(status: BaseBlocStatus.loading()));
 
-    final LoginResultEntity result = await accountUseCase.login(
+    final LoginResultEntity result = await loginUseCase.login(
       entity: toEntity(),
     );
 

@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:auto_route/auto_route.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:withu_app/core/core.dart';
@@ -10,10 +9,14 @@ import 'package:withu_app/core/router/router.gr.dart';
 import 'package:withu_app/feature/account/account.dart';
 import 'package:withu_app/shared/shared.dart';
 
-import 'login_page_test_helper.dart';
+import './login_page_test_helper.dart';
 
 class MockLoginBloc extends MockBloc<LoginEvent, LoginState>
     implements LoginBloc {}
+
+class FakeLoginEvent extends Fake implements LoginEvent {}
+
+class FakeLoginState extends Fake implements LoginState {}
 
 class MockRouter extends Mock implements AppRouter {}
 
@@ -21,46 +24,44 @@ class FakePageRouteInfo extends Mock implements PageRouteInfo {}
 
 void main() {
   group('LoginPage Test', () {
+    TestWidgetsFlutterBinding.ensureInitialized();
+
     late Widget testWidget;
     late MockLoginBloc loginBloc;
     late LoginState initialState;
-    late StreamController<LoginState> controller;
     late MockRouter mockRouter;
+
+    setUpAll(() {
+      registerFallbackValue(FakePageRouteInfo());
+      registerFallbackValue(FakeLoginEvent());
+      registerFallbackValue(FakeLoginState());
+    });
 
     /// 테스트 시작 전
     setUp(() {
       loginBloc = MockLoginBloc();
-      initialState = LoginState(status: BaseBlocStatus.initial());
-      controller = StreamController();
+      initialState = LoginState(
+        status: BaseBlocStatus.initial(),
+      );
       mockRouter = MockRouter();
 
-      if (!getIt.isRegistered<AppRouter>()) {
-        getIt.registerSingleton<AppRouter>(mockRouter);
-      }
+      when(() => loginBloc.state).thenReturn(initialState);
+      getIt.registerFactory<LoginBloc>(() => loginBloc);
 
-      whenListen(
-        loginBloc,
-        controller.stream,
-        initialState: initialState.copyWith(
-          isVisiblePassword: true,
-        ),
-      );
-
-      registerFallbackValue(FakePageRouteInfo());
+      getIt.registerSingleton<AppRouter>(mockRouter);
       when(() => mockRouter.push(any())).thenAnswer((_) async => null);
       when(() => mockRouter.replaceAll(any())).thenAnswer((_) async {});
 
-      testWidget = MaterialApp(
-        home: BlocProvider<LoginBloc>(
-          create: (context) => loginBloc,
-          child: const LoginPageContent(), // 로그인 페이지 위젯
-        ),
+      testWidget = const MaterialApp(
+        home: LoginPage(),
       );
     });
 
     /// 테스트 종료 후
     tearDown(() {
-      controller.close();
+      loginBloc.close();
+      getItAppRouter.dispose();
+      getIt.reset();
     });
 
     testWidgets('화면 로딩 후 초기화 상태 검사', (WidgetTester tester) async {
@@ -183,14 +184,18 @@ void main() {
       await tester.pumpAndSettle();
 
       // Then
-      expect(loginBloc.state.password, equals(const Password(password),));
+      expect(
+          loginBloc.state.password,
+          equals(
+            const Password(password),
+          ));
       expect(loginBloc.state.password.isValid, isTrue);
       expect(find.text(password), findsOneWidget);
       expect(LoginPageTestHelper.passwordErrorMessageFinder(), findsNothing);
     });
 
     testWidgets('비밀번호 유효성 검사 - 실패 케이스', (WidgetTester tester) async {
-      //Given
+      ///Given
       const password = '123qwe';
       whenListen(
         loginBloc,
@@ -203,7 +208,7 @@ void main() {
         initialState: initialState,
       );
 
-      // When
+      /// When
       await tester.pumpWidget(testWidget);
       await tester.enterText(
         LoginPageTestHelper.passwordInputFinder(),
@@ -211,7 +216,7 @@ void main() {
       );
       await tester.pumpAndSettle();
 
-      // Then
+      /// Then
       expect(loginBloc.state.password, equals(const Password(password)));
       expect(loginBloc.state.password.isValid, isFalse);
       expect(find.text(password), findsOneWidget);
@@ -221,17 +226,21 @@ void main() {
 
     testWidgets('비밀번호 텍스트 표시 테스트', (WidgetTester tester) async {
       /// Given
-      controller.add(initialState.copyWith(isVisiblePassword: false));
+      whenListen(
+        loginBloc,
+        Stream.fromIterable([
+          initialState.copyWith(isVisiblePassword: false),
+          initialState.copyWith(isVisiblePassword: true),
+        ]),
+        initialState: initialState.copyWith(
+          isVisiblePassword: false,
+        ),
+      );
+
+      await tester.pumpWidget(testWidget);
+      expect(LoginPageTestHelper.getPasswordInput(tester).obscureText, isTrue);
 
       /// When
-      await tester.pumpWidget(testWidget);
-      await tester.pumpAndSettle();
-
-      /// 사전 검증 - 암호화 상태 확인
-      expect(loginBloc.state.isVisiblePassword, isFalse);
-      expect(LoginPageTestHelper.getPasswordInput(tester).obscureText, true);
-
-      controller.add(initialState.copyWith(isVisiblePassword: true));
       await tester.press(LoginPageTestHelper.passwordVisibleButton());
       await tester.pumpAndSettle();
 
@@ -242,17 +251,21 @@ void main() {
 
     testWidgets('비밀번호 텍스트 숨김 테스트', (WidgetTester tester) async {
       /// Given
+      whenListen(
+        loginBloc,
+        Stream.fromIterable([
+          initialState.copyWith(isVisiblePassword: true),
+          initialState.copyWith(isVisiblePassword: false),
+        ]),
+        initialState: initialState.copyWith(
+          isVisiblePassword: true,
+        ),
+      );
 
-      /// When
       await tester.pumpWidget(testWidget);
-      await tester.pumpAndSettle();
-
-      /// 사전 검증 - 암호화 상태 확인
-      expect(loginBloc.state.isVisiblePassword, isTrue);
       expect(LoginPageTestHelper.getPasswordInput(tester).obscureText, isFalse);
 
-      /// 클릭 이벤트 방출
-      controller.add(initialState.copyWith(isVisiblePassword: false));
+      /// When
       await tester.press(LoginPageTestHelper.passwordVisibleButton());
       await tester.pumpAndSettle();
 
@@ -265,29 +278,33 @@ void main() {
       /// Given
       const loginId = 'test@test.com';
       const password = '123qwe!@';
-      final state = initialState.copyWith(
+      final localState = initialState.copyWith(
         loginId: const Email(value:loginId),
         password: const Password(password),
         isEnabledLogin: true,
       );
-      controller.add(state);
 
-      /// When
+      whenListen(
+        loginBloc,
+        Stream.fromIterable([
+          localState,
+          localState.copyWith(status: BaseBlocStatus.success()),
+        ]),
+        initialState: localState,
+      );
+
       await tester.pumpWidget(testWidget);
-      await tester.pumpAndSettle();
-
-      /// 사전 검증 - 암호화 상태 확인
       expect(loginBloc.state.isEnabledLogin, isTrue);
 
-      /// 클릭 이벤트 방출
-      controller.add(state.copyWith(status: BaseBlocStatus.success()));
+      /// When
       await tester.press(LoginPageTestHelper.loginButtonFinder());
       await tester.pumpAndSettle();
 
       /// Then
       expect(loginBloc.state.status, isA<BaseBlocStatusSuccess>());
-      verify(() => getItAppRouter.replaceAll([const JobPostingsRoute()]))
-          .called(1);
+      verify(
+        () => getItAppRouter.replaceAll([const JobPostingsRoute()]),
+      ).called(1);
     });
 
     testWidgets('로그인 요청 - 실패 케이스 테스트', (WidgetTester tester) async {
@@ -295,23 +312,27 @@ void main() {
       const loginId = 'test@test.com';
       const password = '123qwe!@';
       const failMessage = '존재하지 않는 계정입니다.';
-      final state = initialState.copyWith(
+      final localState = initialState.copyWith(
         loginId: const Email(value:loginId),
         password: const Password(password),
         isEnabledLogin: true,
       );
-      controller.add(state);
+      whenListen(
+        loginBloc,
+        Stream.fromIterable([
+          localState,
+          initialState.copyWith(
+            status: BaseBlocStatus.failure(),
+            message: failMessage,
+          ),
+        ]),
+        initialState: localState,
+      );
+
+      await tester.pumpWidget(testWidget);
 
       /// When
-      await tester.pumpWidget(testWidget);
-      await tester.pumpAndSettle();
-
-      /// 클릭 이벤트 방출
-      controller.add(state.copyWith(
-        status: BaseBlocStatus.failure(),
-        message: failMessage,
-      ));
-      await tester.press(LoginPageTestHelper.loginButtonFinder());
+      await tester.tap(LoginPageTestHelper.loginButtonFinder());
       await tester.pumpAndSettle();
 
       /// Then

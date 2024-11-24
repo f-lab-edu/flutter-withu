@@ -1,10 +1,10 @@
-part of 'usecase.dart';
+part of 'login_usecase.dart';
 
-class AccountUseCaseImpl implements AccountUseCase {
+class LoginUseCaseImpl implements LoginUseCase {
   @override
   final AccountRepository accountRepo;
 
-  AccountUseCaseImpl({required this.accountRepo});
+  LoginUseCaseImpl({required this.accountRepo});
 
   /// 로그인
   @override
