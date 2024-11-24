@@ -626,9 +626,9 @@ class __$$FailResponseImplCopyWithImpl<$Res>
 class _$FailResponseImpl implements _FailResponse {
   const _$FailResponseImpl(
       {required this.status,
-      required this.error,
-      required this.message,
-      required this.devMessage});
+      this.error = '',
+      this.message = '',
+      this.devMessage = ''});
 
   factory _$FailResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$FailResponseImplFromJson(json);
@@ -636,10 +636,13 @@ class _$FailResponseImpl implements _FailResponse {
   @override
   final int status;
   @override
+  @JsonKey()
   final String error;
   @override
+  @JsonKey()
   final String message;
   @override
+  @JsonKey()
   final String devMessage;
 
   @override
@@ -683,9 +686,9 @@ class _$FailResponseImpl implements _FailResponse {
 abstract class _FailResponse implements FailResponse {
   const factory _FailResponse(
       {required final int status,
-      required final String error,
-      required final String message,
-      required final String devMessage}) = _$FailResponseImpl;
+      final String error,
+      final String message,
+      final String devMessage}) = _$FailResponseImpl;
 
   factory _FailResponse.fromJson(Map<String, dynamic> json) =
       _$FailResponseImpl.fromJson;

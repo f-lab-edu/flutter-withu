@@ -23,7 +23,7 @@ mixin _$LoginState {
   String get message => throw _privateConstructorUsedError;
 
   /// loginId - email 형식
-  Email get loginId => throw _privateConstructorUsedError;
+  LoginId get loginId => throw _privateConstructorUsedError;
 
   /// password
   Password get password => throw _privateConstructorUsedError;
@@ -50,7 +50,7 @@ abstract class $LoginStateCopyWith<$Res> {
   $Res call(
       {BaseBlocStatus status,
       String message,
-      Email loginId,
+      LoginId loginId,
       Password password,
       bool isEnabledLogin,
       AccountType selectedTab});
@@ -90,7 +90,7 @@ class _$LoginStateCopyWithImpl<$Res, $Val extends LoginState>
       loginId: null == loginId
           ? _value.loginId
           : loginId // ignore: cast_nullable_to_non_nullable
-              as Email,
+              as LoginId,
       password: null == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
@@ -118,7 +118,7 @@ abstract class _$$LoginStateImplCopyWith<$Res>
   $Res call(
       {BaseBlocStatus status,
       String message,
-      Email loginId,
+      LoginId loginId,
       Password password,
       bool isEnabledLogin,
       AccountType selectedTab});
@@ -156,7 +156,7 @@ class __$$LoginStateImplCopyWithImpl<$Res>
       loginId: null == loginId
           ? _value.loginId
           : loginId // ignore: cast_nullable_to_non_nullable
-              as Email,
+              as LoginId,
       password: null == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
@@ -196,7 +196,7 @@ class _$LoginStateImpl implements _LoginState {
   /// loginId - email 형식
   @override
   @JsonKey()
-  final Email loginId;
+  final LoginId loginId;
 
   /// password
   @override
@@ -251,7 +251,7 @@ abstract class _LoginState implements LoginState {
   factory _LoginState(
       {required final BaseBlocStatus status,
       final String message,
-      final Email loginId,
+      final LoginId loginId,
       final Password password,
       final bool isEnabledLogin,
       final AccountType selectedTab}) = _$LoginStateImpl;
@@ -266,7 +266,7 @@ abstract class _LoginState implements LoginState {
 
   /// loginId - email 형식
   @override
-  Email get loginId;
+  LoginId get loginId;
 
   /// password
   @override

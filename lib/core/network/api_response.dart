@@ -17,16 +17,22 @@ class ApiResponse<T> with _$ApiResponse<T> {
 abstract class FailResponse with _$FailResponse {
   const factory FailResponse({
     required int status,
-    required String error,
-    required String message,
-    required String devMessage,
+    @Default('') String error,
+    @Default('') String message,
+    @Default('') String devMessage,
   }) = _FailResponse;
 
   factory FailResponse.fromJson(Map<String, dynamic> json) =>
       _$FailResponseFromJson(json);
+
+  /// 서버 에러 시.
+  factory FailResponse.error() => const FailResponse(
+        status: 500,
+        message: '서버 에러',
+      );
 }
 
-extension ApiResponseExt on ApiResponse {
+extension ApiResponseExt<T> on ApiResponse<T> {
   bool get isSuccess => maybeWhen(
         success: (_) => true,
         orElse: () => false,
@@ -40,5 +46,11 @@ extension ApiResponseExt on ApiResponse {
   bool get isError => maybeWhen(
         error: () => true,
         orElse: () => false,
+      );
+
+  /// Success Data 가져오기
+  T? get successData => maybeWhen(
+        success: (T data) => data,
+        orElse: () => null,
       );
 }

@@ -5,3 +5,19 @@ repos:
       - id: check-yaml
       - id: end-of-file-fixer
       - id: trailing-whitespace
+
+  - repo: local
+    hooks:
+      - id: dart-fix
+        name: dart-fix
+        entry: bash -c 'dart fix --apply'
+        language: system
+        type: [ dart ]
+        files: lib/.*\.dart$
+
+#      - id: dart-format
+#        name: dart-format
+#        entry: bash -c 'dart format "$@"'
+#        language: system
+#        type: [ dart ]
+#        files: lib/.*\.dart$

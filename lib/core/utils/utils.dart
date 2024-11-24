@@ -7,3 +7,4 @@ export 'mixins/mixins.dart';
 export 'either/either.dart';
 export 'validation/validation.dart';
 export 'bloc/bloc.dart';
+export 'regex/regex.dart';

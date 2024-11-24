@@ -1,9 +1,15 @@
 part of 'splash_bloc.dart';
 
-sealed class SplashState {}
+@freezed
+class SplashState extends BaseBlocState with _$SplashState {
+  factory SplashState({
+    /// 상태.
+    required BaseBlocStatus status,
 
-/// 로딩 상태
-class LoadingState extends SplashState {}
+    /// 다이얼로그 메시지
+    @Default('') String message,
 
-/// 다음 화면으로 넘어가기
-class NavigateToNextScreenState extends SplashState {}
+    /// 로그인 여부
+    @Default(SplashNextPageType.none) SplashNextPageType nextPage,
+  }) = _SplashState;
+}
