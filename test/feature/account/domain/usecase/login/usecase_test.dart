@@ -3,11 +3,13 @@ import 'package:withu_app/core/core.dart';
 import 'package:withu_app/feature/account/account.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+class MockAccountApi extends Mock implements AccountApi {}
+
 class MockAccountRepository extends Mock implements AccountRepository {}
 
 void main() {
   late MockAccountRepository mockRepo;
-  late AccountUseCase useCase;
+  late LoginUseCase useCase;
 
   setUpAll(() {
     registerFallbackValue(LoginRequestDtoMock.mock());
@@ -15,23 +17,23 @@ void main() {
 
   setUp(() {
     mockRepo = MockAccountRepository();
-    useCase = AccountUseCaseImpl(accountRepo: mockRepo);
+    useCase = LoginUseCaseImpl(accountRepo: mockRepo);
   });
 
-  group('Account UseCase 테스트', () {
+  group('로그인 요청 테스트', () {
     test('로그인 요청 - 성공 케이스 테스트', () async {
       // Given
       final successResponseDto = LoginResponseDtoMock.success();
 
       when(
-        () => mockRepo.login(requestData: LoginRequestDtoMock.mock()),
+            () => mockRepo.login(requestData: LoginRequestDtoMock.mock()),
       ).thenAnswer(
-        (_) async => ApiResponse.success(successResponseDto),
+            (_) async => ApiResponse.success(successResponseDto),
       );
       when(
-        () => mockRepo.storeSessionId(id: any(named: 'id')),
+            () => mockRepo.storeSessionId(id: any(named: 'id')),
       ).thenAnswer(
-        (_) async => {},
+            (_) async => {},
       );
 
       // When
@@ -48,9 +50,9 @@ void main() {
     test('서버 에러로 인한 로그인 실패', () async {
       // Given
       when(
-        () => mockRepo.login(requestData: any(named: 'requestData')),
+            () => mockRepo.login(requestData: any(named: 'requestData')),
       ).thenAnswer(
-        (_) async => ApiResponse.fail(FailResponse.error()),
+            (_) async => ApiResponse.fail(FailResponse.error()),
       );
 
       // When

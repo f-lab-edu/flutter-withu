@@ -43,8 +43,10 @@ class BaseButton extends StatelessWidget {
     required BuildContext context,
     required String text,
     required VoidCallback onTap,
+    Key? key,
   }) {
     return BaseButton(
+      key: key,
       text: Text(
         text,
         style: context.textTheme.bodyMediumBold?.copyWith(
@@ -61,8 +63,10 @@ class BaseButton extends StatelessWidget {
     required BuildContext context,
     required String text,
     required VoidCallback onTap,
+    Key? key,
   }) {
     return BaseButton(
+      key: key,
       enabled: false,
       text: Text(
         text,

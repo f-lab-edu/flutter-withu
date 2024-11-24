@@ -73,6 +73,10 @@ enum StringRes {
   signUp,
   pleaseEnterValidEmail,
   pleaseEnterValidPassword,
+  enterOnlyNumber,
+  enterVerificationCode,
+  verification,
+  invalidVerificationCode,
 }
 
 extension StringResEx on StringRes {

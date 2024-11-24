@@ -128,7 +128,6 @@ class _LoginPageState extends State<LoginPageContent> {
                 ),
                 const SizedBox(height: 10),
                 _LoginButton(
-                  key: const Key('login_button'),
                   enabled: state.isEnabledLogin,
                 ),
                 const SizedBox(height: 20),
@@ -145,7 +144,6 @@ class _LoginButton extends StatelessWidget {
   final bool enabled;
 
   const _LoginButton({
-    super.key,
     required this.enabled,
   });
 
@@ -154,6 +152,7 @@ class _LoginButton extends StatelessWidget {
     final text = StringRes.login.tr;
     return enabled
         ? BaseButton.primary(
+            key: const Key('login_button'),
             context: context,
             text: text,
             onTap: () {

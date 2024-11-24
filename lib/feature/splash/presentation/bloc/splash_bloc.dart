@@ -13,10 +13,10 @@ part 'splash_state.dart';
 part 'splash_bloc.freezed.dart';
 
 class SplashBloc extends BaseBloc<SplashEvent, SplashState> {
-  final AccountUseCase accountUseCase;
+  final LoginUseCase loginUseCase;
 
   SplashBloc({
-    required this.accountUseCase,
+    required this.loginUseCase,
   }) : super(SplashState(
           status: BaseBlocStatus.initial(),
         )) {
@@ -33,7 +33,7 @@ class SplashBloc extends BaseBloc<SplashEvent, SplashState> {
     final instance = await SharedPreferences.getInstance();
     instance.clear();
 
-    final isLoggedIn = await accountUseCase.checkLogin();
+    final isLoggedIn = await loginUseCase.checkLogin();
 
     logger.i(isLoggedIn);
 

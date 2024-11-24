@@ -28,4 +28,42 @@ class AccountMockApi extends AccountApiImpl {
 
     return await super.login(requestData: requestData);
   }
+
+  /// 인증번호 요청
+  @override
+  FutureOr<ApiResponse<SendAuthCodeResponseDto>> sendAuthCode({
+    required String phone,
+  }) async {
+    /// Mock 응답 등록
+    dioAdapter.onPost(
+      sendAuthCodePath,
+      (server) => server.reply(
+        200,
+        SendAuthCodeResponseDtoMock.success().toJson(),
+        delay: const Duration(seconds: 1),
+      ),
+      data: {phone: phone},
+    );
+
+    return await super.sendAuthCode(phone: phone);
+  }
+
+  /// 인증번호 검증
+  @override
+  FutureOr<ApiResponse<BaseResponseDto<bool>>> verifyAuthCode({
+    required AuthCodeVerificationRequestDto dto,
+  }) async {
+    /// Mock 응답 등록
+    dioAdapter.onPost(
+      verifyAuthCodePath,
+      (server) => server.reply(
+        200,
+        BaseResponseDtoMock.mock(true).toJson((value) => value),
+        delay: const Duration(seconds: 1),
+      ),
+      data: dto.toJson(),
+    );
+
+    return await super.verifyAuthCode(dto: dto);
+  }
 }
