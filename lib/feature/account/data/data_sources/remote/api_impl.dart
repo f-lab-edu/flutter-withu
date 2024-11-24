@@ -101,4 +101,31 @@ class AccountApiImpl extends AccountApi {
           ),
         );
   }
+
+  /// 회원가입 API
+  @override
+  FutureOr<ApiResponse<SignUpResponseDto>> signUp({
+    required SignUpRequestDto dto,
+  }) async {
+    return network.dio
+        .post(
+          signUpPath,
+          data: dto.toJson(),
+        )
+        .then(
+          (response) => ApiResponse.success(
+            SignUpResponseDto.fromJson(
+              response.data,
+              (json) => SignUpResponseData.fromJson(
+                json as Map<String, dynamic>,
+              ),
+            ),
+          ),
+        )
+        .catchError(
+          (e) => ApiResponse<SignUpResponseDto>.fail(
+            FailResponseExt.fromException(e),
+          ),
+        );
+  }
 }

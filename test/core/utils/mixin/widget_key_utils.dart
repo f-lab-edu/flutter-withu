@@ -7,6 +7,10 @@ extension WidgetKeyUtilsExt on WidgetKeyUtils {
     return find.byKey(toKey());
   }
 
+  Finder toErrorFinder() {
+    return find.byKey(toErrorKey());
+  }
+
   /// Widget으로 변경
   T toWidget<T extends Widget>(WidgetTester tester) {
     return tester.widget<T>(toFinder());

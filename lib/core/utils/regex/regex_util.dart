@@ -13,4 +13,14 @@ class RegExUtil {
   static RegExp phonePattern = RegExp(
     r'^(010|011|016|017|018|019)\d{3,4}\d{4}$',
   );
+
+  /// 이름
+  static RegExp namePattern = RegExp(
+    r'^[ㄱ-ㅎ가-힣A-Za-z]{2,10}$',
+  );
+
+  /// 생년월일 패턴
+  static RegExp birthDatePattern = RegExp(
+    r'^(19|20)\d{2}(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])$',
+  );
 }

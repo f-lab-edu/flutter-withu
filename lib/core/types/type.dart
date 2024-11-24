@@ -5,3 +5,4 @@ export 'pay_type.dart';
 export 'login_type.dart';
 export 'account_type.dart';
 export 'visible_type.dart';
+export 'gender_type.dart';

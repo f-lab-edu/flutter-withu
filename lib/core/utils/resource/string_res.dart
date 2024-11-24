@@ -78,6 +78,17 @@ enum StringRes {
   verification,
   invalidVerificationCode,
   emailDuplicateError,
+  name,
+  enterTwoOrMoreChars,
+  birthDate,
+  enterEightChars,
+  gender,
+  man,
+  woman,
+  phone,
+  email,
+  password,
+  verifyPassword,
 }
 
 extension StringResEx on StringRes {

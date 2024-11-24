@@ -15,4 +15,23 @@ extension StringExt on String {
 
     return formatter.format(double.parse(this));
   }
+
+  /// 날짜 형식으로 변경
+  DateTime toDate() {
+    if (length != 8) {
+      throw FormatException(
+        'Invalid date string format. Expected 8 digits (yyyyMMdd) : $this',
+      );
+    }
+
+    try {
+      return DateTime(
+        int.parse(substring(0, 4)),
+        int.parse(substring(4, 6)),
+        int.parse(substring(6, 8)),
+      );
+    } catch (e) {
+      throw FormatException('Failed to parse date string: $this');
+    }
+  }
 }

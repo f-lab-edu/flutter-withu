@@ -60,4 +60,12 @@ class AccountRepositoryImpl implements AccountRepository {
   }) async {
     return await accountApi.checkEmailDuplicate(email: email);
   }
+
+  /// 회원가입
+  @override
+  Future<ApiResponse<SignUpResponseDto>> signUp({
+    required SignUpRequestDto dto,
+  }) async {
+    return await accountApi.signUp(dto: dto);
+  }
 }

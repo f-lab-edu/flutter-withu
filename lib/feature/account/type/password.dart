@@ -14,4 +14,7 @@ class Password extends Equatable {
 
   bool get isValid => RegExUtil.passwordPattern.hasMatch(value);
 
+  bool isEqual(Password password) {
+    return value == password.value;
+  }
 }

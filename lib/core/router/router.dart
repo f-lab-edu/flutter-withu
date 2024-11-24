@@ -33,5 +33,9 @@ class AppRouter extends RootStackRouter {
           page: JobPostingWorkersRoute.page,
           path: '/job-posting-workers',
         ),
+        AutoRoute(
+          page: SignUpRoute.page,
+          path: '/sign-up',
+        ),
       ];
 }

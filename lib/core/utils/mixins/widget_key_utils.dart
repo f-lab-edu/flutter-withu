@@ -6,4 +6,8 @@ mixin WidgetKeyUtils {
   Key toKey() {
     return Key(getKey());
   }
+
+  Key toErrorKey() {
+    return Key('${getKey()}_error');
+  }
 }

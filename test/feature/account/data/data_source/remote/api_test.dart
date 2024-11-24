@@ -167,4 +167,87 @@ void main() {
       expect(result, isA<ApiResponse<BaseResponseDto<bool>>>());
     });
   });
+
+  group('회원가입 API 테스트', () {
+    final requestDto = SignUpRequestDtoMock.mock();
+
+    test('회원가입 성공', () async {
+      /// Given
+      final responseDto = SignUpResponseDtoMock.success();
+      when(
+        mockDio.post(
+          api.signUpPath,
+          data: requestDto.toJson(),
+        ),
+      ).thenAnswer((_) async {
+        return Response(
+          data: responseDto.toJson(
+            (data) => data.toJson(),
+          ),
+          statusCode: 200,
+          requestOptions: RequestOptions(),
+        );
+      });
+
+      /// When
+      final result = await api.signUp(dto: requestDto);
+
+      /// Then
+      expect(result, isA<ApiResponse<SignUpResponseDto>>());
+      expect(result.successData, isA<SignUpResponseDto>());
+      expect(result.successData, responseDto);
+    });
+
+    test('회원가입 성공', () async {
+      /// Given
+      final responseDto = SignUpResponseDtoMock.failure();
+
+      when(
+        mockDio.post(
+          api.signUpPath,
+          data: requestDto.toJson(),
+        ),
+      ).thenAnswer((_) async {
+        return Response(
+          data: responseDto.toJson(
+            (data) => data.toJson(),
+          ),
+          statusCode: 200,
+          requestOptions: RequestOptions(),
+        );
+      });
+
+      /// When
+      final result = await api.signUp(dto: requestDto);
+
+      /// Then
+      expect(result, isA<ApiResponse<SignUpResponseDto>>());
+      expect(result.successData, isA<SignUpResponseDto>());
+      expect(result.successData, responseDto);
+      expect(result.successData?.info.status, isFalse);
+    });
+
+    test('서버 에러 테스트', () async {
+      /// Given
+      when(
+        mockDio.post(
+          api.signUpPath,
+          data: requestDto.toJson(),
+        ),
+      ).thenAnswer((_) async {
+        return Response(
+          data: FailResponse.error(),
+          statusCode: 500,
+          requestOptions: RequestOptions(),
+        );
+      });
+
+      /// When
+      final result = await api.signUp(dto: requestDto);
+
+      /// Then
+      expect(result, isA<ApiResponse<SignUpResponseDto>>());
+      expect(result.failData?.status, equals(500));
+    });
+  });
 }

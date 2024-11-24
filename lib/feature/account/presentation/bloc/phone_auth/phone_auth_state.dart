@@ -1,8 +1,7 @@
 part of 'phone_auth_bloc.dart';
 
 @freezed
-class PhoneAuthState extends BaseBlocState
-    with _$PhoneAuthState {
+class PhoneAuthState extends BaseBlocState with _$PhoneAuthState {
   factory PhoneAuthState({
     required BaseBlocStatus status,
 
@@ -26,4 +25,7 @@ extension PhoneAuthStateExt on PhoneAuthState {
 
   /// 에러 문구 노출 여부
   bool get isVisibleAuthCodeError => authCodeErrorVisible.isVisible;
+
+  /// 인증 완료 여부
+  bool get isAuth => authCodeErrorVisible.isInvisible;
 }

@@ -53,12 +53,14 @@ class AccountMockApi extends AccountApiImpl {
   FutureOr<ApiResponse<BaseResponseDto<bool>>> verifyAuthCode({
     required AuthCodeVerificationRequestDto dto,
   }) async {
+    final isAuth = '111111' == dto.authCode;
+
     /// Mock 응답 등록
     dioAdapter.onPost(
       verifyAuthCodePath,
       (server) => server.reply(
         200,
-        BaseResponseDtoMock.mock(true).toJson((value) => value),
+        BaseResponseDtoMock.mock(isAuth).toJson((value) => value),
         delay: const Duration(seconds: 1),
       ),
       data: dto.toJson(),
@@ -85,5 +87,26 @@ class AccountMockApi extends AccountApiImpl {
       data: {"loginId": email},
     );
     return super.checkEmailDuplicate(email: email);
+  }
+
+  /// 회원가입 API
+  @override
+  FutureOr<ApiResponse<SignUpResponseDto>> signUp({
+    required SignUpRequestDto dto,
+  }) async {
+    /// Mock 응답 등록
+    dioAdapter.onPost(
+      signUpPath,
+      (server) => server.reply(
+        200,
+        SignUpResponseDtoMock.success().toJson(
+          (data) => data.toJson(),
+        ),
+        delay: const Duration(seconds: 1),
+      ),
+      data: dto.toJson(),
+    );
+
+    return await super.signUp(dto: dto);
   }
 }
