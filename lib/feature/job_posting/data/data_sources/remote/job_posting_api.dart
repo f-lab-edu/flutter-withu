@@ -3,7 +3,7 @@ import 'package:withu_app/core/core.dart';
 import 'package:withu_app/feature/job_posting/data/data.dart';
 import 'package:withu_app/shared/data/data.dart';
 
-abstract class JobPostingApi extends API {
+abstract class JobPostingApi extends DioNetwork {
   final String path = '/job-postings';
 
   /// 공고 목록

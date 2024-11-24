@@ -16,17 +16,19 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider<LoginBloc>(
       create: (context) => getIt(),
-      child: _LoginPage(),
+      child: const LoginPageContent(),
     );
   }
 }
 
-class _LoginPage extends StatefulWidget {
+class LoginPageContent extends StatefulWidget {
+  const LoginPageContent({super.key});
+
   @override
   State<StatefulWidget> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<_LoginPage> {
+class _LoginPageState extends State<LoginPageContent> {
   @override
   void initState() {
     super.initState();
@@ -40,10 +42,20 @@ class _LoginPageState extends State<_LoginPage> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<LoginBloc, LoginState>(
-      listener: (context, state) {
+      listener: (context, state) async {
         /// 로그인 성공
         if (state.status.isSuccess) {
-          context.router.replaceAll([const JobPostingsRoute()]);
+          getItAppRouter.replaceAll([const JobPostingsRoute()]);
+        }
+
+        if (state.hasFailMessage) {
+          await CustomAlertDialog.showContentAlert(
+            context: context,
+            content: state.message,
+            closeCallback: () {
+              context.read<LoginBloc>().add(LoginMessageCleared());
+            },
+          );
         }
       },
       builder: (context, state) {
@@ -69,6 +81,7 @@ class _LoginPageState extends State<_LoginPage> {
                 ),
                 const SizedBox(height: 26),
                 BaseInput.email(
+                  key: const Key('email_input'),
                   textInputAction: TextInputAction.next,
                   errorText: StringRes.pleaseEnterValidEmail.tr,
                   errorVisible: !state.loginId.isValid,
@@ -78,12 +91,19 @@ class _LoginPageState extends State<_LoginPage> {
                 ),
                 const SizedBox(height: 30),
                 BaseInput.password(
+                  key: const Key('password_input'),
                   errorText: StringRes.pleaseEnterValidPassword.tr,
+                  obscureText: !state.isVisiblePassword,
                   errorVisible: !state.password.isValid,
                   onChanged: (String text) {
                     context
                         .read<LoginBloc>()
                         .add(LoginPasswordInputted(value: text));
+                  },
+                  onSuffixPressed: () {
+                    context
+                        .read<LoginBloc>()
+                        .add(LoginVisiblePasswordToggled());
                   },
                 ),
                 const SizedBox(height: 80),
@@ -108,6 +128,7 @@ class _LoginPageState extends State<_LoginPage> {
                 ),
                 const SizedBox(height: 10),
                 _LoginButton(
+                  key: const Key('login_button'),
                   enabled: state.isEnabledLogin,
                 ),
                 const SizedBox(height: 20),
@@ -124,6 +145,7 @@ class _LoginButton extends StatelessWidget {
   final bool enabled;
 
   const _LoginButton({
+    super.key,
     required this.enabled,
   });
 

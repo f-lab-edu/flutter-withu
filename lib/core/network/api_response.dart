@@ -53,4 +53,10 @@ extension ApiResponseExt<T> on ApiResponse<T> {
         success: (T data) => data,
         orElse: () => null,
       );
+
+  /// Fail Data 가져오기
+  FailResponse? get failData => maybeWhen(
+        fail: (FailResponse failResponse) => failResponse,
+        orElse: () => null,
+      );
 }

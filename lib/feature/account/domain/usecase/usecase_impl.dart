@@ -9,27 +9,19 @@ class AccountUseCaseImpl implements AccountUseCase {
   /// 로그인
   @override
   Future<LoginResultEntity> login({
-    required AccountType accountType,
-    required LoginType loginType,
-    required String loginId,
-    required String password,
+    required LoginRequestEntity entity,
   }) async {
     final result = await accountRepo.login(
-      requestData: LoginRequestDto(
-        accountType: accountType,
-        loginType: loginType,
-        loginId: loginId,
-        password: password,
-      ),
+      requestData: entity.toDto(),
     );
 
-    _storeSessionId(id: result.successData?.sessionId ?? '');
+    storeSessionId(id: result.successData?.sessionId ?? '');
 
-    return LoginResultEntityParser.fromDto(result: result);
+    return LoginResultEntityConverter.fromDto(result: result);
   }
 
   /// 세션 Id 저장
-  void _storeSessionId({
+  void storeSessionId({
     required String id,
   }) {
     if (id.isNotEmpty) {

@@ -1,9 +1,8 @@
 import 'dart:async';
-
 import 'package:withu_app/core/core.dart';
 import 'package:withu_app/feature/account/data/data_sources/dto/dto.dart';
 
-abstract class AccountApi extends API {
+abstract class AccountApi {
   /// API 주소
   final path = "/api/account";
 
