@@ -32,6 +32,7 @@ class BaseTabs extends StatelessWidget {
             .map(
               (tab) => Expanded(
                 child: BaseTab(
+                  key: Key('base_tab_${tab.value.toString()}'),
                   data: tab,
                   isSelected: selectedTab == tab,
                   onTap: () => onTap(tab),

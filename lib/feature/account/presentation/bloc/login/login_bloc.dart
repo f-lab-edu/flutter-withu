@@ -11,6 +11,8 @@ part 'login_bloc.freezed.dart';
 
 part 'login_bloc.handler.dart';
 
+part 'login_bloc_converter.dart';
+
 class LoginBloc extends BaseBloc<LoginEvent, LoginState> {
   final AccountUseCase accountUseCase;
 
@@ -19,9 +21,11 @@ class LoginBloc extends BaseBloc<LoginEvent, LoginState> {
   }) : super(
           LoginState(status: BaseBlocStatus.initial()),
         ) {
+    on<LoginMessageCleared>(_onMessageCleared);
     on<LoginIdInputted>(_onIdInputted);
     on<LoginPasswordInputted>(_onPasswordInputted);
     on<LoginBtnPressed>(_onBtnPressed);
     on<LoginTabPressed>(_onTabPressed);
+    on<LoginVisiblePasswordToggled>(_onVisiblePasswordToggled);
   }
 }

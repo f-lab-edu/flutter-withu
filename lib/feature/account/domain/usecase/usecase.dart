@@ -10,10 +10,7 @@ abstract class AccountUseCase {
 
   /// 로그인
   Future<LoginResultEntity> login({
-    required AccountType accountType,
-    required LoginType loginType,
-    required String loginId,
-    required String password,
+    required LoginRequestEntity entity,
   });
 
   /// 로그인 여부

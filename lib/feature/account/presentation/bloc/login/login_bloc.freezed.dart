@@ -28,6 +28,9 @@ mixin _$LoginState {
   /// password
   Password get password => throw _privateConstructorUsedError;
 
+  /// password Visible 여부
+  bool get isVisiblePassword => throw _privateConstructorUsedError;
+
   /// 로그인 버튼 enabled
   bool get isEnabledLogin => throw _privateConstructorUsedError;
 
@@ -52,6 +55,7 @@ abstract class $LoginStateCopyWith<$Res> {
       String message,
       LoginId loginId,
       Password password,
+      bool isVisiblePassword,
       bool isEnabledLogin,
       AccountType selectedTab});
 }
@@ -75,6 +79,7 @@ class _$LoginStateCopyWithImpl<$Res, $Val extends LoginState>
     Object? message = null,
     Object? loginId = null,
     Object? password = null,
+    Object? isVisiblePassword = null,
     Object? isEnabledLogin = null,
     Object? selectedTab = null,
   }) {
@@ -95,6 +100,10 @@ class _$LoginStateCopyWithImpl<$Res, $Val extends LoginState>
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as Password,
+      isVisiblePassword: null == isVisiblePassword
+          ? _value.isVisiblePassword
+          : isVisiblePassword // ignore: cast_nullable_to_non_nullable
+              as bool,
       isEnabledLogin: null == isEnabledLogin
           ? _value.isEnabledLogin
           : isEnabledLogin // ignore: cast_nullable_to_non_nullable
@@ -120,6 +129,7 @@ abstract class _$$LoginStateImplCopyWith<$Res>
       String message,
       LoginId loginId,
       Password password,
+      bool isVisiblePassword,
       bool isEnabledLogin,
       AccountType selectedTab});
 }
@@ -141,6 +151,7 @@ class __$$LoginStateImplCopyWithImpl<$Res>
     Object? message = null,
     Object? loginId = null,
     Object? password = null,
+    Object? isVisiblePassword = null,
     Object? isEnabledLogin = null,
     Object? selectedTab = null,
   }) {
@@ -161,6 +172,10 @@ class __$$LoginStateImplCopyWithImpl<$Res>
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as Password,
+      isVisiblePassword: null == isVisiblePassword
+          ? _value.isVisiblePassword
+          : isVisiblePassword // ignore: cast_nullable_to_non_nullable
+              as bool,
       isEnabledLogin: null == isEnabledLogin
           ? _value.isEnabledLogin
           : isEnabledLogin // ignore: cast_nullable_to_non_nullable
@@ -181,6 +196,7 @@ class _$LoginStateImpl implements _LoginState {
       this.message = '',
       this.loginId = Email.empty,
       this.password = Password.empty,
+      this.isVisiblePassword = false,
       this.isEnabledLogin = false,
       this.selectedTab = AccountType.company});
 
@@ -203,6 +219,11 @@ class _$LoginStateImpl implements _LoginState {
   @JsonKey()
   final Password password;
 
+  /// password Visible 여부
+  @override
+  @JsonKey()
+  final bool isVisiblePassword;
+
   /// 로그인 버튼 enabled
   @override
   @JsonKey()
@@ -215,7 +236,7 @@ class _$LoginStateImpl implements _LoginState {
 
   @override
   String toString() {
-    return 'LoginState(status: $status, message: $message, loginId: $loginId, password: $password, isEnabledLogin: $isEnabledLogin, selectedTab: $selectedTab)';
+    return 'LoginState(status: $status, message: $message, loginId: $loginId, password: $password, isVisiblePassword: $isVisiblePassword, isEnabledLogin: $isEnabledLogin, selectedTab: $selectedTab)';
   }
 
   @override
@@ -228,6 +249,8 @@ class _$LoginStateImpl implements _LoginState {
             (identical(other.loginId, loginId) || other.loginId == loginId) &&
             (identical(other.password, password) ||
                 other.password == password) &&
+            (identical(other.isVisiblePassword, isVisiblePassword) ||
+                other.isVisiblePassword == isVisiblePassword) &&
             (identical(other.isEnabledLogin, isEnabledLogin) ||
                 other.isEnabledLogin == isEnabledLogin) &&
             (identical(other.selectedTab, selectedTab) ||
@@ -236,7 +259,7 @@ class _$LoginStateImpl implements _LoginState {
 
   @override
   int get hashCode => Object.hash(runtimeType, status, message, loginId,
-      password, isEnabledLogin, selectedTab);
+      password, isVisiblePassword, isEnabledLogin, selectedTab);
 
   /// Create a copy of LoginState
   /// with the given fields replaced by the non-null parameter values.
@@ -253,6 +276,7 @@ abstract class _LoginState implements LoginState {
       final String message,
       final LoginId loginId,
       final Password password,
+      final bool isVisiblePassword,
       final bool isEnabledLogin,
       final AccountType selectedTab}) = _$LoginStateImpl;
 
@@ -271,6 +295,10 @@ abstract class _LoginState implements LoginState {
   /// password
   @override
   Password get password;
+
+  /// password Visible 여부
+  @override
+  bool get isVisiblePassword;
 
   /// 로그인 버튼 enabled
   @override

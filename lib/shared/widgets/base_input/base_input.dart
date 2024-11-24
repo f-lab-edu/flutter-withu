@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:withu_app/core/utils/utils.dart';
+import 'package:withu_app/gen/assets.gen.dart';
 import 'package:withu_app/gen/colors.gen.dart';
 
 class BaseInput extends StatelessWidget {
@@ -18,7 +19,9 @@ class BaseInput extends StatelessWidget {
 
   final EdgeInsets? padding;
 
-  final String? suffix;
+  final Widget? suffix;
+
+  final String? suffixText;
 
   final TextStyle? suffixStyle;
 
@@ -51,6 +54,7 @@ class BaseInput extends StatelessWidget {
     this.padding,
     this.onChanged,
     this.suffix,
+    this.suffixText,
     this.suffixStyle,
     this.keyboardType,
     this.textInputAction,
@@ -83,42 +87,51 @@ class BaseInput extends StatelessWidget {
               bottom: BorderSide(color: ColorName.teritary),
             ),
           ),
-          child: TextField(
-            controller: controller,
-            focusNode: focusNode,
-            style: style ?? defaultTextStyle,
-            keyboardType: keyboardType,
-            textInputAction: textInputAction ?? TextInputAction.done,
-            maxLength: maxLength,
-            cursorHeight: 16,
-            cursorColor: ColorName.primary80,
-            textAlign: textAlign,
-            inputFormatters: inputFormatters,
-            obscureText: obscureText,
-            decoration: InputDecoration(
-              hintText: hintText,
-              hintStyle: hintTextStyle ?? defaultHintStyle,
-              border: InputBorder.none,
-              isDense: true,
-              contentPadding: const EdgeInsets.all(0),
-              floatingLabelBehavior: FloatingLabelBehavior.always,
-              suffixText: suffix,
-              suffixStyle: suffixStyle,
-              counterText: '',
-            ),
-            onChanged: onChanged,
+          child: Row(
+            children: [
+              Expanded(
+                child: TextField(
+                  controller: controller,
+                  focusNode: focusNode,
+                  style: style ?? defaultTextStyle,
+                  keyboardType: keyboardType,
+                  textInputAction: textInputAction ?? TextInputAction.done,
+                  maxLength: maxLength,
+                  cursorHeight: 16,
+                  cursorColor: ColorName.primary80,
+                  textAlign: textAlign,
+                  inputFormatters: inputFormatters,
+                  obscureText: obscureText,
+                  decoration: InputDecoration(
+                    hintText: hintText,
+                    hintStyle: hintTextStyle ?? defaultHintStyle,
+                    border: InputBorder.none,
+                    isDense: true,
+                    contentPadding: const EdgeInsets.all(0),
+                    floatingLabelBehavior: FloatingLabelBehavior.always,
+                    suffixText: suffixText,
+                    suffixStyle: suffixStyle,
+                    counterText: '',
+                  ),
+                  onChanged: onChanged,
+                ),
+              ),
+              suffix ?? const SizedBox(),
+            ],
           ),
         ),
-        _ErrorText(
-          visible: errorVisible,
-          text: errorText,
-        ),
+        if (errorVisible == true)
+          _ErrorText(
+            key: Key('${(super.key as ValueKey).value}_error'),
+            text: errorText,
+          ),
       ],
     );
   }
 
   /// 이메일 형식 입력
   factory BaseInput.email({
+    Key? key,
     TextEditingController? controller,
     FocusNode? focusNode,
     TextInputAction? textInputAction,
@@ -127,6 +140,7 @@ class BaseInput extends StatelessWidget {
     bool errorVisible = false,
   }) {
     return BaseInput(
+      key: key,
       controller: controller,
       focusNode: focusNode,
       keyboardType: TextInputType.emailAddress,
@@ -140,46 +154,51 @@ class BaseInput extends StatelessWidget {
 
   /// 비밀번호 형식 입력
   factory BaseInput.password({
+    Key? key,
     TextEditingController? controller,
     FocusNode? focusNode,
     TextInputAction? textInputAction,
     Function(String)? onChanged,
     String errorText = '',
     bool errorVisible = false,
+    bool obscureText = true,
+    VoidCallback? onSuffixPressed,
   }) {
     return BaseInput(
+      key: key,
       controller: controller,
       focusNode: focusNode,
       textInputAction: textInputAction,
-      obscureText: true,
+      obscureText: obscureText,
       hintText: StringRes.pleaseEnterPassword.tr,
       onChanged: onChanged,
       errorText: errorText,
       errorVisible: errorVisible,
+      suffix: InkWell(
+        key: const Key('password_visible_btn'),
+        splashColor: Colors.transparent,
+        onTap: onSuffixPressed,
+        child: Assets.images.eye.svg(),
+      ),
     );
   }
 }
 
 /// 에러 문구
 class _ErrorText extends StatelessWidget {
-  final bool visible;
-
   final String text;
 
   const _ErrorText({
-    required this.visible,
+    super.key,
     required this.text,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Visibility(
-      visible: visible,
-      child: Text(
-        text,
-        style: context.textTheme.bodySmall?.copyWith(
-          color: ColorName.annotations,
-        ),
+    return Text(
+      text,
+      style: context.textTheme.bodySmall?.copyWith(
+        color: ColorName.annotations,
       ),
     );
   }
