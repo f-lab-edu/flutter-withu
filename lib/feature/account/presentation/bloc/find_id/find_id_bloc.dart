@@ -15,6 +15,8 @@ typedef FindIdBlocProvider = BlocProvider<FindIdBloc>;
 
 typedef FindIdBlocConsumer = BlocConsumer<FindIdBloc, FindIdState>;
 
+typedef FindIdBlocListener = BlocListener<FindIdBloc, FindIdState>;
+
 class FindIdBloc extends BaseBloc<FindIdEvent, FindIdState> {
   final FindIdUseCase findIdUseCase;
 

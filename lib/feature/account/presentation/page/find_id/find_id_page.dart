@@ -16,28 +16,7 @@ class FindIdPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        PhoneAuthBlocProvider(
-          create: (context) => getIt(),
-        ),
-        FindIdBlocProvider(
-          create: (context) => getIt(),
-        ),
-      ],
-      child: MultiBlocListener(
-        listeners: [
-          PhoneAuthBlocListener(
-            listener: (context, state) {
-              context
-                  .read<FindIdBloc>()
-                  .add(FindIdIsAuthChanged(value: state.isAuth));
-            },
-          ),
-        ],
-        child: _FindIdPageContent(),
-      ),
-    );
+    return _FindIdPageContent();
   }
 }
 

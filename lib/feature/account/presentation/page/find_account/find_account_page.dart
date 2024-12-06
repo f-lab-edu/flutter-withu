@@ -23,20 +23,37 @@ class FindAccountPage extends StatelessWidget {
         FindAccountBlocProvider(
           create: (context) => getIt(),
         ),
+        FindIdBlocProvider(
+          create: (context) => getIt(),
+        ),
         PhoneAuthBlocProvider(
           create: (context) => getIt(),
         ),
       ],
       child: MultiBlocListener(
         listeners: [
-          PhoneAuthBlocListener(
+          FindIdBlocListener(
             listener: (context, state) {
               _toggleLoading(
                 context: context,
                 isLoading: state.status.isLoading,
               );
             },
-          )
+          ),
+          PhoneAuthBlocListener(
+            listener: (context, state) {
+              /// 로딩 설정
+              _toggleLoading(
+                context: context,
+                isLoading: state.status.isLoading,
+              );
+
+              /// 인증여부 전달
+              context
+                  .read<FindIdBloc>()
+                  .add(FindIdIsAuthChanged(value: state.isAuth));
+            },
+          ),
         ],
         child: _FindAccountPageContent(
           accountType: accountType,
