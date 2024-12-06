@@ -9,5 +9,8 @@ class FindIdState extends BaseBlocState with _$FindIdState {
 
     /// 다이얼로그 메시지
     @Default('') String message,
+
+    /// 휴대폰 인증 완료 여부
+    @Default(false) bool isAuth,
   }) = _FindIdState;
 }

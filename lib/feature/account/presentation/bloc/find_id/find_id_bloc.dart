@@ -15,8 +15,7 @@ typedef FindIdBlocProvider = BlocProvider<FindIdBloc>;
 typedef FindIdBlocConsumer = BlocConsumer<FindIdBloc, FindIdState>;
 
 class FindIdBloc extends BaseBloc<FindIdEvent, FindIdState> {
-  FindIdBloc()
-      : super(
-          FindIdState(status: BaseBlocStatus.initial()),
-        );
+  FindIdBloc() : super(FindIdState(status: BaseBlocStatus.initial())) {
+    on<FindIdIsAuthChanged>(_onIsAuthChanged);
+  }
 }

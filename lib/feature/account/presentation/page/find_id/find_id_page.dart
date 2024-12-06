@@ -23,7 +23,11 @@ class FindIdPage extends StatelessWidget {
       child: MultiBlocListener(
         listeners: [
           PhoneAuthBlocListener(
-            listener: (context, state) {},
+            listener: (context, state) {
+              context
+                  .read<FindIdBloc>()
+                  .add(FindIdIsAuthChanged(value: state.isAuth));
+            },
           ),
         ],
         child: _FindIdPageContent(),
@@ -45,14 +49,16 @@ class _FindIdPageContent extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(
-                "휴대폰",
+                StringRes.phone.tr,
                 style: context.textTheme.bodyMedium?.copyWith(
                   color: ColorName.secondary,
                 ),
               ),
               const PhoneAuthWidget(),
               const Spacer(),
-              _FindIdButton(),
+              _FindIdButton(
+                isEnabled: state.isAuth,
+              ),
             ],
           ),
         );
@@ -62,11 +68,17 @@ class _FindIdPageContent extends StatelessWidget {
 }
 
 class _FindIdButton extends StatelessWidget {
+  final bool isEnabled;
+
+  const _FindIdButton({
+    required this.isEnabled,
+  });
+
   @override
   Widget build(BuildContext context) {
-    return BaseButton.disabled(
-      context: context,
+    return EnabledButton(
       text: StringRes.findId.tr,
+      isEnabled: isEnabled,
       onTap: () {},
     );
   }
