@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:withu_app/core/core.dart';
@@ -5,6 +6,8 @@ import 'package:withu_app/feature/account/account.dart';
 import 'package:withu_app/gen/colors.gen.dart';
 import 'package:withu_app/shared/shared.dart';
 
+/// 계정 찾기 화면
+@RoutePage()
 class FindAccountPage extends StatelessWidget {
   const FindAccountPage({super.key});
 
@@ -24,6 +27,9 @@ class _FindAccountPageContent extends StatelessWidget {
       builder: (context, state) {
         return PageRoot(
           isLoading: state.status.isLoading,
+          appBar: CustomAppBar.back(
+            context: context,
+          ),
           child: SingleChildScrollView(
             child: Column(
               children: [
@@ -45,14 +51,16 @@ class _FindAccountTabs extends StatelessWidget {
         return Row(
           children: FindAccountTabType.values
               .map(
-                (type) => _FindAccountTab(
-                  text: type.tr,
-                  isSelected: state.currentTab == type,
-                  onPressed: () {
-                    context
-                        .read<FindAccountBloc>()
-                        .add(FindAccountTabPressed(tab: type));
-                  },
+                (type) => Expanded(
+                  child: _FindAccountTab(
+                    text: type.tr,
+                    isSelected: state.currentTab == type,
+                    onPressed: () {
+                      context
+                          .read<FindAccountBloc>()
+                          .add(FindAccountTabPressed(tab: type));
+                    },
+                  ),
                 ),
               )
               .toList(),
@@ -96,6 +104,7 @@ class _FindAccountTab extends StatelessWidget {
     return InkWell(
       onTap: onPressed,
       child: Container(
+        alignment: Alignment.center,
         padding: const EdgeInsets.symmetric(vertical: 12),
         decoration: BoxDecoration(
           color: Colors.white,
@@ -103,7 +112,9 @@ class _FindAccountTab extends StatelessWidget {
         ),
         child: Text(
           text,
-          style: context.textTheme.bodyMediumBold,
+          style: context.textTheme.bodyLargeBold?.copyWith(
+            color: isSelected ? ColorName.primary : ColorName.secondary,
+          ),
         ),
       ),
     );

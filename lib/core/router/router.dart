@@ -18,6 +18,10 @@ class AppRouter extends RootStackRouter {
           path: '/login',
         ),
         AutoRoute(
+          page: FindAccountRoute.page,
+          path: '/find-account',
+        ),
+        AutoRoute(
           page: JobPostingsRoute.page,
           path: '/job-postings',
         ),

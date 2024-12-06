@@ -120,7 +120,9 @@ class _LoginPageState extends State<LoginPageContent> {
                     ),
                     const Spacer(),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        getItAppRouter.push(const FindAccountRoute());
+                      },
                       child: Text(
                         StringRes.findIdPw.tr,
                         style: context.textTheme.bodySmall,
