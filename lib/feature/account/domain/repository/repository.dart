@@ -45,4 +45,9 @@ abstract class AccountRepository {
   Future<ApiResponse<SignUpResponseDto>> signUp({
     required SignUpRequestDto dto,
   });
+
+  /// 아이디 찾기
+  Future<ApiResponse<FindIdResponseDto>> findId({
+    required FindIdRequestDto dto,
+  });
 }

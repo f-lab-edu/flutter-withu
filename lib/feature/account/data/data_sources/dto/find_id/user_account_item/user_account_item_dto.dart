@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:withu_app/core/core.dart';
+import 'package:withu_app/feature/account/account.dart';
 
 part 'user_account_item_dto.freezed.dart';
 
@@ -22,5 +23,17 @@ extension UserAccountItemDtoMock on UserAccountItemDto {
       loginType: LoginType.email,
       loginId: 'test@test.co.kr',
     );
+  }
+}
+
+extension UserAccountItemDtoParser on UserAccountItemDto {
+  LoginId? toLoginId() {
+    final id = loginId;
+
+    if (id == null) {
+      return null;
+    }
+
+    return loginIdCreators[loginType]?.create(id);
   }
 }

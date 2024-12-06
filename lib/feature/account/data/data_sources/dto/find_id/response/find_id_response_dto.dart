@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:withu_app/core/network/dto/base/base_response_dto.dart';
+import 'package:withu_app/feature/account/account.dart';
 
-import '../user_account_item/user_account_item_dto.dart';
 
 part 'find_id_response_dto.freezed.dart';
 
@@ -40,5 +40,15 @@ extension FindIdResponseDtoDtoMock on FindIdResponseDto {
         message: '가입하신 계정이 없습니다.',
       ),
     );
+  }
+}
+
+extension FindIdResponseDtoParser on FindIdResponseDto {
+  /// LoginId 리스트로 변경
+  List<LoginId> toLoginIds() {
+    return info.accounts
+        .map((account) => account.toLoginId())
+        .whereType<LoginId>()
+        .toList();
   }
 }
