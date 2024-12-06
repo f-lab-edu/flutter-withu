@@ -55,4 +55,7 @@ void initAccountPresentationInjections() {
   getIt.registerFactory<FindAccountBloc>(
     () => FindAccountBloc(),
   );
+  getIt.registerFactory<FindIdBloc>(
+    () => FindIdBloc(),
+  );
 }
