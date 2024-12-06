@@ -21,6 +21,9 @@ abstract class AccountApi {
   /// 회원가입
   late final signUpPath = '$path/signup';
 
+  /// 아이디찾기
+  late final findIdPath = '$path/find-id';
+
   /// 로그인 API
   FutureOr<ApiResponse<LoginResponseDto>> login({
     required LoginRequestDto requestData,
@@ -44,5 +47,10 @@ abstract class AccountApi {
   /// 회원가입 API
   FutureOr<ApiResponse<SignUpResponseDto>> signUp({
     required SignUpRequestDto dto,
+  });
+
+  /// 아이디찾기 API
+  FutureOr<ApiResponse<FindIdResponseDto>> findId({
+    required FindIdRequestDto dto,
   });
 }
