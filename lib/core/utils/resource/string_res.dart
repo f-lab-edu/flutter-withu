@@ -89,6 +89,8 @@ enum StringRes {
   email,
   password,
   verifyPassword,
+  findId,
+  findPassword,
 }
 
 extension StringResEx on StringRes {

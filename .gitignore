@@ -46,6 +46,8 @@ app.*.map.json
 *.freezed.dart
 *.g.dart
 
-
 # Mockito generated file
 *.mocks.dart
+
+# Coverage
+/coverage/report
