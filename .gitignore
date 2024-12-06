@@ -51,3 +51,6 @@ app.*.map.json
 
 # Coverage
 /coverage/report
+
+# Auto Router
+router.gr.dart
