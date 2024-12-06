@@ -10,6 +10,8 @@ part 'find_account_state.dart';
 
 part 'find_account_bloc.freezed.dart';
 
+typedef FindAccountBlocProvider = BlocProvider<FindAccountBloc>;
+
 typedef FindAccountBlocBuilder = BlocBuilder<FindAccountBloc, FindAccountState>;
 
 class FindAccountBloc extends BaseBloc<FindAccountEvent, FindAccountState> {
@@ -17,6 +19,8 @@ class FindAccountBloc extends BaseBloc<FindAccountEvent, FindAccountState> {
       : super(
           FindAccountState(status: BaseBlocStatus.initial()),
         ) {
+    on<FindAccountLoadingSet>(_onLoadingSet);
+    on<FindAccountLoadingUnSet>(_onLoadingUnSet);
     on<FindAccountTabPressed>(_onTabPressed);
   }
 }

@@ -13,10 +13,37 @@ class FindAccountPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<FindAccountBloc>(
-      create: (context) => getIt(),
-      child: _FindAccountPageContent(),
+    return MultiBlocProvider(
+      providers: [
+        FindAccountBlocProvider(
+          create: (context) => getIt(),
+        ),
+        PhoneAuthBlocProvider(
+          create: (context) => getIt(),
+        ),
+      ],
+      child: MultiBlocListener(listeners: [
+        PhoneAuthBlocListener(
+          listener: (context, state) {
+            _toggleLoading(
+              context: context,
+              isLoading: state.status.isLoading,
+            );
+          },
+        )
+      ], child: _FindAccountPageContent()),
     );
+  }
+
+  void _toggleLoading({
+    required BuildContext context,
+    required bool isLoading,
+  }) {
+    if (isLoading) {
+      context.read<FindAccountBloc>().add(FindAccountLoadingSet());
+    } else {
+      context.read<FindAccountBloc>().add(FindAccountLoadingUnSet());
+    }
   }
 }
 
@@ -30,12 +57,10 @@ class _FindAccountPageContent extends StatelessWidget {
           appBar: CustomAppBar.back(
             context: context,
           ),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                _FindAccountTabs(),
-              ],
-            ),
+          child: Column(
+            children: [
+              _FindAccountTabs(),
+            ],
           ),
         );
       },
