@@ -1,6 +1,5 @@
 part of 'find_id_bloc.dart';
 
-
 @freezed
 class FindIdState extends BaseBlocState with _$FindIdState {
   factory FindIdState({
@@ -9,6 +8,9 @@ class FindIdState extends BaseBlocState with _$FindIdState {
 
     /// 다이얼로그 메시지
     @Default('') String message,
+
+    /// 계정 타입
+    @Default(AccountType.none) AccountType accountType,
 
     /// 휴대폰 인증 완료 여부
     @Default(false) bool isAuth,

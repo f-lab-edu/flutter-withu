@@ -25,6 +25,7 @@ Map<String, dynamic> _$$LoginRequestDtoImplToJson(
     };
 
 const _$AccountTypeEnumMap = {
+  AccountType.none: '',
   AccountType.company: 'COMPANY',
   AccountType.user: 'USER',
 };

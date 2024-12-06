@@ -7,7 +7,12 @@ import 'package:withu_app/shared/shared.dart';
 
 /// 아이디 찾기 화면
 class FindIdPage extends StatelessWidget {
-  const FindIdPage({super.key});
+  final AccountType accountType;
+
+  const FindIdPage({
+    super.key,
+    required this.accountType,
+  });
 
   @override
   Widget build(BuildContext context) {

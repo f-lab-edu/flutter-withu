@@ -1,6 +1,15 @@
 part of 'find_id_bloc.dart';
 
 extension FindIdBlocHandler on FindIdBloc {
+  void _onAccountTypeStored(
+    FindIdAccountTypeStored event,
+    Emitter<FindIdState> emit,
+  ) {
+    emit(state.copyWith(
+      accountType: event.accountType,
+    ));
+  }
+
   void _onIsAuthChanged(
     FindIdIsAuthChanged event,
     Emitter<FindIdState> emit,
@@ -18,7 +27,7 @@ extension FindIdBlocHandler on FindIdBloc {
 
     final result = await findIdUseCase.exec(
       entity: FindIdRequestEntity(
-        accountType: AccountType.company,
+        accountType: state.accountType,
         phone: event.phone.value,
         authCode: event.authCode.value,
       ),

@@ -10,6 +10,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i9;
 import 'package:flutter/material.dart' as _i10;
+import 'package:withu_app/core/core.dart' as _i11;
 import 'package:withu_app/feature/account/presentation/page/find_account/find_account_page.dart'
     as _i1;
 import 'package:withu_app/feature/account/presentation/page/login/login_page.dart'
@@ -29,10 +30,17 @@ import 'package:withu_app/feature/splash/presentation/pages/splash_page.dart'
 
 /// generated route for
 /// [_i1.FindAccountPage]
-class FindAccountRoute extends _i9.PageRouteInfo<void> {
-  const FindAccountRoute({List<_i9.PageRouteInfo>? children})
-      : super(
+class FindAccountRoute extends _i9.PageRouteInfo<FindAccountRouteArgs> {
+  FindAccountRoute({
+    _i10.Key? key,
+    required _i11.AccountType accountType,
+    List<_i9.PageRouteInfo>? children,
+  }) : super(
           FindAccountRoute.name,
+          args: FindAccountRouteArgs(
+            key: key,
+            accountType: accountType,
+          ),
           initialChildren: children,
         );
 
@@ -41,9 +49,29 @@ class FindAccountRoute extends _i9.PageRouteInfo<void> {
   static _i9.PageInfo page = _i9.PageInfo(
     name,
     builder: (data) {
-      return const _i1.FindAccountPage();
+      final args = data.argsAs<FindAccountRouteArgs>();
+      return _i1.FindAccountPage(
+        key: args.key,
+        accountType: args.accountType,
+      );
     },
   );
+}
+
+class FindAccountRouteArgs {
+  const FindAccountRouteArgs({
+    this.key,
+    required this.accountType,
+  });
+
+  final _i10.Key? key;
+
+  final _i11.AccountType accountType;
+
+  @override
+  String toString() {
+    return 'FindAccountRouteArgs{key: $key, accountType: $accountType}';
+  }
 }
 
 /// generated route for

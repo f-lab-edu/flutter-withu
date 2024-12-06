@@ -21,6 +21,7 @@ class FindIdBloc extends BaseBloc<FindIdEvent, FindIdState> {
   FindIdBloc({
     required this.findIdUseCase,
   }) : super(FindIdState(status: BaseBlocStatus.initial())) {
+    on<FindIdAccountTypeStored>(_onAccountTypeStored);
     on<FindIdIsAuthChanged>(_onIsAuthChanged);
     on<FindIdPressed>(_onPressed);
   }
