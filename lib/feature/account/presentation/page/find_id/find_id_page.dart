@@ -1,7 +1,8 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:withu_app/core/core.dart';
 import 'package:withu_app/feature/account/account.dart';
+import 'package:withu_app/gen/colors.gen.dart';
 import 'package:withu_app/shared/shared.dart';
 
 /// 아이디 찾기 화면
@@ -37,12 +38,23 @@ class _FindIdPageContent extends StatelessWidget {
     return FindIdBlocConsumer(
       listener: (context, state) {},
       builder: (context, state) {
-        return Column(
-          children: <Widget>[
-            const PhoneAuthWidget(),
-            const Spacer(),
-            _FindIdButton(),
-          ],
+        return Padding(
+          padding: const EdgeInsets.fromLTRB(24, 40, 24, 20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                "휴대폰",
+                style: context.textTheme.bodyMedium?.copyWith(
+                  color: ColorName.secondary,
+                ),
+              ),
+              const PhoneAuthWidget(),
+              const Spacer(),
+              _FindIdButton(),
+            ],
+          ),
         );
       },
     );

@@ -60,6 +60,7 @@ class _FindAccountPageContent extends StatelessWidget {
           child: Column(
             children: [
               _FindAccountTabs(),
+              const Expanded(child: FindIdPage()),
             ],
           ),
         );
