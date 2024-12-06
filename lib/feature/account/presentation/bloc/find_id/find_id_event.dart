@@ -8,3 +8,15 @@ class FindIdIsAuthChanged extends FindIdEvent {
 
   FindIdIsAuthChanged({required this.value});
 }
+
+/// 아이디 찾기 클릭
+class FindIdPressed extends FindIdEvent {
+  final Phone phone;
+
+  final AuthCode authCode;
+
+  FindIdPressed({
+    required this.phone,
+    required this.authCode,
+  });
+}

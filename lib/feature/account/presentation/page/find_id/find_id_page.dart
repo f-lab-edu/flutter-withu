@@ -79,7 +79,15 @@ class _FindIdButton extends StatelessWidget {
     return EnabledButton(
       text: StringRes.findId.tr,
       isEnabled: isEnabled,
-      onTap: () {},
+      onTap: () {
+        final phoneAuthBloc = context.read<PhoneAuthBloc>();
+        context.read<FindIdBloc>().add(
+              FindIdPressed(
+                phone: phoneAuthBloc.state.phone,
+                authCode: phoneAuthBloc.state.authCode,
+              ),
+            );
+      },
     );
   }
 }
