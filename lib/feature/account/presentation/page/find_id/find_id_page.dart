@@ -16,7 +16,17 @@ class FindIdPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _FindIdPageContent();
+    return FindIdBlocBuilder(
+      builder: (context, state) {
+        if (state.status.isSuccess) {
+          return const FindIdSuccess(loginId: 'test@test.com');
+        } else if (state.status.isFailure) {
+          return const FindIdFailure();
+        } else {
+          return _FindIdPageContent();
+        }
+      },
+    );
   }
 }
 

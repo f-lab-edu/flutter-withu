@@ -91,6 +91,9 @@ enum StringRes {
   verifyPassword,
   findId,
   findPassword,
+  memberYourId,
+  itIs,
+  noRegisteredAccount,
 }
 
 extension StringResEx on StringRes {

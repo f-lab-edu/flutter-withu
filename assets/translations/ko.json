@@ -109,5 +109,8 @@
   "password": "비밀번호",
   "verifyPassword": "비밀번호 확인",
   "findId": "아이디찾기",
-  "findPassword": "비밀번호찾기"
+  "findPassword": "비밀번호찾기",
+  "memberYourId": "회원님의 아이디는",
+  "itIs": "입니다.",
+  "noRegisteredAccount": "앗! 가입된 계정이 없어요."
 }
