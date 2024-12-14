@@ -120,7 +120,7 @@ class AccountMockApi extends AccountApiImpl {
       findIdPath,
       (server) => server.reply(
         200,
-        FindIdResponseDtoDtoMock.success().toJson(
+        FindIdResponseDtoMock.success().toJson(
           (data) => data.toJson(),
         ),
         delay: const Duration(seconds: 1),

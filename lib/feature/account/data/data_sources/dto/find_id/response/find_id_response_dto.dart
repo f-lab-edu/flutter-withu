@@ -2,14 +2,13 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:withu_app/core/network/dto/base/base_response_dto.dart';
 import 'package:withu_app/feature/account/account.dart';
 
-
 part 'find_id_response_dto.freezed.dart';
 
 part 'find_id_response_dto.g.dart';
 
 typedef FindIdResponseDto = BaseResponseDto<FindIdResultDto>;
 
-@freezed
+@Freezed()
 class FindIdResultDto with _$FindIdResultDto {
   factory FindIdResultDto({
     required bool status,
@@ -21,7 +20,7 @@ class FindIdResultDto with _$FindIdResultDto {
       _$FindIdResultDtoFromJson(json);
 }
 
-extension FindIdResponseDtoDtoMock on FindIdResponseDto {
+extension FindIdResponseDtoMock on FindIdResponseDto {
   static FindIdResponseDto success() {
     return BaseResponseDtoMock.mock(
       FindIdResultDto(

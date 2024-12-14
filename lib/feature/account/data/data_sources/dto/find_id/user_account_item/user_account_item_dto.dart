@@ -6,7 +6,7 @@ part 'user_account_item_dto.freezed.dart';
 
 part 'user_account_item_dto.g.dart';
 
-@freezed
+@Freezed()
 class UserAccountItemDto with _$UserAccountItemDto {
   factory UserAccountItemDto({
     required LoginType loginType,
