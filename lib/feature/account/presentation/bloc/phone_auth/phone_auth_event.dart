@@ -2,6 +2,12 @@ part of 'phone_auth_bloc.dart';
 
 abstract class PhoneAuthEvent extends Equatable {}
 
+/// 초기화
+class PhoneAuthReset extends PhoneAuthEvent {
+  @override
+  List<Object?> get props => [];
+}
+
 /// 휴대폰 번호 입력 이벤트.
 class PhoneAuthPhoneInputted extends PhoneAuthEvent {
   final String value;

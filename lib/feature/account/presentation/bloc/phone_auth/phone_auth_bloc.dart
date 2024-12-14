@@ -27,6 +27,7 @@ class PhoneAuthBloc
   }) : super(
           PhoneAuthState(status: BaseBlocStatus.initial()),
         ) {
+    on<PhoneAuthReset>(_onReset);
     on<PhoneAuthPhoneInputted>(_onPhoneInputted);
     on<PhoneAuthAuthCodeSent>(_onAuthCodeRequested);
     on<PhoneAuthAuthCodeInputted>(_onAuthCodeInputted);

@@ -6,6 +6,14 @@ extension PhoneAuthBlocHandler on PhoneAuthBloc {
       status: BaseBlocStatus.loading(),
     );
   }
+
+  void _onReset(
+    PhoneAuthReset event,
+    Emitter<PhoneAuthState> emit,
+  ) {
+    emit(PhoneAuthState(status: BaseBlocStatusInitial()));
+  }
+
   /// 휴대폰 번호 입력 이벤트.
   void _onPhoneInputted(
     PhoneAuthPhoneInputted event,

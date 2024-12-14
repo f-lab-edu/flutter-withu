@@ -26,8 +26,8 @@ class FindAccountPage extends StatelessWidget {
         FindIdBlocProvider(
           create: (context) => getIt(),
         ),
-        PhoneAuthBlocProvider(
-          create: (context) => getIt(),
+        PhoneAuthBlocProvider.value(
+          value: getIt(),
         ),
       ],
       child: MultiBlocListener(

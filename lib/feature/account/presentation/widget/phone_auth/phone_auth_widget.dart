@@ -11,8 +11,8 @@ class PhoneAuthWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<PhoneAuthBloc>(
-      create: (context) => getIt(),
+    return PhoneAuthBlocProvider.value(
+      value: getIt()..add(PhoneAuthReset()),
       child: const Column(
         children: [
           PhoneInput(),
