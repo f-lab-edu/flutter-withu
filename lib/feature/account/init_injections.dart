@@ -43,11 +43,11 @@ void initAccountDomainInjections() {
 }
 
 void initAccountPresentationInjections() {
-  getIt.registerLazySingleton<PhoneAuthBloc>(
+  getIt.registerFactory<PhoneAuthBloc>(
     () => PhoneAuthBloc(phoneAuthUseCase: getIt()),
   );
   getIt.registerLazySingleton<EmailDuplicateCheckBloc>(
-        () => EmailDuplicateCheckBloc(useCase: getIt()),
+    () => EmailDuplicateCheckBloc(useCase: getIt()),
   );
   getIt.registerFactory<LoginBloc>(
     () => LoginBloc(loginUseCase: getIt()),
