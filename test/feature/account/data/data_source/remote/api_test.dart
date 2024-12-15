@@ -323,7 +323,7 @@ void main() {
       ).thenAnswer((_) async {
         return Response(
           data: responseDto,
-          statusCode: 200,
+          statusCode: 500,
           requestOptions: RequestOptions(),
         );
       });

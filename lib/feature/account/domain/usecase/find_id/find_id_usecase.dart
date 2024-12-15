@@ -20,13 +20,18 @@ class FindIdUseCaseImpl implements FindIdUseCase {
   Future<FindIdResultEntity> exec({
     required FindIdRequestEntity entity,
   }) async {
-    final result = await accountRepo.findId(
-      dto: entity.toDto(),
-    );
-
-    return result.maybeWhen(
-      success: (dto) => FindIdResultEntityParser.fromDto(dto),
-      orElse: () => FindIdResultEntityMock.error(),
-    );
+    return await accountRepo
+        .findId(
+          dto: entity.toDto(),
+        )
+        .then(
+          (response) => response.maybeWhen(
+            success: (dto) => FindIdResultEntityParser.fromDto(dto),
+            orElse: () => FindIdResultEntityMock.error(),
+          ),
+        )
+        .catchError(
+          (e) => FindIdResultEntityMock.error(),
+        );
   }
 }
