@@ -141,6 +141,7 @@ void main() {
           FindAccountTabType.id.toWidget<FindAccountTab>(tester).isSelected,
           isTrue,
         );
+        expect(FindIdPageKey.page.toFinder(), findsOneWidget);
         verify(
           () => findAccountBloc.add(
             any(that: isA<FindAccountTabPressed>()),
@@ -229,6 +230,118 @@ void main() {
         // 정리
         phoneAuthController.close();
         findAccountController.close();
+      },
+    );
+  });
+
+  group('아이디 찾기 화면 테스트', () {
+    testWidgets(
+      '휴대폰 인증 되지 않은 상태면 아이디찾기 버튼이 비활성 상태이다.',
+      (WidgetTester tester) async {
+        /// Given
+        whenListen(
+          findIdBloc,
+          Stream.fromIterable([
+            findIdState.copyWith(isAuth: false),
+          ]),
+        );
+        await tester.pumpWidget(testWidget);
+
+        /// When
+
+        /// Then
+        final findIdBtn = FindIdPageKey.findIdBtn.toWidget<FindIdButton>(
+          tester,
+        );
+        expect(findIdBtn.isEnabled, isFalse);
+      },
+    );
+
+    testWidgets(
+      '휴대폰 인증에 성공하면 아이디찾기 버튼이 활성화된다.',
+      (WidgetTester tester) async {
+        /// Given
+        whenListen(
+          findIdBloc,
+          Stream.fromIterable([
+            findIdState,
+            findIdState.copyWith(isAuth: true),
+          ]),
+        );
+
+        when(
+          () => findIdBloc.add(any(that: isA<FindIdIsAuthChanged>())),
+        ).thenReturn(null);
+
+        await tester.pumpWidget(testWidget);
+
+        /// When
+        findIdBloc.add(FindIdIsAuthChanged(value: true));
+        await tester.pumpAndSettle();
+
+        /// Then
+        final findIdBtn = FindIdPageKey.findIdBtn.toWidget<FindIdButton>(
+          tester,
+        );
+        expect(findIdBtn.isEnabled, isTrue);
+        verify(
+          () => findIdBloc.add(any(that: isA<FindIdIsAuthChanged>())),
+        ).called(1);
+      },
+    );
+
+    testWidgets(
+      '아이디 찾기에 성공 시 성공 화면이 표시된다.',
+      (WidgetTester tester) async {
+        /// Given
+        whenListen(
+          findIdBloc,
+          Stream.fromIterable([
+            findIdState.copyWith(
+              isAuth: true,
+            ),
+            findIdState.copyWith(
+              status: BaseBlocStatus.success(),
+            ),
+          ]),
+        );
+        await tester.pumpWidget(testWidget);
+
+        /// When
+        await tester.tap(FindIdPageKey.findIdBtn.toFinder());
+        await tester.pumpAndSettle();
+
+        /// Then
+        expect(findIdBloc.state.status, isA<BaseBlocStatusSuccess>());
+        expect(FindIdPageKey.successPage.toFinder(), findsOneWidget);
+        expect(FindIdPageKey.failurePage.toFinder(), findsNothing);
+      },
+    );
+    testWidgets(
+      '아이디 찾기에 실패 시 실패 화면이 표시된다.',
+      (WidgetTester tester) async {
+        /// Given
+        whenListen(
+          findIdBloc,
+          Stream.fromIterable([
+            findIdState.copyWith(
+              isAuth: true,
+            ),
+            findIdState.copyWith(
+              status: BaseBlocStatus.failure(),
+            ),
+          ]),
+        );
+        await tester.pumpWidget(testWidget);
+
+        /// When
+        await tester.tap(FindIdPageKey.findIdBtn.toFinder());
+        await tester.pumpAndSettle();
+
+        /// Then
+        expect(findIdBloc.state.status, isA<BaseBlocStatusFailure>());
+        expect(FindIdPageKey.successPage.toFinder(), findsNothing);
+        expect(FindIdPageKey.failurePage.toFinder(), findsOneWidget);
       },
     );
   });

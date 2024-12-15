@@ -1,13 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:withu_app/core/utils/utils.dart';
 
+import '../find_id/find_id_page_key.dart';
+
 class FindIdSuccess extends StatelessWidget {
   final String loginId;
 
-  const FindIdSuccess({
-    super.key,
+  FindIdSuccess({
     required this.loginId,
-  });
+  }) : super(key: FindIdPageKey.successPage.toKey());
 
   @override
   Widget build(BuildContext context) {
