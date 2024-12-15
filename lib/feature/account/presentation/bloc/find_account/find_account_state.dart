@@ -1,13 +1,30 @@
 part of 'find_account_bloc.dart';
 
-enum FindAccountTabType with L10nKeyProvider {
-  id(l10nKey: 'findId'),
-  password(l10nKey: 'findPassword');
+enum FindAccountTabType with L10nKeyProvider, WidgetKeyUtils {
+  id(
+    l10nKey: 'findId',
+    key: 'idTab',
+  ),
+
+  password(
+    l10nKey: 'findPassword',
+    key: 'passwordTab',
+  );
 
   @override
   final String l10nKey;
 
-  const FindAccountTabType({required this.l10nKey});
+  final String key;
+
+  const FindAccountTabType({
+    required this.l10nKey,
+    required this.key,
+  });
+
+  @override
+  String getKey() {
+    return key;
+  }
 }
 
 @freezed

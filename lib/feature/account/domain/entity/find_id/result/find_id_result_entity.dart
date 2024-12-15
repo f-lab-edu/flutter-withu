@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:withu_app/core/utils/resource/string_res.dart';
+import 'package:withu_app/core/core.dart';
 import 'package:withu_app/feature/account/account.dart';
 
 part 'find_id_result_entity.freezed.dart';
@@ -24,6 +24,15 @@ extension FindIdResultEntityParser on FindIdResultEntity {
 }
 
 extension FindIdResultEntityMock on FindIdResultEntity {
+  static FindIdResultEntity success() {
+    return FindIdResultEntity(
+      status: true,
+      loginIds: [
+        loginIdCreators[LoginType.email]!.create('test@test.com'),
+      ],
+    );
+  }
+
   static FindIdResultEntity error() {
     return FindIdResultEntity(
       status: false,
