@@ -1,3 +1,2 @@
-json_file = File.join(Dir.pwd, "withu-444918-ec97a541ee39.json")
-json_key_file(json_file)
+json_key_file("#{ENV["SECRET_ANDROID_JSON_KEY"]}")
 package_name("com.conner.withu")
