@@ -44,7 +44,7 @@ app.*.map.json
 
 # Android related
 */keystore
-*/fastlane/withu-444918-ec97a541ee39.json
+android/fastlane/key.json
 report.xml
 
 # iOS related
