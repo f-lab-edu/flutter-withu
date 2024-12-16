@@ -4,6 +4,11 @@ on:
   push:
     branches: [ feature/ci-cd ]
 
+# 동시성 설정 추가
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   deploy_prod:
     runs-on: macos-latest
