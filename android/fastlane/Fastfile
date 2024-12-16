@@ -7,8 +7,13 @@ platform :android do
   desc "Deploy to the Google Play Store"
   lane :deploy do
 
-    # abb 추출
-    sh "flutter build appbundle --release --flavor prod -t lib/core/config/env/prod.dart --no-tree-shake-icons"
+    # build abb
+    gradle(
+        task: 'bundle',
+        build_type: 'release',
+        flavor: 'prod'
+      )
+#     sh "flutter build appbundle --release --flavor prod -t lib/core/config/env/prod.dart --no-tree-shake-icons"
 
     # 트랙 설정 (internal, alpha, beta, production)
     track = "internal"

@@ -13,9 +13,6 @@ platform :ios do
       clean: true,
       xcargs: "-allowProvisioningUpdates"
     )
-
-    # build
-#     sh "flutter build ios --release --flavor prod --no-tree-shake-icons"
     upload_to_testflight
   end
 end
