@@ -5,7 +5,7 @@ on:
     branches: [ feature/ci-cd ]
 
 jobs:
-  setup:
+  deploy_prod:
     runs-on: macos-latest
     steps:
       # 기본 저장소 체크아웃
@@ -50,9 +50,11 @@ jobs:
         env:
           SECRET_ANDROID_JSON_KEY: ${{ secrets.SECRET_ANDROID_JSON_KEY }}
         run: |
+          cd android
           fastlane android deploy
 
       # 배포
       - name: iOS Deploy
         run: |
+          cd ios
           fastlane ios deploy
