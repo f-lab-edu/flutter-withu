@@ -1,38 +1,29 @@
-# This file contains the fastlane.tools configuration
-# You can find the documentation at https://docs.fastlane.tools
-#
-# For a list of all available actions, check out
-#
-#     https://docs.fastlane.tools/actions
-#
-# For a list of all available plugins, check out
-#
-#     https://docs.fastlane.tools/plugins/available-plugins
-#
-
-# Uncomment the line if you want fastlane to automatically update itself
-# update_fastlane
-
 default_platform(:android)
 
+# 환경변수 설정
+ANDROID_JSON_KEY=ENV["ANDROID_JSON_KEY"]
+
+
 platform :android do
-  desc "Runs all the tests"
-  lane :test do
-    gradle(task: "test")
-  end
-
-  desc "Submit a new Beta Build to Crashlytics Beta"
-  lane :beta do
-    gradle(task: "clean assembleRelease")
-    crashlytics
-
-    # sh "your_script.sh"
-    # You can also use other beta testing services here
-  end
-
-  desc "Deploy a new version to the Google Play"
+  desc "Deploy to the Google Play Store"
   lane :deploy do
-    gradle(task: "clean assembleRelease")
-    upload_to_play_store
+
+    # abb 추출
+    sh "flutter build appbundle --release --flavor prod -t lib/core/config/env/prod.dart --no-tree-shake-icons"
+
+    # 트랙 설정 (internal, alpha, beta, production)
+    track = "internal"
+
+    # 플레이스토어 업로드
+    upload_to_play_store(
+      track: track,
+      aab: "../build/app/outputs/bundle/prodRelease/app-prod-release.aab",
+      release_status: "draft", # draft로 설정하여 수동 검토 후 출시
+      skip_upload_metadata: true,
+      skip_upload_images: true,
+      skip_upload_screenshots: true,
+#       json_key_data: "#{ANDROID_JSON_KEY}"
+      #json_key_data: json_key
+    )
   end
 end

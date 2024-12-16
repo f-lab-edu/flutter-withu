@@ -42,6 +42,7 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 */keystore
+*/fastlane/withu-444918-ec97a541ee39.json
 
 # Freezed generated files
 *.freezed.dart

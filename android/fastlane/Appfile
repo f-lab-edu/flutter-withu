@@ -1,2 +1,3 @@
-json_key_file("") # Path to the json secret file - Follow https://docs.fastlane.tools/actions/supply/#setup to get one
-package_name("com.android.withu.dev") # e.g. com.krausefx.app
+json_file = File.join(Dir.pwd, "withu-444918-ec97a541ee39.json")
+json_key_file(json_file)
+package_name("com.conner.withu")
