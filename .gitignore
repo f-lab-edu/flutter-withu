@@ -41,6 +41,7 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+*/keystore
 
 # Freezed generated files
 *.freezed.dart

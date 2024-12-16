@@ -1,0 +1,58 @@
+name: F-Lab flutter-withu Development Deploy«
+
+on:
+  push:
+    branches: [ dev ]
+
+
+jobs:
+  flutter_test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+
+      - run: flutter --version
+      - run: flutter pub get
+      - run: flutter pub run build_runner build --delete-conflicting-outputs
+      - run: flutter test
+
+  android_deploy:
+    runs-on: macOs
+    steps:
+      - uses: actions/checkout@v4
+
+      # Brew 설정
+      - name: Set up Homebrew
+        id: set-up-homebrew
+        uses: Homebrew/actions/setup-homebrew@master
+
+      # Java 17 설정
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      # Ruby 설치
+      - uses: actions/setup-ruby@v1
+
+      # fastlane 설치
+      - name: Install Fastlane
+        run: |
+          brew install fastlane
+
+        # 플러터 설치
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+
+      - run: flutter --version
+      - run: flutter pub get
+      - run: flutter pub run build_runner build --delete-conflicting-outputs
