@@ -50,6 +50,18 @@ jobs:
       # 테스트
       - run: flutter test
 
+      # Android Keystore
+      - name: Decode Keystore
+        env:
+          ENCODED_STRING: ${{ secrets.SECRET_ANDROID_KEYSTORE_BASE64 }}
+          RELEASE_KEYSTORE_PASSWORD: ${{ secrets.SECRET_ANDROID_KEYSTORE_PASSWORD }}
+          RELEASE_KEY_PASSWORD: ${{ secrets.SECRET_ANDROID_KEYSTORE_PASSWORD }}
+          RELEASE_KEYSTORE_ALIAS: ${{ secrets.SECRET_ANDROID_KEYSTORE_ALIAS }}
+
+        run: |
+          echo $ENCODED_STRING > keystore-b64.txt
+          base64 -d -o key.jks < keystore-b64.txt
+
       # 배포
       - name: Android deploy
         env:
