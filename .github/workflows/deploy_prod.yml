@@ -2,7 +2,7 @@ name: F-Lab flutter-withu Prod Deploy
 
 on:
   push:
-    branches: [ main ]
+    branches: [ feature/ci-cd ]
 
 jobs:
   setup:
