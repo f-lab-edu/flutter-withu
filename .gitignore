@@ -41,13 +41,19 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Android related
 */keystore
 */fastlane/withu-444918-ec97a541ee39.json
+
+# iOS related
+.env
+*.app.dSYM.zip
+*.ipa
 
 # Freezed generated files
 *.freezed.dart
 *.g.dart
-
 
 # Mockito generated file
 *.mocks.dart

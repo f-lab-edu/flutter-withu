@@ -2,5 +2,5 @@
 FLUTTER_TARGET = lib/core/config/env/prod.dart
 
 /// 앱 설정
-APP_NAME = Withu
-PRODUCT_BUNDLE_IDENTIFIER = com.ios.withu
+APP_NAME=Withu
+PRODUCT_BUNDLE_IDENTIFIER=com.conner.withu
