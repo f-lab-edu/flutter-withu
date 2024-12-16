@@ -14,14 +14,14 @@ platform :android do
     track = "internal"
 
     # 플레이스토어 업로드
-#     upload_to_play_store(
-#       track: track,
-#       aab: "../build/app/outputs/bundle/prodRelease/app-prod-release.aab",
-#       release_status: "draft", # draft로 설정하여 수동 검토 후 출시
-#       skip_upload_metadata: true,
-#       skip_upload_images: true,
-#       skip_upload_screenshots: true,
-#       json_key_data: "#{SECRET_ANDROID_JSON_KEY}"
-#     )
+    upload_to_play_store(
+      track: track,
+      aab: "../build/app/outputs/bundle/prodRelease/app-prod-release.aab",
+      release_status: "draft", # draft로 설정하여 수동 검토 후 출시
+      skip_upload_metadata: true,
+      skip_upload_images: true,
+      skip_upload_screenshots: true,
+      json_key_data: "#{SECRET_ANDROID_JSON_KEY}"
+    )
   end
 end
