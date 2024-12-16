@@ -46,13 +46,13 @@ jobs:
       - run: flutter test
 
       # 배포
-      - name: fastlane internal upload
+      - name: Android deploy
+        env:
+          SECRET_ANDROID_JSON_KEY: ${{ secrets.SECRET_ANDROID_JSON_KEY }}
         run: |
           fastlane android deploy
 
       # 배포
-      - name: fastlane internal upload
-        env:
-          ANDROID_JSON_KEY: ${{ secrets.ANDROID_JSON_KEY }}
+      - name: iOS Deploy
         run: |
           fastlane ios deploy

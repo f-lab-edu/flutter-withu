@@ -1,8 +1,7 @@
 default_platform(:android)
 
 # 환경변수 설정
-ANDROID_JSON_KEY=ENV["ANDROID_JSON_KEY"]
-
+SECRET_ANDROID_JSON_KEY=ENV["SECRET_ANDROID_JSON_KEY"]
 
 platform :android do
   desc "Deploy to the Google Play Store"
@@ -22,8 +21,7 @@ platform :android do
       skip_upload_metadata: true,
       skip_upload_images: true,
       skip_upload_screenshots: true,
-#       json_key_data: "#{ANDROID_JSON_KEY}"
-      #json_key_data: json_key
+      json_key_data: "#{SECRET_ANDROID_JSON_KEY}"
     )
   end
 end
