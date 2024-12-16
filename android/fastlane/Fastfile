@@ -8,12 +8,7 @@ platform :android do
   lane :deploy do
 
     # build abb
-    gradle(
-        task: 'bundle',
-        build_type: 'release',
-        flavor: 'prod'
-      )
-#     sh "flutter build appbundle --release --flavor prod -t lib/core/config/env/prod.dart --no-tree-shake-icons"
+    sh "flutter build appbundle --release --flavor prod -t lib/core/config/env/prod.dart --no-tree-shake-icons"
 
     # 트랙 설정 (internal, alpha, beta, production)
     track = "internal"
