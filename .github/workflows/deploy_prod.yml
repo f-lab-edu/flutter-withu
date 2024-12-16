@@ -42,29 +42,13 @@ jobs:
       - run: flutter pub get
       - run: flutter pub run build_runner build --delete-conflicting-outputs
 
-  flutter_test:
-    needs: setup
-    runs-on: macos-latest
-    steps:
-      - uses: actions/checkout@v4
+      # 테스트
       - run: flutter test
-
-  android_deploy:
-    needs: setup
-    runs-on: macos-latest
-    steps:
-      - uses: actions/checkout@v4
 
       # 배포
       - name: fastlane internal upload
         run: |
           fastlane android deploy
-
-  ios_deploy:
-    needs: setup
-    runs-on: macos-latest
-    steps:
-      - uses: actions/checkout@v4
 
       # 배포
       - name: fastlane internal upload
