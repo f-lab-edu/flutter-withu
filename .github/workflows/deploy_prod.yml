@@ -28,10 +28,10 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '17'
-
-      # Ruby 설치
-      - name: Setup Ruby
-        uses: actions/setup-ruby@v1
+#
+#      # Ruby 설치
+#      - name: Setup Ruby
+#        uses: actions/setup-ruby@v1
 
       # fastlane 설치
       - name: Install Fastlane
