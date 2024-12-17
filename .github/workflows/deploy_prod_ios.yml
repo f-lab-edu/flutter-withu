@@ -34,10 +34,8 @@ jobs:
 
       # Ruby  및 CocoaPod 설치
       - uses: actions/setup-ruby@v1
-      - name: Setup Ruby and CocoaPods
-        run: |
-          gem install cocoapods
-          pod setup
+      - name: setup-cocoapods
+        uses: maxim-lobanov/setup-cocoapods@v1
 
       # fastlane 설치
       - name: Install Fastlane
@@ -48,10 +46,10 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: stable
-
-      - run: flutter --version
-      - run: flutter pub get
-      - run: flutter pub run build_runner build --delete-conflicting-outputs
+      - run: |
+          flutter --version
+          flutter pub get
+          flutter pub run build_runner build --delete-conflicting-outputs
 
       # 테스트
       - run: flutter test
