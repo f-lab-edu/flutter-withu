@@ -72,9 +72,12 @@ jobs:
           SUPPLY_JSON_KEY_DATA: ${{ secrets.SECRET_ANDROID_JSON_KEY }}
         run: |
           cd android
+          echo "${{ secrets.PLAY_STORE_JSON_KEY }}" | base64 -d > service-account.json
+          SUPPLY_JSON_KEY=service-account.json
           fastlane android deploy
 
-      # 배포
+
+    # 배포
       - name: iOS Deploy
         run: |
           cd ios
