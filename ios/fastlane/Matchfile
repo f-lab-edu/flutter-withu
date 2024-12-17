@@ -1,5 +1,5 @@
 storage_mode("git")
-git_url(ENV["GIT_URL"])
+git_url(ENV["IOS_MATCH_GITHUB_URL"])
 type("appstore")
 app_identifier(["com.conner.withu"])
-username(ENV["APPLE_ID"])
+username(ENV["IOS_APPLE_ID"])
