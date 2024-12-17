@@ -6,6 +6,12 @@ platform :ios do
   lane :deploy do
 
     match(type: "appstore")
+
+    cocoapods(
+      clean_install: true,
+      podfile: "./Podfile"
+    )
+
     build_app(
       workspace: "Runner.xcworkspace",
       scheme: "prod",
@@ -13,6 +19,7 @@ platform :ios do
       clean: true,
       xcargs: "-allowProvisioningUpdates"
     )
+
     upload_to_testflight
   end
 end

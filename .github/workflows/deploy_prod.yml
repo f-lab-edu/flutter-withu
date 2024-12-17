@@ -79,6 +79,9 @@ jobs:
       #          cd android
       #          fastlane android deploy
 
+      - uses: NiftyStack/install-cocoapods-action@1.0.0
+      - run: pod install
+
       # 배포
       - name: iOS Deploy
         env:
@@ -90,8 +93,6 @@ jobs:
           MATCH_PASSWORD: ${{ secrets.MATCH_KEYCHAIN_PASSWORD }}
           FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
           FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: ${{ secrets.FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD }}
-          FASTLANE_SESSION: ${{ secrets.FASTLANE_SESSION }}  # 추가
         run: |
           cd ios
-          pod install
           fastlane ios deploy
