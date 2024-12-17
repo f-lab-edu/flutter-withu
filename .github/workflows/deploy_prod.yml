@@ -83,6 +83,7 @@ jobs:
       - name: iOS Deploy
         env:
           IOS_MATCH_GITHUB_URL: ${{ secrets.IOS_MATCH_GITHUB_URL }}
+          IOS_GITHUB_BASIC_AUTH: ${{ secrets.IOS_GITHUB_BASIC_AUTH }}
           IOS_APPSTORE_TEAM_ID: ${{ secrets.IOS_APPSTORE_TEAM_ID }}
           IOS_APPSTORE_ITC_TEAM_ID: ${{ secrets.IOS_APPSTORE_ITC_TEAM_ID }}
           IOS_APPLE_ID: ${{ secrets.IOS_APPLE_ID }}
