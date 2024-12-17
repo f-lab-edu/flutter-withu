@@ -5,9 +5,7 @@ platform :ios do
   desc "Push a new beta build to TestFlight"
   lane :deploy do
 
-    match(
-      type: "appstore",
-    )
+    match
 
     cocoapods(
       clean_install: true,
