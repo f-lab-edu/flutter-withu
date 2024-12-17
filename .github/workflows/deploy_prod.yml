@@ -68,8 +68,6 @@ jobs:
 
       # 배포
       - name: Android deploy
-#        env:
-#          SUPPLY_JSON_KEY_DATA: ${{ secrets.SECRET_ANDROID_JSON_KEY }}
         run: |
           cd android
           echo "${{ secrets.PLAY_STORE_JSON_KEY }}" | base64 -d > service-account.json
