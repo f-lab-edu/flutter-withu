@@ -32,14 +32,13 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      # Ruby  및 CocoaPod 설치
-      - uses: actions/setup-ruby@v1
-      - name: setup-cocoapods
-        uses: maxim-lobanov/setup-cocoapods@v1
-
       # fastlane 설치
       - name: Install Fastlane
         run: brew install fastlane
+
+      # CocoaPods
+      - name: Install CocoaPods
+        run: brew install cocoapods
 
       # Flutter 설정
       - name: Set up Flutter
