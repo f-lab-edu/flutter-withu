@@ -82,6 +82,8 @@ jobs:
       # CocoaPod 설치
       - name: Install Pod
         run: |
+          gem install bundler
+          bundle install
           gem install cocoapods
           pod setup
 
