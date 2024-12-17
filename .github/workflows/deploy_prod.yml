@@ -16,6 +16,9 @@ jobs:
       # 기본 저장소 체크아웃
       - name: Clone repository
         uses: actions/checkout@v4
+        with:
+          submoddules: true
+          token: ${{ secrets.SECRET_GITHUB_TOKEN }}
 
       # Brew 설정
       - name: Set up Homebrew
