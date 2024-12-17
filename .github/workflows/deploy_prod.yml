@@ -79,6 +79,12 @@ jobs:
       #          cd android
       #          fastlane android deploy
 
+      # CocoaPod 설치
+      - name: Install Pod
+        run: |
+          gem install cocoapods
+          pod setup
+
       # 배포
       - name: iOS Deploy
         env:
