@@ -14,7 +14,7 @@ platform :android do
     track = "internal"
 
     # json key 파일 읽기
-    json_key_data = File.read(ENV["SECRET_ANDROID_JSON_KEY"])
+    # json_key_data = File.read(ENV["SECRET_ANDROID_JSON_KEY"])
 
     # 플레이스토어 업로드
     upload_to_play_store(
@@ -24,7 +24,7 @@ platform :android do
       skip_upload_metadata: true,
       skip_upload_images: true,
       skip_upload_screenshots: true,
-      json_key_data: json_key_data
+      json_key_data: "#{SECRET_ANDROID_JSON_KEY}"
     )
   end
 end
