@@ -4,3 +4,10 @@ type("appstore")
 app_identifier(["com.conner.withu"])
 username(ENV["IOS_APPLE_ID"])
 git_basic_authorization(ENV["IOS_GITHUB_BASIC_AUTH"])
+api_key({
+  key_id: ENV["APP_STORE_CONNECT_API_KEY_KEY_ID"],
+  issuer_id: ENV["APP_STORE_CONNECT_API_KEY_ISSUER_ID"],
+  key_content: ENV["APP_STORE_CONNECT_API_KEY_KEY"],
+  duration: 1200,
+  in_house: false
+})
