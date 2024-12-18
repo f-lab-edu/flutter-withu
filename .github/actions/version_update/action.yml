@@ -1,0 +1,33 @@
+name: 'Flutter Pubspec.yml 버전 업데이트'
+description: ''
+
+runs:
+  using: "composite"
+  steps:
+
+    # pubspec.yaml 버전 업데이트
+    - name: Update pubspec version
+      uses: stikkyapp/update-pubspec-version@v2
+      with:
+        strategy: false  # major, minor, patch 중 선택
+        bump-build: true   # build 번호도 증가
+        path: './pubspec.yaml'
+
+    # grep 으로 패턴 검색하고, sed로 문자열 변경
+    - name: Get updated version
+      id: get_version
+      shell: bsh
+      run: |
+        VERSION=$(grep 'version:' pubspec.yaml | sed 's/version: //')
+        echo "NEW_VERSION=$VERSION" >> $GITHUB_ENV
+        echo "Updated Version: $NEW_VERSION"
+
+    # 변경사항 커밋 & 푸시
+    - name: Commit and push changes
+      shell: bsh
+      run: |
+        git config --local user.email "github-actions@github.com"
+        git config --local user.name "github-actions"
+        git add pubspec.yaml
+        git commit -m "chore: Bump version to ${NEW_VERSION} [skip ci]"
+        git push
