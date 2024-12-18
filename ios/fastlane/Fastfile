@@ -5,8 +5,6 @@ platform :ios do
   desc "Push a new beta build to TestFlight"
   lane :deploy do
 
-    setup_circle_ci
-
     # Signing
     match(readonly: true)
 
