@@ -14,7 +14,7 @@ jobs:
     runs-on: macos-latest
     steps:
       - name: Environment Setup
-        uses: ./flutter-setup.yml
+        uses: ./.github/workflows/flutter-setup.yml
         with:
           github-token: ${{ secrets.SECRET_GITHUB_TOKEN }}
 
