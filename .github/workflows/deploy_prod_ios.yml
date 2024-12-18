@@ -31,6 +31,8 @@ jobs:
           cd ios
           gem install bundler
           bundle install
+          rm -rf Podfile.lock
+          pod deintegrate
           pod setup
           pod install
 
