@@ -9,7 +9,7 @@ platform :ios do
     match(readonly: true)
 
     # Build
-#     sh "flutter build ios --release --flavor prod --no-tree-shake-icons"
+    sh "flutter build ios --release --flavor prod --no-tree-shake-icons"
 
     # .ipa 생성
     build_app(

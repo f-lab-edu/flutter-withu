@@ -43,5 +43,4 @@ jobs:
           pod setup
           pod cache clean --all
           pod install
-          flutter build ios --release --flavor prod --no-tree-shake-icons
           fastlane ios deploy
