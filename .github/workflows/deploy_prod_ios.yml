@@ -31,15 +31,8 @@ jobs:
           cd ios
           gem install bundler
           bundle install
-          rm -rf Podfile.lock
-          pod deintegrate
           pod setup
           pod install
-
-      - name: Clean Xcode Build Cache
-        run: |
-          rm -rf ~/Library/Developer/Xcode/DerivedData
-          rm -rf ~/Library/Caches/org.carthage.CarthageKit
 
       # 배포
       - name: iOS Deploy
