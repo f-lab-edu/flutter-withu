@@ -8,8 +8,9 @@ platform :ios do
     # Signing
     match(readonly: true)
 
+    sh "pod install"
     # Build
-    sh "flutter build ios --release --flavor prod --no-tree-shake-icons"
+    sh "flutter build ios --release --flavor prod --no-tree-shake-icons --no-pub"
 
     # .ipa 생성
     build_app(
