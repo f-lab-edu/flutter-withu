@@ -9,7 +9,7 @@ platform :ios do
     match(readonly: true)
 
     # Build
-    sh "flutter build ios --release --flavor prod --no-tree-shake-icons --verbose"
+    flutter_build_ios
 
     # .ipa 생성
     build_app(
@@ -23,4 +23,13 @@ platform :ios do
     # Deploy
     upload_to_testflight
   end
+
+    # Flutter build iOS
+    lane :flutter_build_ios do
+      sh("cd", "..")
+      puts "Flutter clean"
+      sh("flutter", "clean")
+      puts "Flutter build iOS"
+      sh("flutter", "build", "ios", "--no-codesign", "--flavor prod", "--release")
+    end
 end
