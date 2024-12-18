@@ -5,6 +5,12 @@ platform :ios do
   desc "Push a new beta build to TestFlight"
   lane :deploy do
 
+    # App Store Connect API 인증 설정
+    app_store_connect_api_key(
+      duration: 1200,
+      in_house: false
+    )
+
     # Signing
     match(readonly: true)
 
@@ -20,12 +26,6 @@ platform :ios do
       xcargs: "-allowProvisioningUpdates",
       build_path: "build",
       output_directory: "output",
-    )
-
-    # App Store Connect API 인증 설정
-    app_store_connect_api_key(
-      duration: 1200,
-      in_house: false
     )
 
     # Deploy
