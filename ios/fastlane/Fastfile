@@ -31,8 +31,8 @@ platform :ios do
     # Deploy
     upload_to_testflight(
       apple_id: "6739505809",
-      skip_waiting_for_build_processing: true
-      verbose: true,
+      skip_waiting_for_build_processing: true,
+      verbose: true
     )
   end
 
