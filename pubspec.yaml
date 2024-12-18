@@ -55,9 +55,9 @@ dependencies:
   # widget related packages
   infinite_scroll_pagination: ^4.0.0
   calendar_date_picker2: ^1.1.7
-  flutter_keyboard_visibility: ^6.0.0
   shared_preferences: ^2.3.2
   mocktail: ^1.0.4
+  flutter_keyboard_visibility: ^6.0.0
 
 
 dev_dependencies:
@@ -105,7 +105,7 @@ scripts:
 
   # ios build
   ios:
-    prod: flutter build ios --release --flavor prod
+    prod: flutter build ios --release --flavor prod --no-tree-shake-icons
     dev: flutter build ios --release --flavor dev
 
   # 전체 파일 대상으로 pre-commit hooks 스크립트 실행
