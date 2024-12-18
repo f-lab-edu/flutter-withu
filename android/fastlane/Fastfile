@@ -4,6 +4,9 @@ platform :android do
   desc "Deploy to the Google Play Store"
   lane :deploy do
 
+    # 버전 증가
+    increment_build_number
+
     # build abb
     sh "flutter build appbundle --release --flavor prod -t lib/core/config/env/prod.dart --no-tree-shake-icons --verbose"
 
