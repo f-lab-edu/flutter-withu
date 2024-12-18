@@ -8,7 +8,6 @@ platform :ios do
     # Signing
     match(readonly: true)
 
-    sh "pod install"
     # Build
     sh "flutter build ios --release --flavor prod --no-tree-shake-icons --no-pub"
 

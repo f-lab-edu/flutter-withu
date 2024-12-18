@@ -17,10 +17,6 @@ runs:
       shell: bash
       run: |
         brew install fastlane
-        gem install cocoapods
-        cd ios
-        gem install bundler
-        bundle install
 
     - name: Set up Flutter
       uses: subosito/flutter-action@v2

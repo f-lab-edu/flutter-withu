@@ -24,6 +24,15 @@ jobs:
       - name: Environment Setup
         uses: ./.github/actions/flutter-setup
 
+      # Cocoapod 설치
+      - name: Setup Cocoapods
+        run: |
+          gem install cocoapods
+          cd ios
+          gem install bundler
+          bundle install
+          pod install
+
       # 배포
       - name: iOS Deploy
         env:
