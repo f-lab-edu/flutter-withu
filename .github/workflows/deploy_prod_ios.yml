@@ -1,8 +1,8 @@
-name: F-Lab flutter-withu Prod Deploy
+name: iOS Prod Deploy
 
 on:
   push:
-    branches: [ feature/ci-cd ]
+    branches: [ main, feature/ci-cd ]
 
 # 동시성 설정 추가
 concurrency:
@@ -36,8 +36,6 @@ jobs:
       - name: Setup Fastlane
         run: |
           brew install fastlane
-          gem install bundler
-          bundle install
 
       # Flutter 설정
       - name: Set up Flutter

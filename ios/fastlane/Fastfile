@@ -5,11 +5,23 @@ platform :ios do
   desc "Push a new beta build to TestFlight"
   lane :deploy do
 
+    # 버전 증가
+    increment_build_number
+
     # Signing
     match(readonly: true)
 
     # Build
     sh "flutter build ios --release --flavor prod --no-tree-shake-icons"
+
+    # .ipa 생성
+    build_app(
+      workspace: "Runner.xcworkspace",
+      scheme: "prod",
+      export_method: "app-store",
+      clean: true,
+      xcargs: "-allowProvisioningUpdates"
+    )
 
     # Deploy
     upload_to_testflight
