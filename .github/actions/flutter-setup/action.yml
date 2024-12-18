@@ -13,6 +13,8 @@ runs:
         distribution: 'temurin'
         java-version: '17'
 
+    - uses: actions/setup-ruby@v1
+
     - name: Setup Fastlane
       shell: bash
       run: |
