@@ -4,55 +4,20 @@ on:
   push:
     branches: [ main, feature/ci-cd ]
 
-# 동시성 설정 추가
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  deploy_prod:
+  setup:
+    uses: Younggun-Kim/Github_Actions_Flutter_Setup@v1
+    secrets:
+      SECRET_GITHUB_TOKEN: ${{ secrets.SECRET_GITHUB_TOKEN }}
+
+  deploy:
+    needs: setup
     runs-on: macos-latest
     steps:
-      # 기본 저장소 체크아웃
-      - name: Clone repository
-        uses: actions/checkout@v4
-        with:
-          submoddules: true
-          token: ${{ secrets.SECRET_GITHUB_TOKEN }}
-
-      # Brew 설정
-      - name: Set up Homebrew
-        id: set-up-homebrew
-        uses: Homebrew/actions/setup-homebrew@master
-
-      # Java 17 설정
-      - name: Setup Java
-        uses: actions/setup-java@v3
-        with:
-          distribution: 'temurin'
-          java-version: '17'
-
-      # fastlane 설치
-      - name: Setup Fastlane
-        run: |
-          brew install fastlane
-          cd ios
-          gem install bundler
-          bundle install
-
-      # Flutter 설정
-      - name: Set up Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          channel: stable
-      - run: |
-          flutter pub get
-          flutter pub run build_runner build --delete-conflicting-outputs
-
-      # 테스트
-      - run: flutter test
-
-      # 배포
       - name: iOS Deploy
         env:
           IOS_MATCH_GITHUB_URL: ${{ secrets.IOS_MATCH_GITHUB_URL }}
