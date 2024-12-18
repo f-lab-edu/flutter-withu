@@ -9,15 +9,16 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  setup:
-    uses: Younggun-Kim/Github_Actions_Flutter_Setup@v1
-    secrets:
-      SECRET_GITHUB_TOKEN: ${{ secrets.SECRET_GITHUB_TOKEN }}
 
   deploy:
     needs: setup
     runs-on: macos-latest
     steps:
+      - name: Environment Setup
+        uses: Younggun-Kim/Github_Actions_Flutter_Setup@v1
+        with:
+          github-token: ${{ secrets.SECRET_GITHUB_TOKEN }}
+
       - name: iOS Deploy
         env:
           IOS_MATCH_GITHUB_URL: ${{ secrets.IOS_MATCH_GITHUB_URL }}
