@@ -53,6 +53,7 @@ report.xml
 .env
 *.app.dSYM.zip
 *.ipa
+ios/build/*
 
 # Freezed generated files
 *.freezed.dart
