@@ -20,8 +20,6 @@ platform :ios do
       export_method: "app-store",
       clean: true,
       xcargs: "-allowProvisioningUpdates",
-      build_path: "build",
-      output_directory: "output",
     )
 
     # App Store Connect API 인증 설정
