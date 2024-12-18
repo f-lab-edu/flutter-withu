@@ -30,6 +30,6 @@ platform :ios do
       puts "Flutter clean"
       sh("flutter", "clean")
       puts "Flutter build iOS"
-      sh("flutter", "build", "ios", "--no-codesign", "--flavor prod", "--release")
+      sh("flutter", "build", "ios", "--no-codesign", "--flavor", "prod", "--release")
     end
 end
