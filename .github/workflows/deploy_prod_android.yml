@@ -22,7 +22,7 @@ jobs:
 
       # 배포 환경 설정
       - name: Environment Setup
-        uses: ./.github/actions/flutter-setup
+        uses: .github/actions/flutter-setup
 
       # Android Keystore
       - name: Decode Keystore
