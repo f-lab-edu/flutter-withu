@@ -40,5 +40,7 @@ jobs:
           APP_STORE_CONNECT_API_KEY_KEY: ${{ secrets.APP_STORE_CONNECT_API_KEY_KEY }}
         run: |
           cd ios
+          pod deintegrate
+          rm -rf Podfile.lock
           pod install
           fastlane ios deploy
