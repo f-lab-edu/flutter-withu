@@ -32,9 +32,9 @@ jobs:
           gem install bundler
           bundle install
           rm -rf Podfile.lock
-          pod deintegrate
-          pod setup
-          pod install
+          sudo pod deintegrate
+          sudo pod setup
+          sudo pod install
 
       # 배포
       - name: iOS Deploy
