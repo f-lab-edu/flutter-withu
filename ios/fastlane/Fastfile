@@ -35,9 +35,7 @@ platform :ios do
 
     # Deploy
     upload_to_testflight(
-      team_id: ENV["IOS_APPSTORE_TEAM_ID"],
-      team_name: ENV["IOS_APPSTORE_ITC_TEAM_ID"],
-      apple_id: ENV["IOS_APPLE_ID"],
+      apple_id: "6739505809",
       skip_waiting_for_build_processing: true
     )
   end
