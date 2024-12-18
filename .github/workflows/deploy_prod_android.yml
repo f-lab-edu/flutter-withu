@@ -13,10 +13,14 @@ jobs:
   deploy:
     runs-on: macos-latest
     steps:
-      - name: Environment Setup
-        uses: Younggun-Kim/Github_Actions_Flutter_Setup@v1
+      - name: Checkout Repository  # 이 부분 추가
+        uses: actions/checkout@v4
         with:
-          github-token: ${{ secrets.SECRET_GITHUB_TOKEN }}
+          submoddules: ${{ inputs.submodules }}
+          token: ${{ inputs.github-token }}
+
+      - name: Environment Setup
+        uses: ./.github/workflows/flutter-setup.yml
 
       # Android Keystore
       - name: Decode Keystore
