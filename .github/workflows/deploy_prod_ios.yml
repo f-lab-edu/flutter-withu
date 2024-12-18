@@ -31,6 +31,7 @@ jobs:
           cd ios
           gem install bundler
           bundle install
+          pod setup
           pod install
 
       # 배포
