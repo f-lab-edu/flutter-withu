@@ -5,6 +5,12 @@ platform :ios do
   desc "Push a new beta build to TestFlight"
   lane :deploy do
 
+    # Pod Install
+    cocoapods(
+      clean_install: true,
+      podfile: "./Podfile"
+    )
+
     # 버전 증가
     increment_build_number
 
