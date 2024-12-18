@@ -1,0 +1,52 @@
+name: 'Flutter Setup'
+description: 'Setup Flutter environment with common configurations'
+
+inputs:
+  submodules:
+    description: 'Whether to checkout submodules'
+    required: false
+    default: 'true'
+  github-token:
+    description: 'GitHub token for checkout'
+    required: true
+
+steps:
+  - name: Clone repository
+    uses: actions/checkout@v4
+    with:
+      submoddules: ${{ inputs.submodules }}
+      token: ${{ inputs.github-token }}
+
+  - name: Set up Homebrew
+    id: set-up-homebrew
+    uses: Homebrew/actions/setup-homebrew@master
+    shell: bash
+
+  - name: Setup Java
+    uses: actions/setup-java@v3
+    with:
+      distribution: 'temurin'
+      java-version: '17'
+
+  - name: Setup Fastlane
+    run: |
+      brew install fastlane
+      cd ios
+      gem install bundler
+      bundle install
+    shell: bash
+
+  - name: Set up Flutter
+    uses: subosito/flutter-action@v2
+    with:
+      channel: stable
+
+  - name: Flutter Setup
+    run: |
+      flutter pub get
+      flutter pub run build_runner build --delete-conflicting-outputs
+    shell: bash
+
+  - name: Run Tests
+    run: flutter test
+    shell: bash
