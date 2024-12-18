@@ -1,37 +1,43 @@
 name: 'Flutter Setup'
 description: 'Setup Flutter environment with common configurations'
 
-steps:
-  - name: Set up Homebrew
-    id: set-up-homebrew
-    uses: Homebrew/actions/setup-homebrew@master
-    shell: bash
+inputs:
+  github-token:
+    description: 'GitHub token for checkout'
+    required: true
 
-  - name: Setup Java
-    uses: actions/setup-java@v3
-    with:
-      distribution: 'temurin'
-      java-version: '17'
+runs:
+  using: "composite"
+  steps:
+    - name: Set up Homebrew
+      uses: Homebrew/actions/setup-homebrew@master
+      shell: bash
 
-  - name: Setup Fastlane
-    run: |
-      brew install fastlane
-      cd ios
-      gem install bundler
-      bundle install
-    shell: bash
+    - name: Setup Java
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'temurin'
+        java-version: '17'
 
-  - name: Set up Flutter
-    uses: subosito/flutter-action@v2
-    with:
-      channel: stable
+    - name: Setup Fastlane
+      shell: bash        # shell 지정 필요
+      run: |
+        brew install fastlane
+        cd ios
+        gem install bundler
+        bundle install
 
-  - name: Flutter Setup
-    run: |
-      flutter pub get
-      flutter pub run build_runner build --delete-conflicting-outputs
-    shell: bash
+    - name: Set up Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        channel: stable
 
-  - name: Run Tests
-    run: flutter test
-    shell: bash
+    - name: Flutter Setup
+      shell: bash
+      run: |
+        flutter pub get
+        flutter pub run build_runner build --delete-conflicting-outputs
+
+    - name: Run Tests
+      shell: bash
+      run: flutter test
