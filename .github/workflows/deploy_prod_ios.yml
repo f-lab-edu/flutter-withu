@@ -40,4 +40,5 @@ jobs:
           APP_STORE_CONNECT_API_KEY_KEY: ${{ secrets.APP_STORE_CONNECT_API_KEY_KEY }}
         run: |
           cd ios
+          pod install
           fastlane ios deploy
