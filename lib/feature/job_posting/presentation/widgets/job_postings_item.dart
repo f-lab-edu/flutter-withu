@@ -117,9 +117,7 @@ class _RightView extends StatelessWidget {
         return const _ClosedView();
       case JobPostingStatusType.delete:
         return const _Delete();
-      default:
-        return const SizedBox();
-    }
+      }
   }
 }
 
