@@ -12,12 +12,11 @@ platform :ios do
     flutter_build_ios
 
     # .ipa 생성
-    build_app(
+    build_ios_app(
       workspace: "Runner.xcworkspace",
       scheme: "prod",
       export_method: "app-store",
       clean: true,
-      xcargs: "-allowProvisioningUpdates"
     )
 
     # Deploy
