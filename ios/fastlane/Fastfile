@@ -17,6 +17,9 @@ platform :ios do
       scheme: "prod",
       export_method: "app-store",
       clean: true,
+      xcargs: "-allowProvisioningUpdates",
+      build_path: "build",
+      output_directory: "output",
     )
 
     # Deploy
