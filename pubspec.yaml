@@ -1,7 +1,7 @@
 name: withu_app
 description: "withu mobile application"
 
-version: 1.0.0+6
+version: 1.0.0+7
 
 environment:
   sdk: ^3.5.1

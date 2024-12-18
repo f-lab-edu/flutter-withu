@@ -35,6 +35,3 @@ runs:
     - name: Run Tests
       shell: bash
       run: flutter test
-
-    - name: Version Update
-      uses: ./.github/actions/version_update
