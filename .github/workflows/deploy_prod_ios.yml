@@ -36,6 +36,9 @@ jobs:
       - name: Setup Fastlane
         run: |
           brew install fastlane
+          cd ios
+          gem install bundler
+          bundle install
 
       # Flutter 설정
       - name: Set up Flutter
