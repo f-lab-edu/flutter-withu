@@ -20,11 +20,11 @@ jobs:
           submoddules: true
           token: ${{ secrets.SECRET_GITHUB_TOKEN }}
 
+      # 배포 환경 설정
       - name: Environment Setup
-        uses: ./.github/workflows/flutter-setup.yml
-        with:
-          github-token: ${{ secrets.SECRET_GITHUB_TOKEN }}
+        uses: ./.github/actions/flutter-setup
 
+      # 배포
       - name: iOS Deploy
         env:
           IOS_MATCH_GITHUB_URL: ${{ secrets.IOS_MATCH_GITHUB_URL }}

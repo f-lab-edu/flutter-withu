@@ -20,8 +20,9 @@ jobs:
           submoddules: true
           token: ${{ secrets.SECRET_GITHUB_TOKEN }}
 
+      # 배포 환경 설정
       - name: Environment Setup
-        uses: ./.github/workflows/flutter-setup.yml
+        uses: ./.github/actions/flutter-setup
 
       # Android Keystore
       - name: Decode Keystore
