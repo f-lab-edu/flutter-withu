@@ -1,17 +1,11 @@
 name: 'Flutter Setup'
 description: 'Setup Flutter environment with common configurations'
 
-inputs:
-  github-token:
-    description: 'GitHub token for checkout'
-    required: true
-
 runs:
   using: "composite"
   steps:
     - name: Set up Homebrew
       uses: Homebrew/actions/setup-homebrew@master
-      shell: bash
 
     - name: Setup Java
       uses: actions/setup-java@v3
@@ -20,7 +14,7 @@ runs:
         java-version: '17'
 
     - name: Setup Fastlane
-      shell: bash        # shell 지정 필요
+      shell: bash
       run: |
         brew install fastlane
         cd ios
