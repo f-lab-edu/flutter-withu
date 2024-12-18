@@ -13,11 +13,12 @@ jobs:
   deploy:
     runs-on: macos-latest
     steps:
-      - name: Checkout Repository  # 이 부분 추가
+      # 기본 저장소 체크아웃
+      - name: Clone repository
         uses: actions/checkout@v4
         with:
-          submoddules: ${{ inputs.submodules }}
-          token: ${{ inputs.github-token }}
+          submoddules: true
+          token: ${{ secrets.SECRET_GITHUB_TOKEN }}
 
       - name: Environment Setup
         uses: ./.github/workflows/flutter-setup.yml
