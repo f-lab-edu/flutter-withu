@@ -19,7 +19,7 @@ void main() {
   });
 
   group('이메일 중복 검사 테스트', () {
-    test('중복 케이스', () async {
+    test('test@test.com으로 가입하려고 하면, 이미 가입되어 있으므로 가입이 실패해야 한다.', () async {
       /// Given
       const email = "test@test.com";
       final expectDto = BaseResponseDtoMock.mock(true);
@@ -38,7 +38,7 @@ void main() {
       verify(() => mockRepo.checkEmailDuplicate(email: email)).called(1);
     });
 
-    test('비중복 케이스', () async {
+    test('test@test.com으로 이메일 가입하려고 시도하면 중복되지 않으므로 가입이 진행되어야 한다', () async {
       /// Given
       const email = "test@test.co.kr";
       final expectDto = BaseResponseDtoMock.mock(false);
@@ -57,7 +57,7 @@ void main() {
       verify(() => mockRepo.checkEmailDuplicate(email: email)).called(1);
     });
 
-    test('서버 에러 케이스', () async {
+    test('test@test.com으로 이메일 가입하려고 시도했을 때 서버 에러 응답 시 가입에 실패해야 한다', () async {
       /// Given
       const email = "test@test.co.kr";
       const expectDto = FailResponse(status: 400);

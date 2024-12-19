@@ -26,7 +26,7 @@ void main() {
     });
 
     blocTest(
-      '비중복 이메일 입력 테스트',
+      '중복되지 않은 이메일 입력시 중복 검사에 통과해야 한다.',
       build: () => checkBloc,
       setUp: () {
         when(
@@ -68,7 +68,7 @@ void main() {
     );
 
     blocTest(
-      '중복 이메일 입력 테스트',
+      '중복된 이메일 입력시 중복 검사에 실패해야 한다.',
       build: () => checkBloc,
       setUp: () {
         when(
@@ -112,7 +112,7 @@ void main() {
     );
 
     blocTest(
-      '서버 에러 테스트',
+      '중복 검사 API가 서버 에러를 반환할 경우 에러 문구가 노출된다.',
       build: () => checkBloc,
       setUp: () {
         when(
