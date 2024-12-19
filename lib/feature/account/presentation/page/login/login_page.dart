@@ -110,7 +110,9 @@ class _LoginPageState extends State<LoginPageContent> {
                 Row(
                   children: [
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        getItAppRouter.push(const SignUpRoute());
+                      },
                       child: Text(
                         StringRes.signUp.tr,
                         style: context.textTheme.bodySmall,

@@ -96,5 +96,16 @@
   "enterVerificationCode": "인증번호 입력",
   "verification": "인증",
   "invalidVerificationCode": "인증번호가 틀립니다,",
-  "emailDuplicateError": "! 중복된 이메일입니다."
+  "emailDuplicateError": "! 중복된 이메일입니다.",
+  "name": "이름",
+  "enterTwoOrMoreChars": "2자 이상 이름을 입력하세요.",
+  "birthDate": "생년월일",
+  "enterEightChars": "8리를 입력하세요.",
+  "gender": "성별",
+  "man": "남자",
+  "woman": "여자",
+  "phone": "휴대폰",
+  "email": "이메일",
+  "password": "비밀번호",
+  "verifyPassword": "비밀번호 확인"
 }

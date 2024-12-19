@@ -48,6 +48,11 @@ void main() {
               'emailValid',
               isTrue,
             ),
+        isA<EmailDuplicateCheckState>().having(
+          (state) => state.status.isLoading,
+          'loading status',
+          isTrue,
+        ),
         isA<EmailDuplicateCheckState>()
             .having(
               (state) => state.errorText,
@@ -92,6 +97,11 @@ void main() {
               'emailValid',
               isTrue,
             ),
+        isA<EmailDuplicateCheckState>().having(
+          (state) => state.status.isLoading,
+          'loading status',
+          isTrue,
+        ),
         isA<EmailDuplicateCheckState>()
             .having(
               (state) => state.errorText,
@@ -136,6 +146,11 @@ void main() {
               'emailValid',
               isTrue,
             ),
+        isA<EmailDuplicateCheckState>().having(
+          (state) => state.status.isLoading,
+          'loading',
+          isTrue,
+        ),
         isA<EmailDuplicateCheckState>()
             .having(
               (state) => state.errorText,

@@ -1,6 +1,12 @@
 part of 'email_duplicate_check_bloc.dart';
 
 extension EmailDuplicateCheckBlocHandler on EmailDuplicateCheckBloc {
+  EmailDuplicateCheckState _setLoading() {
+    return state.copyWith(
+      status: BaseBlocStatus.loading(),
+    );
+  }
+
   void _onEmailInputted(
     EmailDuplicateCheckInputted event,
     Emitter<EmailDuplicateCheckState> emit,
@@ -18,9 +24,12 @@ extension EmailDuplicateCheckBlocHandler on EmailDuplicateCheckBloc {
     Emitter<EmailDuplicateCheckState> emit,
     String email,
   ) async {
+    emit(_setLoading());
+
     final result = await useCase.exec(email: email);
 
     emit(state.copyWith(
+      status: BaseBlocStatus.initial(),
       errorText: result,
       errorVisible: VisibleTypeExt.fromBool(result.isNotEmpty),
     ));

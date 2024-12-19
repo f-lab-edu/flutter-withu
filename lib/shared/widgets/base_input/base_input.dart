@@ -91,6 +91,7 @@ class BaseInput extends StatelessWidget {
             children: [
               Expanded(
                 child: TextField(
+                  key: Key('${(super.key as ValueKey).value}_input'),
                   controller: controller,
                   focusNode: focusNode,
                   style: style ?? defaultTextStyle,
