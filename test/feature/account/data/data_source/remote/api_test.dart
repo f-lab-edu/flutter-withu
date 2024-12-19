@@ -250,4 +250,90 @@ void main() {
       expect(result.failData?.status, equals(500));
     });
   });
+
+  group('아이디 찾기 테스트', () {
+    final requestDto = FindIdRequestDto(
+      phoneNumber: '01012345678',
+      authCode: '111111',
+      accountType: AccountType.company,
+    );
+
+    test('올바른 FindIdRequestDto로 요청 시 성공 결과를 반환해야 함', () async {
+      final responseDto = FindIdResponseDtoMock.success();
+      final responseJson = responseDto.toJson(
+        (data) => data.toJson(),
+      );
+
+      when(
+        mockDio.post(
+          api.findIdPath,
+          data: requestDto.toJson(),
+        ),
+      ).thenAnswer((_) async {
+        return Response(
+          data: responseJson,
+          statusCode: 200,
+          requestOptions: RequestOptions(),
+        );
+      });
+
+      /// When
+      final result = await api.findId(dto: requestDto);
+
+      /// Then
+      expect(result, isA<ApiResponse<FindIdResponseDto>>());
+      expect(result.successData, responseDto);
+    });
+
+    test('아이디 찾기 실패시 status가 false 이다.', () async {
+      final responseDto = FindIdResponseDtoMock.failure();
+      final responseJson = responseDto.toJson(
+        (data) => data.toJson(),
+      );
+
+      when(
+        mockDio.post(
+          api.findIdPath,
+          data: requestDto.toJson(),
+        ),
+      ).thenAnswer((_) async {
+        return Response(
+          data: responseJson,
+          statusCode: 200,
+          requestOptions: RequestOptions(),
+        );
+      });
+
+      /// When
+      final result = await api.findId(dto: requestDto);
+
+      /// Then
+      expect(result, isA<ApiResponse<FindIdResponseDto>>());
+      expect(result.successData?.info.status, isFalse);
+    });
+
+    test('서버 에러 발생시 FailResponse를 반환한다', () async {
+      final responseDto = FailResponse.error();
+
+      when(
+        mockDio.post(
+          api.findIdPath,
+          data: requestDto.toJson(),
+        ),
+      ).thenAnswer((_) async {
+        return Response(
+          data: responseDto,
+          statusCode: 500,
+          requestOptions: RequestOptions(),
+        );
+      });
+
+      /// When
+      final result = await api.findId(dto: requestDto);
+
+      /// Then
+      expect(result, isA<ApiResponse<FindIdResponseDto>>());
+      expect(result.isFail, isTrue);
+    });
+  });
 }

@@ -9,19 +9,18 @@ import 'package:withu_app/shared/shared.dart';
 class FindIdPage extends StatelessWidget {
   final AccountType accountType;
 
-  const FindIdPage({
-    super.key,
+  FindIdPage({
     required this.accountType,
-  });
+  }) : super(key: FindIdPageKey.page.toKey());
 
   @override
   Widget build(BuildContext context) {
     return FindIdBlocBuilder(
       builder: (context, state) {
         if (state.status.isSuccess) {
-          return const FindIdSuccess(loginId: 'test@test.com');
+          return FindIdSuccess(loginId: 'test@test.com');
         } else if (state.status.isFailure) {
-          return const FindIdFailure();
+          return FindIdFailure();
         } else {
           return _FindIdPageContent();
         }
@@ -50,7 +49,7 @@ class _FindIdPageContent extends StatelessWidget {
               ),
               const PhoneAuthWidget(),
               const Spacer(),
-              _FindIdButton(
+              FindIdButton(
                 isEnabled: state.isAuth,
               ),
             ],
@@ -61,12 +60,14 @@ class _FindIdPageContent extends StatelessWidget {
   }
 }
 
-class _FindIdButton extends StatelessWidget {
+class FindIdButton extends StatelessWidget {
   final bool isEnabled;
 
-  const _FindIdButton({
+  FindIdButton({
     required this.isEnabled,
-  });
+  }) : super(
+          key: FindIdPageKey.findIdBtn.toKey(),
+        );
 
   @override
   Widget build(BuildContext context) {

@@ -111,7 +111,8 @@ class _FindAccountTabs extends StatelessWidget {
           children: FindAccountTabType.values
               .map(
                 (type) => Expanded(
-                  child: _FindAccountTab(
+                  child: FindAccountTab(
+                    key: type.toKey(),
                     text: type.tr,
                     isSelected: state.currentTab == type,
                     onPressed: () {
@@ -129,14 +130,15 @@ class _FindAccountTabs extends StatelessWidget {
   }
 }
 
-class _FindAccountTab extends StatelessWidget {
+class FindAccountTab extends StatelessWidget {
   final String text;
 
   final bool isSelected;
 
   final VoidCallback onPressed;
 
-  const _FindAccountTab({
+  const FindAccountTab({
+    super.key,
     required this.text,
     required this.isSelected,
     required this.onPressed,

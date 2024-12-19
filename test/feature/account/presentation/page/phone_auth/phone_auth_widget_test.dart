@@ -36,9 +36,12 @@ void main() {
     );
     when(() => phoneAuthBloc.state).thenReturn(initialState);
     getIt.registerFactory<PhoneAuthBloc>(() => phoneAuthBloc);
-    testWidget = const MaterialApp(
+    testWidget = MaterialApp(
       home: Scaffold(
-        body: PhoneAuthWidget(),
+        body: PhoneAuthBlocProvider(
+          create: (context) => getIt(),
+          child: const PhoneAuthWidget(),
+        ),
       ),
     );
   });

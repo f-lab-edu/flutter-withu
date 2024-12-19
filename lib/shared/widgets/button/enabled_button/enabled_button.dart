@@ -31,7 +31,7 @@ class EnabledButton extends StatelessWidget {
         ),
       ),
       backgroundColor: bgColor,
-      onTap: onTap,
+      onTap: isEnabled ? onTap : () {},
     );
   }
 }
