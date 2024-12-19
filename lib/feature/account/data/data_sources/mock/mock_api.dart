@@ -109,4 +109,25 @@ class AccountMockApi extends AccountApiImpl {
 
     return await super.signUp(dto: dto);
   }
+
+  /// 아이디 찾기
+  @override
+  FutureOr<ApiResponse<FindIdResponseDto>> findId({
+    required FindIdRequestDto dto,
+  }) async {
+    /// Mock 응답 등록
+    dioAdapter.onPost(
+      findIdPath,
+      (server) => server.reply(
+        200,
+        FindIdResponseDtoDtoMock.success().toJson(
+          (data) => data.toJson(),
+        ),
+        delay: const Duration(seconds: 1),
+      ),
+      data: dto.toJson(),
+    );
+
+    return super.findId(dto: dto);
+  }
 }

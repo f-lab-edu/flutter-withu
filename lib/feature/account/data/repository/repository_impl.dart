@@ -68,4 +68,12 @@ class AccountRepositoryImpl implements AccountRepository {
   }) async {
     return await accountApi.signUp(dto: dto);
   }
+
+  /// 아이디 찾기
+  @override
+  Future<ApiResponse<FindIdResponseDto>> findId({
+    required FindIdRequestDto dto,
+  }) async {
+    return await accountApi.findId(dto: dto);
+  }
 }

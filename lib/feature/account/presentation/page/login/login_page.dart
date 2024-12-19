@@ -121,7 +121,9 @@ class _LoginPageState extends State<LoginPageContent> {
                     const Spacer(),
                     TextButton(
                       onPressed: () {
-                        getItAppRouter.push(const FindAccountRoute());
+                        getItAppRouter.push(
+                          FindAccountRoute(accountType: state.selectedTab),
+                        );
                       },
                       child: Text(
                         StringRes.findIdPw.tr,

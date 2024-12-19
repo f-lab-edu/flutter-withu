@@ -37,14 +37,17 @@ void initAccountDomainInjections() {
   getIt.registerSingleton<SignUpUseCase>(
     SignUpUseCaseImpl(accountRepo: getIt()),
   );
+  getIt.registerSingleton<FindIdUseCase>(
+    FindIdUseCaseImpl(accountRepo: getIt()),
+  );
 }
 
 void initAccountPresentationInjections() {
-  getIt.registerLazySingleton<PhoneAuthBloc>(
+  getIt.registerFactory<PhoneAuthBloc>(
     () => PhoneAuthBloc(phoneAuthUseCase: getIt()),
   );
   getIt.registerLazySingleton<EmailDuplicateCheckBloc>(
-        () => EmailDuplicateCheckBloc(useCase: getIt()),
+    () => EmailDuplicateCheckBloc(useCase: getIt()),
   );
   getIt.registerFactory<LoginBloc>(
     () => LoginBloc(loginUseCase: getIt()),
@@ -54,5 +57,8 @@ void initAccountPresentationInjections() {
   );
   getIt.registerFactory<FindAccountBloc>(
     () => FindAccountBloc(),
+  );
+  getIt.registerFactory<FindIdBloc>(
+    () => FindIdBloc(findIdUseCase: getIt()),
   );
 }

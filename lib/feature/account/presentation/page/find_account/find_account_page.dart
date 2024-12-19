@@ -9,7 +9,12 @@ import 'package:withu_app/shared/shared.dart';
 /// 계정 찾기 화면
 @RoutePage()
 class FindAccountPage extends StatelessWidget {
-  const FindAccountPage({super.key});
+  final AccountType accountType;
+
+  const FindAccountPage({
+    super.key,
+    required this.accountType,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -18,20 +23,42 @@ class FindAccountPage extends StatelessWidget {
         FindAccountBlocProvider(
           create: (context) => getIt(),
         ),
+        FindIdBlocProvider(
+          create: (context) => getIt(),
+        ),
         PhoneAuthBlocProvider(
           create: (context) => getIt(),
         ),
       ],
-      child: MultiBlocListener(listeners: [
-        PhoneAuthBlocListener(
-          listener: (context, state) {
-            _toggleLoading(
-              context: context,
-              isLoading: state.status.isLoading,
-            );
-          },
-        )
-      ], child: _FindAccountPageContent()),
+      child: MultiBlocListener(
+        listeners: [
+          FindIdBlocListener(
+            listener: (context, state) {
+              _toggleLoading(
+                context: context,
+                isLoading: state.status.isLoading,
+              );
+            },
+          ),
+          PhoneAuthBlocListener(
+            listener: (context, state) {
+              /// 로딩 설정
+              _toggleLoading(
+                context: context,
+                isLoading: state.status.isLoading,
+              );
+
+              /// 인증여부 전달
+              context
+                  .read<FindIdBloc>()
+                  .add(FindIdIsAuthChanged(value: state.isAuth));
+            },
+          ),
+        ],
+        child: _FindAccountPageContent(
+          accountType: accountType,
+        ),
+      ),
     );
   }
 
@@ -48,6 +75,10 @@ class FindAccountPage extends StatelessWidget {
 }
 
 class _FindAccountPageContent extends StatelessWidget {
+  final AccountType accountType;
+
+  const _FindAccountPageContent({required this.accountType});
+
   @override
   Widget build(BuildContext context) {
     return FindAccountBlocBuilder(
@@ -60,6 +91,9 @@ class _FindAccountPageContent extends StatelessWidget {
           child: Column(
             children: [
               _FindAccountTabs(),
+              Expanded(
+                child: FindIdPage(accountType: accountType),
+              ),
             ],
           ),
         );

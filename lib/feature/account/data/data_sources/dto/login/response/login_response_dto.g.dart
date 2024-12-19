@@ -34,6 +34,7 @@ Map<String, dynamic> _$$LoginResponseDtoImplToJson(
     };
 
 const _$AccountTypeEnumMap = {
+  AccountType.none: '',
   AccountType.company: 'COMPANY',
   AccountType.user: 'USER',
 };

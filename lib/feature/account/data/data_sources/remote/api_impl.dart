@@ -128,4 +128,31 @@ class AccountApiImpl extends AccountApi {
           ),
         );
   }
+
+  /// 아이디 찾기
+  @override
+  FutureOr<ApiResponse<FindIdResponseDto>> findId({
+    required FindIdRequestDto dto,
+  }) async {
+    return network.dio
+        .post(
+          findIdPath,
+          data: dto.toJson(),
+        )
+        .then(
+          (response) => ApiResponse.success(
+            FindIdResponseDto.fromJson(
+              response.data,
+              (json) => FindIdResultDto.fromJson(
+                json as Map<String, dynamic>,
+              ),
+            ),
+          ),
+        )
+        .catchError(
+          (e) => ApiResponse<FindIdResponseDto>.fail(
+            FailResponseExt.fromException(e),
+          ),
+        );
+  }
 }
