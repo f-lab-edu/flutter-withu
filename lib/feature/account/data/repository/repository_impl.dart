@@ -52,4 +52,12 @@ class AccountRepositoryImpl implements AccountRepository {
   }) async {
     return await accountApi.verifyAuthCode(dto: dto);
   }
+
+  /// 이메일 중복 검사
+  @override
+  Future<ApiResponse<BaseResponseDto<bool>>> checkEmailDuplicate({
+    required String email,
+  }) async {
+    return await accountApi.checkEmailDuplicate(email: email);
+  }
 }

@@ -94,4 +94,77 @@ void main() {
       expect(result, ApiResponse<LoginResponseDto>.fail(FailResponse.error()));
     });
   });
+
+  group('이메일 중복 검사 API 테스트', () {
+    test('이메일 중복 검사 - 중복 아닌 경우', () async {
+      // Given
+      const email = "test@test.co.kr";
+      when(
+        mockDio.post(
+          api.checkEmailDuplicatePath,
+          data: {"loginId": email},
+        ),
+      ).thenAnswer((_) async {
+        return Response(
+          data: BaseResponseDtoMock.mock(true).toJson((value) => value),
+          statusCode: 200,
+          requestOptions: RequestOptions(),
+        );
+      });
+
+      /// When
+      final result = await api.checkEmailDuplicate(email: email);
+
+      /// Then
+      expect(result, isA<ApiResponse<BaseResponseDto<bool>>>());
+      expect(result.successData?.info, isTrue);
+    });
+
+    test('이메일 중복 검사 - 중복인 경우', () async {
+      // Given
+      const email = "test@test.com";
+      when(
+        mockDio.post(
+          api.checkEmailDuplicatePath,
+          data: {"loginId": email},
+        ),
+      ).thenAnswer((_) async {
+        return Response(
+          data: BaseResponseDtoMock.mock(false).toJson((value) => value),
+          statusCode: 200,
+          requestOptions: RequestOptions(),
+        );
+      });
+
+      /// When
+      final result = await api.checkEmailDuplicate(email: email);
+
+      /// Then
+      expect(result, isA<ApiResponse<BaseResponseDto<bool>>>());
+      expect(result.successData?.info, isFalse);
+    });
+
+    test('중복 검사 서버 에러 테스트', () async {
+      // Given
+      const email = "test@test.com";
+      when(
+        mockDio.post(
+          api.checkEmailDuplicatePath,
+          data: {"loginId": email},
+        ),
+      ).thenAnswer((_) async {
+        return Response(
+          data: FailResponse.error(),
+          statusCode: 400,
+          requestOptions: RequestOptions(),
+        );
+      });
+
+      /// When
+      final result = await api.checkEmailDuplicate(email: email);
+
+      /// Then
+      expect(result, isA<ApiResponse<BaseResponseDto<bool>>>());
+    });
+  });
 }

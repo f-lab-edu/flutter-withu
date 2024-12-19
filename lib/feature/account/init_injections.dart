@@ -31,14 +31,20 @@ void initAccountDomainInjections() {
   getIt.registerSingleton<PhoneAuthUseCase>(
     PhoneAuthUseCaseImpl(accountRepo: getIt()),
   );
+  getIt.registerSingleton<EmailDuplicateCheckUseCase>(
+    EmailDuplicateCheckUseCaseImpl(accountRepo: getIt()),
+  );
 }
 
 void initAccountPresentationInjections() {
 
   getIt.registerFactory<PhoneAuthBloc>(
-        () => PhoneAuthBloc(phoneAuthUseCase: getIt()),
+    () => PhoneAuthBloc(phoneAuthUseCase: getIt()),
   );
   getIt.registerFactory<LoginBloc>(
-        () => LoginBloc(loginUseCase: getIt()),
+    () => LoginBloc(loginUseCase: getIt()),
+  );
+  getIt.registerFactory<EmailDuplicateCheckBloc>(
+        () => EmailDuplicateCheckBloc(useCase: getIt()),
   );
 }

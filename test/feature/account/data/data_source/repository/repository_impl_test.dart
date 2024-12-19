@@ -19,6 +19,7 @@ void main() {
       accountStorage: MockAccountStorageImpl(),
     );
   });
+
   group('AccountRepository 테스트', () {
     test('로그인 성공', () async {
       // Given

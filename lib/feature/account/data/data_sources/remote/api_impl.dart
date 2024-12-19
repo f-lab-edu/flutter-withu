@@ -76,4 +76,29 @@ class AccountApiImpl extends AccountApi {
           ),
         );
   }
+
+  /// 이메일 중복 검사 API
+  @override
+  FutureOr<ApiResponse<BaseResponseDto<bool>>> checkEmailDuplicate({
+    required String email,
+  }) async {
+    return network.dio
+        .post(
+          checkEmailDuplicatePath,
+          data: {"loginId": email},
+        )
+        .then(
+          (response) => ApiResponse.success(
+            BaseResponseDto.fromJson(
+              response.data,
+              (json) => json as bool,
+            ),
+          ),
+        )
+        .catchError(
+          (e) => ApiResponse<BaseResponseDto<bool>>.fail(
+            FailResponseExt.fromException(e),
+          ),
+        );
+  }
 }

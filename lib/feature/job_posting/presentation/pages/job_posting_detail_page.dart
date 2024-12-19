@@ -4,9 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:withu_app/core/core.dart';
 import 'package:withu_app/core/router/router.gr.dart';
 import 'package:withu_app/feature/feature.dart';
-import 'package:withu_app/feature/job_posting/domain/entities/job_posting_detail_entity.dart';
 import 'package:withu_app/gen/colors.gen.dart';
 import 'package:withu_app/shared/shared.dart';
+import 'package:withu_app/feature/job_posting/domain/entities/entities.dart';
 
 /// 공고 상세 화면
 @RoutePage()

@@ -77,6 +77,7 @@ enum StringRes {
   enterVerificationCode,
   verification,
   invalidVerificationCode,
+  emailDuplicateError,
 }
 
 extension StringResEx on StringRes {
