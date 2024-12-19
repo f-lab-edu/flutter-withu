@@ -1,0 +1,24 @@
+default_platform(:android)
+
+platform :android do
+  desc "Deploy to the Google Play Store"
+  lane :deploy do
+
+    # build abb
+    sh "flutter build appbundle --release --flavor prod -t lib/core/config/env/prod.dart --no-tree-shake-icons --verbose"
+
+    # 트랙 설정 (internal, alpha, beta, production)
+    track = "internal"
+
+    # 플레이스토어 업로드
+    upload_to_play_store(
+      track: track,
+      aab: "../build/app/outputs/bundle/prodRelease/app-prod-release.aab",
+      release_status: "draft", # draft로 설정하여 수동 검토 후 출시
+      skip_upload_metadata: true,
+      skip_upload_images: true,
+      skip_upload_screenshots: true,
+      json_key: "./fastlane/key.json",
+    )
+  end
+end

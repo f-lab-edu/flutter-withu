@@ -1,0 +1,45 @@
+
+default_platform(:ios)
+
+platform :ios do
+  desc "Push a new beta build to TestFlight"
+  lane :deploy do
+
+    # keychain
+    setup_ci(force: true)
+
+    # Signing
+    match(readonly: true)
+
+    # Build
+    flutter_build_ios
+
+    # .ipa 생성
+    build_ios_app(
+      workspace: "Runner.xcworkspace",
+      scheme: "prod",
+      export_method: "app-store",
+      clean: true,
+      xcargs: "-allowProvisioningUpdates",
+      build_path: "build",
+      output_directory: "output",
+    )
+
+    # Deploy
+    upload_to_testflight(
+      skip_waiting_for_build_processing: true,
+      verbose: true
+    )
+
+    delete_keychain(name: "fastlane_tmp_keychain-db")
+  end
+
+  # Flutter build iOS
+  lane :flutter_build_ios do
+    sh("cd", "..")
+    puts "Flutter clean"
+    sh("flutter", "clean")
+    puts "Flutter build iOS"
+    sh("flutter", "build", "ios", "--flavor", "prod", "--release", "--no-tree-shake-icons")
+  end
+end

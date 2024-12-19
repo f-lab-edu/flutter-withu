@@ -5,9 +5,11 @@
 *.swp
 .DS_Store
 .atom/
+.build/
 .buildlog/
 .history
 .svn/
+.swiftpm/
 migrate_working_dir/
 
 # IntelliJ related
@@ -42,10 +44,20 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
+# Android related
+*/keystore
+android/fastlane/key.json
+report.xml
+
+# iOS related
+.env
+*.app.dSYM.zip
+*.ipa
+ios/build/*
+
 # Freezed generated files
 *.freezed.dart
 *.g.dart
-
 
 # Mockito generated file
 *.mocks.dart

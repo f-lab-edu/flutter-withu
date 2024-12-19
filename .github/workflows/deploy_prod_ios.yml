@@ -1,0 +1,56 @@
+name: iOS Prod Deploy
+
+on:
+  push:
+    branches: [ main, feature/ci-cd ]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+
+  deploy:
+    runs-on: macos-latest
+    steps:
+      # 기본 저장소 체크아웃
+      - name: Clone repository
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+          token: ${{ secrets.SECRET_GITHUB_TOKEN }}
+
+      # 배포 환경 설정
+      - name: Environment Setup
+        uses: ./.github/actions/flutter-setup
+
+      # Cocoapod 설치
+      - name: Setup Cocoapods
+        run: |
+          gem install cocoapods
+          cd ios
+          gem install bundler
+          bundle install
+          rm -rf Podfile.lock
+          pod deintegrate
+          pod setup
+          pod install
+
+      # 배포
+      - name: iOS Deploy
+        env:
+          IOS_MATCH_GITHUB_URL: ${{ secrets.IOS_MATCH_GITHUB_URL }}
+          IOS_GITHUB_BASIC_AUTH: ${{ secrets.IOS_GITHUB_BASIC_AUTH }}
+          IOS_APPSTORE_TEAM_ID: ${{ secrets.IOS_APPSTORE_TEAM_ID }}
+          IOS_APPSTORE_ITC_TEAM_ID: ${{ secrets.IOS_APPSTORE_ITC_TEAM_ID }}
+          IOS_APPLE_ID: ${{ secrets.IOS_APPLE_ID }}
+          MATCH_PASSWORD: ${{ secrets.MATCH_KEYCHAIN_PASSWORD }}
+          FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
+          FASTLANE_USER: ${{ secrets.FASTLANE_USER }}
+          FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: ${{ secrets.FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD }}
+          APP_STORE_CONNECT_API_KEY_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_KEY_ID }}
+          APP_STORE_CONNECT_API_KEY_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ISSUER_ID }}
+          APP_STORE_CONNECT_API_KEY_KEY: ${{ secrets.APP_STORE_CONNECT_API_KEY_KEY }}
+        run: |
+          cd ios
+          fastlane ios deploy
