@@ -107,5 +107,7 @@
   "phone": "휴대폰",
   "email": "이메일",
   "password": "비밀번호",
-  "verifyPassword": "비밀번호 확인"
+  "verifyPassword": "비밀번호 확인",
+  "findId": "아이디찾기",
+  "findPassword": "비밀번호찾기"
 }

@@ -52,4 +52,7 @@ void initAccountPresentationInjections() {
   getIt.registerFactory<SignUpBloc>(
     () => SignUpBloc(signUpUseCase: getIt()),
   );
+  getIt.registerFactory<FindAccountBloc>(
+    () => FindAccountBloc(),
+  );
 }
